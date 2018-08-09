@@ -6,8 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * 启动类
  * 
- * @author 小威老师
- *
  */
 @SpringBootApplication
 public class SecurityApplication {

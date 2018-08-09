@@ -22,8 +22,6 @@ import io.swagger.annotations.ApiOperation;
 /**
  * 代码生成接口
  * 
- * @author 小威老师
- *
  */
 @Api(tags = "代码生成")
 @RestController

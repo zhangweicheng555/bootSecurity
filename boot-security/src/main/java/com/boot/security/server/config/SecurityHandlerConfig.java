@@ -28,9 +28,6 @@ import com.boot.security.server.utils.ResponseUtil;
 /**
  * spring security处理器
  * 
- * @author 小威老师
- *
- *         2017年10月16日
  */
 @Configuration
 public class SecurityHandlerConfig {

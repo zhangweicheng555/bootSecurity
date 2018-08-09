@@ -33,8 +33,6 @@ import io.swagger.annotations.ApiOperation;
 /**
  * 用户相关接口
  * 
- * @author 小威老师
- *
  */
 @Api(tags = "用户")
 

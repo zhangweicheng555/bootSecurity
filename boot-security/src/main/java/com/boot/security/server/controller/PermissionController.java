@@ -34,8 +34,6 @@ import io.swagger.annotations.ApiOperation;
 /**
  * 权限相关接口
  * 
- * @author 小威老师
- *
  */
 @Api(tags = "权限")
 @RestController

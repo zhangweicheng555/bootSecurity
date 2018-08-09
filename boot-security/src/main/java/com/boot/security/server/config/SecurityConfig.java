@@ -20,10 +20,6 @@ import com.boot.security.server.filter.TokenFilter;
 /**
  * spring security配置
  * 
- * @author 小威老师
- * 
- *         2017年10月16日
- *
  */
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {

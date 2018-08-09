@@ -19,8 +19,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
 	/**
 	 * 跨域支持
-	 * 
-	 * @return
 	 */
 	@Bean
 	public WebMvcConfigurer corsConfigurer() {
