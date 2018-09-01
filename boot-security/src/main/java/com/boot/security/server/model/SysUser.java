@@ -1,9 +1,6 @@
 package com.boot.security.server.model;
 
 import java.util.Date;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 public class SysUser extends BaseEntity<Long> {
 
 	private static final long serialVersionUID = -6525908145032868837L;
@@ -15,11 +12,21 @@ public class SysUser extends BaseEntity<Long> {
 	private String phone;
 	private String telephone;
 	private String email;
-	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date birthday;
 	private Integer sex;
 	private Integer status;
 	private String intro;
+
+	private String mydate;
+	
+	
+	public String getMydate() {
+		return mydate;
+	}
+
+	public void setMydate(String mydate) {
+		this.mydate = mydate;
+	}
 
 	public String getUsername() {
 		return username;

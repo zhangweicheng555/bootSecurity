@@ -3,71 +3,36 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.boot.security.server.dao.UserDao">
 
-	<sql id="where">
-		<where>
-			<if test="params.username != null and params.username != ''">
-				and t.username like concat('%', #{params.username}, '%')
-			</if>
-			<if test="params.nickname != null and params.nickname != ''">
-				and t.nickname like concat('%', #{params.nickname}, '%')
-			</if>
-			<if test="params.status != null and params.status != ''">
-				and t.status = #{params.status}
-			</if>
-		</where>
-	</sql>
-
-	<select id="count" resultType="int">
-		select count(1) from sys_user t
-		<include refid="where" />
+	
+	<select id="findTest" resultType="SysUser">
+		
+		<!--
+		 所有日期范围 随便用这个判断大小 出入的日格式随意
+		
+		select * from T_USER d where   to_date(d.mydate,'yyyy-MM-dd HH24:mi:ss') > to_date(#{beginDate},'yyyy-MM-dd HH24:mi:ss')
+		select * from T_USER d where   to_char(d.mydate,0,16) = #{beginDate}
+		select * from T_USER d where   to_char(to_date(d.mydate,'yyyy-MM-dd HH24:mi:ss'),'yyyy-MM-dd HH24:mi') = to_char(to_date(#{beginDate},'yyyy-MM-dd HH24:mi:ss'),'yyyy-MM-dd HH24:mi')
+		-->
+		select * from T_USER d where   to_date(d.mydate,'yyyy-mm-dd hh24:mi:ss') >= to_date(#{beginDate},'yyyy-mm-dd hh24:mi:ss')  and to_date(#{endDate},'yyyy-mm-dd hh24:mi:ss') >= to_date(d.mydate,'yyyy-mm-dd hh24:mi:ss') 
+	
 	</select>
-
-	<select id="list" resultType="SysUser">
-		select * from sys_user t
-		<include refid="where" />
-		${params.orderBy}
-        limit #{offset}, #{limit}
+	
+	
+	<select id="findNewGridDateByDate" resultType="GridData">
+		select * from LTE_GRID_TEST where sdate= #{mydate}
 	</select>
-
-	<insert id="saveUserRoles">
-		insert into sys_role_user(roleId, userId) values
-		<foreach collection="roleIds" item="roleId" separator=",">
-			(#{roleId}, #{userId})
-		</foreach>
+	
+	<delete id="clearTestGridData" >
+		delete  from LTE_GRID_USER_NUM  d
+		where 
+		to_date(d.Sdate,'yyyy-mm-dd hh24:mi:ss') >= to_date(#{dealBDateScheduled},'yyyy-mm-dd hh24:mi:ss')  and to_date(#{dealEDateScheduled},'yyyy-mm-dd hh24:mi:ss') >= to_date(d.Sdate,'yyyy-mm-dd hh24:mi:ss')
+	</delete>
+	
+	<select id="find1" resultType="TestH">
+		select  x as "x",y as "y" from TESTMODEL 
+	</select>
+	<insert id="find2" >
+		insert into TESTMODEL1(x,y)  values(#{x},#{y})
 	</insert>
-
-	<update id="update">
-		update sys_user t
-		<set>
-			<if test="username != null">
-				username = #{username},
-			</if>
-			<if test="nickname != null">
-				nickname = #{nickname},
-			</if>
-			<if test="headImgUrl != null">
-				headImgUrl = #{headImgUrl},
-			</if>
-			<if test="phone != null">
-				phone = #{phone},
-			</if>
-			<if test="telephone != null">
-				telephone = #{telephone},
-			</if>
-			<if test="email != null">
-				email = #{email},
-			</if>
-			<if test="birthday != null">
-				birthday = #{birthday},
-			</if>
-			<if test="sex != null">
-				sex = #{sex},
-			</if>
-			<if test="status != null">
-				status = #{status},
-			</if>
-			updateTime = #{updateTime}
-		</set>
-		where t.id = #{id}
-	</update>
+	
 </mapper>

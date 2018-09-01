@@ -1,0 +1,1043 @@
+
+
+https://www.iteblog.com/archives/category/ebooks/
+
+C:\Users\dell>scala
+Welcome to Scala version 2.10.4 (Java HotSpot(TM) 64-Bit Server VM, Java 1.8.0_171).
+Type in expressions to have them evaluated.
+Type :help for more information.
+
+scala> val i=1
+i: Int = 1
+
+scala> val i=2;
+i: Int = 2
+
+scala> i =10
+<console>:8: error: reassignment to val
+       i =10
+         ^
+
+scala> val zwc=2
+zwc: Int = 2
+
+scala> zwc=4
+<console>:8: error: reassignment to val
+       zwc=4
+          ^
+
+scala> var zzz=2
+zzz: Int = 2
+
+scala> zzz=4
+zzz: Int = 4
+
+scala> val zwp : String ="zwc";
+zwp: String = zwc
+
+scala> zwp
+res0: String = zwc
+
+scala> val e : Int=100;
+e: Int = 100
+
+scala> e
+res1: Int = 100
+
+scala> val s=if(e>0) 1 else -1
+s: Int = 1
+
+scala> e
+res2: Int = 100
+
+scala> val zwa=if(e>1110) 1 else "zwc"
+zwa: Any = zwc
+
+scala> zwa
+res3: Any = zwc
+
+scala> e
+res4: Int = 100
+
+scala> val k=if(e<0) -1 else if(e>0 && e<100) 1 else 2;
+k: Int = 2
+
+scala> print e
+<console>:8: error: missing arguments for method print in object Predef;
+follow this method with `_' if you want to treat it as a partially applied function
+              print e
+              ^
+
+scala> print(e);
+100
+scala> println(e);
+100
+
+scala> 1 to 10\
+<console>:8: error: value \ is not a member of scala.collection.immutable.Range.Inclusive
+              1 to 10\
+                     ^
+
+scala> 1 to 10
+res9: scala.collection.immutable.Range.Inclusive = Range(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+
+scala> for(k <- 1 to 10){println(k);}
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+
+scala> for(m <- 1to 10){m}
+<console>:1: error: Invalid literal number
+       for(m <- 1to 10){m}
+                ^
+
+scala> for(m <- 1to 10){println(m);}
+<console>:1: error: Invalid literal number
+       for(m <- 1to 10){println(m);}
+                ^
+
+scala> for(m <- 1 to 10){println(m);}
+1
+2
+3
+4
+5
+6
+
+scala> var zsd=for(i <- 1 to 10) yield i*10 println(i)
+<console>:8: error: value println is not a member of Int
+       var zsd=for(i <- 1 to 10) yield i*10 println(i)
+                                            ^
+
+scala> var zsd=for(i <- 1 to 10) yield i*10
+zsd: scala.collection.immutable.IndexedSeq[Int] = Vector(10, 20, 30, 40, 50, 60, 70, 80, 90, 100)
+
+scala> zsd
+res14: scala.collection.immutable.IndexedSeq[Int] = Vector(10, 20, 30, 40, 50, 60, 70, 80, 90, 100)
+
+scala> var df=for(m <- 1 to 10) yield m -1;
+df: scala.collection.immutable.IndexedSeq[Int] = Vector(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
+
+scala> df
+res15: scala.collection.immutable.IndexedSeq[Int] = Vector(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
+
+scala> df
+res16: scala.collection.immutable.IndexedSeq[Int] = Vector(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
+
+scala> 1.to(11).map(_+100)
+res17: scala.collection.immutable.IndexedSeq[Int] = Vector(101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111)
+
+scala> 1.to(11).map(_+100)
+res18: scala.collection.immutable.IndexedSeq[Int] = Vector(101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111)
+
+scala> arr
+res19: Array[Int] = Array(1, 2, 3, 4)
+
+scala> var dfg=for(i <-arr;if(i>3)) yield i*100
+dfg: Array[Int] = Array(400)
+
+scala> for(i <- cloo;if(i>3);if(i <= 6)) println(i)
+4
+5
+6
+
+
+scala> cloo
+res22: scala.collection.immutable.Range.Inclusive = Range(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+
+scala> cloo.filter(_>3).filter(_<=6)
+res23: scala.collection.immutable.IndexedSeq[Int] = Vector(4, 5, 6)
+
+scala> cloo.filter(_>3).filter(_<=6).map(_*10)
+res24: scala.collection.immutable.IndexedSeq[Int] = Vector(40, 50, 60)
+
+scala> cloo.filter(_>3 && _<=6)
+<console>:9: error: wrong number of parameters; expected = 1
+              cloo.filter(_>3 && _<=6)
+
+scala> arr
+res20: Array[Int] = Array(1, 2, 3, 4)
+
+scala> arr.filter(_ > 2)
+res21: Array[Int] = Array(3, 4)
+
+scala> arr.filter(_ > 2).map(_*2)
+res22: Array[Int] = Array(6, 8)
+
+scala>
+
+scala> 0 until  arr.length
+res25: scala.collection.immutable.Range = Range(0, 1, 2, 3)
+
+scala> for(i <- 0 until arr.length) arr(i)
+
+scala> for(i <- 0 until arr.length)  println(arr(i))
+
+scala> def m1(x: Int,y: Int): Int =x+y
+m1: (x: Int, y: Int)Int
+
+scala> var t=m1(2,3)
+t: Int = 5
+
+
+
+scala> var fr=(x: Int) => x* 10
+fr: Int => Int = <function1>
+
+scala> var ft=(x: Int) => x+10
+ft: Int => Int = <function1>
+
+scala> arr
+res42: scala.collection.immutable.Range.Inclusive = Range(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+
+scala> arr.map(fr)
+res43: scala.collection.immutable.IndexedSeq[Int] = Vector(10, 20, 30, 40, 50, 60, 70, 80, 90, 100)
+
+scala> arr.map(fr(_))
+res44: scala.collection.immutable.IndexedSeq[Int] = Vector(10, 20, 30, 40, 50, 60, 70, 80, 90, 100)
+
+scala> arr.map(ft(_))
+res45: scala.collection.immutable.IndexedSeq[Int] = Vector(11, 12, 13, 14, 15, 16, 17, 18, 19, 20)
+
+scala>
+
+
+scala> arr.map(x => x*10)
+res47: scala.collection.immutable.IndexedSeq[Int] = Vector(10, 20, 30, 40, 50, 60, 70, 80, 90, 100)
+
+             ^
+
+scala> arr.map(_ * 10)
+res49: scala.collection.immutable.IndexedSeq[Int] = Vector(10, 20, 30, 40, 50, 60, 70, 80, 90, 100)
+                  ^
+
+scala> arr.map((x: Int) => x*10)
+res51: scala.collection.immutable.IndexedSeq[Int] = Vector(10, 20, 30, 40, 50, 60, 70, 80, 90, 100)
+
+
+
+
+object HelloScala {
+  
+    def method_1(fun: Int => Int): Int ={
+      fun(3)
+    }
+    
+
+    val fun1=(x: Int) => x*10
+    
+    def main(args : Array[String]){
+       println(method_1(fun1))
+    }
+ 
+}
+
+
+
+
+
+
+
+object HelloScala {
+  
+    def method_1(fun: Int => Int): Int ={
+      fun(3)
+    }
+    
+    def method_2(fun:(Int,Int) => Int) ={
+      fun(3,4)
+    }
+    
+    val fun1=(x: Int) => x*10
+
+  val fun2 = (x: Int, y: Int) => x + y
+    
+    def main(args : Array[String]){
+       println(method_1(fun1))
+       
+       println(method_2(fun2))
+    }
+  
+}
+
+
+
+
+ def main(args: Array[String]) {
+
+    def f1(x: Int, y: Int): Int = x + y
+    var fun3 = (x: Int, y: Int) => x + y
+
+    val fun1: Int => Int = { x => x + 5 }
+    val fun2: (Int, Int) => Int = { (x, y) => x * y }
+    println(fun1(3)) //8
+    println(fun2(8, 3)) //24
+    println(f1(8, 3)) //11
+    println(fun3(8, 3)) //11
+  }
+
+
+
+scala> var fg:(Int,Int) => Int ={(x,y)=>x+y}
+fg: (Int, Int) => Int = <function2>
+
+scala> def mmg(fun:(Int,Int) => Int): Int={fun(7,8)}
+mmg: (fun: (Int, Int) => Int)Int
+
+scala> var w=mmg(fg)
+w: Int = 15
+
+scala> w
+res48: Int = 15
+
+scala>
+
+
+
+def method_0(x Int,y Int): Int =x+y
+val fun2(Int,Int) => Int={(x,y) => x+y}
+
+
+
+ def main(args: Array[String]) {
+
+    var arr = Array(1, 2, 3, 4, 5, 6, 7)
+    var a1 = arr.map((x: Int) => x * 10)
+    var a2 = arr.map(x => x + 5)
+    println(a1.toBuffer)
+    println(a2.toBuffer)
+
+  }
+
+
+val fun1=(x: Int,y: Int) => (y,x)
+fun1: (Int, Int) => (Int, Int) = <function2>
+
+scala> fun1(9,0)
+res3: (Int, Int) = (0,9)
+
+
+
+ val fun2:(Int,Int) =>(Int,Int) ={(x,y) => (y,x)}
+fun2: (Int, Int) => (Int, Int) = <function2>
+
+
+
+������»���
+
+
+������ֱ�ӱ���˺���
+scala> def mm(x: Int,y: Int): Int ={x+y}
+mm: (x: Int, y: Int)Int
+
+scala> mm(8.9)
+<console>:9: error: not enough arguments for method mm: (x: Int, y: Int)Int.
+Unspecified value parameter y.
+              mm(8.9)
+                ^
+
+scala> mm(8,9)
+res8: Int = 17
+
+scala> val zd=mm _
+zd: (Int, Int) => Int = <function2>
+
+scala> zd
+res9: (Int, Int) => Int = <function2>
+
+scala> zd(8,9)
+res10: Int = 17
+
+
+
+
+scala> val arr1=new Array[Int](10)
+arr1: Array[Int] = Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+
+scala> arr1(1)=1
+
+scala> arr1
+res12: Array[Int] = Array(0, 1, 0, 0, 0, 0, 0, 0, 0, 0)
+
+scala> val arr2=Array(1,2,3)
+arr2: Array[Int] = Array(1, 2, 3)
+
+
+
+
+ //�䳤���飨���黺�壩  һ��ע��
+    //�����ʹ�����黺�壬��Ҫ����import scala.collection.mutable.ArrayBuffer��
+    val ab = ArrayBuffer[Int]()
+    //�����黺���β��׷��һ��Ԫ��
+    //+=β��׷��Ԫ��
+    ab += 1
+    //׷�Ӷ��Ԫ��
+    ab += (2, 3, 4, 5)
+    //׷��һ������++=
+    ab ++= Array(6, 7)
+    //׷��һ�����黺��
+    ab ++= ArrayBuffer(8,9)
+    //��ӡ���黺��ab
+
+    //������ĳ��λ�ò���Ԫ����insert  ��0��λ�ò���һ�����߶��
+    ab.insert(0, -1, 0)    
+    //ɾ������ĳ��λ�õ�Ԫ����remove
+    ab.remove(8, 2)
+
+
+
+1.��ǿforѭ��
+2.���õ�until�����ɽű꣬0 until 10 ����0������10
+
+val arr = Array(1,2,3,4,5,6,7,8)
+    //��ǿforѭ��
+    for(i <- arr)
+      println(i)
+
+    //���õ�until������һ��Range
+    //reverse�ǽ�ǰ�����ɵ�Range��ת
+    for(i <- (0 until arr.length).reverse)
+      println(arr(i))
+
+
+
+yield�ؼ��ֽ�ԭʼ���������ת�������һ���µ����飬ԭʼ�����鲻��
+
+//����һ������
+    val arr = Array(1, 2, 3, 4, 5, 6, 7, 8, 9)
+    //��ż��ȡ������10��������һ���µ�����
+    val res = for (e <- arr if e % 2 == 0) yield e * 10
+    println(res.toBuffer)
+
+    //���߼���д��,���Ÿ�ˬ
+    //filter�ǹ��ˣ�����һ������ֵΪboolean�ĺ���
+    //map�൱�ڽ������е�ÿһ��Ԫ��ȡ������Ӧ�ô���ȥ�ĺ���
+    val r = arr.filter(_ % 2 == 0).map(_ * 10)
+    println(r.toBuffer)
+
+
+
+5.1.4.���鳣���㷨
+
+scala> arr1
+res19: Array[Int] = Array(0, 1, 0, 0, 0, 0, 0, 0, 0, 0)
+
+scala> arr1.max
+res20: Int = 1
+
+scala> arr1.sorted
+res21: Array[Int] = Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 1)
+
+scala> arr1.sum
+res22: Int = 1
+
+scala> arr1.
+apply          asInstanceOf   clone          isInstanceOf   length         toString       update
+
+scala> arr1.\
+
+
+
+
+
+
+
+
+
+
+
+Byte	8λ�з��Ų�����������ֵ����Ϊ -128 �� 127
+Short	16λ�з��Ų�����������ֵ����Ϊ -32768 �� 32767
+Int	32λ�з��Ų�����������ֵ����Ϊ -2147483648 �� 2147483647
+Long	64λ�з��Ų�����������ֵ����Ϊ -9223372036854775808 �� 9223372036854775807
+Float	32 λ, IEEE 754��׼�ĵ����ȸ�����
+Double	32 λ IEEE 754��׼�ĵ����ȸ�����
+Char	16λ�޷���Unicode�ַ�, ����ֵΪ U+0000 �� U+FFFF
+String	�ַ�����
+Boolean	true��false
+Unit	��ʾ��ֵ��������������void��ͬ�������������κν���ķ����Ľ�����͡�Unitֻ��һ��ʵ��ֵ��д��()��
+Null	null �������
+Nothing	Nothing������Scala����㼶����Ͷˣ������κ��������͵������͡�
+Any	Any������������ĳ���
+AnyRef	AnyRef����Scala������������(reference class)�Ļ���
+
+
+
+      
+scala> var a2=Array("zwp","sdw","sdf","gft","asd")
+a2: Array[String] = Array(zwp, sdw, sdf, gft, asd)
+
+scala> a2
+res124: Array[String] = Array(zwp, sdw, sdf, gft, asd)
+
+scala> a2.reverse
+res125: Array[String] = Array(asd, gft, sdf, sdw, zwp)
+
+scala> a2.sortBy(x => x)
+res126: Array[String] = Array(asd, gft, sdf, sdw, zwp)
+
+scala> a2
+res127: Array[String] = Array(zwp, sdw, sdf, gft, asd)
+
+scala> a2.sortWith((x,y) => x>y)
+res128: Array[String] = Array(zwp, sdw, sdf, gft, asd)
+
+scala> a2.sortWith((x,y) => x<y)
+res129: Array[String] = Array(asd, gft, sdf, sdw, zwp)
+
+scala> a2.sortWith(_>_)
+res130: Array[String] = Array(zwp, sdw, sdf, gft, asd)
+
+scala> a2.sortWith(_<_)
+res131: Array[String] = Array(asd, gft, sdf, sdw, zwp)
+
+
+
+
+����һ�����ɱ�ӳ��
+val scores = Map("Alice"->10,"Bob"->3,"Cindy"->8)
+
+
+����һ���ɱ�ӳ��
+val scores = scala.collection.mutable.Map("Alice"->10,"Bob"->3,"Cindy"->8)
+
+����һ����ӳ��
+val scores = new scala.collection.mutable.HashMap[String,Int]
+
+Ҳ����������ķ�ʽ����ӳ��
+val scores = Map(("Alice",10),("Bob",3),("Cindy",8))
+
+��ȡӳ���е�ֵ
+val bobsScore = scores("Bob")
+
+���ӳ�䲻����������ʹ�õļ�����׳��쳣
+val bobsScore = if(scores.contains("Bob"))scores("Bob") else 0
+val bobsScore = scores.getOrElse("Bob",0)
+
+����ӳ���е�ֵ
+�ɱ�ӳ����Ը���ĳ��ӳ���ֵ���������һ���µ�ӳ���ϵ
+scores("Bob") = 10 //����
+scores("Fred") = 7 //�����µļ�ֵ��
+scores += ("Bob"->10,"Fred"->7)//��+=��������Ӷ����ϵ
+scores -= "Alice" //�Ƴ�ĳ�����Ͷ�Ӧ��ֵ
+
+���ڲ��ɱ�ӳ�䣬���Ի�ȡһ����������ı������ӳ�䣺
+var newScores = scores + ("Bob"->10,"Fred"->7)
+newScores = newScores - "Bob"
+
+����ӳ��
+for((k,v) <- ӳ��) ����k��v
+for(k <- scores.keySet) print(k)
+for(v <= scores.values) print(v)
+for((k,v) <- scores) yield (v,k) //��תӳ��
+
+����ӳ��
+val scores = scala.collection.immutable.SortedMap("Alice"->10,"Bob"->3,"Cindy"->8)
+
+�������˳��������Եļ�
+val months = scala.collection.mutable.LinkedHashMap("January"->1,"February"->2)
+
+
+
+List
+
+scala> val list=List(1,2,3,4,5)
+list: List[Int] = List(1, 2, 3, 4, 5)
+
+scala> list
+res2: List[Int] = List(1, 2, 3, 4, 5)
+
+scala> list(0)
+res3: Int = 1
+
+scala> list(1)
+res4: Int = 2
+
+scala> list(1)=1
+<console>:9: error: value update is not a member of List[Int]
+              list(1)=1
+              ^
+
+scala> import scala.collection.mutable.ListBuffer
+import scala.collection.mutable.ListBuffer
+
+scala> val lb=ListBuffer(1,2,3,4,5)
+lb: scala.collection.mutable.ListBuffer[Int] = ListBuffer(1, 2, 3, 4, 5)
+
+scala> lb
+res6: scala.collection.mutable.ListBuffer[Int] = ListBuffer(1, 2, 3, 4, 5)
+
+scala> lb(00)
+warning: there were 1 deprecation warning(s); re-run with -deprecation for details
+res7: Int = 1
+
+scala> lb(1)
+res8: Int = 2
+
+scala> lb(2)
+res9: Int = 3
+
+scala> lb(0)=4
+
+scala> lb
+res11: scala.collection.mutable.ListBuffer[Int] = ListBuffer(4, 2, 3, 4, 5)
+
+scala> lb.app
+append        appendAll     apply         applyOrElse
+
+scala> lb.append(7)
+
+scala> lb
+res15: scala.collection.mutable.ListBuffer[Int] = ListBuffer(4, 2, 3, 4, 5, 7)
+
+scala>
+
+
+
+list
+
+
+
+scala> list.+:(6)
+res26: List[Int] = List(6, 1, 2, 3, 4, 5)
+
+scala> list
+res27: List[Int] = List(1, 2, 3, 4, 5)
+
+scala> list.::(0)
+res32: List[Int] = List(0, 1, 2, 3, 4, 5)
+
+
+
+
+scala> list
+res21: List[Int] = List(1, 2, 3, 4, 5)
+
+scala> 9 :: list
+res22: List[Int] = List(9, 1, 2, 3, 4, 5)
+
+scala> list
+res23: List[Int] = List(1, 2, 3, 4, 5)
+
+scala> list.::(0)
+res24: List[Int] = List(0, 1, 2, 3, 4, 5)
+
+scala> list
+res25: List[Int] = List(1, 2, 3, 4, 5)
+
+scala> list. +: 6
+<console>:1: error: ';' expected but integer literal found.
+       list. +: 6
+                ^
+
+scala> list.+: 6
+<console>:1: error: ';' expected but integer literal found.
+       list.+: 6
+               ^
+
+scala> list.+:(6)
+res26: List[Int] = List(6, 1, 2, 3, 4, 5)
+
+scala> list
+res27: List[Int] = List(1, 2, 3, 4, 5)
+
+scala> list.:+(8)
+res28: List[Int] = List(1, 2, 3, 4, 5, 8)
+
+scala> list
+res29: List[Int] = List(1, 2, 3, 4, 5)
+
+scala> 0 +: list
+res30: List[Int] = List(0, 1, 2, 3, 4, 5)
+
+scala> list
+res31: List[Int] = List(1, 2, 3, 4, 5)
+
+scala> list.::(0)
+res32: List[Int] = List(0, 1, 2, 3, 4, 5)
+
+scala> list.::1
+<console>:1: error: ';' expected but integer literal found.
+       list.::1
+              ^
+
+scala> var list0=List(1,2,3)
+list0: List[Int] = List(1, 2, 3)
+
+scala> var list1=List(4,5,6)
+list1: List[Int] = List(4, 5, 6)
+
+scala> list1 ++ list0
+res33: List[Int] = List(4, 5, 6, 1, 2, 3)
+
+scala> list1 ++: list0
+res34: List[Int] = List(4, 5, 6, 1, 2, 3)
+
+scala> list1 :++ list0
+<console>:11: error: value :++ is not a member of List[Int]
+              list1 :++ list0
+                    ^
+
+scala> list0
+res36: List[Int] = List(1, 2, 3)
+
+scala> list1
+res37: List[Int] = List(4, 5, 6)
+
+scala> list1 ++ list0
+res38: List[Int] = List(4, 5, 6, 1, 2, 3)
+
+scala> list1 ++: list0
+res39: List[Int] = List(4, 5, 6, 1, 2, 3)
+
+scala> list1.:::list0
+<console>:10: error: missing arguments for method ::: in class List;
+follow this method with `_' if you want to treat it as a partially applied function
+              list1.:::list0
+                    ^
+
+scala> list1.:::(list0)
+res41: List[Int] = List(1, 2, 3, 4, 5, 6)
+
+scala>
+
+
+scala> var lz0=List(1,2,3,4)
+lz0: List[Int] = List(1, 2, 3, 4)
+
+scala> lz0(1)
+res42: Int = 2
+
+scala> lz0.apply
+apply         applyOrElse
+
+scala> lz0.apply
+<console>:10: error: missing arguments for method apply in trait LinearSeqOptimized;
+follow this method with `_' if you want to treat it as a partially applied function
+              lz0.apply
+                  ^
+
+scala> lz0
+res44: List[Int] = List(1, 2, 3, 4)
+
+scala> var  lz1=List(5,6,7)
+lz1: List[Int] = List(5, 6, 7)
+
+scala> var lz3=ListBuffer(1,2,34)
+lz3: scala.collection.mutable.ListBuffer[Int] = ListBuffer(1, 2, 34)
+
+scala> lz3
+res45: scala.collection.mutable.ListBuffer[Int] = ListBuffer(1, 2, 34)
+
+scala> lz3(1)
+res46: Int = 2
+
+scala> lz3.a
+addString      aggregate      andThen        append         appendAll
+apply          applyOrElse    asInstanceOf
+
+scala> lz3.app
+append        appendAll     apply         applyOrElse
+
+scala> lz3.append
+append      appendAll
+
+scala> lz3.append(7)
+
+scala> lz3
+res48: scala.collection.mutable.ListBuffer[Int] = ListBuffer(1, 2, 34, 7)
+
+scala> lz3.+:(8)
+res49: scala.collection.mutable.ListBuffer[Int] = ListBuffer(8, 1, 2, 34, 7)
+
+scala> lz3.:+(9)
+res50: scala.collection.mutable.ListBuffer[Int] = ListBuffer(1, 2, 34, 7, 9)
+
+scala> lz
+<console>:9: error: not found: value lz
+              lz
+              ^
+
+scala> lz0
+res52: List[Int] = List(1, 2, 3, 4)
+
+scala> lz1
+res53: List[Int] = List(5, 6, 7)
+
+scala> lz0.:::(lz1)           ����������ǲ��ɱ���������ϵĲ���
+res54: List[Int] = List(5, 6, 7, 1, 2, 3, 4)
+
+scala> lz0 ++ lz1
+res55: List[Int] = List(1, 2, 3, 4, 5, 6, 7)
+
+scala> lz1 ++ lz0
+res56: List[Int] = List(5, 6, 7, 1, 2, 3, 4)
+
+
+
+
+
+scala> list0
+res66: scala.collection.mutable.ListBuffer[Int] = ListBuffer(1, 2, 3, 4, 5, 6)
+
+scala> list1
+res67: scala.collection.mutable.ListBuffer[Int] = ListBuffer(4, 5, 6)
+
+scala> list0.:::(list1)
+<console>:11: error: value ::: is not a member of scala.collection.mutable.ListBuffer[Int]
+              list0.:::(list1)
+                    ^
+
+scala> list0 ++ list1
+res69: scala.collection.mutable.ListBuffer[Int] = ListBuffer(1, 2, 3, 4, 5, 6, 4, 5, 6)
+
+scala> list1
+res70: scala.collection.mutable.ListBuffer[Int] = ListBuffer(4, 5, 6)
+
+scala> list0.:::(list1)
+<console>:11: error: value ::: is not a member of scala.collection.mutable.ListBuffer[Int]
+              list0.:::(list1)
+                    ^
+
+scala> list1
+res72: scala.collection.mutable.ListBuffer[Int] = ListBuffer(4, 5, 6)
+
+scala> list1 ++=list0
+res73: scala.collection.mutable.ListBuffer[Int] = ListBuffer(4, 5, 6, 1, 2, 3, 4, 5, 6)
+
+
+scala> lisy1
+<console>:9: error: not found: value lisy1
+              lisy1
+              ^
+
+scala>
+
+scala> list0
+res84: scala.collection.mutable.ListBuffer[Int] = ListBuffer(1, 2, 3, 4, 5, 6)
+
+scala> lisylz0
+<console>:9: error: not found: value lisylz0
+              lisylz0
+              ^
+
+scala> lz0
+res86: List[Int] = List(1, 2, 3, 4)
+
+scala> list0
+res87: scala.collection.mutable.ListBuffer[Int] = ListBuffer(1, 2, 3, 4, 5, 6)
+
+scala> list0.+:(9)
+res88: scala.collection.mutable.ListBuffer[Int] = ListBuffer(9, 1, 2, 3, 4, 5, 6)
+
+scala> list0.:+(9)
+res89: scala.collection.mutable.ListBuffer[Int] = ListBuffer(1, 2, 3, 4, 5, 6, 9)
+
+
+
+
+scala> var  list=List(0,1,2,3,4,56,7,8,9)
+list: List[Int] = List(0, 1, 2, 3, 4, 56, 7, 8, 9)       ^
+
+scala> var group=list.grouped(2)
+group: Iterator[List[Int]] = non-empty iterator
+
+
+scala> var lst=group.toList
+lst: List[List[Int]] = List(List(0, 1), List(2, 3), List(4, 56), List(7, 8), List(9))
+
+scala> lst.flatten
+res128: List[Int] = List(0, 1, 2, 3, 4, 56, 7, 8, 9)
+
+scala> var arr=Array("a b d","s d f","g r e")
+arr: Array[String] = Array(a b d, s d f, g r e)
+
+scala> arr.flatMap(_.split(" "))
+res129: Array[String] = Array(a, b, d, s, d, f, g, r, e)
+
+scala> arr.map(_.split(" "))
+res130: Array[Array[String]] = Array(Array(a, b, d), Array(s, d, f), Array(g, r, e))
+
+scala> arr.map(_.split(" ")).flatten
+res131: Array[String] = Array(a, b, d, s, d, f, g, r, e)
+
+scala> list.sortWith(_ < _)
+res136: List[Int] = List(0, 1, 2, 3, 4, 7, 8, 9, 56)
+
+scala> list.sortWith(_ > _)
+res137: List[Int] = List(56, 9, 8, 7, 4, 3, 2, 1, 0)
+
+scala> list.sortWith( _ > _)
+res138: List[Int] = List(56, 9, 8, 7, 4, 3, 2, 1, 0)
+
+scala> list.sortBy(x =>x)
+res139: List[Int] = List(0, 1, 2, 3, 4, 7, 8, 9, 56)
+
+
+scala> list.flatMap(_.split(" ")).map((_,1)).groupBy(t=>t._1).map(t=>(t._1,t._2.size)).toList.sortBy(_._2).reverse
+
+
+
+
+scala> var f2=(x :Int,y: Int) => x+y
+f2: (Int, Int) => Int = <function2>
+
+scala> f2(3,4)
+res2: Int = 7
+
+scala> var f3:(Int,Int)=>Int ={(x,y)=> x+y}
+f3: (Int, Int) => Int = <function2>
+
+scala> f3(4,5)
+res3: Int = 9
+
+scala> def m2(name: Int,address:Int):Int ={name+address}
+m2: (name: Int, address: Int)Int
+
+scala> m2(3,4)
+res4: Int = 7
+
+
+
+
+
+scala> var f1:(Int,Int)=>Int  ={(x,y) =>x+y}
+f1: (Int, Int) => Int = <function2>
+
+scala> def m1(fun:(Int,Int)=>Int,name: Int) ={println(name)}
+m1: (fun: (Int, Int) => Int, name: Int)Unit
+
+scala> m1(f1(3,4),1)
+<console>:10: error: type mismatch;
+ found   : Int
+ required: (Int, Int) => Int
+              m1(f1(3,4),1)
+                   ^
+
+scala> def m1(fun:(Int,Int)=>Int,name: Int) ={fun(name,1)}
+m1: (fun: (Int, Int) => Int, name: Int)Int
+
+scala> m1(f1,2)
+res6: Int = 3
+
+ Array(1,2,3,4,5).map((num: Int) => num*num)
+res17: Array[Int] = Array(1, 4, 9, 16, 25)  ���ִ�����Ǵ�������  ���ܴ������ֲ��������ĺ���
+
+
+
+
+
+
+第一类方式从内存里构造RDD，使用的方法：makeRDD和parallelize方法
+
+
+val rdd01 = sc.makeRDD(List(1,2,3,4,5,6))
+val r01 = rdd01.map { x => x * x }
+println(r01.collect().mkString(","))  注意这个mkString
+
+val r02 = rdd02.filter { x => x < 5}
+
+大家看到了RDD本质就是一个数组，因此构造数据时候使用的是List（链表）和Array（数组）类型。
+这样对于后面正确的理解 RDD是很方便的。
+
+
+RDD的操作分为转化操作（transformation）和行动操作（action）
+
+
+
+转换
+
+map()  参数是函数，函数应用于RDD每一个元素，返回值是新的RDD
+
+flatMap()  参数是函数，函数应用于RDD每一个元素，将元素数据进行拆分，变成迭代器，返回值是新的RDD
+
+filter()   参数是函数，函数会过滤掉不符合条件的元素，返回值是新的RDD
+
+distinct()  没有参数，将RDD里的元素进行去重操作
+
+union()  参数是RDD，生成包含两个RDD所有元素的新RDD
+
+intersection()  参数是RDD，求出两个RDD的共同元素
+
+subtract()  参数是RDD，将原RDD里和参数RDD里相同的元素去掉
+
+cartesian()  参数是RDD，求两个RDD的笛卡儿积
+
+
+
+行动操作
+
+collect()  返回RDD所有元素
+
+count()  RDD里元素个数
+
+countByValue()  各元素在RDD中出现次数   这个注意了
+
+reduce()        并行整合所有RDD数据，例如求和操作  
+转换
+
+map()  参数是函数，函数应用于RDD每一个元素，返回值是新的RDD
+
+flatMap()  参数是函数，函数应用于RDD每一个元素，将元素数据进行拆分，变成迭代器，返回值是新的RDD
+
+filter()   参数是函数，函数会过滤掉不符合条件的元素，返回值是新的RDD
+
+distinct()  没有参数，将RDD里的元素进行去重操作
+
+union()  参数是RDD，生成包含两个RDD所有元素的新RDD
+
+intersection()  参数是RDD，求出两个RDD的共同元素
+
+subtract()  参数是RDD，将原RDD里和参数RDD里相同的元素去掉
+
+cartesian()  参数是RDD，求两个RDD的笛卡儿积
+
+
+
+行动操作
+
+collect()  返回RDD所有元素
+
+count()  RDD里元素个数
+
+countByValue()  各元素在RDD中出现次数   这个注意了
+
+reduce()        并行整合所有RDD数据，例如求和操作          (rddInt.reduce((x ,y) => x + y))
+
+
+ sc.textFile("hdfs://192.168.233.21:9000/zws").flatMap(_.split(" "))
+   .map((_,1)).reduceByKey(_+_)
+   .sortBy(_._2,false).collect
+   --sortBy(_._2,false)  接收两个参数   一个个是按照什么排序 第二个是升序还是降序
+ sc.textFile("hdfs://192.168.233.21:9000/zws").flatMap(_.split(" ")).map((_,1))
+   .reduceByKey(_+_).sortBy(_._1,false)
+   .saveAsTextFile("hdfs://192.168.233.21:9000/ss/zwp")   --这个地方是指定目录就可以 名字他们会默认
+ 
+ sc.textFile("hdfs://192.168.233.21:9000/zws").flatMap(_.split(" ")).map((_,1))
+   .reduceByKey(_+_,1).sortBy(_._1,false)     --reduceByKey(_+_,1)  他可以指定1   来说明生成的结果问价你有几个
+                                                                                                                            注意，有时候Hadoop的时候我们会设置生成三个，
+                                                                                                                            但是如果我们还想生成一个结果文件，那么就可以i使用这个了
+                                                                                                                             这个就是指定了reduce的文件数量
+   .saveAsTextFile("hdfs://192.168.233.21:9000/ss/zwp")   --这个地方是指定目录就可以 名字他们会默认
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
