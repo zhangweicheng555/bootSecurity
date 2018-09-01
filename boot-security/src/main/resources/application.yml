@@ -1,9 +1,4 @@
-spring:
-  #datasource:
-   # driver-class-name: oracle.jdbc.driver.OracleDriver
-   # url: jdbc:oracle:thin:@ip:1521:orcl
-   # username: 
-   #  password:  
+spring:  
   cache:
     type: ehcache
     ehcache:
@@ -64,5 +59,9 @@ log:
     my: debug
   file: logs/admin-server.log
   maxsize: 30MB
+token: 
+  expire:
+    seconds: 7200
+  jwtSecret: (XIAO:)_$^11244^%$_(WEI:)_@@++--(LAO:)_++++_.sds_(SHI:)
 server:
   port: 8090

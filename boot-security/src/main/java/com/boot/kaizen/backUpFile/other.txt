@@ -1,0 +1,8 @@
+
+判断是不是支持localStorage 本地存储 低版本是不支持的
+if(！window.localStorage){
+            alert("浏览器支持localstorage");
+            return false;
+        }else{
+            //主逻辑业务
+        }
