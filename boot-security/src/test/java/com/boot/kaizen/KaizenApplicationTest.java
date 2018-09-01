@@ -1,4 +1,4 @@
-package com.boot.security.server;
+package com.boot.kaizen;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
