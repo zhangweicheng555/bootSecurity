@@ -58,7 +58,7 @@ files:
   path: ${file-path:d:/files}
 logging:
   config: classpath:logback-admin.xml
-log:
+log: 
   level:
     root: info
     my: debug
