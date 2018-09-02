@@ -62,6 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				"/swagger-resources/**", //
 				"/pages/**", //
 				"/druid/**", //
+				"/favicon.ico",//
 				"/statics/**").permitAll().anyRequest().authenticated();
 
 		http.formLogin()//

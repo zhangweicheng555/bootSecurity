@@ -111,7 +111,7 @@ layui.use('layer', function(){
 });
 
 function del(id){
-	layer.confirm('确定要删除吗？', {
+	parent.layer.confirm('确定要删除吗？', {
         btn : [ '确定', '取消' ]
     }, function() {
         $.ajax({
