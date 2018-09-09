@@ -9,10 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.boot.kaizen.model.ParamTest;
 import com.boot.kaizen.model.SysTest;
 import com.boot.kaizen.service.SysTestService;
-import com.github.pagehelper.ISelect;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 
 /**
  * app对接相关接口

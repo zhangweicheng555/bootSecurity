@@ -110,9 +110,9 @@ public class SysUser extends BaseEntity<Long> {
 	}
 
 	public interface Status {
-		int DISABLED = 0;
+		int DISABLED = 0;//禁用
 		int VALID = 1;
-		int LOCKED = 2;
+		int LOCKED = 2;  //锁定
 	}
 
 }
