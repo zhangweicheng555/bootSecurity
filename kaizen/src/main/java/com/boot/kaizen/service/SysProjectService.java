@@ -31,4 +31,12 @@ public interface SysProjectService {
 	 * @date 2018年9月9日 下午12:59:30
 	 */
 	public JsonMsgUtil delete(String ids);
+
+	/**
+	 * 编辑
+	 * 
+	 * @author weichengz
+	 * @date 2018年9月16日 下午6:27:00
+	 */
+	public JsonMsgUtil edit(SysProject sysProject);
 }

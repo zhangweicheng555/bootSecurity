@@ -39,7 +39,7 @@ spring:
   
 mybatis:
   type-aliases-package: com.boot.kaizen.model
-  mapper-locations: classpath:/mybatis-mappers/*
+  mapper-locations: classpath:/mybatis-mappers/**/*.xml
   configuration:
     mapUnderscoreToCamelCase: true
     

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>角色管理</title>
+    <base href="#(basePath)"/>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    	<!-- 引入css -->
+    	#@cssModel?()
+  </head>
+  
+  <body class="easyui-layout">
+  	
+  		<div data-options="region:'north',border:false">
+	    	<div style="float: left;padding-left: 4px;">
+	    		<form onsubmit="return false;" id="queryForm" method="post">
+			    	<div class="layui-input-inline"><input type="text"  name="name" id="name" style="height: 30px;"  placeholder="请输入角色名称" autocomplete="off" class="layui-input"></div>
+				    <div class="layui-input-inline"><button  id="btnQuery"  class="layui-btn   layui-btn-normal layui-btn-small"   style="margin-left: 1px;"><i class="layui-icon">&#x1002;</i>查询</button></div>
+				    <div class="layui-input-inline"><button  id="cleanQuery"  class="layui-btn    layui-btn-small"   style="margin-left: 1px;"><i class="layui-icon">&#xe639;</i>清空</button></div>
+	    		</form>
+	    	</div>
+	    	<div style="text-align: right;float: right"  class="layui-input-inline">
+	    		<div class="layui-btn-group">
+				  <button id="add" class="layui-btn  layui-btn-small"><i class="layui-icon">&#xe654;</i></button>
+				  <button id="update" class="layui-btn  layui-btn-small"><i class="layui-icon">&#xe642;</i></button>
+				  <button id="delete" class="layui-btn  layui-btn-small"><i class="layui-icon">&#xe640;</i></button>
+				  <button id="sendResource" class="layui-btn  layui-btn-small layui-btn-normal">分配资源</button>
+				</div>
+	    	</div>
+	    </div>   
+	    
+	    
+	    
+	    
+	    <div data-options="region:'center',border:false" style="margin-top: 2px;">
+	     	 <table id="datagridModel" ></table> 
+	    </div> 
+  		
+  		
+  		
+  		
+  		
+    	<!-- 引入js 这个要在自己的上面-->
+    	#@jsModel?()
+    	
+    	<script type="text/javascript">
+			layui.config({base: "JFinalNew/js/"}).use(["layer","jquery","common"], function() {
+				var $ = layui.jquery;
+				var layer = layui.layer;
+				var common = layui.common;
+			
+				
+				var indexModel;/**记录点击行的编号*/
+				var datagrid;				
+				$(function(){
+					datagrid=$("#datagridModel").datagrid({    
+					    url:"sysrole/queryList.html",    
+					    columns:[[    
+					        {field:"insertdate",title:"添加时间",width:150,align:"center"},    
+					        {field:"updatedate",title:"修改时间",width:150,align:"center"},    
+					        {field:"sort",title:"排序",width:100,align:"center",sortable:true},    
+					        {field:"remark",title:"描述",width:250,align:"center"}   
+					    ]],
+					    frozenColumns:[[
+					        {field:"id",title:"编号",width:100,align:"center",checkbox:true},  
+					        {field:"name",title:"角色名称",width:150,align:"center",sortable:true}   
+					    ]],
+					    autoRowHeight:false,
+					    striped:true,
+					    nowrap:true,
+					    idField:"id",
+					    multiSort:true,/**sort=createDate,stationName  order=asc,asc*/
+					    loadMsg:"拼命加载中...",
+					    pagination:true,
+					    singleSelect:false,
+					    checkOnSelect:true,
+					    selectOnCheck:true,
+					    pagePosition:"bottom", 
+					    pageNumber:1,
+					    pageSize:10,
+					    pageList:[10,20,50,100,500,1000],  
+					    queryParams:{},
+					    fit:true,
+					    fitColumns:true,
+					    onClickRow:function(index,row){
+					    	datagrid.datagrid("clearChecked");
+					    	datagrid.datagrid("clearSelections");
+					    	if(indexModel == row.id){
+					    		indexModel="";
+					    	}else{
+					    		indexModel=row.id;
+					    		datagrid.datagrid("selectRow",index);
+					    	}
+					    }
+					}); 
+				});
+			
+				/**提交查询的参数*/
+				$("#btnQuery").click(function(){
+					datagrid.datagrid("clearChecked");
+					datagrid.datagrid("clearSelections");
+					load();
+				});
+				/**清空*/
+				$("#cleanQuery").click(function(){
+					$("#name").val(""),
+					load();
+				});
+				
+				/**分配资源*/
+				$("#sendResource").click(function(){
+					var rows=datagrid.datagrid("getChecked");
+					if(rows.length != 1){
+						common.getMsgBlackDialog("请选中一条角色记录,在进行分配操作",2000);
+						return ;
+					}
+					common.openEditDialogView("分配资源","sysrole/distributeResource.html?id="+rows[0].id,"1200px","550px",true);
+				});
+				/**添加*/
+				$("#add").click(function(){
+					common.openEditDialog(load,"添加角色","sysrole/editPage.html","750px","350px",false,"sysrole/edit.html");
+				});
+				/**修改*/
+				$("#update").click(function(){
+					var rows=datagrid.datagrid("getChecked");
+					if(rows.length !=1){
+						common.getMsgBlackDialog("只能选择一条记录修改",2000);
+						return ;
+					}
+					common.openEditDialog(load,"修改角色","sysrole/editPage.html?id="+rows[0].id,"750px","350px",false,"sysrole/edit.html");
+				});
+				/**删除*/
+				$("#delete").click(function(){
+					var rows=datagrid.datagrid("getChecked");
+					if(rows.length != 1){
+						common.getMsgBlackDialog("请选中要删除的一条记录",2000);
+						return ;
+					}
+					$.ajax({
+						   type: "POST",url: "sysrole/isDelete.html",data: {id:rows[0].id},dataType: "json",
+						   success: function(msg){
+						   	   if(msg.success){
+									common.getConfirmDelDialog("友情提示","删除再次确认？",3,"sysrole/delete.html",{id:rows[0].id},load);
+						   	   }else{
+						   	   		common.getMsgBlackDialog("请先将角色对应的用户移除,在进行删除操作",2000);
+						   	   		return ;
+						   	   }
+						   }
+					});
+					
+					
+				});
+				/**加载*/
+				function load(){
+					datagrid.datagrid("load",{
+					name:$("#name").val()
+					});
+					datagrid.datagrid("clearChecked");
+					datagrid.datagrid("clearSelections");
+				}
+			});
+  		</script>
+  		
+  		
+  </body>
+</html>

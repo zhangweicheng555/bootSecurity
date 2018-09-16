@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <title>项目管理列表</title>
 <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
@@ -35,14 +35,14 @@
 							</form>
 						</td>
 						<td align="right">
-							<button id="searchProjectBtn" class="layui-btn layui-btn-sm" onclick="location.href='addUser.html'">
+							<button id="addProjectBtn" class="layui-btn layui-btn-sm">
 								<i class="layui-icon">&#xe608;</i> 添加
 							</button>
 							<button id="exportProjectBtn" class="layui-btn layui-btn-sm" style="margin-left: 1px;">
 								<i class="layui-icon layui-icon-right" style="font-size: 30px; color: white-space;"></i>当前页导出
 							</button>
 							<button id="deleteProjectBtn" class="layui-btn layui-btn-sm  layui-btn-danger" style="margin-left: 1px;">
-								<i class="layui-icon layui-icon-close" style="font-size: 30px; color: white-space;"></i>删除
+								  <i class="layui-icon">&#xe640;</i>删除
 							</button>
 						</td>
 					</tr>
@@ -66,16 +66,19 @@
 </body>
 </html>
 
-	<script type="text/javascript" src="../../js/libs/jquery-2.1.1.min.js"></script>
-	<script type="text/javascript" src="../../layui/layui.js"></script>
+	<script type="text/javascript" src="../../js/libs/jquery-2.1.1.min.js" ></script>
+	<script type="text/javascript" src="../../layui/layui.js" ></script>
 	<script type="text/javascript" src="../../js/jq.js"></script>
+	<script type="text/javascript" src="../../js/common.js" charset="UTF-8"></script>
 
 	<script type="text/javascript">
 	var currData;
 	var checkArray=new Array();
-	layui.use([ 'layer' ,'table','laydate'], function() {
+	layui.use([ 'layer' ,'table','laydate','jquery','common'], function() {
 	  var layer = layui.layer;
 	  var laydate = layui.laydate;
+	  var $=layui.$;
+	  var common = layui.common;
 	  
 	  var table = layui.table;
 	  var tableIns=table.render({
@@ -90,7 +93,7 @@
 			   }
 	    ,cols: [[        
 	      {field:'id', width:30, title: 'ID', sort: true,type:'checkbox'}
-	      ,{title: '序号',width:40,templet: '#indexTpl',align:'center'}
+	      ,{title: '序号',width:70,templet: '#indexTpl',align:'center'}
 	      ,{field:'projName',   minWidth:150, title: '项目名称',align:'center'}
 	      ,{field:'projCode',   width:150, title: '项目编码',align:'center'}
 	      ,{field:'roleNames',  minWidth:150, title: '拥有角色',align:'center'}
@@ -136,49 +139,29 @@
 	  //监听行工具事件
 	  table.on('tool(sysproject)', function(obj){
 	    var row = obj.data;
-	    if(obj.event === 'del'){
-	    	parent.layer.confirm('确定要删除吗？', function(index){
-	    	  $.ajax({
-	    		   type: "POST",dataType:"json",url: "/project/delete",
-	    		   data: {"ids":row.id},
-	    		   success: function(msg){
-	    			   if(msg.success){
-	    				   obj.del();
-	    				   parent.layer.close(index);
-	    			       layer.msg('删除操作成功');
-	    			   }else{
-	    				   parent.layer.close(index);
-	    				   layer.msg('由于网络原因删除操作失败');
-	    			   }
-	    		   }
-	    		});
-	      });
-	    } else if(obj.event === 'edit'){
+	    if(obj.event === 'del'){//单行删除
+	    	if(checkArray && checkArray.length>0){//控制单项删除
+				  common.getMsgBlackDialog('请选中一条记录',1000);
+			  }else{
+	     	      common.getConfirmDelDialog("确定要删除吗？","删除【"+row.projName+"】记录",2,"/project/delete",{"ids":row.id},function(){deleteRow(obj);});
+			  }
+	    } else if(obj.event === 'edit'){//编辑
 	      	
 	    }
+	  });
+	  
+	  /**添加*/
+	  $("#addProjectBtn").click(function(){//添加
+		  common.openEditDialog(fresh,"添加项目","pages/project/add.html","1000px","520px",false,"确定","取消","/project/edit");
 	  });
 	  
 	  $("#searchBt").click(function(){
 		  fresh();
 	  });
-	  $("#deleteProjectBtn").click(function(){
+	  
+	  $("#deleteProjectBtn").click(function(){//多项删除
 		  if(checkArray && checkArray.length>0){
-			  parent.layer.confirm('共删除【'+checkArray.length+'】条记录', {icon: 3, title:'删除确认'}, function(index){
-				  var strIds=checkArray.join(",");
-				  $.ajax({
-			   		   type: "POST",dataType:"json",url: "/project/delete",
-			   		   data: {"ids":strIds},
-			   		   success: function(msg){
-			   			   if(msg.success){
-			   			       layer.msg('删除操作成功');
-			   			       fresh();
-			   			   }else{
-			   				   layer.msg('由于网络原因删除操作失败');
-			   			   }
-			   		   }
-			   		});
-				  parent.layer.close(index);
-				});
+		  	  common.getConfirmDelDialog("确定要删除吗？",'共删除【'+checkArray.length+'】条记录',2,"/project/delete",{"ids":checkArray.join(",")},fresh);
 		  }else{
 			  layer.msg('未选中要删除的记录');
 		  }
@@ -241,6 +224,9 @@
 		  $("#projName").val("");
 		  fresh();
 	  });
+	  
+	 
+	  
 	  $("#exportProjectBtn").click(function(){
 		  table.exportFile("sysproject", currData, "csv");
 	  });
@@ -255,6 +241,9 @@
 				   ,page: {curr: 1}
 		  		   }
 		  );
+	  }
+	  function deleteRow(obj){//只删除行 无刷新
+		  obj.del();
 	  }
 	  
 	  laydate.render({

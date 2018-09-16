@@ -1,9 +1,10 @@
-package com.boot.kaizen.controller;
+package com.boot.kaizen.controller.sys;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -54,6 +55,12 @@ public class SysProjectController {
 	public JsonMsgUtil delete(@RequestParam("ids") String ids) {
 
 		return projectService.delete(ids);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/edit", method = RequestMethod.POST)
+	public JsonMsgUtil edit(SysProject sysProject) {
+		return projectService.edit(sysProject);
 	}
 
 }

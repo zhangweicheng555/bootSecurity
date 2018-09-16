@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<base href="#(basePath)" />
+    <title>任务处理</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    #@cssModel?()
+  </head>
+  
+  <body>
+    
+    <form class="layui-form" id="formDemo" method="post"  style="margin-top: 5px;">
+		 <input type="hidden" name="taskId" id="taskId" value="#(taskId)" >
+		 <input type="hidden" name="myactcomment.sid" id="id" value="#(childpayback.id??)" >
+  		 
+  		 <div class="layui-form-item">
+		    <label class="layui-form-label">申请人:</label>
+		    <div class="layui-input-inline">
+		      <input type="text" name="uname" id="uname" value="#(childpayback.uname??)" style="width: 200px;" lay-verify="required" autocomplete="off"  class="layui-input">
+		    </div>
+		    <label class="layui-form-label">报销钱数:</label>
+		    <div class="layui-input-inline">
+		      <input type="text" name="moneynum" id="moneynum" value="#(childpayback.moneynum??)" style="width: 200px;" lay-verify="required" autocomplete="off"  class="layui-input">
+		    </div>
+		 </div>
+		 
+  		 <div class="layui-form-item">
+		    <label class="layui-form-label">备注:</label>
+		    <div class="layui-input-inline">
+		      <textarea  style="width: 510px;height: 50px;" placeholder="请输入备注信息" class="layui-textarea">#(childpayback.remark??)</textarea>
+		    </div>
+		 </div>
+  		 <div class="layui-form-item">
+		    <label class="layui-form-label">处理描述:</label>
+		    <div class="layui-input-inline">
+		      <textarea name="myactcomment.remark" id="remark" style="width: 510px;height: 50px;" placeholder="请输入处理描述信息" class="layui-textarea"></textarea>
+		    </div>
+		 </div>
+		  
+		  
+		  <!-- 触发提交的按钮 -->
+		  <button id="subBut" class="layui-btn"  style="display: none" lay-submit lay-filter="formDemo">立即提交</button>
+  	</form>
+    
+    #@jsModel?()
+    <script type="text/javascript">
+    	/**固定写法*/
+		var flag=false;
+		
+    	layui.config({base: "JFinalNew/js/"}).use(["layer","jquery","form"], function() {
+				var $ = layui.jquery;
+				var layer = layui.layer;
+				var form=layui.form();
+				
+				/**固定写法*/
+				form.on('submit(formDemo)', function(data){
+					/**判断角色名称是不是存在相同的  有相同不提交 提示*/
+					flag=true;
+				    return false;
+				});
+		});
+		/**固定写法*/
+		function submitForm(){
+			$("#subBut").click();
+	 		return flag;
+		}
+    </script>
+  </body>
+</html>

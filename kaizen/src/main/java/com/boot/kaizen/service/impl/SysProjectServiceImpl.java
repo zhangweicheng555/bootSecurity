@@ -1,5 +1,6 @@
 package com.boot.kaizen.service.impl;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -45,6 +46,24 @@ public class SysProjectServiceImpl implements SysProjectService {
 			}
 		} catch (Exception e) {
 			throw e;
+		}
+		return j;
+	}
+
+	@Override
+	public JsonMsgUtil edit(SysProject sysProject) {
+		JsonMsgUtil j = new JsonMsgUtil(false);
+		try {
+			if (sysProject.getId() == null) {//add
+				sysProject.setCreateTime(new Date());
+				projectDao.insert(sysProject);
+			} else {// edit
+				sysProject.setUpdateTime(new Date());
+				projectDao.update(sysProject);
+			}
+			j = new JsonMsgUtil(true, "操作成功", null);
+		} catch (Exception e) {
+
 		}
 		return j;
 	}
