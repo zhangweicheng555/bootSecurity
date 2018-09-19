@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.boot.kaizen.model.SysProject;
@@ -24,4 +25,7 @@ public interface SysProjectDao {
 
 	@Update("update sys_project set proj_name=#{projName},proj_code=#{projCode},proj_intro=#{projIntro},sort=#{sort},updateTime=#{updateTime} where id=#{id}")
 	void update(SysProject sysProject);
+
+	@Select("select * from sys_project where id=#{id}")
+	SysProject findById(@Param("id") Long id);
 }

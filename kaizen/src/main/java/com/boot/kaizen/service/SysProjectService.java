@@ -39,4 +39,6 @@ public interface SysProjectService {
 	 * @date 2018年9月16日 下午6:27:00
 	 */
 	public JsonMsgUtil edit(SysProject sysProject);
+
+	public JsonMsgUtil findById(Long id);
 }

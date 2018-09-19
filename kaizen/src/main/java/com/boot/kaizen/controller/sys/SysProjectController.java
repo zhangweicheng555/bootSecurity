@@ -63,4 +63,10 @@ public class SysProjectController {
 		return projectService.edit(sysProject);
 	}
 
+	@ResponseBody
+	@RequestMapping(value = "/findById", method = RequestMethod.POST)
+	public JsonMsgUtil findById(@RequestParam("id") Long id) {
+		return projectService.findById(id);
+	}
+
 }

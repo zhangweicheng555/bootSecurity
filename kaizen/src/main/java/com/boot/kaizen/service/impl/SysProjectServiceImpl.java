@@ -54,7 +54,7 @@ public class SysProjectServiceImpl implements SysProjectService {
 	public JsonMsgUtil edit(SysProject sysProject) {
 		JsonMsgUtil j = new JsonMsgUtil(false);
 		try {
-			if (sysProject.getId() == null) {//add
+			if (sysProject.getId() == null) {// add
 				sysProject.setCreateTime(new Date());
 				projectDao.insert(sysProject);
 			} else {// edit
@@ -64,6 +64,18 @@ public class SysProjectServiceImpl implements SysProjectService {
 			j = new JsonMsgUtil(true, "操作成功", null);
 		} catch (Exception e) {
 
+		}
+		return j;
+	}
+
+	@Override
+	public JsonMsgUtil findById(Long id) {
+		JsonMsgUtil j = new JsonMsgUtil(false);
+		if (id != null) {
+			SysProject sysProject = projectDao.findById(id);
+			if (sysProject != null) {
+				j = new JsonMsgUtil(true, "操作成功", sysProject);
+			}
 		}
 		return j;
 	}

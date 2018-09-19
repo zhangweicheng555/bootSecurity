@@ -10,7 +10,7 @@
 
 	
 	
-	<form class="layui-form"  id="formDemo" style="margin-top: 20px;">
+	<form class="layui-form"  lay-filter="formDemo" id="formDemo" style="margin-top: 20px;">
 	  
 	  <div class="layui-form-item">
 	    <label class="layui-form-label" style="width: 100px;">项目名称</label>
@@ -54,12 +54,34 @@
 	
 <script>
 
+	initData();
+	function initData(){
+		var id=getUrlParam("id");
+		$.ajax({
+			   type: "POST",url: "/project/findById?id="+id,data: {"id":id},dataType:"json",
+			   success: function(msg){
+			     if(msg.success){
+			    	var obj=msg.object;
+			 		form.val("formDemo", {
+			 		  "projName": "贤心" 
+			 		  ,"projCode": "女"
+			 		  ,"sort": "女"
+			 		  ,"projIntro": 3
+			 		});
+			     }else{
+			    	 
+			     }
+			   }
+		});
+	}
+
 	var flag=false;
 	
 	function submitForm(){
 		$("#formDemoBtn").click();
 		return flag;
 	 }
+	 
 	
 	
 	
@@ -72,7 +94,7 @@
 		flag=true;
 	    return false;
 	  });
-	
+		
 	});
 	
 </script> 
