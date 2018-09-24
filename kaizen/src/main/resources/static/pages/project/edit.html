@@ -58,18 +58,18 @@
 	function initData(){
 		var id=getUrlParam("id");
 		$.ajax({
-			   type: "POST",url: "/project/findById?id="+id,data: {"id":id},dataType:"json",
+			   type: "POST",url: "/project/findById",data: {"id":id},dataType:"json",
 			   success: function(msg){
 			     if(msg.success){
 			    	var obj=msg.object;
 			 		form.val("formDemo", {
-			 		  "projName": "贤心" 
-			 		  ,"projCode": "女"
-			 		  ,"sort": "女"
-			 		  ,"projIntro": 3
+			 		  "projName": obj.projName
+			 		  ,"projCode": obj.projCode
+			 		  ,"sort": obj.sort
+			 		  ,"projIntro": obj.projIntro
 			 		});
 			     }else{
-			    	 
+			    	 layer.msg('返回修改数据信息异常');
 			     }
 			   }
 		});
