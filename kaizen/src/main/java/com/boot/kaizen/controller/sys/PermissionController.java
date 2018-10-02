@@ -1,4 +1,4 @@
-package com.boot.kaizen.controller;
+package com.boot.kaizen.controller.sys;
 
 import java.util.Collections;
 import java.util.List;
@@ -80,34 +80,32 @@ public class PermissionController {
 		}
 	}
 
+	/**
+	 * @Description: 查询资源列表
+	 * @author weichengz
+	 * @date 2018年10月2日 上午11:48:00
+	 */
+	@RequestMapping(value = "/list")
+	@PreAuthorize("hasAuthority('sys:menu:query')")
+	public List<Permission> permissionsList() {
+		List<Permission> permissionsAll = permissionDao.listAll();
+		List<Permission> list = Lists.newArrayList();
+		setPermissionsList(0L, permissionsAll, list);
+		return list;
+	}
 
 	/**
-	 * 菜单列表
-	 * 
-	 * @param pId
-	 * @param permissionsAll
-	 * @param list
+	 * @Description: 迭代资源 f1-c1,c2 f2-c
+	 * @author weichengz
+	 * @date 2018年10月2日 上午11:49:23
 	 */
 	private void setPermissionsList(Long pId, List<Permission> permissionsAll, List<Permission> list) {
 		for (Permission per : permissionsAll) {
 			if (per.getParentId().equals(pId)) {
 				list.add(per);
-				if (permissionsAll.stream().filter(p -> p.getParentId().equals(per.getId())).findAny() != null) {
-					setPermissionsList(per.getId(), permissionsAll, list);
-				}
+				setPermissionsList(per.getId(), permissionsAll, list);
 			}
 		}
-	}
-
-	@GetMapping
-	@PreAuthorize("hasAuthority('sys:menu:query')")
-	public List<Permission> permissionsList() {
-		List<Permission> permissionsAll = permissionDao.listAll();
-
-		List<Permission> list = Lists.newArrayList();
-		setPermissionsList(0L, permissionsAll, list);
-
-		return list;
 	}
 
 	@GetMapping("/all")

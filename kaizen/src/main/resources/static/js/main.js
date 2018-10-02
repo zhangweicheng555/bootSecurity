@@ -131,7 +131,7 @@ layui.use(['layer', 'element'], function() {
 	         //新增一个Tab项  
 	         element.tabAdd('admin-tab', {  
 	           title: title,
-	           content: '<iframe scrolling="no" src="' + $(this).attr('data-url') + '"></iframe>',
+	           content: '<iframe  src="' + $(this).attr('data-url') + '"></iframe>',
 	           id: lay_id
 	         });  
 	         element.tabChange("admin-tab", lay_id);    

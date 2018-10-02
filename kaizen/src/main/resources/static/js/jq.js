@@ -59,7 +59,7 @@ function getUrlParam(key) {
 	for(var i=0;i<params.length;i++){
 		var param=params[i].split("=");
 		if(key == param[0]){
-			return parma[1];
+			return param[1];
 		}
 	}
 }
@@ -68,4 +68,25 @@ function deleteCurrentTab() {
 	var lay_id = $(parent.document).find("ul.layui-tab-title").children(
 			"li.layui-this").attr("lay-id");
 	parent.active.tabDelete(lay_id);
+}
+//核对是否有权限
+function checkPermission() {
+	var pers = [];
+	$.ajax({
+		type : 'get',
+		url : '/permissions/owns',
+		contentType : "application/json; charset=utf-8",
+		async : false,
+		success : function(data) {
+			pers = data;
+			$("[permission]").each(function() {
+				var per = $(this).attr("permission");
+				if ($.inArray(per, data) < 0) {
+					$(this).hide();
+				}
+			});
+		}
+	});
+	
+	return pers;
 }

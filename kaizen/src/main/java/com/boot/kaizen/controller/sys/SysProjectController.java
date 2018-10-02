@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -57,6 +56,12 @@ public class SysProjectController {
 		return projectService.delete(ids);
 	}
 
+	/**
+	 * 修改信息
+	* @Description: TODO
+	* @author weichengz
+	* @date 2018年10月2日 上午10:52:30
+	 */
 	@ResponseBody
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
 	public JsonMsgUtil edit(SysProject sysProject) {

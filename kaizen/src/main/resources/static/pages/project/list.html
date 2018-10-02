@@ -131,7 +131,7 @@
                 $('.layui-table-header th[data-field="id"] input[type="checkbox"]').next().addClass('layui-form-checked');
             }
 	    }
-        ,height:'full-40'
+        ,height:'full'
         ,cellMinWidth: 80
 		,size: 'sm' 
 	  });
@@ -140,11 +140,6 @@
 	  table.on('tool(sysproject)', function(obj){
 	    var row = obj.data;
 	    if(obj.event === 'del'){//单行删除
-	    	/* if(checkArray && checkArray.length>0){//控制单项删除
-				  common.getMsgBlackDialog('请选中一条记录',1000);
-			  }else{
-	     	      common.getConfirmDelDialog("确定要删除吗？","删除【"+row.projName+"】记录",2,"/project/delete",{"ids":row.id},function(){deleteRow(obj);});
-			  } */
 	    	common.getConfirmDelDialog("确定要删除吗？","删除【"+row.projName+"】记录",2,"/project/delete",{"ids":row.id},function(){deleteRow(obj);});
 	    } else if(obj.event === 'edit'){//编辑
 		    common.openEditDialog(fresh,"编辑项目","pages/project/edit.html?id="+row.id,"1000px","520px",false,"确定","取消","/project/edit");
@@ -161,7 +156,8 @@
 		  fresh();
 	  });
 	  
-	  $("#deleteProjectBtn").click(function(){//多项删除
+	  /**多项删除*/
+	  $("#deleteProjectBtn").click(function(){
 		  if(checkArray && checkArray.length>0){
 		  	  common.getConfirmDelDialog("确定要删除吗？",'共删除【'+checkArray.length+'】条记录',2,"/project/delete",{"ids":checkArray.join(",")},fresh);
 		  }else{

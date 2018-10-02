@@ -63,7 +63,7 @@ public class SysProjectServiceImpl implements SysProjectService {
 			}
 			j = new JsonMsgUtil(true, "操作成功", null);
 		} catch (Exception e) {
-
+			
 		}
 		return j;
 	}

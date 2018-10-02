@@ -15,6 +15,7 @@
 	  <div class="layui-form-item">
 	    <label class="layui-form-label" style="width: 100px;">项目名称</label>
 	    <div class="layui-input-inline" style="width: 400px;">
+	    <input  type="hidden" name="id" value="id" />
 	      <input type="text" name="projName" id="projName"   required  lay-verify="required"  autocomplete="off" class="layui-input">
 	    </div>
 	     <div class="layui-form-mid layui-word-aux"><span style="color: red;">*</span></div>
@@ -45,58 +46,62 @@
 	</form>
 	
 	
-	
-	
-	
 	<script type="text/javascript" src="../../js/libs/jquery-2.1.1.min.js"></script>
 	<script type="text/javascript" src="../../layui/layui.js"></script>
 	<script type="text/javascript" src="../../js/jq.js"></script>
 	
 <script>
 
-	initData();
-	function initData(){
-		var id=getUrlParam("id");
-		$.ajax({
-			   type: "POST",url: "/project/findById",data: {"id":id},dataType:"json",
-			   success: function(msg){
-			     if(msg.success){
-			    	var obj=msg.object;
-			 		form.val("formDemo", {
-			 		  "projName": obj.projName
-			 		  ,"projCode": obj.projCode
-			 		  ,"sort": obj.sort
-			 		  ,"projIntro": obj.projIntro
-			 		});
-			     }else{
-			    	 layer.msg('返回修改数据信息异常');
-			     }
-			   }
-		});
-	}
-
 	var flag=false;
-	
 	function submitForm(){
 		$("#formDemoBtn").click();
 		return flag;
 	 }
 	 
 	
-	
-	
+	var form;
 	layui.use(['layer', 'form','jquery'], function(){
 	  var layer = layui.layer,form = layui.form,$=layui.jquery;
-	//监听提交
-	  form.on('submit(formDemo)', function(data){
-		  //JSON.stringify(data.field)  将form表格序列化了
-		//layer.msg(JSON.stringify(data.field));
-		flag=true;
+	  //监听提交
+	  form.on('submit(formDemo)', function(data){//JSON.stringify(data.field)  将form表格序列化了
+		  flag=true;
 	    return false;
 	  });
-		
+	  
+	  
+	  
+	  //初始化工作
+	  initData();
+	  function initData(){
+			var id=getUrlParam("id");
+			if(!id){
+				layer.msg('获取数据ID异常');
+				return;
+			}
+			$.ajax({
+				   type: "POST",url: "/project/findById",data: {"id":id},dataType:"json",
+				   success: function(msg){
+				     if(msg.success){
+				    	var obj=msg.object;
+				 		form.val("formDemo", {
+				 		  "id": obj.id
+				 		  ,"projName": obj.projName
+				 		  ,"projCode": obj.projCode
+				 		  ,"sort": obj.sort
+				 		  ,"projIntro": obj.projIntro
+				 		});
+				     }else{
+				    	 layer.msg('返回修改数据信息异常');
+				     }
+				   }
+			});
+		};
 	});
 	
+	
+	
+	    
+		
 </script> 
 
 </body>
