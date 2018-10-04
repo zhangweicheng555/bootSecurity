@@ -11,4 +11,5 @@ import com.boot.kaizen.model.SysRole;
 public interface SysRoleDao {
 
 	List<SysRole> queryByProId(@Param("projId") Long projId);
+
 }

@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"  style="margin-top: 20px;">
-	<form class="form-horizontal" onsubmit="return false" id="form">
+	<form class="form-horizontal" onsubmit="return false" id="formDemo">
 		<fieldset>
 			<div class="form-group">
 				<label class="col-md-2 control-label">上级菜单</label>
@@ -40,9 +40,7 @@
 			<div class="form-group">
 				<label class="col-md-2 control-label">类型</label>
 				<div class="col-md-10">
-					<select name="type" class="form-control input-sm">
-					   <option value="1">菜单</option>
-					   <option value="2">按钮</option>
+					<select name="type" id="type" class="form-control input-sm">
 					</select>
 				</div>
 			</div>
@@ -68,37 +66,26 @@
 	<script type="text/javascript" src="../../js/jq.js"></script>
 	<script type="text/javascript" src="../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
 	<script type="text/javascript" src="../../js/common.js"></script>
-	<script type="text/javascript" src="../../js/my/ztree-menu.js"></script>
 	<script type="text/javascript" src="../../layui/layui.js"></script>
+	<script type="text/javascript" src="../../js/my/ztree-menu.js"></script>
 	<script type="text/javascript">
 		layui.use('layer', function(){
 		    var layer = layui.layer;
 		});
 		
-		
+		//初始化菜单下拉框
 		initParentMenuSelect();
+		//初始化字典下拉菜单
+		initDicSelect("menu","type");
 		
-		function add() {
-			$('#form').bootstrapValidator();
-			var bootstrapValidator = $("#form").data('bootstrapValidator');
+		function submitForm() {
+			$('#formDemo').bootstrapValidator();
+			var bootstrapValidator = $("#formDemo").data('bootstrapValidator');
 			bootstrapValidator.validate();
 		    if(!bootstrapValidator.isValid()){
-			   return;
+			   return false;
 		    }
-		    
-		    var formdata = $("#form").serializeObject();
-
-			$.ajax({
-				type : 'post',
-				url : '/permissions',
-				contentType: "application/json; charset=utf-8",  
-				data : JSON.stringify(formdata),
-				success : function(data) {
-					layer.msg("添加成功", {shift: -1, time: 1000}, function(){
-                        location.href = "menuList.html";
-                    });
-				}
-			});
+		   return true;
 		}
 		
 		function selectCss(){
@@ -108,7 +95,7 @@
 				  area: ['800px', '400px'],
 				  maxmin: true,
 				  shadeClose: true,
-				  content: ['icon.html']
+				  content: ['/pages/menu/icon.html']
 				});
 		}
 	</script>

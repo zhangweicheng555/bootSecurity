@@ -1,11 +1,13 @@
 package com.boot.kaizen.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Permission extends BaseEntity<Long> {
+public class Permission implements Serializable {
 
 	private static final long serialVersionUID = 6180869216498363919L;
 
+	private Long id;// 主键ID 自增
 	private Long parentId;
 	private String name;
 	private String css;
@@ -18,6 +20,14 @@ public class Permission extends BaseEntity<Long> {
 
 	public Long getParentId() {
 		return parentId;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public void setParentId(Long parentId) {

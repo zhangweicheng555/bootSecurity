@@ -17,6 +17,14 @@ public interface SysProjectService {
 	public List<SysProject> query();
 
 	/**
+	 * 
+	 * @Description: 只查询项目信息
+	 * @author weichengz
+	 * @date 2018年10月4日 上午2:41:05
+	 */
+	public List<SysProject> findList();
+
+	/**
 	 * 返回角色的id/名字串
 	 * 
 	 * @author weichengz
@@ -41,4 +49,12 @@ public interface SysProjectService {
 	public JsonMsgUtil edit(SysProject sysProject);
 
 	public JsonMsgUtil findById(Long id);
+
+	/**
+	 * 
+	 * @Description: 查询带有角色的项目列表
+	 * @author weichengz
+	 * @date 2018年10月4日 上午1:54:49
+	 */
+	public List<SysProject> findWithRoleRealtion();
 }

@@ -25,7 +25,7 @@ import com.github.pagehelper.PageInfo;
  */
 @Controller
 @RequestMapping("/project")
-public class SysProjectController {
+public class ProjectController {
 
 	@Autowired
 	private SysProjectService projectService;

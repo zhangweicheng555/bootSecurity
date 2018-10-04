@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>资源权限列表</title>
+<title>角色列表</title>
 <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
 <link rel="stylesheet" href="../../css/treetable/jquery.treetable.css" />
 <link rel="stylesheet" href="../../css/treetable/jquery.treetable.theme.default.css" />
@@ -20,7 +20,7 @@
 	                   			<td>
 								</td>
 								<td align="right">
-	                   				<button class="layui-btn layui-btn-sm" id="menuAddBtn" permission="sys:menu:add">
+	                   				<button class="layui-btn layui-btn-sm" id="menuAddBtn" onclick="location.href='/pages/role/add.html'" permission="sys:menu:add">
                                       <i class="layui-icon">&#xe608;</i> 添加
                                     </button>
 	                   			</td>
@@ -34,10 +34,9 @@
                         <table id="dt-table" class="table table-striped table-bordered table-hover" style="width:100%">
                              <tr>
                                  <th style="text-align: center;" width="20%">名称</th>
-                                 <th style="text-align: center;" width="5%">样式</th>
-								 <th style="text-align: center;">href</th>     
-								 <th style="text-align: center;" width="15%">permission</th>     
-								 <th style="text-align: center;" width="5%">sort</th>     
+								 <th style="text-align: center;">描述</th>     
+								 <th style="text-align: center;" width="15%">创建时间</th>     
+								 <th style="text-align: center;" width="15%">修改时间</th>     
 								 <th style="text-align: center;">操作</th>
                              </tr>
                         </table>
@@ -57,15 +56,16 @@
 <script type="text/javascript">
 
 var pers = checkPermission();
-initMenuList();
+initRoleList();
 
-function initMenuList(){
+function initRoleList(){
 	$.ajax({
 		type : 'get',
-		url : '/permissions/list',
+		url : '/role/list',
 		contentType: "application/json; charset=utf-8",  
 		async:false,
 		success : function(data) {
+			console.info(data);
 			var length = data.length;
 			for(var i=0; i<length; i++){
 				var d = data[i];
@@ -73,37 +73,29 @@ function initMenuList(){
 				var td1 = "<td>" + d.name +"</td>";
 				tr += td1;
 				
-				var css="";
-				if(d.css != null && d.css !=''){
-					css = "<td style='text-align: center;'><i  class='fa "+d.css+"'></i></td>";
-				}else{
-					css = "<td style='text-align: center;'></td>";
+				var description = "";
+				if(d.description != null && d.description !=''){
+					description = d.description;
 				}
-				tr += css;
-				
-				var href = "";
-				if(d.href != null && d.css !=''){
-					href = d.href;
-				}
-				var td2 = "<td style='text-align: center;'>" + href +"</td>";
+				var td2 = "<td style='text-align: center;'>" + description +"</td>";
 				tr += td2;
 				
-				var permission = "";
-				if(d.permission != null && d.css !=''){
-					permission=d.permission;
+				var createTime = "";
+				if(d.createTime != null && d.createTime !=''){
+					createTime=d.createTime;
 				}
-				var td3 = "<td style='text-align: center;'>" + permission +"</td>";
+				var td3 = "<td style='text-align: center;'>" + createTime +"</td>";
 				tr += td3;
 				
-				var sort = "";
-				if(d.sort != null && d.sort !=''){
-					sort=d.sort;
+				var updateTime = "";
+				if(d.updateTime != null && d.updateTime !=''){
+					updateTime=d.updateTime;
 				}
-				sort = "<td style='text-align: center;'>" + sort +"</td>";
-				tr += sort;
+				updateTime = "<td style='text-align: center;'>" + updateTime +"</td>";
+				tr += updateTime;
 				
-				var id = d.id;
-				var href = "/pages/menu/update.html?id=" + id;
+				var id = d.id+"_"+d.parentId;
+				var href = "/pages/role/update.html?id=" + id;
 				var edit = buttonEdit(href, "sys:menu:add", pers);
 				var del = buttonDel(id, "sys:menu:del", pers);
                 tr += "<td style='text-align: center;'>"+edit + del+"</td>";
@@ -131,11 +123,6 @@ layui.use(['layer','jquery','common'], function(){
     	var layer = layui.layer;
     	var $=layui.$;
    	    common = layui.common;
-   	    
-	    /**添加*/
-	    $("#menuAddBtn").click(function(){//添加
-		  common.openEditDialog(fresh,"添加资源","/pages/menu/add.html","1000px","520px",false,"确定","取消","/permissions/edit");
-	    });
     
 	  
 });
@@ -149,6 +136,6 @@ function update(href){
 }
 //刷新
 function fresh(){
-	 location.href = "/pages/menu/list.html";
+	 location.href = "/pages/role/list.html";
 };
 </script>

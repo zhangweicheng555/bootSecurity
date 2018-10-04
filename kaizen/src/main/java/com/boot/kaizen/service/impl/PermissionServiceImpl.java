@@ -5,10 +5,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.boot.kaizen.dao.PermissionDao;
 import com.boot.kaizen.model.Permission;
 import com.boot.kaizen.service.PermissionService;
+import com.boot.kaizen.util.JsonMsgUtil;
 
 @Service
 public class PermissionServiceImpl implements PermissionService {
@@ -32,12 +32,33 @@ public class PermissionServiceImpl implements PermissionService {
 
 	@Override
 	@Transactional
-	public void delete(Long id) {
-		permissionDao.deleteRolePermission(id);
-		permissionDao.delete(id);
-		permissionDao.deleteByParentId(id);
+	public JsonMsgUtil delete(Long id) {
+		JsonMsgUtil j=new JsonMsgUtil(false);
+		try {
+			permissionDao.delete(id);
+			j=new JsonMsgUtil(true, "操作成功", "");
+		} catch (Exception e) {
+			j.setMsg("删除操作失败");
+		}
+		return j;
+	}
 
-		log.debug("删除菜单id:{}", id);
+	@Override
+	public JsonMsgUtil edit(Permission permission) {
+		JsonMsgUtil j = new JsonMsgUtil(false);
+		try {
+			if (permission.getId() != null) {// edit
+				permissionDao.update(permission);
+				j = new JsonMsgUtil(true, "添加成功", "");
+			} else {
+				permissionDao.save(permission);
+				j = new JsonMsgUtil(true, "添加成功", "");
+			}
+		} catch (Exception e) {
+			j.setMsg("添加操作失败");
+			e.printStackTrace();
+		}
+		return j;
 	}
 
 }

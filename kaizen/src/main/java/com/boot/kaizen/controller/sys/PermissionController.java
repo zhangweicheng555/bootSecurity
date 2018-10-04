@@ -9,13 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSONArray;
@@ -24,6 +22,7 @@ import com.boot.kaizen.dao.PermissionDao;
 import com.boot.kaizen.entity.LoginUser;
 import com.boot.kaizen.model.Permission;
 import com.boot.kaizen.service.PermissionService;
+import com.boot.kaizen.util.JsonMsgUtil;
 import com.boot.kaizen.util.UserUtil;
 import com.google.common.collect.Lists;
 
@@ -95,7 +94,7 @@ public class PermissionController {
 	}
 
 	/**
-	 * @Description: 迭代资源 f1-c1,c2 f2-c
+	 * @Description: 迭代资源 f1-c1,c2 f2-c :依赖treeTable格式
 	 * @author weichengz
 	 * @date 2018年10月2日 上午11:49:23
 	 */
@@ -118,11 +117,15 @@ public class PermissionController {
 		return array;
 	}
 
-	@GetMapping("/parents")
+	/**
+	 * @Description: 查询下拉框 父菜单
+	 * @author weichengz
+	 * @date 2018年10月3日 上午8:33:21
+	 */
+	@RequestMapping(value = "/parents")
 	@PreAuthorize("hasAuthority('sys:menu:query')")
 	public List<Permission> parentMenu() {
 		List<Permission> parents = permissionDao.listParents();
-
 		return parents;
 	}
 
@@ -155,15 +158,26 @@ public class PermissionController {
 		return permissionDao.listByRoleId(roleId);
 	}
 
-	@PostMapping
+	/**
+	 * 
+	 * @Description: 编辑添加
+	 * @author weichengz
+	 * @date 2018年10月3日 上午10:06:40
+	 */
+	@RequestMapping(value = "/edit")
 	@PreAuthorize("hasAuthority('sys:menu:add')")
-	public void save(@RequestBody Permission permission) {
-		permissionDao.save(permission);
+	public JsonMsgUtil edit(Permission permission) {
+		return permissionService.edit(permission);
 	}
 
-	@GetMapping("/{id}")
+	/**
+	 * @Description: 根据ID查询
+	 * @author weichengz
+	 * @date 2018年10月3日 上午9:49:09
+	 */
+	@RequestMapping(value = "/get")
 	@PreAuthorize("hasAuthority('sys:menu:query')")
-	public Permission get(@PathVariable Long id) {
+	public Permission get(@RequestParam(value = "id", required = true) Long id) {
 		return permissionDao.getById(id);
 	}
 
@@ -190,9 +204,15 @@ public class PermissionController {
 				.map(Permission::getPermission).collect(Collectors.toSet());
 	}
 
-	@DeleteMapping("/{id}")
+	/**
+	 * 
+	 * @Description: 删除
+	 * @author weichengz
+	 * @date 2018年10月3日 下午4:42:42
+	 */
+	@RequestMapping(value = "/delete")
 	@PreAuthorize("hasAuthority('sys:menu:del')")
-	public void delete(@PathVariable Long id) {
-		permissionService.delete(id);
+	public JsonMsgUtil delete(@RequestParam(value = "id", required = true) Long id) {
+		return permissionService.delete(id);
 	}
 }

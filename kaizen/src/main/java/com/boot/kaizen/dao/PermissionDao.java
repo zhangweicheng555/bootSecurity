@@ -6,6 +6,7 @@ import java.util.Set;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -31,18 +32,12 @@ public interface PermissionDao {
 
 	@Insert("insert into sys_permission(parentId, name, css, href, type, permission, sort) values(#{parentId}, #{name}, #{css}, #{href}, #{type}, #{permission}, #{sort})")
 	int save(Permission permission);
+	
+	int update(@Param("permission") Permission permission);
 
-	@Update("update sys_permission t set parentId = #{parentId}, name = #{name}, css = #{css}, href = #{href}, type = #{type}, permission = #{permission}, sort = #{sort} where t.id = #{id}")
-	int update(Permission permission);
-
-	@Delete("delete from sys_permission where id = #{id}")
+	@Delete("delete from sys_permission where id = #{id} or parentId = #{id}")
 	int delete(Long id);
 
-	@Delete("delete from sys_permission where parentId = #{id}")
-	int deleteByParentId(Long id);
-
-	@Delete("delete from sys_role_permission where permissionId = #{permissionId}")
-	int deleteRolePermission(Long permissionId);
 
 	@Select("select ru.userId from sys_role_permission rp inner join sys_role_user ru on ru.roleId = rp.roleId where rp.permissionId = #{permissionId}")
 	Set<Long> listUserIds(Long permissionId);

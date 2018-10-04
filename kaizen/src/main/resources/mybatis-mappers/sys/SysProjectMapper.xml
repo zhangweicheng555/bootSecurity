@@ -8,6 +8,16 @@
 		 select * from sys_project
 	</select>
 	
+	
+	<select id="findWithRoleRealtion" resultMap="SysProjectQMap">
+		 select distinct p.* 
+		 from 
+		 sys_project p
+		 ,proj_role_relation r
+		 where p.id=r.proj_id
+		 order by p.sort asc
+	</select>
+	
 	<delete id="delete">
 		 delete from sys_project
 		 where id in
@@ -46,6 +56,9 @@
 		 group by sp.id,sp.proj_name,sp.proj_code,sp.proj_intro,sp.sort,sp.createTime,sp.updateTime
 	
 	</select>
+	<select id="findList" resultMap="SysProjectFMap">
+		 select * from  sys_project sp
+	</select>
 	
 	
 	<resultMap type="com.boot.kaizen.model.SysProject" id="SysProjectQMap">
@@ -70,5 +83,6 @@
 		<result property="createTime" column="createTime" />
 		<result property="updateTime" column="updateTime" />
 	</resultMap>
+
 	
 </mapper>

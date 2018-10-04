@@ -100,20 +100,66 @@ function createNode(d) {
 	return node;
 }
 
+
+
+function initDicSelect(type,selectId){
+	$.ajax({
+        type : 'get',
+        url : '/dic/findByType',
+        data:{"type":type},
+        async : false,
+        dataType: "json",
+        success : function(data) {
+        	var select = $("#"+selectId);
+            select.append("<option value='0'>''</option>");
+            if(data != null && data.length >0){
+            	select.empty();
+            	for(var i=0;i<data.length;i++){
+            		var row=data[i];
+            		select.append("<option value='"+row.k+"'>"+row.val+"</option>");
+            	}
+            }
+        }
+    });
+}
+
+function initProjSelect(selectId){
+	$.ajax({
+		type : 'get',
+		url : '/role/projSelect',
+		data:{},
+		async : false,
+		dataType: "json",
+		success : function(data) {
+			var select = $("#"+selectId);
+			select.append("<option value=''>''</option>");
+			if(data != null && data.length >0){
+				select.empty();
+				for(var i=0;i<data.length;i++){
+					var row=data[i];
+					select.append("<option value='"+row.id+"'>"+row.projName+"</option>");
+				}
+			}
+		}
+	});
+}
+
 function initParentMenuSelect(){
 	$.ajax({
         type : 'get',
         url : '/permissions/parents',
         async : false,
+        dataType: "json",
         success : function(data) {
             var select = $("#parentId");
             select.append("<option value='0'>root</option>");
-            for(var i=0; i<data.length; i++){
-                var d = data[i];
-                var id = d['id'];
-                var name = d['name'];
-                
-                select.append("<option value='"+ id +"'>" +name+"</option>");
+            if(data != null && data.length >0){
+            	for(var i=0; i<data.length; i++){
+            		var d = data[i];
+            		var id = d.id;
+            		var name = d.name;
+            		select.append("<option value='"+ id +"'>" +name+"</option>");
+            	}
             }
         }
     });

@@ -16,6 +16,10 @@ public interface SysProjectDao {
 
 	List<SysProject> query();
 
+	List<SysProject> findWithRoleRealtion();
+	
+	List<SysProject> findList();
+
 	List<SysProject> find(@Param("map") Map<String, Object> map);
 
 	Integer delete(@Param("idsArray") Long[] array);

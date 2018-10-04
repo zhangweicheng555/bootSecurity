@@ -13,7 +13,7 @@ public class SysRole extends BaseEntity<Long> {
 	private String name;
 
 	private String description;
-	
+
 	private String sort;
 
 	public String getName() {
@@ -39,5 +39,5 @@ public class SysRole extends BaseEntity<Long> {
 	public void setSort(String sort) {
 		this.sort = sort;
 	}
-	
+
 }

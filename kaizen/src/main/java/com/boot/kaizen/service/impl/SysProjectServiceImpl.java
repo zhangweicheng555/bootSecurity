@@ -63,7 +63,7 @@ public class SysProjectServiceImpl implements SysProjectService {
 			}
 			j = new JsonMsgUtil(true, "操作成功", null);
 		} catch (Exception e) {
-			
+
 		}
 		return j;
 	}
@@ -78,6 +78,16 @@ public class SysProjectServiceImpl implements SysProjectService {
 			}
 		}
 		return j;
+	}
+
+	@Override
+	public List<SysProject> findWithRoleRealtion() {
+		return projectDao.findWithRoleRealtion();
+	}
+
+	@Override
+	public List<SysProject> findList() {
+		return projectDao.findList();
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.boot.kaizen.service;
 
 import com.boot.kaizen.model.Permission;
+import com.boot.kaizen.util.JsonMsgUtil;
 
 public interface PermissionService {
 
@@ -8,5 +9,7 @@ public interface PermissionService {
 
 	void update(Permission permission);
 
-	void delete(Long id);
+	JsonMsgUtil delete(Long id);
+	
+	JsonMsgUtil edit(Permission permission);
 }
