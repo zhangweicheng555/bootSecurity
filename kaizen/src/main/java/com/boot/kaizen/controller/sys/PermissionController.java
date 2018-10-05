@@ -20,6 +20,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.boot.kaizen.dao.PermissionDao;
 import com.boot.kaizen.entity.LoginUser;
+import com.boot.kaizen.entity.ZtreeModel;
 import com.boot.kaizen.model.Permission;
 import com.boot.kaizen.service.PermissionService;
 import com.boot.kaizen.util.JsonMsgUtil;
@@ -79,8 +80,9 @@ public class PermissionController {
 		}
 	}
 
+
 	/**
-	 * @Description: 查询资源列表
+	 * @Description: 查询资源列表 treeTable
 	 * @author weichengz
 	 * @date 2018年10月2日 上午11:48:00
 	 */

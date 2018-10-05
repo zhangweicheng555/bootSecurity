@@ -1,16 +1,25 @@
 ﻿<!DOCTYPE html>
 <HTML>
-<HEAD>
-<TITLE>bootstrap风格的zTree树形菜单代码</TITLE>
+<head>
+<TITLE>zTree树形菜单代码</TITLE>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 
-<link rel="stylesheet" href="zTree/css/bootstrapStyle/bootstrapStyle.css" type="text/css">
+<link rel="stylesheet" href="../../js/zTree/css/bootstrapStyle/bootstrapStyle.css" type="text/css">
+<script type="text/javascript" src="../../js/zTree/js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/zTree/js/jquery.ztree.core.js"></script>
+<script type="text/javascript" src="../../js/zTree/js/jquery.ztree.excheck.js"></script>
+<script type="text/javascript" src="../../js/zTree/js/jquery.ztree.exedit.js"></script>
 
-<script type="text/javascript" src="zTree/js/jquery-1.4.4.min.js"></script>
-<script type="text/javascript" src="zTree/js/jquery.ztree.core.js"></script>
-<script type="text/javascript" src="zTree/js/jquery.ztree.excheck.js"></script>
-<script type="text/javascript" src="zTree/js/jquery.ztree.exedit.js"></script>
-<SCRIPT type="text/javascript">
+</head>
+
+<body>
+<ul id="treeDemo" class="ztree"></ul>
+
+
+
+
+
+<script type="text/javascript">
 	
 		var setting = {
 			check: {
@@ -35,9 +44,9 @@
 			{ id:2, pId:0, name:"随意勾选 2", checked:true, open:true},
 			{ id:21, pId:2, name:"随意勾选 2-1"},
 			{ id:22, pId:2, name:"随意勾选 2-2", open:true},
-			{ id:221, pId:22, name:"随意勾选 2-2-1", checked:true},
+			{ id:221, pId:22, name:"随意勾选 2-2-1", checked:false},
 			{ id:222, pId:22, name:"随意勾选 2-2-2"},
-			{ id:23, pId:2, name:"随意勾选 2-3"}
+			{ id:23, pId:2, name:"随意勾选 2-3", open:true}
 		];
 
 		function nocheckNode(e) {
@@ -60,11 +69,8 @@
 			$("#nocheckFalse").bind("click", {nocheck: false}, nocheckNode);
 		});
 		
-	</SCRIPT>
-</HEAD>
-
-<body>
-<ul id="treeDemo" class="ztree"></ul>
-
-</BODY>
+		
+		
+	</script>
+</body>
 </HTML>

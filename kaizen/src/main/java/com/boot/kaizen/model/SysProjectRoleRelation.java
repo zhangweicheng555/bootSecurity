@@ -1,31 +1,51 @@
 package com.boot.kaizen.model;
 
+import java.io.Serializable;
+
 /**
  * 用户项目角色实体类设计
  * 
  * @author weichengz
  * @date 2018年9月8日 上午10:26:05
  */
-public class SysProjectRoleRelation extends BaseEntity<Long> {
+public class SysProjectRoleRelation implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private String roleId;// 角色ID
-	private String projId;// 项目ID
+	private Long id;
+	private Long roleId;// 角色ID
+	private Long projId;// 项目ID
 
-	public String getRoleId() {
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public SysProjectRoleRelation(Long roleId, Long projId) {
+		super();
+		this.roleId = roleId;
+		this.projId = projId;
+	}
+
+	public Long getRoleId() {
 		return roleId;
 	}
 
-	public void setRoleId(String roleId) {
+	public void setRoleId(Long roleId) {
 		this.roleId = roleId;
 	}
 
-	public String getProjId() {
+	public Long getProjId() {
 		return projId;
 	}
 
-	public void setProjId(String projId) {
+	public void setProjId(Long projId) {
 		this.projId = projId;
+	}
+
+	public SysProjectRoleRelation() {
 	}
 
 }

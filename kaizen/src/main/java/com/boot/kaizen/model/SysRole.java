@@ -16,6 +16,16 @@ public class SysRole extends BaseEntity<Long> {
 
 	private String sort;
 
+	private Long projId;
+
+	public Long getProjId() {
+		return projId;
+	}
+
+	public void setProjId(Long projId) {
+		this.projId = projId;
+	}
+
 	public String getName() {
 		return name;
 	}

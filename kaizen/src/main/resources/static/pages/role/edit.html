@@ -2,16 +2,20 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<title>修改资源管理</title>
 <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
 <link rel="stylesheet" href="../../js/zTree/css/bootstrapStyle/bootstrapStyle.css" type="text/css">
 <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome/css/font-awesome.css">
 
 </head>
 <body>
+
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"  style="margin-top: 20px;margin-bottom: 30px;">
+		<input type="hidden" id="projIdM" name="projIdM" />
 		<form class="form-horizontal" onsubmit="return false" id="formDemo">
 			
 			<input type="hidden" id="permissionIds" name="permissionIds" />
+			<input type="hidden" id="id" name="id" />
 			
 			<fieldset>
 				<div class="form-group">
@@ -58,7 +62,7 @@
 					<div class="row" align="center">
 						<div class="col-md-12">
 						    <button class="btn btn-primary" onclick="location.href='/pages/role/list.html'">返回</button>
-							<button class="btn btn-primary" type="submit" onclick="add(this)">
+							<button class="btn btn-primary" type="submit" onclick="update(this)">
 								<i class="fa fa-save"></i> 保存
 							</button>
 						</div>
@@ -67,6 +71,7 @@
 			</fieldset>
 		</form>
 	</div>
+	
 	
 	<script type="text/javascript" src="../../js/libs/jquery-2.1.1.min.js"></script>
 	<script type="text/javascript" src="../../js/jq.js"></script>
@@ -78,54 +83,81 @@
 	<script type="text/javascript" src="../../js/zTree/js/jquery.ztree.core.js"></script>
     <script type="text/javascript" src="../../js/zTree/js/jquery.ztree.excheck.js"></script>
     <script type="text/javascript" src="../../js/zTree/js/jquery.ztree.exedit.js"></script>
-	<script type="text/javascript">
 	
-		
-	    initProjSelect("projId",null);
-	    initZtree("treeDemo",null);
-	    
 	
-		function add(obj) {
-			$('#formDemo').bootstrapValidator();
-			var bootstrapValidator = $("#formDemo").data('bootstrapValidator');
-			bootstrapValidator.validate();
-		    if(!bootstrapValidator.isValid()){
-			   return ;
-		    }
+<script>
 
-		   
-		    var ztreeOperate=$.fn.zTree.getZTreeObj("treeDemo");
-		    var array=ztreeOperate.getCheckedNodes(true);
-		    var permissions="";
-		    if(array != null && array.length>0){
-		    	for(var i=0;i<array.length;i++){
-		    		permissions +=array[i].id;
-		    		if(i<array.length-1){
-		    			permissions +=",";
-		    		}
-		    	}
-		    	if(permissions){
-		    		$("#permissionIds").val(permissions.trim());
-		    	}
-		    }
-		    
-			$.ajax({
-				type : 'post',
-				url : '/role/edit',
-				dataType: "json", 
-				data : $("#formDemo").serialize(),
-				success : function(msg) {
-					if(msg.success){
-						parent.layer.msg("操作成功");
-	                   location.href = "/pages/role/list.html";
-					}else{
-						parent.layer.msg("操作失败");
-					}
-				}
-			});
+var id=getUrlParam("id");
+initForm(id);
+initProjSelect("projId",$("#projIdM").val());
+
+initZtree("treeDemo",id);
+
+function initForm(id){
+	$.ajax({
+		type : 'post',
+		url : '/role/findById',
+		dataType: "json", 
+		async : false,
+		data : {"id":id},
+		success : function(msg) {
+			if(msg != null){
+				//初始化项目Select
+				$("#id").val(msg.id);
+				$("#projIdM").val(msg.projId);
+				$("#name").val(msg.name);
+				$("#description").val(msg.description);
+				$("#sort").val(msg.sort);
+				return ;
+			}
+			parent.layer.msg("查询的角色不存在！");
 		}
+	});
+}
+function update(obj) {
+	$('#formDemo').bootstrapValidator();
+	var bootstrapValidator = $("#formDemo").data('bootstrapValidator');
+	bootstrapValidator.validate();
+    if(!bootstrapValidator.isValid()){
+	   return ;
+    }
+
+   
+    var ztreeOperate=$.fn.zTree.getZTreeObj("treeDemo");
+    var array=ztreeOperate.getCheckedNodes(true);
+    var permissions="";
+    if(array != null && array.length>0){
+    	for(var i=0;i<array.length;i++){
+    		permissions +=array[i].id;
+    		if(i<array.length-1){
+    			permissions +=",";
+    		}
+    	}
+    	if(permissions){
+    		$("#permissionIds").val(permissions.trim());
+    	}
+    }
+    
+	$.ajax({
+		type : 'post',
+		url : '/role/edit',
+		dataType: "json", 
+		data : $("#formDemo").serialize(),
+		success : function(msg) {
+			if(msg.success){
+				parent.layer.msg("操作成功");
+               location.href = "/pages/role/list.html";
+			}else{
+				parent.layer.msg("操作失败");
+			}
+		}
+	});
+}
+	
+	
+	    
 		
-		
-	</script>
+</script> 
+
 </body>
 </html>

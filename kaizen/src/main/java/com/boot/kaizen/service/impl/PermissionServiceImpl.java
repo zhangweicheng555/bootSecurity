@@ -1,11 +1,15 @@
 package com.boot.kaizen.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.boot.kaizen.dao.PermissionDao;
+import com.boot.kaizen.entity.ZtreeModel;
 import com.boot.kaizen.model.Permission;
 import com.boot.kaizen.service.PermissionService;
 import com.boot.kaizen.util.JsonMsgUtil;
@@ -59,6 +63,25 @@ public class PermissionServiceImpl implements PermissionService {
 			e.printStackTrace();
 		}
 		return j;
+	}
+
+	@Override
+	public List<ZtreeModel> find(List<Long> ids) {
+		
+		List<ZtreeModel> ztreeModels=new ArrayList<ZtreeModel>();
+		List<Permission> permissions = permissionDao.listAll();
+		if (permissions != null && permissions.size()>0) {
+			for (Permission permission : permissions) {
+				ZtreeModel ztreeModel=null;
+				if (ids.contains(permission.getId())) {
+					ztreeModel=new ZtreeModel(permission.getId(), permission.getParentId(), permission.getName(),true);
+				}else {
+					ztreeModel=new ZtreeModel(permission.getId(), permission.getParentId(), permission.getName());
+				}
+				ztreeModels.add(ztreeModel);
+			}
+		}
+		return ztreeModels;
 	}
 
 }

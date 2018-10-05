@@ -94,10 +94,15 @@ function initRoleList(){
 				updateTime = "<td style='text-align: center;'>" + updateTime +"</td>";
 				tr += updateTime;
 				
-				var id = d.id+"_"+d.parentId;
-				var href = "/pages/role/update.html?id=" + id;
-				var edit = buttonEdit(href, "sys:menu:add", pers);
-				var del = buttonDel(id, "sys:menu:del", pers);
+				var id = d.id;
+				var href = "/pages/role/edit.html?id=" + id;
+				
+				var edit="";
+				var del="";
+				if(d.parentId !=-1){
+					edit = buttonEdit(href, "sys:menu:add", pers);
+					del = buttonDel(id, "sys:menu:del", pers);
+				}
                 tr += "<td style='text-align: center;'>"+edit + del+"</td>";
 				tr += "</tr>"
 				$("#dt-table").append(tr);
@@ -128,12 +133,14 @@ layui.use(['layer','jquery','common'], function(){
 });
 //删除
 function del(id){
-	 common.getConfirmDelDialog("确定要删除吗？",'删除数据ID为：【'+id+'】',2,"/permissions/delete",{"id":id},fresh);
+	 common.getConfirmDelDialog("确定要删除吗？",'删除数据ID为：【'+id+'】',2,"/role/delete",{"id":id},fresh);
 }
+
 //修改
 function update(href){
-	 common.openEditDialog(fresh,"编辑资源",href,"1000px","520px",false,"确定","取消","/permissions/edit");
+	 location.href=href;
 }
+
 //刷新
 function fresh(){
 	 location.href = "/pages/role/list.html";

@@ -123,11 +123,15 @@ function initDicSelect(type,selectId){
     });
 }
 
-function initProjSelect(selectId){
+function initProjSelect(selectId,projId){
+	var data={};
+	if(projId){
+		data={"flag":projId};
+	}
 	$.ajax({
-		type : 'get',
+		type : 'post',
 		url : '/role/projSelect',
-		data:{},
+		data:data,
 		async : false,
 		dataType: "json",
 		success : function(data) {
@@ -137,7 +141,11 @@ function initProjSelect(selectId){
 				select.empty();
 				for(var i=0;i<data.length;i++){
 					var row=data[i];
-					select.append("<option value='"+row.id+"'>"+row.projName+"</option>");
+					if(projId && projId==row.id){
+						select.append("<option selected value='"+row.id+"'>"+row.projName+"</option>");
+					}else{
+						select.append("<option value='"+row.id+"'>"+row.projName+"</option>");
+					}
 				}
 			}
 		}
@@ -165,36 +173,37 @@ function initParentMenuSelect(){
     });
 }
 
-function getSettting() {
+
+//初始化ztree
+function initZtree(treeId,flag){
+	var data={};
+	if(flag){
+		 data = {"flag":flag};
+	}
+	
 	var setting = {
-		check : {
-			enable : true,
-			chkboxType : {
-				"Y" : "ps",
-				"N" : "ps"
+			check: {
+				enable: true,
+				nocheckInherit: true
+			},
+			data: {
+				simpleData: {
+					enable: true,
+					idKey: "id",
+					pIdKey: "pId",
+					rootPId: 0
+				}
 			}
-		},
-		async : {
-			enable : true,
-		},
-		data : {
-			simpleData : {
-				enable : true,
-				idKey : "id",
-				pIdKey : "pId",
-				rootPId : 0
-			}
-		},
-		callback : {
-			onCheck : zTreeOnCheck
-		}
-	};
+		};
 
-	return setting;
-}
-
-function zTreeOnCheck(event, treeId, treeNode) {
-//	console.log(treeNode.id + ", " + treeNode.name + "," + treeNode.checked
-//			+ "," + treeNode.pId);
-//	console.log(JSON.stringify(treeNode));
+	$.ajax({
+        type : 'post',
+        url : '/role/find',
+        async : false,
+        data:data,
+        dataType: "json",
+        success : function(data) {
+	       return $.fn.zTree.init($("#"+treeId), setting, data);
+        }
+    });
 }

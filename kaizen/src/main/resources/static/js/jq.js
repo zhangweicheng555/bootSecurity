@@ -48,6 +48,7 @@ function buttonEdit(href, permission, pers) {
 			+ href + "\")'><i class='layui-icon'>&#xe642;</i></button>");
 	return btn.prop("outerHTML");
 }
+
 // 根据参数的名字获取url后面传递的值
 function getUrlParam(key) {
 	var href = window.location.href;
