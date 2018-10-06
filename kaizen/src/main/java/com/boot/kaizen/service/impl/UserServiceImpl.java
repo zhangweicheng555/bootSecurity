@@ -1,6 +1,7 @@
 package com.boot.kaizen.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,9 +11,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
-import com.boot.kaizen.dao.UserDao;
-import com.boot.kaizen.entity.UserDto;
+import com.boot.kaizen._enum.DicType;
+import com.boot.kaizen.dao.SysUserDao;
 import com.boot.kaizen.model.SysUser;
+import com.boot.kaizen.model.UserDto;
 import com.boot.kaizen.model.SysUser.Status;
 import com.boot.kaizen.service.UserService;
 
@@ -23,7 +25,7 @@ public class UserServiceImpl implements UserService {
 	private static final Logger log = LoggerFactory.getLogger("adminLogger");
 
 	@Autowired
-	private UserDao userDao;
+	private SysUserDao userDao;
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 
@@ -75,8 +77,12 @@ public class UserServiceImpl implements UserService {
 	public SysUser updateUser(UserDto userDto) {
 		userDao.update(userDto);
 		saveUserRoles(userDto.getId(), userDto.getRoleIds());
-
 		return userDto;
+	}
+
+	@Override
+	public List<SysUser> find(Map<String, Object> map) {
+		return userDao.find(map);
 	}
 
 }

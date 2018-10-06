@@ -19,6 +19,10 @@
 		delete from sys_role_permission
 		where roleId=#{roleId}
      </delete >
+	<delete id ="deleteByPermissionId" >
+		delete from sys_role_permission
+		where permissionId=#{permissionId}
+     </delete >
 	
 	
 	

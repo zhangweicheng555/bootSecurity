@@ -24,6 +24,7 @@ import com.boot.kaizen.service.ProjectRoleRelationService;
 import com.boot.kaizen.service.RoleService;
 import com.boot.kaizen.service.SysProjectService;
 import com.boot.kaizen.service.SysRolePermissionService;
+import com.boot.kaizen.service.SysRoleUserService;
 import com.boot.kaizen.util.JsonMsgUtil;
 
 @Service
@@ -40,6 +41,8 @@ public class RoleServiceImpl implements RoleService {
 	private SysRolePermissionService rolePermissionService;
 	@Autowired
 	private SysRolePermissionDao sysRolePermissionDao;
+	@Autowired
+	private SysRoleUserService roleUserService;
 
 	@Override
 	public List<TreeTable> list() {
@@ -125,7 +128,8 @@ public class RoleServiceImpl implements RoleService {
 			sysRoleDao.delete(id);
 			projectRoleRelationService.deleteByRoleAndProId(id);
 			rolePermissionService.deleteByRoleId(id);
-			j=new JsonMsgUtil(true, "删除操作成功", "");
+			roleUserService.delete(id);
+			j = new JsonMsgUtil(true, "删除操作成功", "");
 		} catch (Exception e) {
 			j.setMsg("删除操作失败");
 			e.printStackTrace();

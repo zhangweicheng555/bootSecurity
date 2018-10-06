@@ -11,15 +11,14 @@ public class SysUser extends BaseEntity<Long> {
 	private String username;
 	private String password;
 	private String nickname;
-	private String headImgUrl;
 	private String phone;
 	private String telephone;
 	private String email;
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date birthday;
 	private Integer sex;
+	private String headImgUrl;
 	private Integer status;
-	private String intro;
 
 	public String getUsername() {
 		return username;
@@ -101,18 +100,10 @@ public class SysUser extends BaseEntity<Long> {
 		this.status = status;
 	}
 
-	public String getIntro() {
-		return intro;
-	}
-
-	public void setIntro(String intro) {
-		this.intro = intro;
-	}
-
 	public interface Status {
-		int DISABLED = 0;//禁用
+		int DISABLED = 0;// 禁用
 		int VALID = 1;
-		int LOCKED = 2;  //锁定
+		int LOCKED = 2; // 锁定
 	}
 
 }

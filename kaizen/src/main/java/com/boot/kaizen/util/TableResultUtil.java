@@ -1,5 +1,11 @@
 package com.boot.kaizen.util;
 
+/**
+ * table响应实体类
+ * 
+ * @author weichengz
+ * @date 2018年10月6日 下午5:38:33
+ */
 public class TableResultUtil {
 
 	private Long code = 0l;// 0正常

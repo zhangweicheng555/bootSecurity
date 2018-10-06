@@ -21,4 +21,5 @@ public interface SysRoleDao {
 
 	void delete(@Param("id") Long id);
 
+
 }

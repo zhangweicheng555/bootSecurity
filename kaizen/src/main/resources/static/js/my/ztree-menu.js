@@ -104,7 +104,7 @@ function createNode(d) {
 
 function initDicSelect(type,selectId){
 	$.ajax({
-        type : 'get',
+        type : 'post',
         url : '/dic/findByType',
         data:{"type":type},
         async : false,

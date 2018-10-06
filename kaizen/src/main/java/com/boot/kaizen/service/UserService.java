@@ -1,10 +1,19 @@
 package com.boot.kaizen.service;
 
-import com.boot.kaizen.entity.UserDto;
+import java.util.List;
+import java.util.Map;
+
 import com.boot.kaizen.model.SysUser;
+import com.boot.kaizen.model.UserDto;
 
 public interface UserService {
 
+	/**
+	 * 
+	 * @Description: 保存用户
+	 * @author weichengz
+	 * @date 2018年10月6日 下午5:06:10
+	 */
 	SysUser saveUser(UserDto userDto);
 
 	SysUser updateUser(UserDto userDto);
@@ -12,5 +21,12 @@ public interface UserService {
 	SysUser getUser(String username);
 
 	void changePassword(String username, String oldPassword, String newPassword);
+
+	/**
+	 * @Description: 列表查询
+	 * @author weichengz
+	 * @date 2018年10月6日 下午5:39:16
+	 */
+	List<SysUser> find(Map<String, Object> map);
 
 }

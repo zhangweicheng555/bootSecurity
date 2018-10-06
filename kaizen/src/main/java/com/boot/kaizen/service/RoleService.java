@@ -18,4 +18,5 @@ public interface RoleService {
 
 	public JsonMsgUtil delete(Long id);
 
+
 }

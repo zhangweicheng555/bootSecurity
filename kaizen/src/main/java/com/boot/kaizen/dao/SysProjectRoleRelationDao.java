@@ -11,4 +11,6 @@ public interface SysProjectRoleRelationDao {
 	void batchInsert(@Param("list") List<SysProjectRoleRelation> relations);
 
 	void deleteByRoleAndProId(@Param("roleId") Long roleId);
+
+	void deleteByProIds(@Param("arrayIds") Long[] array);
 }

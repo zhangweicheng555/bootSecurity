@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 接受请求参数的实体类
+ * 接受Table请求参数的实体类
  * 
  * @author weichengz
  * @date 2018年9月9日 上午8:29:26

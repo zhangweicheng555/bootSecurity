@@ -10,4 +10,6 @@ public interface SysRolePermissionDao {
 	void batchInsert(@Param("list") List<SysRolePermission> relations);
 
 	void deleteByRoleId(@Param("roleId") Long roleId);
+
+	void deleteByPermissionId(@Param("permissionId") Long permissionId);
 }

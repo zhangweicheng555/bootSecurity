@@ -4,6 +4,17 @@
 <mapper namespace="com.boot.kaizen.dao.SysProjectRoleRelationDao">
 
 	
+	
+	<delete id="deleteByProIds">
+		 delete from proj_role_relation
+		 where proj_id in
+		 <foreach collection="arrayIds" index="index" item="item"
+            open="(" separator="," close=")">
+            #{item}
+        </foreach>
+	</delete>
+	
+	
 	<insert id ="batchInsert" parameterType="java.util.List" >
            insert into proj_role_relation
            (role_id,proj_id)

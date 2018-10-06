@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>项目管理列表</title>
+<title>用户管理列表</title>
 <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
 </head>
@@ -17,13 +17,13 @@
 						<td>
 							<form class="form-inline" onsubmit="return false">
 								<div class="form-group">
-									项目名称：
-									<input id="projName" name="projName" type="text" class="form-control" placeholder="模糊查询"> 
+									登陆名：
+									<input id="username" name="username" type="text" class="form-control" > 
+									姓名：
+									<input id="nickname" name="nickname" type="text" class="form-control" > 
 									
-									创建时间：
-									<input type="text"  id="beginTime" class="form-control" name="beginTime">
-									-
-									<input type="text"  id="endTime" class="form-control" name="endTime">
+									添加时间：
+									<input type="text"  id="beginTime" class="form-control" name="beginTime" placeholder="大于等于">
 									
 									<button id="searchBt" class="layui-btn layui-btn-sm">
 										<i class="layui-icon">&#xe615;</i>搜索
@@ -35,10 +35,11 @@
 							</form>
 						</td>
 						<td align="right">
-							<button id="addProjectBtn" class="layui-btn layui-btn-sm"  permission="sys:project:edit">
-								<i class="layui-icon">&#xe608;</i> 添加
-							</button>
-							<button id="deleteProjectBtn" class="layui-btn layui-btn-sm  layui-btn-danger" style="margin-left: 1px;"  permission="sys:project:edit">
+						   <button class="layui-btn layui-btn-sm" id="userAddBtn" onclick="location.href='/pages/user/add.html'" permission="sys:user:edit">
+                              <i class="layui-icon">&#xe608;</i> 添加
+                            </button>
+							
+							<button id="deleteProjectBtn" class="layui-btn layui-btn-sm  layui-btn-danger" style="margin-left: 1px;"  permission="sys:user:del">
 								  <i class="layui-icon">&#xe640;</i>删除
 							</button>
 						</td>
@@ -50,7 +51,7 @@
 		<div>
 			<div class="widget-body no-padding">
 				<!-- 列表展示区域 -->
-				<table class="layui-hide" id="sysproject" lay-filter="sysproject"></table>
+				<table class="layui-hide" id="sysuser" lay-filter="sysuser"></table>
 			</div>
 		</div>
 		
@@ -69,6 +70,7 @@
 	<script type="text/javascript" src="../../js/common.js" charset="UTF-8"></script>
 
 	<script type="text/javascript">
+	
 	var currData;
 	var checkArray=new Array();
 	layui.use([ 'layer' ,'table','laydate','jquery','common'], function() {
@@ -79,24 +81,27 @@
 	  
 	  var table = layui.table;
 	  var tableIns=table.render({
-	    elem: '#sysproject'    
-	    ,id:'sysproject'
-	    ,url:'/project/find'  
+	    elem: '#sysuser'    
+	    ,id:'sysuser'
+	    ,url:'/users/find'  
 	    ,method:'post'    
 	    ,where:{
-			   "map[projName]":$("#projName").val()
+			   "map[username]":$("#username").val()
 			   ,"map[beginTime]":$("#beginTime").val()
-			   ,"map[endTime]":$("#endTime").val() 
+			   ,"map[nickname]":$("#nickname").val() 
 			   }
 	    ,cols: [[        
 	      {field:'id', width:30, title: 'ID', sort: true,type:'checkbox'}
-	      ,{title: '序号',width:70,templet: '#indexTpl',align:'center'}
-	      ,{field:'projName',   minWidth:150, title: '项目名称',align:'center'}
-	      ,{field:'projCode',   width:150, title: '项目编码',align:'center'}
-	      ,{field:'roleNames',  minWidth:150, title: '拥有角色',align:'center'}
-	      ,{field:'createTime', width:150, title: '创建时间',align:'center'}
-	      ,{field:'updateTime', width:150, title: '修改时间',align:'center'}
-	      ,{title:'操作', toolbar: '#editBtnBar', width:150,align:'center'}
+	      ,{title: '序号',width:40,templet: '#indexTpl',align:'center'}
+	      ,{field:'username',   minWidth:150, title: '登陆名',align:'center'}
+	      ,{field:'nickname',   width:150, title: '姓名',align:'center'}
+	      ,{field:'birthday', width:150, title: '出生日期',align:'center'}
+	      ,{field:'sex', width:50, title: '性别',align:'center', templet: '#sexTpl'}
+	      ,{field:'phone', width:150, title: '手机号码',align:'center'}
+	      ,{field:'telephone', width:150, title: '电话号码',align:'center'}
+	      ,{field:'email', width:150, title: '邮箱',align:'center'}
+	      ,{field:'createTime', width:150, title: '添加时间',align:'center'}
+	      ,{title:'操作', toolbar: '#editBtnBar', width:120,align:'center'}
 	    ]]
 	    ,page: true
 	    ,limit:3
@@ -121,7 +126,7 @@
                 }
             }
             //设置全选checkbox的选中状态
-            var checkStatus = table.checkStatus('sysproject');
+            var checkStatus = table.checkStatus('sysuser');
             console.info(checkStatus);
             if(checkStatus.isAll){
                 $('.layui-table-header th[data-field="id"] input[type="checkbox"]').prop('checked', true);
@@ -134,7 +139,7 @@
 	  });
 	  
 	  //监听行工具事件  操作对应
-	  table.on('tool(sysproject)', function(obj){
+	  table.on('tool(sysuser)', function(obj){
 	    var row = obj.data;
 	    if(obj.event === 'del'){//单行删除
 	    	common.getConfirmDelDialog("确定要删除吗？","删除【"+row.projName+"】记录",2,"/project/delete",{"ids":row.id},function(){deleteRow(obj);});
@@ -165,7 +170,7 @@
 	  
 	  //currData  checkArray  监听checkbox  选中取消事件
 	  table.on('checkbox', function(obj){
-		 var checkStatus = table.checkStatus('sysproject');
+		 var checkStatus = table.checkStatus('sysuser');
 		 var rows=checkStatus.data;
 		  if(obj.checked==true){//选中事件
 			  var nowCheckArray=new Array();
@@ -215,18 +220,18 @@
 	  /**清空*/
 	  $("#clearBt").click(function(){
 		  $("#beginTime").val("");
-		  $("#endTime").val("");
-		  $("#projName").val("");
+		  $("#nickname").val("");
+		  $("#username").val("");
 		  fresh();
 	  });
 	  
 	  
 	  function fresh(){
-		  table.reload('sysproject'
+		  table.reload('sysuser'
 				   ,{where:{
-					   "map[projName]":$("#projName").val()
+					   "map[username]":$("#username").val()
+					   ,"map[nickname]":$("#nickname").val()
 					   ,"map[beginTime]":$("#beginTime").val()
-					   ,"map[endTime]":$("#endTime").val()
 					   }
 				   ,page: {curr: 1}
 		  		   }
@@ -250,18 +255,18 @@
    		 }
 	  });
 	  
-	  laydate.render({
-	     elem: '#endTime'
-	    ,type: 'datetime'
-	    ,max: 0
-	    ,theme: 'molv'
-   	    ,done: function(val, date, endDate){
-   	    	$("#endTime").val(val);
-   		 }
-	  });
 	  
+	  var pers = checkPermission();
 });
 
+</script>
+
+<script type="text/html" id="sexTpl">
+  {{#  if(0==d.sex){ }}
+           男 
+  {{#  } else { }}
+        女
+  {{#  } }}
 </script>
 
 <script type="text/html" id="indexTpl">
@@ -269,6 +274,6 @@
 </script>
 
 <script type="text/html" id="editBtnBar">
-  <a class="layui-btn layui-btn-xs" lay-event="edit"  permission="sys:project:edit">编辑</a>
-  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" style="margin-left: 1px;"  permission="sys:project:del">删除</a>
+ <a class="layui-btn layui-btn-xs" lay-event="edit"   permission="sys:user:edit">编辑</a>
+ <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" style="margin-left: 1px;"  permission="sys:user:del">删除</a>
 </script>

@@ -27,4 +27,11 @@ public class ProjectRoleRelationServiceImpl implements ProjectRoleRelationServic
 		projectRoleRelationDao.deleteByRoleAndProId(roleId);
 	}
 
+	@Override
+	public void deleteByProIds(Long[] array) {
+		projectRoleRelationDao.deleteByProIds(array);
+	}
+
+	
+
 }

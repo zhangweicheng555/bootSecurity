@@ -8,4 +8,6 @@ public interface ProjectRoleRelationService {
 	void batchInsert(List<SysProjectRoleRelation> relations);
 
 	void deleteByRoleAndProId(Long roleId);
+
+	void deleteByProIds(Long[] array);
 }

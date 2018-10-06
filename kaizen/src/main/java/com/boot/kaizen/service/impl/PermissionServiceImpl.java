@@ -12,6 +12,7 @@ import com.boot.kaizen.dao.PermissionDao;
 import com.boot.kaizen.entity.ZtreeModel;
 import com.boot.kaizen.model.Permission;
 import com.boot.kaizen.service.PermissionService;
+import com.boot.kaizen.service.SysRolePermissionService;
 import com.boot.kaizen.util.JsonMsgUtil;
 
 @Service
@@ -21,7 +22,9 @@ public class PermissionServiceImpl implements PermissionService {
 
 	@Autowired
 	private PermissionDao permissionDao;
-
+	@Autowired
+	private SysRolePermissionService rolePermissionService;
+	
 	@Override
 	public void save(Permission permission) {
 		permissionDao.save(permission);
@@ -40,6 +43,8 @@ public class PermissionServiceImpl implements PermissionService {
 		JsonMsgUtil j=new JsonMsgUtil(false);
 		try {
 			permissionDao.delete(id);
+			//删除资源与角色的关系
+			rolePermissionService.deleteByPermissionId(id);
 			j=new JsonMsgUtil(true, "操作成功", "");
 		} catch (Exception e) {
 			j.setMsg("删除操作失败");

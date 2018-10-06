@@ -1,8 +1,6 @@
-package com.boot.kaizen.entity;
+package com.boot.kaizen.model;
 
 import java.util.List;
-
-import com.boot.kaizen.model.SysUser;
 
 
 public class UserDto extends SysUser {

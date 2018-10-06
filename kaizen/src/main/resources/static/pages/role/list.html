@@ -20,7 +20,7 @@
 	                   			<td>
 								</td>
 								<td align="right">
-	                   				<button class="layui-btn layui-btn-sm" id="menuAddBtn" onclick="location.href='/pages/role/add.html'" permission="sys:menu:add">
+	                   				<button class="layui-btn layui-btn-sm" id="roleAddBtn" onclick="location.href='/pages/role/add.html'" permission="sys:role:edit">
                                       <i class="layui-icon">&#xe608;</i> 添加
                                     </button>
 	                   			</td>
@@ -100,8 +100,8 @@ function initRoleList(){
 				var edit="";
 				var del="";
 				if(d.parentId !=-1){
-					edit = buttonEdit(href, "sys:menu:add", pers);
-					del = buttonDel(id, "sys:menu:del", pers);
+					edit = buttonEdit(href, "sys:role:add", pers);
+					del = buttonDel(id, "sys:role:del", pers);
 				}
                 tr += "<td style='text-align: center;'>"+edit + del+"</td>";
 				tr += "</tr>"

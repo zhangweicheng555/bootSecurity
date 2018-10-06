@@ -1,4 +1,4 @@
-package com.boot.kaizen.controller;
+package com.boot.kaizen.controller.sys;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,13 +11,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.boot.kaizen.dao.UserDao;
-import com.boot.kaizen.entity.UserDto;
+import com.boot.kaizen._enum.DicType;
+import com.boot.kaizen.dao.SysUserDao;
+import com.boot.kaizen.entity.RequestParamEntity;
+import com.boot.kaizen.model.SysProject;
 import com.boot.kaizen.model.SysUser;
+import com.boot.kaizen.model.UserDto;
 import com.boot.kaizen.service.UserService;
+import com.boot.kaizen.util.TableResultUtil;
 import com.boot.kaizen.util.UserUtil;
+import com.github.pagehelper.ISelect;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+
 import io.swagger.annotations.ApiOperation;
 
 /**
@@ -35,8 +45,21 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	@Autowired
-	private UserDao userDao;
+	private SysUserDao userDao;
 
+	@ResponseBody
+	@RequestMapping(value = "/find", method = RequestMethod.POST)
+	public TableResultUtil find(RequestParamEntity param) {
+		PageInfo<SysUser> pageInfo = PageHelper.startPage(param.getPage(), param.getLimit())
+				.doSelectPageInfo(new ISelect() {
+					@Override
+					public void doSelect() {
+						userService.find(param.getMap());
+					}
+				});
+		return new TableResultUtil(0l, "操作成功", pageInfo.getTotal(), pageInfo.getList());
+	}
+	
 	@PostMapping
 	@PreAuthorize("hasAuthority('sys:user:add')")
 	public SysUser saveUser(@RequestBody UserDto userDto) {

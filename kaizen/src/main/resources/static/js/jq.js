@@ -79,6 +79,8 @@ function checkPermission() {
 		contentType : "application/json; charset=utf-8",
 		async : false,
 		success : function(data) {
+			console.info('--------------------')
+			console.info('--------'+data+'------------')
 			pers = data;
 			$("[permission]").each(function() {
 				var per = $(this).attr("permission");

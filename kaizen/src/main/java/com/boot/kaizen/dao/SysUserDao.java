@@ -12,9 +12,10 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.boot.kaizen.model.SysUser;
+import com.boot.kaizen.model.UserDto;
 
 @Mapper
-public interface UserDao {
+public interface SysUserDao {
 
 	@Options(useGeneratedKeys = true, keyProperty = "id")
 	@Insert("insert into sys_user(username, password, nickname, headImgUrl, phone, telephone, email, birthday, sex, status, createTime, updateTime) values(#{username}, #{password}, #{nickname}, #{headImgUrl}, #{phone}, #{telephone}, #{email}, #{birthday}, #{sex}, #{status}, now(), now())")
@@ -40,4 +41,6 @@ public interface UserDao {
 	int saveUserRoles(@Param("userId") Long userId, @Param("roleIds") List<Long> roleIds);
 
 	int update(SysUser user);
+
+	List<SysUser> find(@Param("map") Map<String, Object> map);
 }

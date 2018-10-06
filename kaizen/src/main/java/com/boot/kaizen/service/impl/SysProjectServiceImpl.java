@@ -11,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.boot.kaizen.dao.SysProjectDao;
 import com.boot.kaizen.model.SysProject;
+import com.boot.kaizen.service.ProjectRoleRelationService;
+import com.boot.kaizen.service.RoleService;
 import com.boot.kaizen.service.SysProjectService;
 import com.boot.kaizen.util.JsonMsgUtil;
 
@@ -19,6 +21,9 @@ public class SysProjectServiceImpl implements SysProjectService {
 
 	@Autowired
 	private SysProjectDao projectDao;
+
+	@Autowired
+	private ProjectRoleRelationService prijectRoleRelationService;
 
 	@Override
 	public List<SysProject> query() {
@@ -42,7 +47,10 @@ public class SysProjectServiceImpl implements SysProjectService {
 					String id = idsArray[i];
 					array[i] = Long.valueOf(id.trim());
 				}
-				j = new JsonMsgUtil(true, "删除操作成功", projectDao.delete(array));
+				Integer deleteNum = projectDao.delete(array);
+				// 删除项目下的角色
+				prijectRoleRelationService.deleteByProIds(array);
+				j = new JsonMsgUtil(true, "删除操作成功", deleteNum);
 			}
 		} catch (Exception e) {
 			throw e;
