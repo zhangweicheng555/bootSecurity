@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.boot.kaizen.model.SysUser;
 import com.boot.kaizen.model.UserDto;
+import com.boot.kaizen.util.JsonMsgUtil;
 
 public interface UserService {
 
@@ -14,7 +15,7 @@ public interface UserService {
 	 * @author weichengz
 	 * @date 2018年10月6日 下午5:06:10
 	 */
-	SysUser saveUser(UserDto userDto);
+	SysUser saveUser(SysUser userDto);
 
 	SysUser updateUser(UserDto userDto);
 
@@ -28,5 +29,7 @@ public interface UserService {
 	 * @date 2018年10月6日 下午5:39:16
 	 */
 	List<SysUser> find(Map<String, Object> map);
+
+	JsonMsgUtil delete(String ids);
 
 }

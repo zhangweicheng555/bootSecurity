@@ -18,7 +18,7 @@ import com.boot.kaizen.model.UserDto;
 public interface SysUserDao {
 
 	@Options(useGeneratedKeys = true, keyProperty = "id")
-	@Insert("insert into sys_user(username, password, nickname, headImgUrl, phone, telephone, email, birthday, sex, status, createTime, updateTime) values(#{username}, #{password}, #{nickname}, #{headImgUrl}, #{phone}, #{telephone}, #{email}, #{birthday}, #{sex}, #{status}, now(), now())")
+	@Insert("insert into sys_user(username, password, nickname, headImgUrl, phone, telephone, email, birthday, sex, status, createTime) values(#{username}, #{password}, #{nickname}, #{headImgUrl}, #{phone}, #{telephone}, #{email}, #{birthday}, #{sex}, #{status}, #{createTime})")
 	int save(SysUser user);
 
 	@Select("select * from sys_user t where t.id = #{id}")
@@ -43,4 +43,6 @@ public interface SysUserDao {
 	int update(SysUser user);
 
 	List<SysUser> find(@Param("map") Map<String, Object> map);
+
+	void deleteBatch(@Param("idsArray") Long[] array);
 }

@@ -2,6 +2,8 @@ package com.boot.kaizen.model;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class SysUser extends BaseEntity<Long> {
@@ -14,6 +16,7 @@ public class SysUser extends BaseEntity<Long> {
 	private String phone;
 	private String telephone;
 	private String email;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date birthday;
 	private Integer sex;
@@ -102,7 +105,7 @@ public class SysUser extends BaseEntity<Long> {
 
 	public interface Status {
 		int DISABLED = 0;// 禁用
-		int VALID = 1;
+		int VALID = 1;//有效的
 		int LOCKED = 2; // 锁定
 	}
 

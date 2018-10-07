@@ -1,8 +1,10 @@
 package com.boot.kaizen.service.impl;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,13 +12,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
-
-import com.boot.kaizen._enum.DicType;
 import com.boot.kaizen.dao.SysUserDao;
 import com.boot.kaizen.model.SysUser;
 import com.boot.kaizen.model.UserDto;
 import com.boot.kaizen.model.SysUser.Status;
 import com.boot.kaizen.service.UserService;
+import com.boot.kaizen.util.JsonMsgUtil;
 
 
 @Service
@@ -31,25 +32,15 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
-	public SysUser saveUser(UserDto userDto) {
-		SysUser user = userDto;
-		user.setPassword(passwordEncoder.encode(user.getPassword()));
-		user.setStatus(Status.VALID);
-		userDao.save(user);
-		saveUserRoles(user.getId(), userDto.getRoleIds());
-
-		log.debug("新增用户{}", user.getUsername());
-		return user;
+	public SysUser saveUser(SysUser sysUser) {
+		sysUser.setPassword(passwordEncoder.encode(sysUser.getPassword()));
+		sysUser.setStatus(Status.VALID);
+		sysUser.setCreateTime(new Date());
+		userDao.save(sysUser);
+		return sysUser;
 	}
 
-	private void saveUserRoles(Long userId, List<Long> roleIds) {
-		if (roleIds != null) {
-			userDao.deleteUserRole(userId);
-			if (!CollectionUtils.isEmpty(roleIds)) {
-				userDao.saveUserRoles(userId, roleIds);
-			}
-		}
-	}
+
 
 	@Override
 	public SysUser getUser(String username) {
@@ -76,7 +67,6 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	public SysUser updateUser(UserDto userDto) {
 		userDao.update(userDto);
-		saveUserRoles(userDto.getId(), userDto.getRoleIds());
 		return userDto;
 	}
 
@@ -85,4 +75,28 @@ public class UserServiceImpl implements UserService {
 		return userDao.find(map);
 	}
 
+
+
+	@Override
+	public JsonMsgUtil delete(String ids) {
+		JsonMsgUtil j = new JsonMsgUtil(false);
+		try {
+			if (StringUtils.isNoneBlank(ids)) {
+				String[] idsArray = ids.trim().split(",");
+				Long[] array = new Long[idsArray.length];
+				for (int i = 0; i < idsArray.length; i++) {
+					String id = idsArray[i];
+					array[i] = Long.valueOf(id.trim());
+				}
+				userDao.deleteBatch(array);
+				// 删除用户角色关系
+				j = new JsonMsgUtil(true, "删除操作成功", "");
+			}
+		} catch (Exception e) {
+			throw e;
+		}
+		return j;
+	}
+
+	
 }
