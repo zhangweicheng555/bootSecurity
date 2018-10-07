@@ -11,7 +11,7 @@ import java.util.Map;
  */
 public enum DicType {
 
-	BTN("menu", "2", "按钮"), MENU("menu", "groundSymbol", "地面标识")
+	BTN("menu", "0", "按钮"), MENU("menu", "1", "菜单")
 
 	, MEAL("sex", "0", "男"), FEMEAL("sex", "1", "女")
 
