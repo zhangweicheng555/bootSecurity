@@ -13,5 +13,8 @@ public class KaizenApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(KaizenApplication.class, args);
+		
 	}
+	
+	
 }
