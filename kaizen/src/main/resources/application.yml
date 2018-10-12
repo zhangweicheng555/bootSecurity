@@ -35,8 +35,7 @@ spring:
       max-request-size: 100MB
   mvc:
     servlet:
-      load-on-startup: 1
-  
+      load-on-startup: 1 
 mybatis:
   type-aliases-package: com.boot.kaizen.model
   mapper-locations: classpath:/mybatis-mappers/**/*.xml

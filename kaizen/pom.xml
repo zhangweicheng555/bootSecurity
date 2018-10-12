@@ -78,8 +78,6 @@
 			<version>${mybatis.version}</version>
 		</dependency>
 
-		<!-- oracle <dependency> <groupId>com.oracle</groupId> <artifactId>ojdbc6</artifactId> 
-			<version>11.2.0.3</version> </dependency> -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -120,8 +118,6 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
 		</dependency>
-		<!-- <dependency> <groupId>org.apache.poi</groupId> <artifactId>poi</artifactId> 
-			<version>${poi.version}</version> </dependency> -->
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt</artifactId>
@@ -181,6 +177,7 @@
             <artifactId>activiti-spring</artifactId>
             <version>6.0.0</version>
         </dependency>
+		
 		
 	</dependencies>
 
