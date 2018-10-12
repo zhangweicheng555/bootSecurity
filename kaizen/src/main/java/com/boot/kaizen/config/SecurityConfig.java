@@ -88,11 +88,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
 	}
 
-	
-	@Override
-	public void configure(WebSecurity web) throws Exception {
-		 web.ignoring().antMatchers("/act/**");//路径不拦截
-	}
-	
 
 }
