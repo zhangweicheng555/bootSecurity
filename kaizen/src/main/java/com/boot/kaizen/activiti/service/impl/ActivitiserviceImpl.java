@@ -63,6 +63,12 @@ public class ActivitiserviceImpl implements Activitiservice {
 
 	@Override
 	public void findActivitiProccessImage(String processInstanceId, HttpServletResponse response) {
+		
+		// 设置页面不缓存
+	    response.setHeader("Pragma", "No-cache");
+	    response.setHeader("Cache-Control", "no-cache");
+	    response.setDateHeader("Expires", 0);
+		
 		HistoricProcessInstance historicProcessInstance = historyService.createHistoricProcessInstanceQuery()
 				.processInstanceId(processInstanceId).singleResult();
 		if (historicProcessInstance != null) {
