@@ -65,9 +65,17 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
-	public SysUser updateUser(UserDto userDto) {
-		userDao.update(userDto);
-		return userDto;
+	public JsonMsgUtil updateUser(SysUser sysUser) {
+		JsonMsgUtil j=new JsonMsgUtil(false);
+		try {
+			sysUser.setUpdateTime(new Date());
+			userDao.update(sysUser);
+			j=new JsonMsgUtil(true, "操作成功", "");
+		} catch (Exception e) {
+			j.setMsg("修改失败");
+			e.printStackTrace();
+		}
+		return j;
 	}
 
 	@Override
@@ -94,6 +102,20 @@ public class UserServiceImpl implements UserService {
 			}
 		} catch (Exception e) {
 			throw e;
+		}
+		return j;
+	}
+
+
+
+	@Override
+	public JsonMsgUtil findById(Long id) {
+		JsonMsgUtil j=new JsonMsgUtil(false);
+		try {
+			j=new JsonMsgUtil(true, "操作成功", userDao.getById(id));
+		} catch (Exception e) {
+			j.setMsg("擦走失败");
+			e.printStackTrace();
 		}
 		return j;
 	}

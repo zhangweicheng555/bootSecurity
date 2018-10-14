@@ -22,7 +22,7 @@ public class KaizenApplicationTest {
 	
 	@Test
 	public void Test() {
-		activitiservice.completeTaskById("20005");
+		activitiservice.completeTaskById("2505");
 		//activitiservice.srartProcessInstanceByKey("myProcess");
 	}
 

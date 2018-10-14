@@ -50,9 +50,9 @@ public class UserController {
 
 	/**
 	 * 
-	* @Description: 查询列表
-	* @author weichengz
-	* @date 2018年10月7日 上午11:24:20
+	 * @Description: 查询列表
+	 * @author weichengz
+	 * @date 2018年10月7日 上午11:24:20
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/find", method = RequestMethod.POST)
@@ -90,11 +90,15 @@ public class UserController {
 		return j;
 	}
 
-	@PutMapping
-	@ApiOperation(value = "修改用户")
-	@PreAuthorize("hasAuthority('sys:user:add')")
-	public SysUser updateUser(@RequestBody UserDto userDto) {
-		return userService.updateUser(userDto);
+	/**
+	 * 
+	 * @Description: 修改用户
+	 * @author weichengz
+	 * @date 2018年10月14日 下午7:19:02
+	 */
+	@RequestMapping(value="/updateUser")
+	public JsonMsgUtil updateUser(SysUser sysUser) {
+		return userService.updateUser(sysUser);
 	}
 
 	@PutMapping(params = "headImgUrl")
@@ -122,14 +126,18 @@ public class UserController {
 		return UserUtil.getLoginUser();
 	}
 
-	@ApiOperation(value = "根据用户id获取用户")
-	@GetMapping("/{id}")
-	@PreAuthorize("hasAuthority('sys:user:query')")
-	public SysUser user(@PathVariable Long id) {
-		return userDao.getById(id);
+	/**
+	 * 
+	 * @Description: 根据id查询
+	 * @author weichengz
+	 * @date 2018年10月14日 下午6:55:45
+	 */
+	@RequestMapping(value = "/findById")
+	public JsonMsgUtil findById(@RequestParam("id") Long id) {
+		return userService.findById(id);
 	}
 
-	@RequestMapping(value="/delete")
+	@RequestMapping(value = "/delete")
 	@PreAuthorize("hasAuthority('sys:user:edit')")
 	public JsonMsgUtil delete(@RequestParam("ids") String ids) {
 		return userService.delete(ids);

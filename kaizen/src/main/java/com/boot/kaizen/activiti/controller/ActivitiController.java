@@ -1,9 +1,8 @@
 package com.boot.kaizen.activiti.controller;
 
-import javax.annotation.security.PermitAll;
 import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -15,6 +14,7 @@ import com.boot.kaizen.activiti.service.Activitiservice;
  * @author a-zhangweicheng
  *
  */
+@Controller
 @RequestMapping(value = "/act")
 public class ActivitiController {
 
@@ -26,6 +26,6 @@ public class ActivitiController {
 	 */
 	@RequestMapping(value = "/findActivitiProccessImage")
 	public void findActivitiProccessImage(@RequestParam("piid") String piid, HttpServletResponse response) {
-		activitiservice.findActivitiProccessImage("20001", response);
+		activitiservice.findActivitiProccessImage("2501", response);
 	}
 }

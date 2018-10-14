@@ -144,7 +144,7 @@
 	    if(obj.event === 'del'){//单行删除
 	    	common.getConfirmDelDialog("确定要删除吗？","删除【"+row.username+"】记录",2,"/users/delete",{"ids":row.id},function(){deleteRow(obj);});
 	    } else if(obj.event === 'edit'){//编辑
-		    common.openEditDialog(fresh,"编辑项目","pages/project/edit.html?id="+row.id,"1000px","520px",false,"确定","取消","/project/edit");
+	    	location.href="/pages/user/edit.html?id="+row.id;
 	    }
 	  });
 	  

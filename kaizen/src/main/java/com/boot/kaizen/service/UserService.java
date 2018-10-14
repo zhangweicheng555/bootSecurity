@@ -17,7 +17,7 @@ public interface UserService {
 	 */
 	SysUser saveUser(SysUser userDto);
 
-	SysUser updateUser(UserDto userDto);
+	JsonMsgUtil updateUser(SysUser sysUser);
 
 	SysUser getUser(String username);
 
@@ -31,5 +31,7 @@ public interface UserService {
 	List<SysUser> find(Map<String, Object> map);
 
 	JsonMsgUtil delete(String ids);
+
+	JsonMsgUtil findById(Long id);
 
 }

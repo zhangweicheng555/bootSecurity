@@ -40,7 +40,7 @@ public interface SysUserDao {
 
 	int saveUserRoles(@Param("userId") Long userId, @Param("roleIds") List<Long> roleIds);
 
-	int update(SysUser user);
+	int update(@Param("user") SysUser user);
 
 	List<SysUser> find(@Param("map") Map<String, Object> map);
 
