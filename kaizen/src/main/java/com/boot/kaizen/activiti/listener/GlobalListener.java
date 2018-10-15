@@ -1,6 +1,8 @@
 package com.boot.kaizen.activiti.listener;
 
 import java.io.Serializable;
+
+import org.activiti.engine.delegate.event.ActivitiEntityEvent;
 import org.activiti.engine.delegate.event.ActivitiEvent;
 import org.activiti.engine.delegate.event.ActivitiEventListener;
 import org.activiti.engine.delegate.event.ActivitiEventType;
@@ -41,7 +43,6 @@ public class GlobalListener implements ActivitiEventListener, Serializable {
 		if (ActivitiEventType.TASK_ASSIGNED.equals(type)) {
 			System.out.println("任务被分配了.......................");
 		}
-
 	}
 
 	@Override

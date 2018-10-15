@@ -48,7 +48,7 @@ public class ActivitiConfig {
 		configuration.setDatabaseSchemaUpdate("true");
 		configuration.setDeploymentResources(resources);
 		configuration.setDbIdentityUsed(false);
-		configuration.setAsyncExecutorActivate(false);
+		configuration.setAsyncExecutorActivate(true);
 		configuration.setActivityFontName("宋体");
 		configuration.setAnnotationFontName("宋体");
 		configuration.setLabelFontName("宋体");

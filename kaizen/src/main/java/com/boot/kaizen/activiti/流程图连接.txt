@@ -7,3 +7,9 @@ https://blog.csdn.net/m0_37222746/article/details/73321680   这个地方退回�
 
 
 https://www.cnblogs.com/leemup/p/activiti6_trace.html
+
+
+流程的挂起 本质上就是流程的暂停：
+也可以暂停流程实例。暂停时，进程无法继续（例如，完成任务会抛出异常）并且不会执行任何作业（例如计时器）。可以通过调用该runtimeService.suspendProcessInstance方法来挂起流程实例。再次激活流程实例是通过调用runtimeService.activateProcessInstanceXXX方法完成的。
+
+流程或者部署的暂停的 标记是2   开始的标记是1

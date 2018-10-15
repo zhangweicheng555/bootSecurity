@@ -1,5 +1,6 @@
 package com.boot.kaizen.util;
 
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -505,5 +506,21 @@ public class MyDateUtil {
 			list.add(sdf.format(beginDate));
 		}
 		return list;
+	}
+	
+	/**
+	 * 传入  yyyy-MM-dd HH:mm:ss
+	 * @param dateStr
+	 * @return
+	 */
+	public static String getIsoDate(String dateStr) {
+		DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+		DateFormat sd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		try {
+			return sdf.format(sd.parse(dateStr));
+		} catch (ParseException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

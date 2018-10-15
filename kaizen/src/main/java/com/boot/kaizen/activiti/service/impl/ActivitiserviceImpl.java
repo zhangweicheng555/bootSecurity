@@ -5,7 +5,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -55,6 +57,13 @@ public class ActivitiserviceImpl implements Activitiservice {
 				+ processInstance.getName());
 		return processInstance;
 	}
+	@Override
+	public ProcessInstance srartProcessInstanceByKeyV(String processDefinationKey,Map<String, Object> variables) {
+		ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(processDefinationKey,variables);
+		System.out.println("创建了流程实例：" + processInstance.getId() + " " + processInstance.getDeploymentId() + " "
+				+ processInstance.getName());
+		return processInstance;
+	}
 
 	@Override
 	public void completeTaskById(String taskId) {
@@ -63,12 +72,12 @@ public class ActivitiserviceImpl implements Activitiservice {
 
 	@Override
 	public void findActivitiProccessImage(String processInstanceId, HttpServletResponse response) {
-		
+
 		// 设置页面不缓存
-	    response.setHeader("Pragma", "No-cache");
-	    response.setHeader("Cache-Control", "no-cache");
-	    response.setDateHeader("Expires", 0);
-		
+		response.setHeader("Pragma", "No-cache");
+		response.setHeader("Cache-Control", "no-cache");
+		response.setDateHeader("Expires", 0);
+
 		HistoricProcessInstance historicProcessInstance = historyService.createHistoricProcessInstanceQuery()
 				.processInstanceId(processInstanceId).singleResult();
 		if (historicProcessInstance != null) {
@@ -172,6 +181,40 @@ public class ActivitiserviceImpl implements Activitiservice {
 
 		}
 		return highFlows;
+	}
+
+	@Override
+	public void suspensionProcessInstance(String processInstanceId) {
+		runtimeService.suspendProcessInstanceById(processInstanceId);
+	}
+
+	@Override
+	public void suspensionProcessDefination(String processDefinitionKey) {
+		repositoryService.suspendProcessDefinitionByKey(processDefinitionKey);
+	}
+
+	@Override
+	public void activeProcessInstance(String processInstanceId) {
+		runtimeService.activateProcessInstanceById(processInstanceId);
+	}
+
+	@Override
+	public void activeProcessDefination(String processDefinitionKey) {
+		repositoryService.activateProcessDefinitionByKey(processDefinitionKey);
+	}
+
+	@Override
+	public void claimTask(String taskId, String assignee) {
+		taskService.claim(taskId, assignee);
+	}
+
+	@Override
+	public Date processIfEnd(String processInstanceId) {
+		HistoricProcessInstance historicProcessInstance = historyService.createHistoricProcessInstanceQuery().processInstanceId(processInstanceId).singleResult();
+		if (historicProcessInstance != null) {
+			return historicProcessInstance.getEndTime();
+		}
+		return null;
 	}
 
 }
