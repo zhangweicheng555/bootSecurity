@@ -67,6 +67,15 @@
 					<input class="form-control" placeholder="邮箱" type="text" maxlength="50" id="email" name="email">
 				</div>
 			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">上传图片</label>
+				<div class="col-md-10">
+					<button type="button" class="layui-btn" id="test1">
+					  <i class="layui-icon">&#xe67c;</i>选择图片
+					</button>
+					<button type="button" class="layui-btn" id="test9">开始上传</button>
+				</div>
+			</div>
 			
 
 			<div class="form-actions">
@@ -76,6 +85,8 @@
 						<button class="btn btn-primary" type="submit" onclick="add()">
 							<i class="fa fa-save"></i> 保存
 						</button>
+						
+						<img alt="" src="d:/files/2018/10/16/1111.png" />
 					</div>
 				</div>
 			</div>
@@ -101,9 +112,34 @@
 		
 		
 		
-		layui.use(['layer','laydate'], function(){
+		layui.use(['layer','laydate','upload'], function(){
 		    var layer = layui.layer;
 		    var laydate = layui.laydate;
+		    
+		    
+		    
+		    var upload = layui.upload;
+		    //执行实例
+		    var uploadInst = upload.render({
+		      elem: '#test1' //绑定元素
+		      ,url: '/users/upload' //上传接口
+		     // ,headers: {token: 'sasasas'}
+		      ,accept:'images'
+		      ,exts:'jpg|png|jpeg'
+		      ,auto: false
+		      ,field:'file'
+		      ,bindAction: '#test9'
+		      ,drag:false
+		      ,done: function(res){
+		    	  console.info(res);
+		      }
+		      ,error: function(){
+		      }
+		    });
+		  
+		  
+		  
+		    
 		    laydate.render({
 		    	elem: '#birthday'
 	   		    ,max: 0

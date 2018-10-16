@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.boot.kaizen._enum.DicType;
 import com.boot.kaizen.dao.SysUserDao;
@@ -22,6 +24,7 @@ import com.boot.kaizen.model.SysProject;
 import com.boot.kaizen.model.SysUser;
 import com.boot.kaizen.model.UserDto;
 import com.boot.kaizen.service.UserService;
+import com.boot.kaizen.util.FileUtil;
 import com.boot.kaizen.util.JsonMsgUtil;
 import com.boot.kaizen.util.TableResultUtil;
 import com.boot.kaizen.util.UserUtil;
@@ -142,5 +145,27 @@ public class UserController {
 	public JsonMsgUtil delete(@RequestParam("ids") String ids) {
 		return userService.delete(ids);
 	}
+	
+	
+	
+	@Value("${files.path}")
+	private String filesPath;
 
+	/**
+	 * 测试上传
+	 */
+	@RequestMapping(value = "/upload")
+	@PreAuthorize("hasAuthority('sys:user:edit')")
+	public JsonMsgUtil upload(@RequestParam("file") MultipartFile file) {
+		String fileOrigName = file.getOriginalFilename();
+		if (!fileOrigName.contains(".")) {
+			throw new IllegalArgumentException("缺少后缀名");
+		}
+
+		fileOrigName = fileOrigName.substring(fileOrigName.lastIndexOf("."));
+		String pathname = FileUtil.getPath() + "1111" + fileOrigName;
+		String fullPath = filesPath + pathname;
+		FileUtil.saveFile(file, fullPath);
+		return new JsonMsgUtil(true,fullPath,"success");
+	}
 }
