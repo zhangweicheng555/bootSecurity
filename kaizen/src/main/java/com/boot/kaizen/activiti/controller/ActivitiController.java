@@ -31,6 +31,6 @@ public class ActivitiController {
 	 */
 	@RequestMapping(value = "/findActivitiProccessImage")
 	public void findActivitiProccessImage(@RequestParam("piid") String piid, HttpServletResponse response) {
-		activitiservice.findActivitiProccessImage("2501", response);
+		activitiservice.findActivitiProccessImage("55011", response);
 	}
 }

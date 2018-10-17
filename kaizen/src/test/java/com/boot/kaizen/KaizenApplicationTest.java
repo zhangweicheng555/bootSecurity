@@ -34,13 +34,9 @@ public class KaizenApplicationTest {
 	@Test
 	public void Test() throws InterruptedException {
 		Map<String, Object> map=new HashMap<String, Object>();
-		map.put("msg", MyDateUtil.getIsoDate("2018-10-15 20:05:00"));
-		activitiservice.srartProcessInstanceByKeyV("myProcess222",map);
+		map.put("receive", "a-zhangweicheng@kuandeng.com");
+		activitiservice.srartProcessInstanceByKeyV("myTest",map);
 		
-		List<Task> list = taskService.createTaskQuery().taskAssignee("zwc").list();
-		for (Task task : list) {
-			activitiservice.completeTaskById(task.getId());
-		}
 		
 		Thread.sleep(200000000);
 	}

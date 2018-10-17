@@ -32,7 +32,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	private String filesPath;
 
 	/**
-	 * 外部文件访问
+	 * 外部文件访问 <img alt="" src="/statics/2018/10/17/1111.jpg" />
 	 */
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {

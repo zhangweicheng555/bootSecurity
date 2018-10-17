@@ -55,6 +55,16 @@ public class ActivitiConfig {
 		List<ActivitiEventListener> eventListeners=new ArrayList<ActivitiEventListener>();
 		eventListeners.add(globalListener);
 		configuration.setEventListeners(eventListeners);
+		
+		/**配置邮件*/
+		configuration.setMailServerHost("smtp.qq.com");
+		configuration.setMailServerPort(465);
+		//默认的发邮件邮箱
+		configuration.setMailServerDefaultFrom("19348243@qq.com");
+		configuration.setMailServerUsername("19348243@qq.com");
+		configuration.setMailServerPassword("zipquwltrrkobiaa");
+		configuration.setMailServerUseSSL(true);
+		
 		return configuration.buildProcessEngine();
 	}
 
