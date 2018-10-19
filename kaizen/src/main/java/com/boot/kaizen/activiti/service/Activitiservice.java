@@ -23,7 +23,8 @@ public interface Activitiservice {
 	public ProcessInstance srartProcessInstanceByKey(String processDefinationKey);
 
 	/**
-	 * 通过流程定义的key/变量启动流程  
+	 * 通过流程定义的key/变量启动流程
+	 * 
 	 * @param processDefinationKey
 	 * @param variables
 	 * @return
@@ -87,4 +88,20 @@ public interface Activitiservice {
 	 * @param processInstanceId
 	 */
 	public Date processIfEnd(String processInstanceId);
+
+	/**
+	 * 删除流程实例 逻辑上的删除 结束流程实例
+	 * 
+	 * @param processInstanceId
+	 * @param deleteReasoon
+	 */
+	public void deleteProcessIntance(String processInstanceId, String deleteReasoon);
+
+	/**
+	 * 通过流程定义删除流程部署 级联删除
+	 * 
+	 * @param processDefinationId
+	 * @param cascade
+	 */
+	public void deleteProcessByDefinationId(String processDefinationId, Boolean cascade);
 }

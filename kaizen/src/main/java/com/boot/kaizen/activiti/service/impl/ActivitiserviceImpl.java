@@ -23,6 +23,7 @@ import org.activiti.engine.history.HistoricActivityInstance;
 import org.activiti.engine.history.HistoricProcessInstance;
 import org.activiti.engine.impl.RepositoryServiceImpl;
 import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
+import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.image.ProcessDiagramGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,9 +58,10 @@ public class ActivitiserviceImpl implements Activitiservice {
 				+ processInstance.getName());
 		return processInstance;
 	}
+
 	@Override
-	public ProcessInstance srartProcessInstanceByKeyV(String processDefinationKey,Map<String, Object> variables) {
-		ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(processDefinationKey,variables);
+	public ProcessInstance srartProcessInstanceByKeyV(String processDefinationKey, Map<String, Object> variables) {
+		ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(processDefinationKey, variables);
 		System.out.println("创建了流程实例：" + processInstance.getId() + " " + processInstance.getDeploymentId() + " "
 				+ processInstance.getName());
 		return processInstance;
@@ -210,11 +212,24 @@ public class ActivitiserviceImpl implements Activitiservice {
 
 	@Override
 	public Date processIfEnd(String processInstanceId) {
-		HistoricProcessInstance historicProcessInstance = historyService.createHistoricProcessInstanceQuery().processInstanceId(processInstanceId).singleResult();
+		HistoricProcessInstance historicProcessInstance = historyService.createHistoricProcessInstanceQuery()
+				.processInstanceId(processInstanceId).singleResult();
 		if (historicProcessInstance != null) {
 			return historicProcessInstance.getEndTime();
 		}
 		return null;
+	}
+
+	@Override
+	public void deleteProcessIntance(String processInstanceId, String deleteReasoon) {
+		runtimeService.deleteProcessInstance(processInstanceId, deleteReasoon);
+	}
+
+	@Override
+	public void deleteProcessByDefinationId(String processDefinationId, Boolean cascade) {
+		ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery()
+				.processDefinitionId(processDefinationId).singleResult();
+		repositoryService.deleteDeployment(processDefinition.getDeploymentId(), cascade);
 	}
 
 }

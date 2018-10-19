@@ -4,7 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.activiti.engine.FormService;
+import org.activiti.engine.RepositoryService;
+import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
+import org.activiti.engine.form.FormProperty;
+import org.activiti.engine.form.StartFormData;
+import org.activiti.engine.form.TaskFormData;
 import org.activiti.engine.task.Task;
 import org.aspectj.lang.Aspects14;
 import org.junit.Test;
@@ -31,14 +37,30 @@ public class KaizenApplicationTest {
 	@Autowired
 	private TaskService taskService;
 	
+	@Autowired
+	private FormService formService;
+	@Autowired
+	private RuntimeService runtimeService;
+	
 	@Test
 	public void Test() throws InterruptedException {
-		Map<String, Object> map=new HashMap<String, Object>();
-		map.put("receive", "a-zhangweicheng@kuandeng.com");
-		activitiservice.srartProcessInstanceByKeyV("myTest",map);
+		//activitiservice.deleteProcessByDefinationId("myProcess222:3:32508",true);
 		
+		runtimeService.startProcessInstanceByKey("ModelA");
 		
-		Thread.sleep(200000000);
+		StartFormData formData = formService.getStartFormData("ModelA:1:57513");
+		List<FormProperty> formProperties = formData.getFormProperties();
+		for (FormProperty formProperty : formProperties) {
+			System.out.println(formProperty.getId()+"   "+formProperty.getName()+"  "+formProperty.getValue()+"  "+formProperty.getType().getName());
+		}
+		System.out.println("-----------------------------------------------------------");
+		TaskFormData taskFormData = formService.getTaskFormData("60005");
+		List<FormProperty> properties = taskFormData.getFormProperties();
+		for (FormProperty formProperty : properties) {
+			System.out.println(formProperty.getId()+"   "+formProperty.getName()+"  "+formProperty.getValue()+"  "+formProperty.getType().getName());
+		}
+		
+		//Thread.sleep(200000000);
 	}
 
 }
