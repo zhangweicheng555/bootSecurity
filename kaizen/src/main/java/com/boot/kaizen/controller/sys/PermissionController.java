@@ -82,7 +82,7 @@ public class PermissionController {
 	 * @date 2018年10月2日 上午11:48:00
 	 */
 	@RequestMapping(value = "/list")
-	@PreAuthorize("hasAuthority('sys:menu:query')")
+	@PreAuthorize("hasAuthority('sys:menu:list')")
 	public List<Permission> permissionsList() {
 		List<Permission> permissionsAll = permissionDao.listAll();
 		List<Permission> list = Lists.newArrayList();
@@ -105,7 +105,7 @@ public class PermissionController {
 	}
 
 	@GetMapping("/all")
-	@PreAuthorize("hasAuthority('sys:menu:query')")
+	@PreAuthorize("hasAuthority('sys:menu:list')")
 	public JSONArray permissionsAll() {
 		List<Permission> permissionsAll = permissionDao.listAll();
 		JSONArray array = new JSONArray();
@@ -120,7 +120,7 @@ public class PermissionController {
 	 * @date 2018年10月3日 上午8:33:21
 	 */
 	@RequestMapping(value = "/parents")
-	@PreAuthorize("hasAuthority('sys:menu:query')")
+	@PreAuthorize("hasAuthority('sys:menu:list')")
 	public List<Permission> parentMenu() {
 		List<Permission> parents = permissionDao.listParents();
 		return parents;
@@ -155,7 +155,7 @@ public class PermissionController {
 	 * @date 2018年10月21日 下午7:23:54
 	 */
 	@GetMapping(params = "roleId")
-	@PreAuthorize("hasAnyAuthority('sys:menu:query','sys:role:query')")
+	@PreAuthorize("hasAnyAuthority('sys:menu:list','sys:role:list')")
 	public List<Permission> listByRoleId(Long roleId) {
 		return permissionDao.listByRoleId(roleId);
 	}
@@ -167,7 +167,7 @@ public class PermissionController {
 	 * @date 2018年10月3日 上午10:06:40
 	 */
 	@RequestMapping(value = "/edit")
-	@PreAuthorize("hasAuthority('sys:menu:add')")
+	@PreAuthorize("hasAuthority('sys:menu:edit')")
 	public JsonMsgUtil edit(Permission permission) {
 		return permissionService.edit(permission);
 	}
@@ -178,13 +178,13 @@ public class PermissionController {
 	 * @date 2018年10月3日 上午9:49:09
 	 */
 	@RequestMapping(value = "/get")
-	@PreAuthorize("hasAuthority('sys:menu:query')")
+	@PreAuthorize("hasAuthority('sys:menu:list')")
 	public Permission get(@RequestParam(value = "id", required = true) Long id) {
 		return permissionDao.getById(id);
 	}
 
 	@PutMapping
-	@PreAuthorize("hasAuthority('sys:menu:add')")
+	@PreAuthorize("hasAuthority('sys:menu:edit')")
 	public void update(@RequestBody Permission permission) {
 		permissionService.update(permission);
 	}
