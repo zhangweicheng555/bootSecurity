@@ -20,15 +20,12 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.boot.kaizen.dao.PermissionDao;
 import com.boot.kaizen.entity.LoginUser;
-import com.boot.kaizen.entity.ZtreeModel;
 import com.boot.kaizen.model.Permission;
 import com.boot.kaizen.service.PermissionService;
 import com.boot.kaizen.util.JsonMsgUtil;
 import com.boot.kaizen.util.UserUtil;
 import com.google.common.collect.Lists;
-
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 
 /**
  * 权限控制层
@@ -46,7 +43,6 @@ public class PermissionController {
 	@Autowired
 	private PermissionService permissionService;
 
-	@ApiOperation(value = "当前登录用户拥有的权限")
 	@GetMapping("/current")
 	public List<Permission> permissionsCurrent() {
 		LoginUser loginUser = UserUtil.getLoginUser();
@@ -63,10 +59,10 @@ public class PermissionController {
 	}
 
 	/**
-	 * 设置子元素 2018.06.09
-	 *
-	 * @param p
-	 * @param permissions
+	 * 
+	 * @Description: 设置子元素
+	 * @author weichengz
+	 * @date 2018年10月21日 下午7:23:22
 	 */
 	private void setChild(Permission p, List<Permission> permissions) {
 		List<Permission> child = permissions.parallelStream().filter(a -> a.getParentId().equals(p.getId()))
@@ -79,7 +75,6 @@ public class PermissionController {
 			});
 		}
 	}
-
 
 	/**
 	 * @Description: 查询资源列表 treeTable
@@ -132,11 +127,10 @@ public class PermissionController {
 	}
 
 	/**
-	 * 菜单树
 	 * 
-	 * @param pId
-	 * @param permissionsAll
-	 * @param array
+	 * @Description: 菜单树
+	 * @author weichengz
+	 * @date 2018年10月21日 下午7:25:10
 	 */
 	private void setPermissionsTree(Long pId, List<Permission> permissionsAll, JSONArray array) {
 		for (Permission per : permissionsAll) {
@@ -154,6 +148,12 @@ public class PermissionController {
 		}
 	}
 
+	/**
+	 * 
+	 * @Description: 拥有多个权限的例子
+	 * @author weichengz
+	 * @date 2018年10月21日 下午7:23:54
+	 */
 	@GetMapping(params = "roleId")
 	@PreAuthorize("hasAnyAuthority('sys:menu:query','sys:role:query')")
 	public List<Permission> listByRoleId(Long roleId) {
@@ -190,12 +190,12 @@ public class PermissionController {
 	}
 
 	/**
-	 * 校验权限
 	 * 
-	 * @return
+	 * @Description: 校验权限
+	 * @author weichengz
+	 * @date 2018年10月21日 下午7:24:41
 	 */
 	@GetMapping("/owns")
-	@ApiOperation(value = "校验当前用户的权限")
 	public Set<String> ownsPermission() {
 		List<Permission> permissions = UserUtil.getLoginUser().getPermissions();
 		if (CollectionUtils.isEmpty(permissions)) {

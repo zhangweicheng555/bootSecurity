@@ -12,4 +12,6 @@ public interface SysRolePermissionDao {
 	void deleteByRoleId(@Param("roleId") Long roleId);
 
 	void deleteByPermissionId(@Param("permissionId") Long permissionId);
+
+	void deleteByProjIds(@Param("projIds") Long[] projIds);
 }

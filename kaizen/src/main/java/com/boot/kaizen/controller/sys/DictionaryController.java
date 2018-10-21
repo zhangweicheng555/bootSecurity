@@ -3,15 +3,11 @@ package com.boot.kaizen.controller.sys;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.boot.kaizen.model.Permission;
 import com.boot.kaizen.model.SysDic;
 import com.boot.kaizen.service.SysDictionaryService;
-import com.boot.kaizen.util.JsonMsgUtil;
 
 /**
  * 字典管理

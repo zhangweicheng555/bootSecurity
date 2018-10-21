@@ -1,22 +1,13 @@
 package com.boot.kaizen.controller.sys;
 
-import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.boot.kaizen.entity.DistributeTreeTable;
-import com.boot.kaizen.entity.TreeTable;
-import com.boot.kaizen.entity.ZtreeModel;
-import com.boot.kaizen.model.SysProject;
-import com.boot.kaizen.model.SysRole;
 import com.boot.kaizen.service.DistributeService;
-import com.boot.kaizen.service.PermissionService;
-import com.boot.kaizen.service.RoleService;
-import com.boot.kaizen.service.SysProjectService;
 import com.boot.kaizen.util.JsonMsgUtil;
 
 /**

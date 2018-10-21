@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.boot.kaizen.model.SysUser;
-import com.boot.kaizen.model.UserDto;
 import com.boot.kaizen.util.JsonMsgUtil;
 
 public interface UserService {

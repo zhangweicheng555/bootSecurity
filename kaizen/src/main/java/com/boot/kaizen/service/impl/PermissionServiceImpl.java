@@ -42,9 +42,9 @@ public class PermissionServiceImpl implements PermissionService {
 	public JsonMsgUtil delete(Long id) {
 		JsonMsgUtil j=new JsonMsgUtil(false);
 		try {
-			permissionDao.delete(id);
 			//删除资源与角色的关系
 			rolePermissionService.deleteByPermissionId(id);
+			permissionDao.delete(id);
 			j=new JsonMsgUtil(true, "操作成功", "");
 		} catch (Exception e) {
 			j.setMsg("删除操作失败");

@@ -8,12 +8,12 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.boot.kaizen.dao.SysProjectDao;
 import com.boot.kaizen.model.SysProject;
 import com.boot.kaizen.service.ProjectRoleRelationService;
-import com.boot.kaizen.service.RoleService;
 import com.boot.kaizen.service.SysProjectService;
+import com.boot.kaizen.service.SysRolePermissionService;
+import com.boot.kaizen.service.SysRoleUserService;
 import com.boot.kaizen.util.JsonMsgUtil;
 
 @Service
@@ -24,6 +24,10 @@ public class SysProjectServiceImpl implements SysProjectService {
 
 	@Autowired
 	private ProjectRoleRelationService prijectRoleRelationService;
+	@Autowired
+	private SysRoleUserService roleUserService;
+	@Autowired
+	private SysRolePermissionService rolePermissionService;
 
 	@Override
 	public List<SysProject> query() {
@@ -47,9 +51,15 @@ public class SysProjectServiceImpl implements SysProjectService {
 					String id = idsArray[i];
 					array[i] = Long.valueOf(id.trim());
 				}
-				Integer deleteNum = projectDao.delete(array);
+				//删除角色跟用户的关系表
+				roleUserService.deleteByProjIds(array);
+				//删除角色跟资源的关系表
+				rolePermissionService.deleteByProjIds(array);
 				// 删除项目下的角色
 				prijectRoleRelationService.deleteByProIds(array);
+				//删除项目
+				Integer deleteNum = projectDao.delete(array);
+				
 				j = new JsonMsgUtil(true, "删除操作成功", deleteNum);
 			}
 		} catch (Exception e) {

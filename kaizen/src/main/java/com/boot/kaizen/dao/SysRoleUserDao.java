@@ -14,4 +14,8 @@ public interface SysRoleUserDao {
 	
 	void batchInsert(@Param("list") List<SysRoleUser> roleUsers);
 
+	void deleteBatch(@Param("userIds") Long[] userIds);
+
+	void deleteByProjIds(@Param("projIds") Long[] projIds);
+
 }

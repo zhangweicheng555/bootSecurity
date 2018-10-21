@@ -9,6 +9,31 @@
 		 where roleId = #{roleId}
 	</delete>
 	
+	<delete id="deleteBatch">
+		 delete from sys_role_user
+		 where userId in
+		 <foreach collection="userIds" index="index" item="item"
+            open="(" separator="," close=")">
+            #{item}
+        </foreach>
+	</delete>
+	
+	<delete id="deleteByProjIds">
+		 delete from sys_role_user
+		 where roleId in
+		 (
+		 	select role_id from proj_role_relation
+		 	where proj_id in (
+		 		 <foreach collection="projIds" index="index" item="item"
+		            open="(" separator="," close=")">
+		            #{item}
+		        </foreach>
+		 	)
+		 	
+		 )
+		
+	</delete>
+	
 	<insert id ="batchInsert" parameterType="java.util.List" >
            insert into sys_role_user
            (roleId,userId)

@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.boot.kaizen.dao.SysProjectDao;
 import com.boot.kaizen.dao.SysProjectRoleRelationDao;
@@ -121,14 +122,15 @@ public class RoleServiceImpl implements RoleService {
 		return sysRoleDao.findPermissionIdsByRoleId(roleId);
 	}
 
+	@Transactional
 	@Override
 	public JsonMsgUtil delete(Long id) {
 		JsonMsgUtil j = new JsonMsgUtil(false);
 		try {
-			sysRoleDao.delete(id);
 			projectRoleRelationService.deleteByRoleAndProId(id);
 			rolePermissionService.deleteByRoleId(id);
 			roleUserService.delete(id);
+			sysRoleDao.delete(id);
 			j = new JsonMsgUtil(true, "删除操作成功", "");
 		} catch (Exception e) {
 			j.setMsg("删除操作失败");

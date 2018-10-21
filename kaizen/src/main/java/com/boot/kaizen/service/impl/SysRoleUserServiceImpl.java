@@ -23,4 +23,14 @@ public class SysRoleUserServiceImpl implements SysRoleUserService {
 		roleUserDao.batchInsert(roleUsers);
 	}
 
+	@Override
+	public void deleteBatch(Long[] userIds) {
+		roleUserDao.deleteBatch(userIds);
+	}
+
+	@Override
+	public void deleteByProjIds(Long[] projIds) {
+		roleUserDao.deleteByProjIds(projIds);
+	}
+
 }

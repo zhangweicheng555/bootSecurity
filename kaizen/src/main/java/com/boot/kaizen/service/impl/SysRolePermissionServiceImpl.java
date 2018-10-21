@@ -28,4 +28,9 @@ public class SysRolePermissionServiceImpl implements SysRolePermissionService {
 		rolePermissionDao.deleteByPermissionId(id);
 	}
 
+	@Override
+	public void deleteByProjIds(Long[] projIds) {
+		rolePermissionDao.deleteByProjIds(projIds);
+	}
+
 }

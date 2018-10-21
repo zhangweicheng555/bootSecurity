@@ -16,9 +16,9 @@ import com.boot.kaizen.dao.SysUserDao;
 import com.boot.kaizen.model.SysUser;
 import com.boot.kaizen.model.UserDto;
 import com.boot.kaizen.model.SysUser.Status;
+import com.boot.kaizen.service.SysRoleUserService;
 import com.boot.kaizen.service.UserService;
 import com.boot.kaizen.util.JsonMsgUtil;
-
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -29,6 +29,8 @@ public class UserServiceImpl implements UserService {
 	private SysUserDao userDao;
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
+	@Autowired
+	private SysRoleUserService roleUserService;
 
 	@Override
 	@Transactional
@@ -39,8 +41,6 @@ public class UserServiceImpl implements UserService {
 		userDao.save(sysUser);
 		return sysUser;
 	}
-
-
 
 	@Override
 	public SysUser getUser(String username) {
@@ -66,11 +66,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public JsonMsgUtil updateUser(SysUser sysUser) {
-		JsonMsgUtil j=new JsonMsgUtil(false);
+		JsonMsgUtil j = new JsonMsgUtil(false);
 		try {
 			sysUser.setUpdateTime(new Date());
 			userDao.update(sysUser);
-			j=new JsonMsgUtil(true, "操作成功", "");
+			j = new JsonMsgUtil(true, "操作成功", "");
 		} catch (Exception e) {
 			j.setMsg("修改失败");
 			e.printStackTrace();
@@ -83,8 +83,6 @@ public class UserServiceImpl implements UserService {
 		return userDao.find(map);
 	}
 
-
-
 	@Override
 	public JsonMsgUtil delete(String ids) {
 		JsonMsgUtil j = new JsonMsgUtil(false);
@@ -96,8 +94,9 @@ public class UserServiceImpl implements UserService {
 					String id = idsArray[i];
 					array[i] = Long.valueOf(id.trim());
 				}
-				userDao.deleteBatch(array);
 				// 删除用户角色关系
+				roleUserService.deleteBatch(array);
+				userDao.deleteBatch(array);
 				j = new JsonMsgUtil(true, "删除操作成功", "");
 			}
 		} catch (Exception e) {
@@ -106,13 +105,11 @@ public class UserServiceImpl implements UserService {
 		return j;
 	}
 
-
-
 	@Override
 	public JsonMsgUtil findById(Long id) {
-		JsonMsgUtil j=new JsonMsgUtil(false);
+		JsonMsgUtil j = new JsonMsgUtil(false);
 		try {
-			j=new JsonMsgUtil(true, "操作成功", userDao.getById(id));
+			j = new JsonMsgUtil(true, "操作成功", userDao.getById(id));
 		} catch (Exception e) {
 			j.setMsg("擦走失败");
 			e.printStackTrace();
@@ -120,19 +117,14 @@ public class UserServiceImpl implements UserService {
 		return j;
 	}
 
-
-
 	@Override
 	public String findUserNames(Long roleId) {
 		return userDao.findUserNames(roleId);
 	}
-
-
 
 	@Override
 	public List<Long> findUserIds(Long roleId) {
 		return userDao.findUserIds(roleId);
 	}
 
-	
 }

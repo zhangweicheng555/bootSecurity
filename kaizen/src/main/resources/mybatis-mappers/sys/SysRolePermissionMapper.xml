@@ -25,5 +25,18 @@
      </delete >
 	
 	
+	<delete id="deleteByProjIds">
+		 delete from sys_role_permission
+		 where roleId in
+		 (
+		 	select role_id from proj_role_relation
+		 	where proj_id in (
+		 		 <foreach collection="projIds" index="index" item="item"
+		            open="(" separator="," close=")">
+		            #{item}
+		        </foreach>
+		 	)
+		 )
+	</delete>
 	
 </mapper>

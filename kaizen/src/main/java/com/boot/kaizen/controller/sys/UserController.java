@@ -9,18 +9,14 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-
-import com.boot.kaizen._enum.DicType;
 import com.boot.kaizen.dao.SysUserDao;
 import com.boot.kaizen.entity.RequestParamEntity;
-import com.boot.kaizen.model.SysProject;
 import com.boot.kaizen.model.SysUser;
 import com.boot.kaizen.model.UserDto;
 import com.boot.kaizen.service.UserService;
@@ -31,7 +27,6 @@ import com.boot.kaizen.util.UserUtil;
 import com.github.pagehelper.ISelect;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-
 import io.swagger.annotations.ApiOperation;
 
 /**
