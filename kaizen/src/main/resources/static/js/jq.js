@@ -48,6 +48,17 @@ function buttonEdit(href, permission, pers) {
 			+ href + "\")'><i class='layui-icon'>&#xe642;</i></button>");
 	return btn.prop("outerHTML");
 }
+// 编辑按钮权限  无Url
+function buttonEditOpen(flag, permission, pers) {
+	if (permission != "") {
+		if ($.inArray(permission, pers) < 0) {
+			return "";
+		}
+	}
+	var array=flag.split(",");
+	var btn = $("<button class='layui-btn layui-btn-xs myB' lang='"+array[0]+"'  title='编辑' '><i class='layui-icon'>&#xe642;</i></button>");
+	return btn.prop("outerHTML");
+}
 
 // 根据参数的名字获取url后面传递的值
 function getUrlParam(key) {
@@ -79,8 +90,6 @@ function checkPermission() {
 		contentType : "application/json; charset=utf-8",
 		async : false,
 		success : function(data) {
-			console.info('--------------------')
-			console.info('--------'+data+'------------')
 			pers = data;
 			$("[permission]").each(function() {
 				var per = $(this).attr("permission");

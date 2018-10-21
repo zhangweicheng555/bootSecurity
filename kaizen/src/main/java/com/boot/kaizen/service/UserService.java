@@ -24,6 +24,7 @@ public interface UserService {
 	void changePassword(String username, String oldPassword, String newPassword);
 
 	/**
+	 * 
 	 * @Description: 列表查询
 	 * @author weichengz
 	 * @date 2018年10月6日 下午5:39:16
@@ -33,5 +34,20 @@ public interface UserService {
 	JsonMsgUtil delete(String ids);
 
 	JsonMsgUtil findById(Long id);
+
+	/**
+	 * 
+	 * @Description: 通过角色Id查询用户的名字
+	 * @author weichengz
+	 * @date 2018年10月21日 上午9:29:26
+	 */
+	String findUserNames(Long roleId);
+	/**
+	 * 
+	 * @Description: 通过角色Id查询用户的id
+	 * @author weichengz
+	 * @date 2018年10月21日 上午9:29:26
+	 */
+	List<Long> findUserIds(Long roleId);
 
 }

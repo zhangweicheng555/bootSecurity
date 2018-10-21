@@ -24,6 +24,27 @@
 		 order by su.createTime desc
 	</select>
 	
+	<select id="findUserNames" resultType="java.lang.String">
+		 select  
+		 group_concat(u.username separator '、') 
+		 from 
+		 sys_role_user r
+		 ,sys_user u
+		 where 
+		 u.id=r.userId
+		 and r.roleId =#{roleId}
+	</select>
+	
+	<select id="findUserIds" resultType="java.lang.Long">
+		 select   u.id
+		 from 
+		 sys_role_user r
+		 ,sys_user u
+		 where 
+		 u.id=r.userId
+		 and r.roleId =#{roleId}
+	</select>
+	
 	<delete id="deleteBatch">
 		 delete from sys_user
 		 where id in

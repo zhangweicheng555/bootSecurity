@@ -120,5 +120,19 @@ public class UserServiceImpl implements UserService {
 		return j;
 	}
 
+
+
+	@Override
+	public String findUserNames(Long roleId) {
+		return userDao.findUserNames(roleId);
+	}
+
+
+
+	@Override
+	public List<Long> findUserIds(Long roleId) {
+		return userDao.findUserIds(roleId);
+	}
+
 	
 }
