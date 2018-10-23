@@ -39,7 +39,7 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping("/users")
 public class UserController {
 
-	private static final Logger log = LoggerFactory.getLogger("adminLogger");
+	private static final Logger log = LoggerFactory.getLogger("dayLogger");
 
 	@Autowired
 	private UserService userService;
@@ -55,6 +55,7 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping(value = "/find", method = RequestMethod.POST)
 	public TableResultUtil find(RequestParamEntity param) {
+		
 		PageInfo<SysUser> pageInfo = PageHelper.startPage(param.getPage(), param.getLimit())
 				.doSelectPageInfo(new ISelect() {
 					@Override

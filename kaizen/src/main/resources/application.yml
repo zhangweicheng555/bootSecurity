@@ -56,7 +56,8 @@ log:
   level:
     root: info
     my: debug
-  file: logs/admin-server.log
+  file: src/main/resources/logs/admin-server.log
+  dayfile: src/main/resources/logs/day.log
   maxsize: 30MB
 token: 
   expire:

@@ -2,11 +2,8 @@ package com.boot.kaizen.config;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.EventListener;
 import java.util.List;
-
 import javax.sql.DataSource;
-
 import org.activiti.engine.FormService;
 import org.activiti.engine.HistoryService;
 import org.activiti.engine.IdentityService;
@@ -37,7 +34,7 @@ public class ActivitiConfig {
 
 	@Autowired
 	private GlobalListener globalListener;
-	
+
 	@Bean
 	public ProcessEngine processEngine(DataSourceTransactionManager transactionManager, DataSource dataSource)
 			throws IOException {
@@ -54,19 +51,19 @@ public class ActivitiConfig {
 		configuration.setActivityFontName("宋体");
 		configuration.setAnnotationFontName("宋体");
 		configuration.setLabelFontName("宋体");
-		List<ActivitiEventListener> eventListeners=new ArrayList<ActivitiEventListener>();
+		List<ActivitiEventListener> eventListeners = new ArrayList<ActivitiEventListener>();
 		eventListeners.add(globalListener);
 		configuration.setEventListeners(eventListeners);
-		
-		/**配置邮件*/
+
+		/** 配置邮件 */
 		configuration.setMailServerHost("smtp.qq.com");
 		configuration.setMailServerPort(465);
-		//默认的发邮件邮箱
+		// 默认的发邮件邮箱
 		configuration.setMailServerDefaultFrom("19348243@qq.com");
 		configuration.setMailServerUsername("19348243@qq.com");
 		configuration.setMailServerPassword("zipquwltrrkobiaa");
 		configuration.setMailServerUseSSL(true);
-		
+
 		return configuration.buildProcessEngine();
 	}
 
@@ -104,7 +101,5 @@ public class ActivitiConfig {
 	public FormService formService(ProcessEngine processEngine) {
 		return processEngine.getFormService();
 	}
-
-	
 
 }

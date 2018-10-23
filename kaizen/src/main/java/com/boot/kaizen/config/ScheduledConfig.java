@@ -18,7 +18,7 @@ public class ScheduledConfig {
 	 */
 	// @Scheduled(cron = "0 0/5 17-20 * * ?")
 	public void scheduledByFiveMinute() throws ParseException {
-
+		
 	}
 
 	/**
