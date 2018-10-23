@@ -86,22 +86,20 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public JsonMsgUtil delete(String ids) {
 		JsonMsgUtil j = new JsonMsgUtil(false);
-		try {
-			if (StringUtils.isNoneBlank(ids)) {
-				String[] idsArray = ids.trim().split(",");
-				Long[] array = new Long[idsArray.length];
-				for (int i = 0; i < idsArray.length; i++) {
-					String id = idsArray[i];
-					array[i] = Long.valueOf(id.trim());
-				}
-				// 删除用户角色关系
-				roleUserService.deleteBatch(array);
-				userDao.deleteBatch(array);
-				j = new JsonMsgUtil(true, "删除操作成功", "");
+
+		if (StringUtils.isNoneBlank(ids)) {
+			String[] idsArray = ids.trim().split(",");
+			Long[] array = new Long[idsArray.length];
+			for (int i = 0; i < idsArray.length; i++) {
+				String id = idsArray[i];
+				array[i] = Long.valueOf(id.trim());
 			}
-		} catch (Exception e) {
-			throw e;
+			// 删除用户角色关系
+			roleUserService.deleteBatch(array);
+			userDao.deleteBatch(array);
+			j = new JsonMsgUtil(true, "删除操作成功", "");
 		}
+
 		return j;
 	}
 

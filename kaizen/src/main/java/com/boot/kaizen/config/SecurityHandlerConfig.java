@@ -19,10 +19,10 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 import com.boot.kaizen.entity.LoginUser;
-import com.boot.kaizen.entity.ResponseInfo;
 import com.boot.kaizen.entity.Token;
 import com.boot.kaizen.filter.TokenFilter;
 import com.boot.kaizen.service.TokenService;
+import com.boot.kaizen.util.JsonMsgUtil;
 import com.boot.kaizen.util.ResponseUtil;
 
 /**
@@ -75,8 +75,8 @@ public class SecurityHandlerConfig {
 				} else {
 					msg = exception.getMessage();
 				}
-				ResponseInfo info = new ResponseInfo(HttpStatus.UNAUTHORIZED.value() + "", msg);
-				ResponseUtil.responseJson(response, HttpStatus.UNAUTHORIZED.value(), info);
+				JsonMsgUtil j = new JsonMsgUtil(HttpStatus.UNAUTHORIZED.value(), msg);
+				ResponseUtil.responseJson(response, HttpStatus.UNAUTHORIZED.value(), j);
 			}
 		};
 
@@ -94,8 +94,8 @@ public class SecurityHandlerConfig {
 			@Override
 			public void commence(HttpServletRequest request, HttpServletResponse response,
 					AuthenticationException authException) throws IOException, ServletException {
-				ResponseInfo info = new ResponseInfo(HttpStatus.UNAUTHORIZED.value() + "", "请先登录");
-				ResponseUtil.responseJson(response, HttpStatus.UNAUTHORIZED.value(), info);
+				JsonMsgUtil j = new JsonMsgUtil(HttpStatus.UNAUTHORIZED.value(), "请先登录");
+				ResponseUtil.responseJson(response, HttpStatus.UNAUTHORIZED.value(), j);
 			}
 		};
 	}
@@ -112,12 +112,10 @@ public class SecurityHandlerConfig {
 			@Override
 			public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response,
 					Authentication authentication) throws IOException, ServletException {
-				ResponseInfo info = new ResponseInfo(HttpStatus.OK.value() + "", "退出成功");
-
+				JsonMsgUtil j = new JsonMsgUtil(HttpStatus.OK.value(), "退出成功");
 				String token = TokenFilter.getToken(request);
 				tokenService.deleteToken(token);
-
-				ResponseUtil.responseJson(response, HttpStatus.OK.value(), info);
+				ResponseUtil.responseJson(response, HttpStatus.OK.value(), j);
 			}
 		};
 

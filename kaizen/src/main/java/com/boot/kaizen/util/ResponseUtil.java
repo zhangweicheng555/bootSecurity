@@ -6,6 +6,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSONObject;
 
+/**
+ * 手动控制输出json数据
+ * 
+ * @author a-zhangweicheng
+ *
+ */
 public class ResponseUtil {
 
 	public static void responseJson(HttpServletResponse response, int status, Object data) {

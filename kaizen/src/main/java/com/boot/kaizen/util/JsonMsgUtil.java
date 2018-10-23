@@ -1,5 +1,7 @@
 package com.boot.kaizen.util;
 
+import java.util.Date;
+
 /**
  * json结构实体类
  * 
@@ -9,14 +11,38 @@ package com.boot.kaizen.util;
 public class JsonMsgUtil {
 
 	private boolean success = false;
-	private String msg;
-	private Object object = null;
+	private String message;// 提示信息
+	private Long time = new Date().getTime();// 提示信息
+	private Integer code = 200;// 状态码
+	private Object object = null;// 返回的对象 这个就是返回的存储信息的地方
+
+	public Long getTime() {
+		return time;
+	}
+
+	public void setTime(Long time) {
+		this.time = time;
+	}
+
+	public JsonMsgUtil(Integer code, String msg) {
+		super();
+		this.message = msg;
+		this.code = code;
+	}
 
 	public JsonMsgUtil(boolean success, String msg, Object object) {
 		super();
 		this.success = success;
-		this.msg = msg;
+		this.message = msg;
 		this.object = object;
+	}
+
+	public Integer getCode() {
+		return code;
+	}
+
+	public void setCode(Integer code) {
+		this.code = code;
 	}
 
 	public JsonMsgUtil() {
@@ -37,11 +63,11 @@ public class JsonMsgUtil {
 	}
 
 	public String getMsg() {
-		return msg;
+		return message;
 	}
 
 	public void setMsg(String msg) {
-		this.msg = msg;
+		this.message = msg;
 	}
 
 	public Object getObject() {
