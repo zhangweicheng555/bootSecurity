@@ -2,6 +2,8 @@ package com.boot.kaizen.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -12,8 +14,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.boot.kaizen.filter.TokenFilter;
 
@@ -44,6 +46,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		return new BCryptPasswordEncoder();
 	}
 
+	/** 扩展验证机制最核心的注入代码 */
+	@Bean(name = BeanIds.AUTHENTICATION_MANAGER)
+	@Override
+	public AuthenticationManager authenticationManagerBean() throws Exception {
+		return super.authenticationManagerBean();
+	}
+	/** 扩展验证机制最核心的注入代码 */
+	@Bean
+	public MyUsernamePasswordAuthenticationFilter myUsernamePasswordAuthenticationFilter() throws Exception {
+		MyUsernamePasswordAuthenticationFilter myUsernamePasswordAuthenticationFilter=new MyUsernamePasswordAuthenticationFilter();
+		AntPathRequestMatcher requestMatcher = new AntPathRequestMatcher("/login", "POST");
+		myUsernamePasswordAuthenticationFilter.setRequiresAuthenticationRequestMatcher(requestMatcher);
+		myUsernamePasswordAuthenticationFilter.setAuthenticationManager(authenticationManagerBean());
+		return myUsernamePasswordAuthenticationFilter;
+	}
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable();
@@ -62,7 +80,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				"/swagger-resources/**", //
 				"/pages/**", //
 				"/druid/**", //
-				"/favicon.ico",//
+				"/favicon.ico", //
 				"/statics/**").permitAll().anyRequest().authenticated();
 
 		http.formLogin()//
@@ -79,7 +97,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.headers().frameOptions().disable();
 		http.headers().cacheControl();
 
-		http.addFilterBefore(tokenFilter, UsernamePasswordAuthenticationFilter.class);
+		// http.addFilterBefore(tokenFilter,UsernamePasswordAuthenticationFilter.class);
+		http.addFilterBefore(tokenFilter, MyUsernamePasswordAuthenticationFilter.class);
 	}
 
 	@Override
@@ -87,5 +106,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
 	}
 
-	
 }

@@ -67,3 +67,15 @@
 2018-10-23 16:32:34,868 [http-nio-8090-exec-6] ==>  Preparing: select su.id,su.username,su.nickname,su.phone ,su.telephone,su.email,su.birthday ,su.sex,su.status,su.createTime from sys_user su where 1=1 order by su.createTime desc LIMIT ? 
 2018-10-23 16:32:34,870 [http-nio-8090-exec-6] ==> Parameters: 3(Integer)
 2018-10-23 16:32:34,871 [http-nio-8090-exec-6] <==      Total: 2
+2018-10-23 20:33:28,135 [http-nio-8090-exec-6] ==>  Preparing: select * from t_token t where t.id = ? 
+2018-10-23 20:33:28,150 [http-nio-8090-exec-6] ==> Parameters: ad42ddb0-3713-4a3d-a925-a115ab939149(String)
+2018-10-23 20:33:28,157 [http-nio-8090-exec-6] <==      Total: 1
+2018-10-23 20:33:28,219 [http-nio-8090-exec-1] ==>  Preparing: select * from t_token t where t.id = ? 
+2018-10-23 20:33:28,219 [http-nio-8090-exec-1] ==> Parameters: ad42ddb0-3713-4a3d-a925-a115ab939149(String)
+2018-10-23 20:33:28,220 [http-nio-8090-exec-1] <==      Total: 1
+2018-10-23 20:45:00,183 [http-nio-8090-exec-9] ==>  Preparing: select * from t_token t where t.id = ? 
+2018-10-23 20:45:00,186 [http-nio-8090-exec-9] ==> Parameters: 25e8590f-cd6f-4c9b-9591-a14c8226c060(String)
+2018-10-23 20:45:00,186 [http-nio-8090-exec-9] <==      Total: 0
+2018-10-23 20:45:00,202 [http-nio-8090-exec-6] ==>  Preparing: select * from t_token t where t.id = ? 
+2018-10-23 20:45:00,202 [http-nio-8090-exec-6] ==> Parameters: 25e8590f-cd6f-4c9b-9591-a14c8226c060(String)
+2018-10-23 20:45:00,202 [http-nio-8090-exec-6] <==      Total: 0
