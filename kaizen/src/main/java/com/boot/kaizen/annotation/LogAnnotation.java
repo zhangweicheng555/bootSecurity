@@ -6,7 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * log注解 定义在方法上
+ * log注解 定义在方法上 用@LogAnnotation(flag="") 配合日志拦截器使用
  * 
  * @author a-zhangweicheng
  *
