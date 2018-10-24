@@ -31,23 +31,27 @@
 					</div>
 				    <ul class="layui-nav" pc>
 				    	<!-- 顶部资源  这里后期设置三级菜单可以使用 -->
-				      	<li class="layui-nav-item">
+				      	<!-- <li class="layui-nav-item">
 							<a href='javascript:;' lay-id="index_1" data-url="pages/user/list.html">用户管理</a>
-						</li>
-				      	<li class="layui-nav-item">
-							<a href='javascript:;' lay-id="index_2" data-url="pages/project/list.html">项目管理</a>
-						</li>
-				      	<li class="layui-nav-item">
-							<a href='javascript:;' lay-id="index_6" data-url="pages/role/list.html">角色管理</a>
-						</li>
-				      	
-				      	<li class="layui-nav-item">
-							<a href='javascript:;' lay-id="index_3" data-url="pages/menu/list.html">资源管理</a>
+						</li> -->
+				       <li class="layui-nav-item">
+							<a href='javascript:;' lay-id="index_change" style="font-weight: bold;">切换项目</a>
+							 <dl class="layui-nav-child">
+		                        <dd>
+		                            <a href='javascript:;' lay-id="-999" data-url="#"><i class="fa fa-user-circle" aria-hidden="true"></i>待补充信息1</a>
+		                        </dd>
+		                        <dd>
+		                            <a href='javascript:;' lay-id="-998" data-url="#"><i class="fa fa-drupal" aria-hidden="true"></i>待补充信息2</a>
+		                        </dd>
+		                        <dd>
+		                            <a href="javascript:;" onclick="logout()"><i class="fa fa-sign-out" aria-hidden="true"></i>退出</a>
+		                        </dd>
+		                    </dl>
 						</li>
 				      
-						<li class="layui-nav-item">
-							<a href='javascript:;' lay-id="index_5" data-url="#"><i class="fa fa-envelope-o" aria-hidden="true" title="公告" unreadNotice></i></a>
-						</li>
+						<!-- <li class="layui-nav-item">
+							<a href='javascript:;' lay-id="index_5" data-url="#"><i class="fa fa-envelope-o" aria-hidden="true" title="公告" unreadNotice></i>公告</a>
+						</li> -->
 						
 				      <li class="layui-nav-item" pc>
 				        <a href="javascript:;" class="admin-header-user">
