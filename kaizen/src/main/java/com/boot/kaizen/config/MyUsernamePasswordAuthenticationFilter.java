@@ -6,6 +6,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.util.Assert;
+
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,16 +19,12 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class MyUsernamePasswordAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
-	public static final String SPRING_SECURITY_FORM_USERNAME_KEY = "username";
-	public static final String SPRING_SECURITY_FORM_PASSWORD_KEY = "password";
 	public static final String SPRING_SECURITY_FORM_PROJ_KEY = "proj";
 
-	private String usernameParameter = SPRING_SECURITY_FORM_USERNAME_KEY;
-	private String passwordParameter = SPRING_SECURITY_FORM_PASSWORD_KEY;
 	private String projParameter = SPRING_SECURITY_FORM_PROJ_KEY;
 	private boolean postOnly = true;
-
-
+	
+	@Override
 	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
 			throws AuthenticationException {
 		if (postOnly && !request.getMethod().equals("POST")) {
@@ -57,36 +55,23 @@ public class MyUsernamePasswordAuthenticationFilter extends UsernamePasswordAuth
 		return this.getAuthenticationManager().authenticate(authRequest);
 	}
 
-	protected String obtainPassword(HttpServletRequest request) {
-		return request.getParameter(passwordParameter);
-	}
+	
 
 	protected String obtainProj(HttpServletRequest request) {
 		return request.getParameter(projParameter);
 	}
 
-	protected String obtainUsername(HttpServletRequest request) {
-		return request.getParameter(usernameParameter);
-	}
 
 	protected void setDetails(HttpServletRequest request, UsernamePasswordAuthenticationToken authRequest) {
 		authRequest.setDetails(authenticationDetailsSource.buildDetails(request));
 	}
 
-	public void setUsernameParameter(String usernameParameter) {
-		Assert.hasText(usernameParameter, "Username parameter must not be empty or null");
-		this.usernameParameter = usernameParameter;
-	}
 
 	public void setProjParameter(String projParameter) {
 		Assert.hasText(projParameter, "projParameter parameter must not be empty or null");
 		this.projParameter = projParameter;
 	}
 
-	public void setPasswordParameter(String passwordParameter) {
-		Assert.hasText(passwordParameter, "Password parameter must not be empty or null");
-		this.passwordParameter = passwordParameter;
-	}
 
 	public void setPostOnly(boolean postOnly) {
 		this.postOnly = postOnly;
