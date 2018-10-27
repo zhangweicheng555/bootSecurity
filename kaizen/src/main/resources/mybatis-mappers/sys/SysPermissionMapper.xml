@@ -26,6 +26,29 @@
 		where t.id = #{permission.id}
 	</update>
 	
-	
+	<select id="queryByUserIdAndProjId" resultType="Permission">
+		 select  distinct sp.* 
+		 from 
+		 sys_project p
+		 ,proj_role_relation pr
+		 ,sys_role r
+		 ,sys_role_user ru
+		 ,sys_user u
+		 
+		 ,sys_role_permission rp
+		 ,sys_permission sp
+		 where 
+		 p.id=pr.proj_id
+		 and pr.role_id=r.id
+		 and r.id=ru.roleId
+		 and u.id=ru.userId
+		 
+		 and rp.roleId=r.id
+		 and sp.id=rp.permissionId
+		 
+		 and u.username=#{username}
+		 and p.id=#{projId}
+		
+	</select>
 	
 </mapper>

@@ -12,7 +12,6 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.boot.kaizen.model.SysUser;
-import com.boot.kaizen.model.UserDto;
 
 @Mapper
 public interface SysUserDao {

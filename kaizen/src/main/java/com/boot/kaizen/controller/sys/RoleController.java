@@ -96,7 +96,7 @@ public class RoleController {
 	 * @date 2018年10月5日 上午11:56:40 flag:角色的id
 	 */
 	@RequestMapping(value = "/find")
-	@PreAuthorize("hasAuthority('sys:menu:query')")
+	@PreAuthorize("hasAuthority('sys:menu:list')")
 	public List<ZtreeModel> find(@RequestParam(value = "flag", required = false) Long flag) {
 		List<Long> ids = roleService.findPermissionIdsByRoleId(flag);
 		if (ids == null) {

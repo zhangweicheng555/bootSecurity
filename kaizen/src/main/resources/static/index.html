@@ -35,17 +35,9 @@
 							<a href='javascript:;' lay-id="index_1" data-url="pages/user/list.html">用户管理</a>
 						</li> -->
 				       <li class="layui-nav-item">
-							<a href='javascript:;' lay-id="index_change" style="font-weight: bold;">切换项目</a>
-							 <dl class="layui-nav-child">
-		                        <dd>
-		                            <a href='javascript:;' lay-id="-999" data-url="#"><i class="fa fa-user-circle" aria-hidden="true"></i>待补充信息1</a>
-		                        </dd>
-		                        <dd>
-		                            <a href='javascript:;' lay-id="-998" data-url="#"><i class="fa fa-drupal" aria-hidden="true"></i>待补充信息2</a>
-		                        </dd>
-		                        <dd>
-		                            <a href="javascript:;" onclick="logout()"><i class="fa fa-sign-out" aria-hidden="true"></i>退出</a>
-		                        </dd>
+							<a href='javascript:;' id="nowProject" lang="" style="font-weight: bold;">切换项目</a>
+							 <dl class="layui-nav-child" id="childDl">
+		                        <!-- <dd><a href='javascript:;' class="clsProj"  data-url="#">待补充信息1</a></dd> -->
 		                    </dl>
 						</li>
 				      
@@ -111,7 +103,9 @@
 			<script type="text/javascript" src="js/libs/jquery-2.1.1.min.js"></script>
 			<script type="text/javascript" src="js/jq.js"></script>
 			<script type="text/javascript" src="js/main.js"></script>
+			
 	</div>
+	<input type="hidden" id="username" name="username" />
 </body>
 
 </html>

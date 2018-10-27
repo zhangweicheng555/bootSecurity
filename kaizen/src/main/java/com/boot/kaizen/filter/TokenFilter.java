@@ -1,6 +1,7 @@
 package com.boot.kaizen.filter;
 
 import java.io.IOException;
+import java.util.Date;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -16,6 +17,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.boot.kaizen.entity.LoginUser;
+import com.boot.kaizen.model.LoginService;
+import com.boot.kaizen.service.PermissionService;
+import com.boot.kaizen.service.SysLoginServiceService;
 import com.boot.kaizen.service.TokenService;
 
 /**
@@ -27,22 +31,45 @@ import com.boot.kaizen.service.TokenService;
 @Component
 public class TokenFilter extends OncePerRequestFilter {
 
-	private static final String TOKEN_KEY = "token";
-
 	@Autowired
 	private TokenService tokenService;
 	@Autowired
 	private UserDetailsService userDetailsService;
+	@Autowired
+	private PermissionService permissionService;
+	@Autowired
+	private SysLoginServiceService sysLoginServiceService;
+	
 	private static final Long MINUTES_10 = 10 * 60 * 1000L;
+	private static final String SPRING_SECURITY_PROJ = "proj";
+	private static final String TOKEN_KEY = "token";
+	public static final String SPRING_SECURITY_FORM_USERNAME_KEY = "username";
 
+	
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
+		
+		String projId=obtainProjId(request);
+		String username=obtainUserName(request);
+		if (StringUtils.isNoneBlank(username) && StringUtils.isNoneBlank(projId)) {
+			LoginService loginService=new LoginService(username, Long.valueOf(projId), new Date());
+			sysLoginServiceService.insert(loginService);
+		}
+		
+		
 		String token = getToken(request);
 		if (StringUtils.isNotBlank(token)) {
 			LoginUser loginUser = tokenService.getLoginUser(token);
 			if (loginUser != null) {
-				loginUser = checkLoginTime(loginUser);
+				
+				if (StringUtils.isNoneBlank(projId) && StringUtils.isNoneBlank(username)) {//更新权限 刷新token
+					loginUser.setPermissions(permissionService.queryByUserIdAndProjId(username, Long.valueOf(projId)));
+					tokenService.refresh(loginUser);
+				}else {
+					loginUser = checkLoginTime(loginUser);
+				}
+				
 				UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(loginUser,
 						null, loginUser.getAuthorities());
 				SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -50,6 +77,14 @@ public class TokenFilter extends OncePerRequestFilter {
 		}
 
 		filterChain.doFilter(request, response);
+	}
+
+	private String obtainUserName(HttpServletRequest request) {
+		return request.getParameter(SPRING_SECURITY_FORM_USERNAME_KEY);
+	}
+
+	private String obtainProjId(HttpServletRequest request) {
+		return request.getParameter(SPRING_SECURITY_PROJ);
 	}
 
 	/**

@@ -40,4 +40,6 @@ public interface PermissionDao {
 
 	@Select("select ru.userId from sys_role_permission rp inner join sys_role_user ru on ru.roleId = rp.roleId where rp.permissionId = #{permissionId}")
 	Set<Long> listUserIds(Long permissionId);
+
+	List<Permission> queryByUserIdAndProjId(@Param("username") String username,@Param("projId")  Long projId);
 }

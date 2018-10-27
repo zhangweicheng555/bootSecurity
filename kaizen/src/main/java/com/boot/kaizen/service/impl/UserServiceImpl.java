@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import com.boot.kaizen.dao.SysUserDao;
 import com.boot.kaizen.model.SysUser;
-import com.boot.kaizen.model.UserDto;
 import com.boot.kaizen.model.SysUser.Status;
 import com.boot.kaizen.service.SysRoleUserService;
 import com.boot.kaizen.service.UserService;

@@ -4,6 +4,7 @@ import java.util.Date;
 
 import com.boot.kaizen.model.BaseEntity;
 
+
 public class TokenModel extends BaseEntity<String> {
 
 	private static final long serialVersionUID = 4566334160572911795L;

@@ -57,4 +57,19 @@ public interface SysProjectService {
 	 * @date 2018年10月4日 上午1:54:49
 	 */
 	public List<SysProject> findWithRoleRealtion();
+
+	/**
+	 * @Description: 通过用户名字随机查询所在项目中的一个项目
+	 * @author weichengz
+	 * @date 2018年10月27日 下午7:31:53
+	 */
+	public Long findRandomProj(String username);
+
+	/**
+	 * 
+	* @Description: 处理登陆后选择项目模块
+	* @author weichengz
+	* @date 2018年10月27日 下午11:38:08
+	 */
+	public JsonMsgUtil queryProjectsForUsername(String username);
 }

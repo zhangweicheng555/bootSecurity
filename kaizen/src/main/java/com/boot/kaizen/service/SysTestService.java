@@ -5,6 +5,7 @@ import java.util.List;
 import com.boot.kaizen.model.ParamTest;
 import com.boot.kaizen.model.SysTest;
 
+
 public interface SysTestService {
 
 	public List<SysTest> findTest();

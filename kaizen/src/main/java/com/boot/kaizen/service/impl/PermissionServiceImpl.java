@@ -89,4 +89,9 @@ public class PermissionServiceImpl implements PermissionService {
 		return ztreeModels;
 	}
 
+	@Override
+	public List<Permission> queryByUserIdAndProjId(String username, Long projId) {
+		return permissionDao.queryByUserIdAndProjId(username,projId);
+	}
+
 }

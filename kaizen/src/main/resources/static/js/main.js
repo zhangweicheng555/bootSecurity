@@ -68,6 +68,7 @@ function setChild(parentElement, child){
     }
 }
 
+var username;
 // 登陆用户头像昵称
 showLoginInfo();
 function showLoginInfo(){
@@ -77,7 +78,7 @@ function showLoginInfo(){
 		async : false,
 		success : function(data) {
 			$(".admin-header-user span").text(data.nickname);
-			
+			username=data.username;
 			var pro = window.location.protocol;
 			var host = window.location.host;
 			var domain = pro + "//" + host;
@@ -212,4 +213,51 @@ layui.use(['layer', 'element'], function() {
 	    shadeMobile.on('click', function () {
 	        $('body').removeClass('site-mobile');
 	    });
+	    
+	    
+	    //开始登陆处理项目
+	    $.ajax({
+			type : 'post',
+			url : '/project/dealIndexProject',
+			async : false,
+			dataType: "json",
+			success : function(data) {
+				if(data.success){
+					$("#nowProject").attr("lang",data.object.nowProject.id);
+					$("#nowProject").text(data.object.nowProject.projName);
+					var listProjects=data.object.listProject;
+					if(listProjects != null && listProjects.length >0){
+						for(var i=0;i<listProjects.length;i++){
+							$("#childDl").empty();
+							var project=listProjects[i];
+							$("#childDl").append("<dd><a href='javascript:;' class='clsProj'  id='"+project.id+"'>"+project.projName+"</a></dd>");
+						}
+					}
+				}else{
+					layer.msg("系统异常！");
+				}
+			}
+		});
+	  //监听下拉菜单
+	  $(".clsProj").click(function(){
+		  var proj=$(this).attr("id");
+		  $.ajax({
+				type : 'post',
+				url : '/project/changeProject',
+				async : false,
+				dataType: "json",
+				data:{
+					"proj":proj,
+					"username":username
+				},
+				success : function(data) {
+					if(data.success){
+						 location.href = "/index.html";
+					}else{
+						layer.msg("系统异常！");
+					}
+				}
+			});
+		 
+	  });
 });

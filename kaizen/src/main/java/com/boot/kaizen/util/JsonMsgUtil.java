@@ -12,7 +12,7 @@ public class JsonMsgUtil {
 
 	private boolean success = false;
 	private String message;// 提示信息
-	private Long time = new Date().getTime();// 提示信息
+	private Long time = new Date().getTime();// 相应的时间
 	private Integer code = 200;// 状态码
 	private Object object = null;// 返回的对象 这个就是返回的存储信息的地方
 

@@ -11,13 +11,14 @@ import org.apache.ibatis.annotations.Update;
 
 import com.boot.kaizen.model.SysProject;
 
+
 @Mapper
 public interface SysProjectDao {
 
 	List<SysProject> query();
 
 	List<SysProject> findWithRoleRealtion();
-	
+
 	List<SysProject> findList();
 
 	List<SysProject> find(@Param("map") Map<String, Object> map);
@@ -32,4 +33,14 @@ public interface SysProjectDao {
 
 	@Select("select * from sys_project where id=#{id}")
 	SysProject findById(@Param("id") Long id);
+
+	Long findRandomProj(@Param("username") String username);
+
+	/**
+	 * 
+	 * @Description: 查询这个用户拥有的所有的项目 id跟name
+	 * @author weichengz
+	 * @date 2018年10月27日 下午11:40:12
+	 */
+	List<Map<String, Object>> queryProjects(String username);
 }

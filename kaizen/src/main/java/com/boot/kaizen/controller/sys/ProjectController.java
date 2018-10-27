@@ -1,7 +1,6 @@
 package com.boot.kaizen.controller.sys;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,9 +9,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.boot.kaizen.entity.RequestParamEntity;
 import com.boot.kaizen.model.SysProject;
+import com.boot.kaizen.model.SysUser;
 import com.boot.kaizen.service.SysProjectService;
 import com.boot.kaizen.util.JsonMsgUtil;
 import com.boot.kaizen.util.TableResultUtil;
+import com.boot.kaizen.util.UserUtil;
 import com.github.pagehelper.ISelect;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -58,9 +59,10 @@ public class ProjectController {
 
 	/**
 	 * 修改信息
-	* @Description: TODO
-	* @author weichengz
-	* @date 2018年10月2日 上午10:52:30
+	 * 
+	 * @Description: TODO
+	 * @author weichengz
+	 * @date 2018年10月2日 上午10:52:30
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
@@ -72,6 +74,35 @@ public class ProjectController {
 	@RequestMapping(value = "/findById", method = RequestMethod.POST)
 	public JsonMsgUtil findById(@RequestParam("id") Long id) {
 		return projectService.findById(id);
+	}
+
+	/**
+	 * 
+	 * @Description: index页面显示项目模块
+	 * @author weichengz
+	 * @date 2018年10月27日 下午11:26:50
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/dealIndexProject", method = RequestMethod.POST)
+	public JsonMsgUtil dealIndexProject() {
+		SysUser sysUser = UserUtil.getLoginUser();
+		if (sysUser == null) {
+			throw new IllegalArgumentException("用户不存在");
+		}
+		String username = sysUser.getUsername();
+		return projectService.queryProjectsForUsername(username);
+	}
+
+	/**
+	 * 
+	 * @Description: 更换项目
+	 * @author weichengz
+	 * @date 2018年10月28日 上午12:53:06
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/changeProject", method = RequestMethod.POST)
+	public JsonMsgUtil changeProject() {
+		return new JsonMsgUtil(true);
 	}
 
 }

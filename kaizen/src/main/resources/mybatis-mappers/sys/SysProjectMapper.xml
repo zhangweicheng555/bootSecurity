@@ -18,6 +18,42 @@
 		 order by p.sort asc
 	</select>
 	
+	<select id="queryProjects" resultType="java.util.Map">
+		  select distinct 
+		  p.id as "id"
+		  ,p.proj_name as "projName"
+		 from 
+		 sys_project p
+		 ,proj_role_relation pr
+		 ,sys_role r
+		 ,sys_role_user ru
+		 ,sys_user u
+		 
+		 where 
+		 p.id=pr.proj_id
+		 and pr.role_id=r.id
+		 and r.id=ru.roleId
+		 and u.id=ru.userId
+		 
+	</select>
+	
+	<select id="findRandomProj" resultType="java.lang.Long">
+		 select distinct p.id
+		 from 
+		 sys_project p
+		 ,proj_role_relation pr
+		 ,sys_role r
+		 ,sys_role_user ru
+		 ,sys_user u
+		 where 
+		 p.id=pr.proj_id
+		 and pr.role_id=r.id
+		 and r.id=ru.roleId
+		 and u.id=ru.userId
+		 order by p.createTime desc
+		 limit 1
+	</select>
+	
 	<delete id="delete">
 		 delete from sys_project
 		 where id in

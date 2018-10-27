@@ -1,10 +1,7 @@
 package com.boot.kaizen.service;
 
 import java.util.List;
-
 import com.boot.kaizen.entity.DistributeTreeTable;
-import com.boot.kaizen.entity.TreeTable;
-import com.boot.kaizen.model.SysRole;
 import com.boot.kaizen.util.JsonMsgUtil;
 
 public interface DistributeService {

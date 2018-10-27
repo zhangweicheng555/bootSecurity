@@ -129,7 +129,6 @@ public class TokenServiceDbImpl implements TokenService {
 			if (loginUser != null) {
 				tokenDao.delete(uuid);
 				// logService.save(loginUser.getId(), "退出", true, null);
-
 				return true;
 			}
 		}
