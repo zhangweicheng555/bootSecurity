@@ -1,7 +1,7 @@
 package com.boot.kaizen.model;
 
 /**
- * lte小区核查结果  lte_cell_check
+ * lte小区核查结果 lte_cell_check
  * 
  * @author weichengz
  * @date 2018年10月28日 上午4:04:02
@@ -11,58 +11,93 @@ public class LteCellCheck extends BaseEntity<Long> {
 	private static final long serialVersionUID = 1L;
 
 	private Long userId;// 用户id
-	private String testDate;// 测试时间
 	private String eNodeBID;// 站号
 	private String communityName;// 小区名或者小区号
+	private String testDate;// 测试时间
 
-	private String csfb_TestCount;// 语音测试次数
-	private String csfb__FallSuccessCount;// 语音回落成功次数
-	private String csfb_FallRate;// 语音回落率
+	private String csfbTestCount;// 语音测试次数
+	private String csfbFallSuccessCount;// 语音回落成功次数
+	private String csfbFallRate;// 语音回落率
 
-	private String good_FtpUpAverageRsrp;// 好点FTP上传-平均RSRP  dBm
-	private String good_FtpUpAverageSinr;// 好点FTP上传-平均SINR  dB
-	private String good_FtpUpRate;// 好点FTP上传-上传速率                     MB/s
+	private String goodFtpUpAverageRsrp;// 好点FTP上传-平均RSRP dBm
+	private String goodFtpUpAverageSinr;// 好点FTP上传-平均SINR dB
+	private String goodFtpUpRate;// 好点FTP上传-上传速率 MB/s
 
-	private String general_FtpUpAverageRsrp;// 中点FTP上传-平均RSRP
-	private String general_FtpUpAverageSinr;// 中点FTP上传-平均SINR
-	private String general_FtpUpRate;// 中点FTP上传-上传速率
+	private String generalFtpUpAverageRsrp;// 中点FTP上传-平均RSRP
+	private String generalFtpUpAverageSinr;// 中点FTP上传-平均SINR
+	private String generalFtpUpRate;// 中点FTP上传-上传速率
 
-	private String poor_FtpUpAverageRsrp;// 差点FTP上传-平均RSRP
-	private String poor_FtpUpAverageSinr;// 差点FTP上传-平均SINR
-	private String poor_FtpUpRate;// 差点FTP上传-上传速率
+	private String poorFtpUpAverageRsrp;// 差点FTP上传-平均RSRP
+	private String poorFtpUpAverageSinr;// 差点FTP上传-平均SINR
+	private String poorFtpUpRate;// 差点FTP上传-上传速率
 
-	private String good_FtpDownAverageRsrp;// 好点FTP下载-平均RSRP
-	private String good_FtpDownAverageSinr;// 好点FTP下载-平均SINR
-	private String good_FtpDownRate;// 好点FTP下载-下载速率
+	private String goodFtpDownAverageRsrp;// 好点FTP下载-平均RSRP
+	private String goodFtpDownAverageSinr;// 好点FTP下载-平均SINR
+	private String goodFtpDownRate;// 好点FTP下载-下载速率
 
-	private String general_FtpDownAverageRsrp;// 中点FTP下载-平均RSRP
-	private String general_FtpDownAverageSinr;// 中点FTP下载-平均SINR
-	private String general_FtpDownRate;// 中点FTP下载-下载速率
+	private String generalFtpDownAverageRsrp;// 中点FTP下载-平均RSRP
+	private String generalFtpDownAverageSinr;// 中点FTP下载-平均SINR
+	private String generalFtpDownRate;// 中点FTP下载-下载速率
 
-	private String poor_FtpDownAverageRsrp;// 差点FTP下载-平均RSRP
-	private String poor_FtpDownAverageSinr;// 差点FTP下载-平均SINR
-	private String poor_FtpDownRate;// 差点FTP下载-下载速率          以上单位同上
+	private String poorFtpDownAverageRsrp;// 差点FTP下载-平均RSRP
+	private String poorFtpDownAverageSinr;// 差点FTP下载-平均SINR
+	private String poorFtpDownRate;// 差点FTP下载-下载速率 以上单位同上
 
 	private String pci;// PCI
 	private String tac;// tac
 	private String cellId;// CELL ID
 	private String frequency;// 频点
 
-	
+	public LteCellCheck(Long userId, String eNodeBID, String communityName, String testDate, String csfbTestCount,
+			String csfbFallSuccessCount, String csfbFallRate, String goodFtpUpAverageRsrp, String goodFtpUpAverageSinr,
+			String goodFtpUpRate, String generalFtpUpAverageRsrp, String generalFtpUpAverageSinr,
+			String generalFtpUpRate, String poorFtpUpAverageRsrp, String poorFtpUpAverageSinr, String poorFtpUpRate,
+			String goodFtpDownAverageRsrp, String goodFtpDownAverageSinr, String goodFtpDownRate,
+			String generalFtpDownAverageRsrp, String generalFtpDownAverageSinr, String generalFtpDownRate,
+			String poorFtpDownAverageRsrp, String poorFtpDownAverageSinr, String poorFtpDownRate, String pci,
+			String tac, String cellId, String frequency) {
+		super();
+		this.userId = userId;
+		this.eNodeBID = eNodeBID;
+		this.communityName = communityName;
+		this.testDate = testDate;
+		this.csfbTestCount = csfbTestCount;
+		this.csfbFallSuccessCount = csfbFallSuccessCount;
+		this.csfbFallRate = csfbFallRate;
+		this.goodFtpUpAverageRsrp = goodFtpUpAverageRsrp;
+		this.goodFtpUpAverageSinr = goodFtpUpAverageSinr;
+		this.goodFtpUpRate = goodFtpUpRate;
+		this.generalFtpUpAverageRsrp = generalFtpUpAverageRsrp;
+		this.generalFtpUpAverageSinr = generalFtpUpAverageSinr;
+		this.generalFtpUpRate = generalFtpUpRate;
+		this.poorFtpUpAverageRsrp = poorFtpUpAverageRsrp;
+		this.poorFtpUpAverageSinr = poorFtpUpAverageSinr;
+		this.poorFtpUpRate = poorFtpUpRate;
+		this.goodFtpDownAverageRsrp = goodFtpDownAverageRsrp;
+		this.goodFtpDownAverageSinr = goodFtpDownAverageSinr;
+		this.goodFtpDownRate = goodFtpDownRate;
+		this.generalFtpDownAverageRsrp = generalFtpDownAverageRsrp;
+		this.generalFtpDownAverageSinr = generalFtpDownAverageSinr;
+		this.generalFtpDownRate = generalFtpDownRate;
+		this.poorFtpDownAverageRsrp = poorFtpDownAverageRsrp;
+		this.poorFtpDownAverageSinr = poorFtpDownAverageSinr;
+		this.poorFtpDownRate = poorFtpDownRate;
+		this.pci = pci;
+		this.tac = tac;
+		this.cellId = cellId;
+		this.frequency = frequency;
+	}
+
+	public LteCellCheck() {
+		super();
+	}
+
 	public Long getUserId() {
 		return userId;
 	}
 
 	public void setUserId(Long userId) {
 		this.userId = userId;
-	}
-
-	public String getTestDate() {
-		return testDate;
-	}
-
-	public void setTestDate(String testDate) {
-		this.testDate = testDate;
 	}
 
 	public String geteNodeBID() {
@@ -81,172 +116,180 @@ public class LteCellCheck extends BaseEntity<Long> {
 		this.communityName = communityName;
 	}
 
-	public String getCsfb_TestCount() {
-		return csfb_TestCount;
+	public String getTestDate() {
+		return testDate;
 	}
 
-	public void setCsfb_TestCount(String csfb_TestCount) {
-		this.csfb_TestCount = csfb_TestCount;
+	public void setTestDate(String testDate) {
+		this.testDate = testDate;
 	}
 
-	public String getCsfb__FallSuccessCount() {
-		return csfb__FallSuccessCount;
+	public String getCsfbTestCount() {
+		return csfbTestCount;
 	}
 
-	public void setCsfb__FallSuccessCount(String csfb__FallSuccessCount) {
-		this.csfb__FallSuccessCount = csfb__FallSuccessCount;
+	public void setCsfbTestCount(String csfbTestCount) {
+		this.csfbTestCount = csfbTestCount;
 	}
 
-	public String getCsfb_FallRate() {
-		return csfb_FallRate;
+	public String getCsfbFallSuccessCount() {
+		return csfbFallSuccessCount;
 	}
 
-	public void setCsfb_FallRate(String csfb_FallRate) {
-		this.csfb_FallRate = csfb_FallRate;
+	public void setCsfbFallSuccessCount(String csfbFallSuccessCount) {
+		this.csfbFallSuccessCount = csfbFallSuccessCount;
 	}
 
-	public String getGood_FtpUpAverageRsrp() {
-		return good_FtpUpAverageRsrp;
+	public String getCsfbFallRate() {
+		return csfbFallRate;
 	}
 
-	public void setGood_FtpUpAverageRsrp(String good_FtpUpAverageRsrp) {
-		this.good_FtpUpAverageRsrp = good_FtpUpAverageRsrp;
+	public void setCsfbFallRate(String csfbFallRate) {
+		this.csfbFallRate = csfbFallRate;
 	}
 
-	public String getGood_FtpUpAverageSinr() {
-		return good_FtpUpAverageSinr;
+	public String getGoodFtpUpAverageRsrp() {
+		return goodFtpUpAverageRsrp;
 	}
 
-	public void setGood_FtpUpAverageSinr(String good_FtpUpAverageSinr) {
-		this.good_FtpUpAverageSinr = good_FtpUpAverageSinr;
+	public void setGoodFtpUpAverageRsrp(String goodFtpUpAverageRsrp) {
+		this.goodFtpUpAverageRsrp = goodFtpUpAverageRsrp;
 	}
 
-	public String getGood_FtpUpRate() {
-		return good_FtpUpRate;
+	public String getGoodFtpUpAverageSinr() {
+		return goodFtpUpAverageSinr;
 	}
 
-	public void setGood_FtpUpRate(String good_FtpUpRate) {
-		this.good_FtpUpRate = good_FtpUpRate;
+	public void setGoodFtpUpAverageSinr(String goodFtpUpAverageSinr) {
+		this.goodFtpUpAverageSinr = goodFtpUpAverageSinr;
 	}
 
-	public String getGeneral_FtpUpAverageRsrp() {
-		return general_FtpUpAverageRsrp;
+	public String getGoodFtpUpRate() {
+		return goodFtpUpRate;
 	}
 
-	public void setGeneral_FtpUpAverageRsrp(String general_FtpUpAverageRsrp) {
-		this.general_FtpUpAverageRsrp = general_FtpUpAverageRsrp;
+	public void setGoodFtpUpRate(String goodFtpUpRate) {
+		this.goodFtpUpRate = goodFtpUpRate;
 	}
 
-	public String getGeneral_FtpUpAverageSinr() {
-		return general_FtpUpAverageSinr;
+	public String getGeneralFtpUpAverageRsrp() {
+		return generalFtpUpAverageRsrp;
 	}
 
-	public void setGeneral_FtpUpAverageSinr(String general_FtpUpAverageSinr) {
-		this.general_FtpUpAverageSinr = general_FtpUpAverageSinr;
+	public void setGeneralFtpUpAverageRsrp(String generalFtpUpAverageRsrp) {
+		this.generalFtpUpAverageRsrp = generalFtpUpAverageRsrp;
 	}
 
-	public String getGeneral_FtpUpRate() {
-		return general_FtpUpRate;
+	public String getGeneralFtpUpAverageSinr() {
+		return generalFtpUpAverageSinr;
 	}
 
-	public void setGeneral_FtpUpRate(String general_FtpUpRate) {
-		this.general_FtpUpRate = general_FtpUpRate;
+	public void setGeneralFtpUpAverageSinr(String generalFtpUpAverageSinr) {
+		this.generalFtpUpAverageSinr = generalFtpUpAverageSinr;
 	}
 
-	public String getPoor_FtpUpAverageRsrp() {
-		return poor_FtpUpAverageRsrp;
+	public String getGeneralFtpUpRate() {
+		return generalFtpUpRate;
 	}
 
-	public void setPoor_FtpUpAverageRsrp(String poor_FtpUpAverageRsrp) {
-		this.poor_FtpUpAverageRsrp = poor_FtpUpAverageRsrp;
+	public void setGeneralFtpUpRate(String generalFtpUpRate) {
+		this.generalFtpUpRate = generalFtpUpRate;
 	}
 
-	public String getPoor_FtpUpAverageSinr() {
-		return poor_FtpUpAverageSinr;
+	public String getPoorFtpUpAverageRsrp() {
+		return poorFtpUpAverageRsrp;
 	}
 
-	public void setPoor_FtpUpAverageSinr(String poor_FtpUpAverageSinr) {
-		this.poor_FtpUpAverageSinr = poor_FtpUpAverageSinr;
+	public void setPoorFtpUpAverageRsrp(String poorFtpUpAverageRsrp) {
+		this.poorFtpUpAverageRsrp = poorFtpUpAverageRsrp;
 	}
 
-	public String getPoor_FtpUpRate() {
-		return poor_FtpUpRate;
+	public String getPoorFtpUpAverageSinr() {
+		return poorFtpUpAverageSinr;
 	}
 
-	public void setPoor_FtpUpRate(String poor_FtpUpRate) {
-		this.poor_FtpUpRate = poor_FtpUpRate;
+	public void setPoorFtpUpAverageSinr(String poorFtpUpAverageSinr) {
+		this.poorFtpUpAverageSinr = poorFtpUpAverageSinr;
 	}
 
-	public String getGood_FtpDownAverageRsrp() {
-		return good_FtpDownAverageRsrp;
+	public String getPoorFtpUpRate() {
+		return poorFtpUpRate;
 	}
 
-	public void setGood_FtpDownAverageRsrp(String good_FtpDownAverageRsrp) {
-		this.good_FtpDownAverageRsrp = good_FtpDownAverageRsrp;
+	public void setPoorFtpUpRate(String poorFtpUpRate) {
+		this.poorFtpUpRate = poorFtpUpRate;
 	}
 
-	public String getGood_FtpDownAverageSinr() {
-		return good_FtpDownAverageSinr;
+	public String getGoodFtpDownAverageRsrp() {
+		return goodFtpDownAverageRsrp;
 	}
 
-	public void setGood_FtpDownAverageSinr(String good_FtpDownAverageSinr) {
-		this.good_FtpDownAverageSinr = good_FtpDownAverageSinr;
+	public void setGoodFtpDownAverageRsrp(String goodFtpDownAverageRsrp) {
+		this.goodFtpDownAverageRsrp = goodFtpDownAverageRsrp;
 	}
 
-	public String getGood_FtpDownRate() {
-		return good_FtpDownRate;
+	public String getGoodFtpDownAverageSinr() {
+		return goodFtpDownAverageSinr;
 	}
 
-	public void setGood_FtpDownRate(String good_FtpDownRate) {
-		this.good_FtpDownRate = good_FtpDownRate;
+	public void setGoodFtpDownAverageSinr(String goodFtpDownAverageSinr) {
+		this.goodFtpDownAverageSinr = goodFtpDownAverageSinr;
 	}
 
-	public String getGeneral_FtpDownAverageRsrp() {
-		return general_FtpDownAverageRsrp;
+	public String getGoodFtpDownRate() {
+		return goodFtpDownRate;
 	}
 
-	public void setGeneral_FtpDownAverageRsrp(String general_FtpDownAverageRsrp) {
-		this.general_FtpDownAverageRsrp = general_FtpDownAverageRsrp;
+	public void setGoodFtpDownRate(String goodFtpDownRate) {
+		this.goodFtpDownRate = goodFtpDownRate;
 	}
 
-	public String getGeneral_FtpDownAverageSinr() {
-		return general_FtpDownAverageSinr;
+	public String getGeneralFtpDownAverageRsrp() {
+		return generalFtpDownAverageRsrp;
 	}
 
-	public void setGeneral_FtpDownAverageSinr(String general_FtpDownAverageSinr) {
-		this.general_FtpDownAverageSinr = general_FtpDownAverageSinr;
+	public void setGeneralFtpDownAverageRsrp(String generalFtpDownAverageRsrp) {
+		this.generalFtpDownAverageRsrp = generalFtpDownAverageRsrp;
 	}
 
-	public String getGeneral_FtpDownRate() {
-		return general_FtpDownRate;
+	public String getGeneralFtpDownAverageSinr() {
+		return generalFtpDownAverageSinr;
 	}
 
-	public void setGeneral_FtpDownRate(String general_FtpDownRate) {
-		this.general_FtpDownRate = general_FtpDownRate;
+	public void setGeneralFtpDownAverageSinr(String generalFtpDownAverageSinr) {
+		this.generalFtpDownAverageSinr = generalFtpDownAverageSinr;
 	}
 
-	public String getPoor_FtpDownAverageRsrp() {
-		return poor_FtpDownAverageRsrp;
+	public String getGeneralFtpDownRate() {
+		return generalFtpDownRate;
 	}
 
-	public void setPoor_FtpDownAverageRsrp(String poor_FtpDownAverageRsrp) {
-		this.poor_FtpDownAverageRsrp = poor_FtpDownAverageRsrp;
+	public void setGeneralFtpDownRate(String generalFtpDownRate) {
+		this.generalFtpDownRate = generalFtpDownRate;
 	}
 
-	public String getPoor_FtpDownAverageSinr() {
-		return poor_FtpDownAverageSinr;
+	public String getPoorFtpDownAverageRsrp() {
+		return poorFtpDownAverageRsrp;
 	}
 
-	public void setPoor_FtpDownAverageSinr(String poor_FtpDownAverageSinr) {
-		this.poor_FtpDownAverageSinr = poor_FtpDownAverageSinr;
+	public void setPoorFtpDownAverageRsrp(String poorFtpDownAverageRsrp) {
+		this.poorFtpDownAverageRsrp = poorFtpDownAverageRsrp;
 	}
 
-	public String getPoor_FtpDownRate() {
-		return poor_FtpDownRate;
+	public String getPoorFtpDownAverageSinr() {
+		return poorFtpDownAverageSinr;
 	}
 
-	public void setPoor_FtpDownRate(String poor_FtpDownRate) {
-		this.poor_FtpDownRate = poor_FtpDownRate;
+	public void setPoorFtpDownAverageSinr(String poorFtpDownAverageSinr) {
+		this.poorFtpDownAverageSinr = poorFtpDownAverageSinr;
+	}
+
+	public String getPoorFtpDownRate() {
+		return poorFtpDownRate;
+	}
+
+	public void setPoorFtpDownRate(String poorFtpDownRate) {
+		this.poorFtpDownRate = poorFtpDownRate;
 	}
 
 	public String getPci() {
@@ -281,49 +324,8 @@ public class LteCellCheck extends BaseEntity<Long> {
 		this.frequency = frequency;
 	}
 
-	public LteCellCheck(Long userId, String testDate, String eNodeBID, String communityName, String csfb_TestCount,
-			String csfb__FallSuccessCount, String csfb_FallRate, String good_FtpUpAverageRsrp,
-			String good_FtpUpAverageSinr, String good_FtpUpRate, String general_FtpUpAverageRsrp,
-			String general_FtpUpAverageSinr, String general_FtpUpRate, String poor_FtpUpAverageRsrp,
-			String poor_FtpUpAverageSinr, String poor_FtpUpRate, String good_FtpDownAverageRsrp,
-			String good_FtpDownAverageSinr, String good_FtpDownRate, String general_FtpDownAverageRsrp,
-			String general_FtpDownAverageSinr, String general_FtpDownRate, String poor_FtpDownAverageRsrp,
-			String poor_FtpDownAverageSinr, String poor_FtpDownRate, String pci, String tac, String cellId,
-			String frequency) {
-		super();
-		this.userId = userId;
-		this.testDate = testDate;
-		this.eNodeBID = eNodeBID;
-		this.communityName = communityName;
-		this.csfb_TestCount = csfb_TestCount;
-		this.csfb__FallSuccessCount = csfb__FallSuccessCount;
-		this.csfb_FallRate = csfb_FallRate;
-		this.good_FtpUpAverageRsrp = good_FtpUpAverageRsrp;
-		this.good_FtpUpAverageSinr = good_FtpUpAverageSinr;
-		this.good_FtpUpRate = good_FtpUpRate;
-		this.general_FtpUpAverageRsrp = general_FtpUpAverageRsrp;
-		this.general_FtpUpAverageSinr = general_FtpUpAverageSinr;
-		this.general_FtpUpRate = general_FtpUpRate;
-		this.poor_FtpUpAverageRsrp = poor_FtpUpAverageRsrp;
-		this.poor_FtpUpAverageSinr = poor_FtpUpAverageSinr;
-		this.poor_FtpUpRate = poor_FtpUpRate;
-		this.good_FtpDownAverageRsrp = good_FtpDownAverageRsrp;
-		this.good_FtpDownAverageSinr = good_FtpDownAverageSinr;
-		this.good_FtpDownRate = good_FtpDownRate;
-		this.general_FtpDownAverageRsrp = general_FtpDownAverageRsrp;
-		this.general_FtpDownAverageSinr = general_FtpDownAverageSinr;
-		this.general_FtpDownRate = general_FtpDownRate;
-		this.poor_FtpDownAverageRsrp = poor_FtpDownAverageRsrp;
-		this.poor_FtpDownAverageSinr = poor_FtpDownAverageSinr;
-		this.poor_FtpDownRate = poor_FtpDownRate;
-		this.pci = pci;
-		this.tac = tac;
-		this.cellId = cellId;
-		this.frequency = frequency;
-	}
-
-	public LteCellCheck() {
-		super();
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 }

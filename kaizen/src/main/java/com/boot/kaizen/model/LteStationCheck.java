@@ -1,13 +1,12 @@
 package com.boot.kaizen.model;
 
 /**
- * lte基站核查结果  lte_station_check
+ * lte基站核查结果 lte_station_check
  * 
  * @author weichengz
  * @date 2018年10月28日 上午4:00:48
  */
 public class LteStationCheck extends BaseEntity<Long> {
-
 	private static final long serialVersionUID = 1L;
 
 	private String eNodeBID;// 站号

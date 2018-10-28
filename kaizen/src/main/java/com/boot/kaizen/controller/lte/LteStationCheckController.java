@@ -6,11 +6,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.boot.kaizen.entity.LoginUser;
 import com.boot.kaizen.entity.RequestParamEntity;
-import com.boot.kaizen.model.LteGcParameter;
-import com.boot.kaizen.service.lte.ILteGcParameterService;
+import com.boot.kaizen.model.LteStationCheck;
+import com.boot.kaizen.service.lte.ILteStationCheckService;
 import com.boot.kaizen.util.JsonMsgUtil;
 import com.boot.kaizen.util.TableResultUtil;
 import com.boot.kaizen.util.UserUtil;
@@ -24,11 +23,11 @@ import com.github.pagehelper.PageInfo;
  * @date 2018年10月28日 上午3:13:32
  */
 @RestController
-@RequestMapping("/gc")
-public class LteGcParameterController {
+@RequestMapping("/station")
+public class LteStationCheckController {
 
 	@Autowired
-	private ILteGcParameterService lteGcParameterService;
+	private ILteStationCheckService lteStationCheckService;
 
 	@ResponseBody
 	@RequestMapping(value = "/find", method = RequestMethod.POST)
@@ -37,39 +36,14 @@ public class LteGcParameterController {
 		LoginUser loginUser = UserUtil.getLoginUser();
 		param.getMap().put("projId", loginUser.getProjId());
 
-		PageInfo<LteGcParameter> pageInfo = PageHelper.startPage(param.getPage(), param.getLimit())
+		PageInfo<LteStationCheck> pageInfo = PageHelper.startPage(param.getPage(), param.getLimit())
 				.doSelectPageInfo(new ISelect() {
 					@Override
 					public void doSelect() {
-						lteGcParameterService.find(param.getMap());
+						lteStationCheckService.find(param.getMap());
 					}
 				});
 		return new TableResultUtil(0l, "操作成功", pageInfo.getTotal(), pageInfo.getList());
-	}
-
-	/**
-	 * 
-	 * @Description: 编辑
-	 * @author weichengz
-	 * @date 2018年10月28日 下午4:36:46
-	 */
-	@ResponseBody
-	@RequestMapping(value = "/edit", method = RequestMethod.POST)
-	public JsonMsgUtil edit(LteGcParameter lteGcParameter) {
-		LoginUser loginUser = UserUtil.getLoginUser();
-		return lteGcParameterService.edit(lteGcParameter, loginUser);
-	}
-
-	/**
-	 * 
-	 * @Description: 根据id查询
-	 * @author weichengz
-	 * @date 2018年10月28日 下午5:00:01
-	 */
-	@ResponseBody
-	@RequestMapping(value = "/findById", method = RequestMethod.POST)
-	public JsonMsgUtil findById(@RequestParam("id") Long id) {
-		return lteGcParameterService.findById(id);
 	}
 
 	/**
@@ -81,6 +55,6 @@ public class LteGcParameterController {
 	@ResponseBody
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	public JsonMsgUtil delete(@RequestParam("ids") String ids) {
-		return lteGcParameterService.delete(ids);
+		return lteStationCheckService.delete(ids);
 	}
 }
