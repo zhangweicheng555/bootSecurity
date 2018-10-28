@@ -18,9 +18,18 @@ public abstract class BaseEntity<T extends Serializable> implements Serializable
 	private Date createTime;// 创建时间
 	private Date updateTime;// 修改时间
 	private T projId;// 项目ID
+	private T createAt;// 添加人
 
 	public T getId() {
 		return id;
+	}
+
+	public T getCreateAt() {
+		return createAt;
+	}
+
+	public void setCreateAt(T createAt) {
+		this.createAt = createAt;
 	}
 
 	public T getProjId() {

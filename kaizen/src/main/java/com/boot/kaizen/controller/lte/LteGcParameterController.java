@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.boot.kaizen.entity.LoginUser;
 import com.boot.kaizen.entity.RequestParamEntity;
+import com.boot.kaizen.model.LteGcParameter;
 import com.boot.kaizen.model.LtePlan;
-import com.boot.kaizen.service.lte.ILtePlanService;
+import com.boot.kaizen.model.SysProject;
+import com.boot.kaizen.service.lte.ILteGcParameterService;
 import com.boot.kaizen.util.JsonMsgUtil;
 import com.boot.kaizen.util.TableResultUtil;
 import com.boot.kaizen.util.UserUtil;
@@ -24,11 +26,11 @@ import com.github.pagehelper.PageInfo;
  * @date 2018年10月28日 上午3:13:32
  */
 @RestController
-@RequestMapping("/plan")
-public class LtePlanController {
+@RequestMapping("/gc")
+public class LteGcParameterController {
 
 	@Autowired
-	private ILtePlanService ltePlanService;
+	private ILteGcParameterService lteGcParameterService;
 
 	@ResponseBody
 	@RequestMapping(value = "/find", method = RequestMethod.POST)
@@ -37,11 +39,11 @@ public class LtePlanController {
 		LoginUser loginUser = UserUtil.getLoginUser();
 		param.getMap().put("projId", loginUser.getProjId());
 
-		PageInfo<LtePlan> pageInfo = PageHelper.startPage(param.getPage(), param.getLimit())
+		PageInfo<LteGcParameter> pageInfo = PageHelper.startPage(param.getPage(), param.getLimit())
 				.doSelectPageInfo(new ISelect() {
 					@Override
 					public void doSelect() {
-						ltePlanService.find(param.getMap());
+						lteGcParameterService.find(param.getMap());
 					}
 				});
 		return new TableResultUtil(0l, "操作成功", pageInfo.getTotal(), pageInfo.getList());
@@ -55,9 +57,9 @@ public class LtePlanController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
-	public JsonMsgUtil edit(LtePlan ltePlan) {
+	public JsonMsgUtil edit(LteGcParameter lteGcParameter) {
 		LoginUser loginUser = UserUtil.getLoginUser();
-		return ltePlanService.edit(ltePlan, loginUser);
+		return lteGcParameterService.edit(lteGcParameter, loginUser);
 	}
 
 	/**
@@ -69,7 +71,7 @@ public class LtePlanController {
 	@ResponseBody
 	@RequestMapping(value = "/findById", method = RequestMethod.POST)
 	public JsonMsgUtil findById(@RequestParam("id") Long id) {
-		return ltePlanService.findById(id);
+		return lteGcParameterService.findById(id);
 	}
 
 	/**
@@ -81,6 +83,6 @@ public class LtePlanController {
 	@ResponseBody
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	public JsonMsgUtil delete(@RequestParam("ids") String ids) {
-		return ltePlanService.delete(ids);
+		return lteGcParameterService.delete(ids);
 	}
 }

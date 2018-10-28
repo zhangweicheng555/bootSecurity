@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>添加工参表</title>
+<title>添加计划表</title>
 <link rel="stylesheet" type="text/css" media="screen" href="../../../../css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" media="screen" href="../../../../layui/css/layui.css">
 </head>
@@ -25,68 +25,62 @@
 	  </div>
 	  
 	  <div class="layui-form-item">
-	    <label class="layui-form-label" style="width: 150px;">小区号</label>
+	    <label class="layui-form-label" style="width: 150px;">基站类型</label>
 	    <div class="layui-input-inline">
-	      <input type="text" name="mCellID" id="mCellID"   autocomplete="off" required  lay-verify="required"  class="layui-input">
+	      <input type="text" name="mBaseStationType" id="mBaseStationType"   autocomplete="off" class="layui-input">
 	    </div>
 	   
-	    <label class="layui-form-label" style="width: 150px;">小区名称</label>
+	    <label class="layui-form-label" style="width: 150px;">海拔</label>
 	    <div class="layui-input-inline">
-	      <input type="text" name="mCellName" id="mCellName"   autocomplete="off" class="layui-input">
+	      <input type="text" name="mAltitude" id="mAltitude"   autocomplete="off" class="layui-input">
 	    </div>
 	  </div>
 	  
 	  <div class="layui-form-item">
-	    <label class="layui-form-label" style="width: 150px;">频点</label>
+	    <label class="layui-form-label" style="width: 150px;">经度</label>
 	    <div class="layui-input-inline">
-	      <input type="text" name="mFrequency" id="mFrequency"   autocomplete="off" class="layui-input">
+	      <input type="text" name="mLongitude" id="mLongitude"   autocomplete="off" class="layui-input">
 	    </div>
 
-	    <label class="layui-form-label" style="width: 150px;">PCI</label>
+	    <label class="layui-form-label" style="width: 150px;">纬度</label>
 	    <div class="layui-input-inline">
-	      <input type="text" name="mPCI" id="mPCI"   autocomplete="off" class="layui-input">
+	      <input type="text" name="mLatitude" id="mLatitude"   autocomplete="off" class="layui-input">
 	    </div>
 	  </div>
 	  
 	  <div class="layui-form-item">
-	    <label class="layui-form-label" style="width: 150px;">RsPower</label>
+	    <label class="layui-form-label" style="width: 150px;">Tac</label>
 	    <div class="layui-input-inline">
-	      <input type="text" name="mRsPower" id="mRsPower"   autocomplete="off" class="layui-input">
+	      <input type="text" name="mTac" id="mTac"   autocomplete="off" class="layui-input">
 	    </div>
 
-	    <label class="layui-form-label" style="width: 150px;">天线挂高</label>
+	    <label class="layui-form-label" style="width: 150px;">测试工程师</label>
 	    <div class="layui-input-inline">
-	      <input type="text" name="mAntennaHangUp" id="mAntennaHangUp"   autocomplete="off" class="layui-input">
+	      <input type="text" name="testPerson" id="testPerson"   autocomplete="off" class="layui-input">
 	    </div>
 	  </div>
 	  
 	  <div class="layui-form-item">
-	    <label class="layui-form-label" style="width: 150px;">方位角</label>
+	    <label class="layui-form-label" style="width: 150px;">测试工程师电话</label>
 	    <div class="layui-input-inline">
-	      <input type="text" name="mAzimuth" id="mAzimuth"   autocomplete="off" class="layui-input">
+	      <input type="text" name="testPersonPhone" id="testPersonPhone"   autocomplete="off" class="layui-input">
 	    </div>
 
-	    <label class="layui-form-label" style="width: 150px;">机械下倾角</label>
+	    <label class="layui-form-label" style="width: 150px;">后台工程师</label>
 	    <div class="layui-input-inline">
-	      <input type="text" name="mMechanicalLowerInclination" id="mMechanicalLowerInclination"   autocomplete="off" class="layui-input">
+	      <input type="text" name="backPerson" id="backPerson"   autocomplete="off" class="layui-input">
 	    </div>
 	  </div>
 	  
 	  <div class="layui-form-item">
-	    <label class="layui-form-label" style="width: 150px;">预置电下倾</label>
+	    <label class="layui-form-label" style="width: 150px;">后台工程师电话</label>
 	    <div class="layui-input-inline">
-	      <input type="text" name="mPresetElectricDip" id="mPresetElectricDip"   autocomplete="off" class="layui-input">
+	      <input type="text" name="backPersonPhone" id="backPersonPhone"   autocomplete="off" class="layui-input">
 	    </div>
 
-	    <label class="layui-form-label" style="width: 150px;">总下倾角</label>
+	    <label class="layui-form-label" style="width: 150px;">测试时间</label>
 	    <div class="layui-input-inline"> 
-	      <input type="text" name="mtotalLowerInclination" id="mtotalLowerInclination"     autocomplete="off" class="layui-input">
-	    </div>
-	  </div>
-	  <div class="layui-form-item">
-	    <label class="layui-form-label" style="width: 150px;">配置名</label>
-	    <div class="layui-input-inline">
-	      <input type="text" name="configName" id="configName"   autocomplete="off" class="layui-input">
+	      <input type="text" name="testTime" id="testTime"   required  lay-verify="required"   autocomplete="off" class="layui-input">
 	    </div>
 	  </div>
 	  
@@ -105,6 +99,8 @@
 
 	var flag=false;
 	
+	var token = localStorage.getItem("token");
+	$("#zwc").val(token);
 	
 	function submitForm(){
 		$("#formDemoBtn").click();
@@ -125,6 +121,17 @@
 	  });
 	
 	
+	
+
+	  /**日期框*/
+	  laydate.render({
+	     elem: '#testTime'
+	    ,max: 0
+	    ,theme: 'molv'
+   	    ,done: function(val, date, endDate){
+   	    	$("#beginTime").val(val);//给搜索赋值
+   		 }
+	  });
 	});
 	
 </script> 

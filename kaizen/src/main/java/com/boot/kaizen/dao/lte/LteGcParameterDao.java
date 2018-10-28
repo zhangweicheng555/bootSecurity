@@ -2,24 +2,21 @@ package com.boot.kaizen.dao.lte;
 
 import java.util.List;
 import java.util.Map;
-
-import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
-
-import com.boot.kaizen.model.LtePlan;
+import com.boot.kaizen.model.LteGcParameter;
 
 
 @Mapper
-public interface LtePlanDao {
+public interface LteGcParameterDao {
 	/**
 	 * 
 	* @Description: 查询
 	* @author weichengz
 	* @date 2018年10月28日 下午4:42:04
 	 */
-	List<LtePlan> find(@Param("map") Map<String, Object> map);
+	List<LteGcParameter> find(@Param("map") Map<String, Object> map);
 
 	/**
 	 * 
@@ -27,7 +24,7 @@ public interface LtePlanDao {
 	* @author weichengz
 	* @date 2018年10月28日 下午4:42:11
 	 */
-	void save(LtePlan ltePlan);
+	void save(LteGcParameter lteGcParameter);
 
 	/**
 	 * 
@@ -35,8 +32,8 @@ public interface LtePlanDao {
 	* @author weichengz
 	* @date 2018年10月28日 下午5:03:03
 	 */
-	@Select("select * from lte_plane where id=#{id}")
-	LtePlan findById(@Param("id") Long id);
+	@Select("select * from lte_gc where id=#{id}")
+	LteGcParameter findById(@Param("id") Long id);
 
 	/**
 	 * 
@@ -44,7 +41,7 @@ public interface LtePlanDao {
 	* @author weichengz
 	* @date 2018年10月28日 下午5:43:30
 	 */
-	void update(LtePlan ltePlan);
+	void update(LteGcParameter lteGcParameter);
 
 	Integer delete(@Param("idsArray") Long[] array);
 

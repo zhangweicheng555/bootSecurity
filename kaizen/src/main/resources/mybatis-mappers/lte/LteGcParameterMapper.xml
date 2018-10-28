@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boot.kaizen.dao.lte.LteGcParameterDao">
+
+	
+	
+	<select id="find" resultType="LteGcParameter">
+		 select lp.* 
+		 from
+		 lte_gc lp 
+		 where 1=1
+		 <if test="map.projId != null and map.projId != ''">
+            and lp.projId = #{map.projId}
+        </if>
+		 <if test="map.mENodeBID != null and map.mENodeBID != ''">
+            and lp.mENodeBID like '%${map.mENodeBID}%'
+        </if>
+		 <if test="map.mBaseStationName != null and map.mBaseStationName != ''">
+            and lp.mBaseStationName like '%${map.mBaseStationName}%'
+        </if>
+		 <if test="map.mCellID != null and map.mCellID != ''">
+            and lp.mCellID = #{map.mCellID}
+        </if>
+		
+		 order by lp.createTime desc
+	</select>
+	
+	<delete id="delete">
+		 delete from lte_gc
+		 where id in
+		 <foreach collection="idsArray" index="index" item="item"
+            open="(" separator="," close=")">
+            #{item}
+        </foreach>
+	</delete>
+	
+	<update id="update">
+		update lte_gc 
+		set mENodeBID=#{mENodeBID}
+		,mBaseStationName=#{mBaseStationName}
+		,mCellID=#{mCellID}
+		,mCellName=#{mCellName}
+		,mFrequency=#{mFrequency} 
+		,mPCI=#{mPCI} 
+		
+		,mRsPower=#{mRsPower} 
+		,mAntennaHangUp=#{mAntennaHangUp} 
+		,mAzimuth=#{mAzimuth} 
+		,mMechanicalLowerInclination=#{mMechanicalLowerInclination} 
+		,mPresetElectricDip=#{mPresetElectricDip} 
+		,mtotalLowerInclination=#{mtotalLowerInclination} 
+		,configName=#{configName} 
+		,updateTime=#{updateTime} 
+			
+		where id=#{id}
+	</update>
+	
+	<insert id="save"  useGeneratedKeys="true" keyProperty="id">
+		insert into  lte_gc
+		(
+			mENodeBID,
+			mBaseStationName,
+			mCellID,
+			mCellName,
+			mFrequency,
+			mPCI,
+			mRsPower,
+			mAntennaHangUp,
+			mAzimuth,
+			mMechanicalLowerInclination,
+			mPresetElectricDip,
+			mtotalLowerInclination,
+			configName,
+			createTime,
+			createAt,
+			projId
+		) 
+		values
+		(
+			
+			#{mENodeBID},
+			#{mBaseStationName},
+			#{mCellID},
+			#{mCellName},
+			#{mFrequency},
+			#{mPCI},
+			#{mRsPower},
+			#{mAntennaHangUp},
+			#{mAzimuth},
+			#{mMechanicalLowerInclination},
+			#{mPresetElectricDip},
+			#{mtotalLowerInclination},
+			#{configName},
+			#{createTime},
+			#{createAt},
+			#{projId}
+		)
+	</insert>
+	
+	
+
+	
+</mapper>

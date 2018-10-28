@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.Map;
 
 import com.boot.kaizen.entity.LoginUser;
-import com.boot.kaizen.model.LtePlan;
+import com.boot.kaizen.model.LteConfig;
 import com.boot.kaizen.util.JsonMsgUtil;
 
-public interface ILtePlanService {
+public interface ILteConfigService {
 
 	/**
 	 * 
@@ -15,7 +15,7 @@ public interface ILtePlanService {
 	 * @author weichengz
 	 * @date 2018年10月28日 下午12:29:52
 	 */
-	public List<LtePlan> find(Map<String, Object> map);
+	public List<LteConfig> find(Map<String, Object> map);
 
 	/**
 	 * 
@@ -23,7 +23,7 @@ public interface ILtePlanService {
 	* @author weichengz
 	* @date 2018年10月28日 下午4:37:23
 	 */
-	public JsonMsgUtil edit(LtePlan ltePlan,LoginUser loginUser);
+	public JsonMsgUtil edit(LteConfig lteConfig,LoginUser loginUser);
 
 	/**
 	 * 

@@ -8,39 +8,38 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.stereotype.Service;
-import com.boot.kaizen.dao.lte.LtePlanDao;
+
+import com.boot.kaizen.dao.lte.LteGcParameterDao;
 import com.boot.kaizen.entity.LoginUser;
-import com.boot.kaizen.model.LtePlan;
-import com.boot.kaizen.service.DistributeService;
+import com.boot.kaizen.model.LteGcParameter;
 import com.boot.kaizen.util.JsonMsgUtil;
 
 @Service
-class LtePlanServiceImpl implements ILtePlanService {
+class LteGcParameterServiceImpl implements ILteGcParameterService {
 
 	@Autowired
-	private LtePlanDao planDao;
+	private LteGcParameterDao gcParameterDao;
 
 	@Override
-	public List<LtePlan> find(Map<String, Object> map) {
-		return planDao.find(map);
+	public List<LteGcParameter> find(Map<String, Object> map) {
+		return gcParameterDao.find(map);
 	}
 
 	@Override
-	public JsonMsgUtil edit(LtePlan ltePlan, LoginUser loginUser) {
+	public JsonMsgUtil edit(LteGcParameter lteGcParameter, LoginUser loginUser) {
 		if (loginUser == null) {
 			throw new DisabledException("用户已过期，重新登陆");
 		}
-		JsonMsgUtil j = new JsonMsgUtil(false);
-		if (ltePlan.getId() != null) {// edit
-			ltePlan.setUpdateTime(new Date());
-			planDao.update(ltePlan);
+		if (lteGcParameter.getId() != null) {// edit
+			lteGcParameter.setUpdateTime(new Date());
+			gcParameterDao.update(lteGcParameter);
 		} else {// add
-			ltePlan.setProjId(loginUser.getProjId());
-			ltePlan.setCreateAt(loginUser.getId());
-			ltePlan.setCreateTime(new Date());
-			planDao.save(ltePlan);
+			lteGcParameter.setProjId(loginUser.getProjId());
+			lteGcParameter.setCreateAt(loginUser.getId());
+			lteGcParameter.setCreateTime(new Date());
+			gcParameterDao.save(lteGcParameter);
 		}
-		return new JsonMsgUtil(true, "添加成功", ltePlan);
+		return new JsonMsgUtil(true, "添加成功", lteGcParameter);
 	}
 
 	@Override
@@ -48,11 +47,11 @@ class LtePlanServiceImpl implements ILtePlanService {
 		if (id == null) {
 			throw new IllegalArgumentException("未传入数据id");
 		}
-		LtePlan ltePlan = planDao.findById(id);
-		if (ltePlan == null) {
+		LteGcParameter lteGcParameter = gcParameterDao.findById(id);
+		if (lteGcParameter == null) {
 			throw new IllegalArgumentException("查询的数据不存在");
 		}
-		return new JsonMsgUtil(true, "查询成功", ltePlan);
+		return new JsonMsgUtil(true, "查询成功", lteGcParameter);
 	}
 
 	@Override
@@ -67,7 +66,7 @@ class LtePlanServiceImpl implements ILtePlanService {
 					array[i] = Long.valueOf(id.trim());
 				}
 				// 删除项目
-				Integer deleteNum = planDao.delete(array);
+				Integer deleteNum = gcParameterDao.delete(array);
 				j = new JsonMsgUtil(true, "删除操作成功", deleteNum);
 			}
 		} catch (Exception e) {

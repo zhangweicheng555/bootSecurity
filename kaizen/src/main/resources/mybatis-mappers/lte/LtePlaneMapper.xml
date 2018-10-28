@@ -8,25 +8,96 @@
 	<select id="find" resultType="LtePlan">
 		 select lp.* 
 		 from
-		 lte_plane lp
-		 <if test="map.projName != null and map.projName != ''">
-            and lp.proj_name like '%${map.projName}%'
+		 lte_plane lp 
+		 where 1=1
+		 <if test="map.projId != null and map.projId != ''">
+            and lp.projId = #{map.projId}
+        </if>
+		 <if test="map.mENodeBID != null and map.mENodeBID != ''">
+            and lp.mENodeBID like '%${map.mENodeBID}%'
         </if>
 		<if test="map.beginTime != null and map.beginTime != '' and (map.endTime == null or map.endTime == '')">
-            and lp.createTime &gt;=  str_to_date(#{map.beginTime},'%Y-%m-%d %H:%i:%s')
+            and lp.testTime &gt;=  #{map.beginTime}
         </if>
 		<if test="map.endTime != null and map.endTime != '' and (map.beginTime == null or map.beginTime == '')">
-            and lp.createTime &lt;=  str_to_date(#{map.endTime},'%Y-%m-%d %H:%i:%s')
+            and lp.testTime &lt;=  #{map.endTime}
         </if>
 		<if test="map.endTime != null and map.endTime != '' and map.beginTime != null and map.beginTime != ''">
-            and lp.createTime 
-            between str_to_date(#{map.beginTime},'%Y-%m-%d %H:%i:%s')
-            and     str_to_date(#{map.endTime},'%Y-%m-%d %H:%i:%s')
+            and lp.testTime 
+            between #{map.beginTime}
+            and     #{map.endTime}
         </if>
 		 order by lp.testTime desc
 	</select>
 	
+	<delete id="delete">
+		 delete from lte_plane
+		 where id in
+		 <foreach collection="idsArray" index="index" item="item"
+            open="(" separator="," close=")">
+            #{item}
+        </foreach>
+	</delete>
 	
+	<update id="update">
+		update lte_plane 
+		set mENodeBID=#{mENodeBID}
+		,mBaseStationName=#{mBaseStationName}
+		,mBaseStationType=#{mBaseStationType}
+		,mAltitude=#{mAltitude}
+		,mLongitude=#{mLongitude} 
+		,mLatitude=#{mLatitude} 
+		
+		,testPerson=#{testPerson} 
+		,testPersonPhone=#{testPersonPhone} 
+		,backPerson=#{backPerson} 
+		,backPersonPhone=#{backPersonPhone} 
+		,testTime=#{testTime} 
+		,mTac=#{mTac} 
+		,updateTime=#{updateTime} 
+			
+		where id=#{id}
+	</update>
+	
+	<insert id="save"  useGeneratedKeys="true" keyProperty="id">
+		insert into  lte_plane
+		(
+			mENodeBID,
+			mBaseStationName,
+			mBaseStationType,
+			mAltitude,
+			mLongitude,
+			mLatitude,
+			mTac,
+			testPerson,
+			testPersonPhone,
+			backPerson,
+			backPersonPhone,
+			testTime,
+			createTime,
+			createAt,
+			projId
+		) 
+		values
+		(
+			
+			#{mENodeBID},
+			#{mBaseStationName},
+			#{mBaseStationType},
+			#{mAltitude},
+			#{mLongitude},
+			#{mLatitude},
+			#{mTac},
+			#{testPerson},
+			#{testPersonPhone},
+			#{backPerson},
+			#{backPersonPhone},
+			#{testTime},
+			#{createTime},
+			#{createAt},
+			#{projId}
+		)
+	</insert>
 	
 	
 
