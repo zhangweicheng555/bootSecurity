@@ -5,7 +5,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.boot.kaizen.dao.lte.LtePlanDao;
-import com.boot.kaizen.model.lte.LtePlan;
+import com.boot.kaizen.model.LtePlan;
 
 @Service
 public class LtePlanServiceImpl implements ILtePlanService {

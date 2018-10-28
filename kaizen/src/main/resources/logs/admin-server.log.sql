@@ -2917,3 +2917,30 @@
 2018-10-28 12:23:57,405 [http-nio-8090-exec-1] ==>  Preparing: select * from sys_permission t order by t.sort 
 2018-10-28 12:23:57,405 [http-nio-8090-exec-1] ==> Parameters: 
 2018-10-28 12:23:57,405 [http-nio-8090-exec-1] <==      Total: 29
+2018-10-28 13:07:49,158 [http-nio-8090-exec-1] ==>  Preparing: select * from sys_user t where t.username = ? 
+2018-10-28 13:07:49,168 [http-nio-8090-exec-1] ==> Parameters: admin(String)
+2018-10-28 13:07:49,168 [http-nio-8090-exec-1] <==      Total: 1
+2018-10-28 13:07:49,183 [http-nio-8090-exec-1] ==>  Preparing: select proj from sys_login_service where username=? order by createTime desc limit 1 
+2018-10-28 13:07:49,183 [http-nio-8090-exec-1] ==> Parameters: admin(String)
+2018-10-28 13:07:49,183 [http-nio-8090-exec-1] <==      Total: 1
+2018-10-28 13:07:49,183 [http-nio-8090-exec-1] ==>  Preparing: select distinct sp.* from sys_project p ,proj_role_relation pr ,sys_role r ,sys_role_user ru ,sys_user u ,sys_role_permission rp ,sys_permission sp where p.id=pr.proj_id and pr.role_id=r.id and r.id=ru.roleId and u.id=ru.userId and rp.roleId=r.id and sp.id=rp.permissionId and u.username=? and p.id=? 
+2018-10-28 13:07:49,183 [http-nio-8090-exec-1] ==> Parameters: admin(String), 9(Long)
+2018-10-28 13:07:49,199 [http-nio-8090-exec-1] <==      Total: 16
+2018-10-28 13:07:49,324 [http-nio-8090-exec-1] ==>  Preparing: insert into t_token(id, val, expireTime, createTime, updateTime) values (?, ?, ?, ?, ?) 
+2018-10-28 13:07:49,324 [http-nio-8090-exec-1] ==> Parameters: 89d357b6-3ae0-4510-a453-0f97f50176a8(String), {"accountNonExpired":true,"accountNonLocked":true,"authorities":[{"authority":"sys:role:del"},{"authority":"sys:user:list"},{"authority":"sys:project:edit"},{"authority":"sys:menu:del"},{"authority":"sys:menu:list"},{"authority":"sys:role:edit"},{"authority":"sys:project:list"},{"authority":"sys:distribute:list"},{"authority":"sys:project:del"},{"authority":"sys:user:edit"},{"authority":"sys:distribute:edit"},{"authority":"sys:role:list"},{"authority":"sys:sys:system"},{"authority":"sys:menu:edit"},{"authority":"sys:diatribute:del"},{"authority":"sys:user:del"}],"birthday":899222400000,"createTime":1491808898000,"credentialsNonExpired":true,"email":"","enabled":true,"expireTime":1540710469277,"id":1,"loginTime":1540703269277,"nickname":"zhangsan","password":"$2a$10$iYM/H7TrSaLs7XyIWQdGwe1xf4cdmt3nwMja6RT0wxG5YY1RjN0EK","permissions":[{"css":"fa-cog","href":"","id":71,"name":"系统管理","parentId":0,"permission":"sys:sys:system","sort":1,"type":1},{"css":"fa-sitemap","href":"pages/menu/list.html","id":78,"name":"资源管理","parentId":71,"permission":"sys:menu:list","sort":3,"type":1},{"css":"","href":"","id":79,"name":"编辑","parentId":78,"permission":"sys:menu:edit","sort":31,"type":2},{"css":"","href":"","id":80,"name":"删除","parentId":78,"permission":"sys:menu:del","sort":32,"type":2},{"css":"fa-credit-card","href":"pages/project/list.html","id":72,"name":"项目管理","parentId":71,"permission":"sys:project:list","sort":11,"type":1},{"css":"","href":"","id":73,"name":"编辑","parentId":72,"permission":"sys:project:edit","sort":12,"type":2},{"css":"","href":"","id":74,"name":"删除","parentId":72,"permission":"sys:project:del","sort":100,"type":2},{"css":"fa-user-md","href":"pages/role/list.html","id":75,"name":"角色管理","parentId":71,"permission":"sys:role:list","sort":21,"type":1},{"css":"","href":"","id":76,"name":"编辑","parentId":75,"permission":"sys:role:edit","sort":22,"type":2},{"css":"fa-times","href":"","id":77,"name":"删除","parentId":75,"permission":"sys:role:del","sort":23,"type":2},{"css":"fa-user","href":"pages/user/list.html","id":81,"name":"用户管理","parentId":71,"permission":"sys:user:list","sort":24,"type":1},{"css":"","href":"","id":82,"name":"编辑","parentId":81,"permission":"sys:user:edit","sort":100,"type":2},{"css":"","href":"","id":83,"name":"删除","parentId":81,"permission":"sys:user:del","sort":101,"type":2},{"css":"fa-cab","href":"pages/distribute/list.html","id":85,"name":"权限分配","parentId":71,"permission":"sys:distribute:list","sort":200,"type":1},{"css":"","href":"","id":86,"name":"编辑","parentId":85,"permission":"sys:distribute:edit","sort":1,"type":2},{"css":"fa-cab","href":"","id":87,"name":"删除","parentId":85,"permission":"sys:diatribute:del","sort":2,"type":2}],"phone":"","projId":9,"sex":0,"status":1,"telephone":"","token":"89d357b6-3ae0-4510-a453-0f97f50176a8","updateTime":1499304019000,"username":"admin"}(String), 2018-10-28 15:07:49.277(Timestamp), 2018-10-28 13:07:49.277(Timestamp), 2018-10-28 13:07:49.277(Timestamp)
+2018-10-28 13:07:49,324 [http-nio-8090-exec-1] <==    Updates: 1
+2018-10-28 13:07:49,886 [http-nio-8090-exec-2] ==>  Preparing: select * from t_token t where t.id = ? 
+2018-10-28 13:07:49,886 [http-nio-8090-exec-2] ==> Parameters: 89d357b6-3ae0-4510-a453-0f97f50176a8(String)
+2018-10-28 13:07:49,886 [http-nio-8090-exec-2] <==      Total: 1
+2018-10-28 13:07:49,951 [http-nio-8090-exec-5] ==>  Preparing: select * from t_token t where t.id = ? 
+2018-10-28 13:07:49,951 [http-nio-8090-exec-5] ==> Parameters: 89d357b6-3ae0-4510-a453-0f97f50176a8(String)
+2018-10-28 13:07:49,951 [http-nio-8090-exec-5] <==      Total: 1
+2018-10-28 13:07:50,045 [http-nio-8090-exec-4] ==>  Preparing: select * from t_token t where t.id = ? 
+2018-10-28 13:07:50,045 [http-nio-8090-exec-4] ==> Parameters: 89d357b6-3ae0-4510-a453-0f97f50176a8(String)
+2018-10-28 13:07:50,045 [http-nio-8090-exec-4] <==      Total: 1
+2018-10-28 13:07:50,061 [http-nio-8090-exec-4] ==>  Preparing: select distinct p.id as "id" ,p.proj_name as "projName" from sys_project p ,proj_role_relation pr ,sys_role r ,sys_role_user ru ,sys_user u where p.id=pr.proj_id and pr.role_id=r.id and r.id=ru.roleId and u.id=ru.userId 
+2018-10-28 13:07:50,061 [http-nio-8090-exec-4] ==> Parameters: 
+2018-10-28 13:07:50,061 [http-nio-8090-exec-4] <==      Total: 2
+2018-10-28 13:07:50,061 [http-nio-8090-exec-4] ==>  Preparing: select proj from sys_login_service where username=? order by createTime desc limit 1 
+2018-10-28 13:07:50,061 [http-nio-8090-exec-4] ==> Parameters: admin(String)
+2018-10-28 13:07:50,061 [http-nio-8090-exec-4] <==      Total: 1

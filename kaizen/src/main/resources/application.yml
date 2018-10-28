@@ -37,7 +37,7 @@ spring:
     servlet:
       load-on-startup: 1 
 mybatis:
-  type-aliases-package: com.boot.kaizen.model.*.java
+  type-aliases-package: com.boot.kaizen.model
   mapper-locations: classpath:/mybatis-mappers/**/*.xml
   configuration:
     mapUnderscoreToCamelCase: true

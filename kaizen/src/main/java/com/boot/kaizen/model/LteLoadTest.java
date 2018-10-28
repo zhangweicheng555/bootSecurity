@@ -1,6 +1,4 @@
-package com.boot.kaizen.model.lte;
-
-import com.boot.kaizen.model.BaseEntity;
+package com.boot.kaizen.model;
 
 /**
  * lte路测信息 lte_load_test

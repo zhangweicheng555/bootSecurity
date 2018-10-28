@@ -4,7 +4,8 @@ import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import com.boot.kaizen.model.lte.LtePlan;
+
+import com.boot.kaizen.model.LtePlan;
 
 
 @Mapper

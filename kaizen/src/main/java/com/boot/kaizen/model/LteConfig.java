@@ -1,6 +1,4 @@
-package com.boot.kaizen.model.lte;
-
-import com.boot.kaizen.model.BaseEntity;
+package com.boot.kaizen.model;
 
 /**
  * lte测试配置项  lte_config

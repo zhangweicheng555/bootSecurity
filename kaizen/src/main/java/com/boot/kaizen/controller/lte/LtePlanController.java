@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.boot.kaizen.entity.RequestParamEntity;
-import com.boot.kaizen.model.lte.LtePlan;
+import com.boot.kaizen.model.LtePlan;
 import com.boot.kaizen.service.lte.ILtePlanService;
 import com.boot.kaizen.util.TableResultUtil;
 import com.github.pagehelper.ISelect;

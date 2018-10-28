@@ -5,8 +5,8 @@
 
 	
 	
-	<select id="find" resultMap="LtePlan">
-		 select * 
+	<select id="find" resultType="LtePlan">
+		 select lp.* 
 		 from
 		 lte_plane lp
 		 <if test="map.projName != null and map.projName != ''">

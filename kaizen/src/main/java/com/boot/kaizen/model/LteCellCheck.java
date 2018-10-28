@@ -1,6 +1,4 @@
-package com.boot.kaizen.model.lte;
-
-import com.boot.kaizen.model.BaseEntity;
+package com.boot.kaizen.model;
 
 /**
  * lte小区核查结果  lte_cell_check

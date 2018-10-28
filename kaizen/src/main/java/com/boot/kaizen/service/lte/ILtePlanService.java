@@ -2,7 +2,8 @@ package com.boot.kaizen.service.lte;
 
 import java.util.List;
 import java.util.Map;
-import com.boot.kaizen.model.lte.LtePlan;
+
+import com.boot.kaizen.model.LtePlan;
 
 public interface ILtePlanService {
 

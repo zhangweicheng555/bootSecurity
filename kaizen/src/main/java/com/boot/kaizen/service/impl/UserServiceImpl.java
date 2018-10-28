@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.CollectionUtils;
 import com.boot.kaizen.dao.SysUserDao;
 import com.boot.kaizen.model.SysUser;
 import com.boot.kaizen.model.SysUser.Status;
