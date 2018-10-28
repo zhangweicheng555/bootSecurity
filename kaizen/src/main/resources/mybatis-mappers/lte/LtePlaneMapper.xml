@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boot.kaizen.dao.lte.LtePlanDao">
+
+	
+	
+	<select id="find" resultMap="LtePlan">
+		 select * 
+		 from
+		 lte_plane lp
+		 <if test="map.projName != null and map.projName != ''">
+            and lp.proj_name like '%${map.projName}%'
+        </if>
+		<if test="map.beginTime != null and map.beginTime != '' and (map.endTime == null or map.endTime == '')">
+            and lp.createTime &gt;=  str_to_date(#{map.beginTime},'%Y-%m-%d %H:%i:%s')
+        </if>
+		<if test="map.endTime != null and map.endTime != '' and (map.beginTime == null or map.beginTime == '')">
+            and lp.createTime &lt;=  str_to_date(#{map.endTime},'%Y-%m-%d %H:%i:%s')
+        </if>
+		<if test="map.endTime != null and map.endTime != '' and map.beginTime != null and map.beginTime != ''">
+            and lp.createTime 
+            between str_to_date(#{map.beginTime},'%Y-%m-%d %H:%i:%s')
+            and     str_to_date(#{map.endTime},'%Y-%m-%d %H:%i:%s')
+        </if>
+		 order by lp.testTime desc
+	</select>
+	
+	
+	
+	
+
+	
+</mapper>

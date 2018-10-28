@@ -67,6 +67,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		// 根据用户的名字、项目id 查询所有的资源
 		List<Permission> permissions = permissionService.queryByUserIdAndProjId(username,projId);
 		loginUser.setPermissions(permissions);
+		loginUser.setProjId(projId);
 		return loginUser;
 	}
 

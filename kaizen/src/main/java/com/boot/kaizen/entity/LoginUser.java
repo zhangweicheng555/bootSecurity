@@ -23,6 +23,17 @@ public class LoginUser extends SysUser implements UserDetails {
 	private Long loginTime;
 	/** 过期时间戳 */
 	private Long expireTime;
+	/***用户所属于的项目*/
+	private Long projId; //用于登陆的时候记录  方便使用
+
+	
+	public Long getProjId() {
+		return projId;
+	}
+
+	public void setProjId(Long projId) {
+		this.projId = projId;
+	}
 
 	public List<Permission> getPermissions() {
 		return permissions;

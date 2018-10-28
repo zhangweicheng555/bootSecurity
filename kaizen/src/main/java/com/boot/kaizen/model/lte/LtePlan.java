@@ -8,7 +8,7 @@ import com.boot.kaizen.model.BaseEntity;
  * @author weichengz
  * @date 2018年10月28日 上午3:37:57
  */
-public class LtePlane extends BaseEntity<Long> {
+public class LtePlan extends BaseEntity<Long> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -122,11 +122,11 @@ public class LtePlane extends BaseEntity<Long> {
 		this.testTime = testTime;
 	}
 
-	public LtePlane() {
+	public LtePlan() {
 		super();
 	}
 
-	public LtePlane(String mENodeBID, String mBaseStationName, String mBaseStationType, String mAltitude,
+	public LtePlan(String mENodeBID, String mBaseStationName, String mBaseStationType, String mAltitude,
 			String mLongitude, String mLatitude, String mTac, String testPerson, String testPersonPhone,
 			String backPerson, String backPersonPhone, String testTime) {
 		super();

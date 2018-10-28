@@ -2,6 +2,7 @@ package com.boot.kaizen.filter;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,6 +20,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.boot.kaizen.entity.LoginUser;
 import com.boot.kaizen.model.LoginService;
+import com.boot.kaizen.model.Permission;
 import com.boot.kaizen.service.PermissionService;
 import com.boot.kaizen.service.SysLoginServiceService;
 import com.boot.kaizen.service.TokenService;
@@ -39,37 +42,41 @@ public class TokenFilter extends OncePerRequestFilter {
 	private PermissionService permissionService;
 	@Autowired
 	private SysLoginServiceService sysLoginServiceService;
-	
+
 	private static final Long MINUTES_10 = 10 * 60 * 1000L;
 	private static final String SPRING_SECURITY_PROJ = "proj";
 	private static final String TOKEN_KEY = "token";
 	public static final String SPRING_SECURITY_FORM_USERNAME_KEY = "username";
 
-	
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
-		
-		String projId=obtainProjId(request);
-		String username=obtainUserName(request);
+
+		String projId = obtainProjId(request);
+		String username = obtainUserName(request);
 		if (StringUtils.isNoneBlank(username) && StringUtils.isNoneBlank(projId)) {
-			LoginService loginService=new LoginService(username, Long.valueOf(projId), new Date());
+			LoginService loginService = new LoginService(username, Long.valueOf(projId), new Date());
 			sysLoginServiceService.insert(loginService);
 		}
-		
-		
+
 		String token = getToken(request);
 		if (StringUtils.isNotBlank(token)) {
 			LoginUser loginUser = tokenService.getLoginUser(token);
 			if (loginUser != null) {
-				
-				if (StringUtils.isNoneBlank(projId) && StringUtils.isNoneBlank(username)) {//更新权限 刷新token
-					loginUser.setPermissions(permissionService.queryByUserIdAndProjId(username, Long.valueOf(projId)));
+
+				if (StringUtils.isNoneBlank(projId) && StringUtils.isNoneBlank(username)) {// 更新权限 刷新token
+					List<Permission> listPermissions = permissionService.queryByUserIdAndProjId(username,
+							Long.valueOf(projId));
+					if (listPermissions == null || listPermissions.size() == 0) {
+						throw new AuthenticationCredentialsNotFoundException("用户在该项目下无授权");
+					}
+					loginUser.setPermissions(listPermissions);
+					loginUser.setProjId(Long.valueOf(projId));
 					tokenService.refresh(loginUser);
-				}else {
+				} else {
 					loginUser = checkLoginTime(loginUser);
 				}
-				
+
 				UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(loginUser,
 						null, loginUser.getAuthorities());
 				SecurityContextHolder.getContext().setAuthentication(authentication);
