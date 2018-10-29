@@ -123,4 +123,9 @@ public class UserServiceImpl implements UserService {
 		return userDao.findUserIds(roleId);
 	}
 
+	@Override
+	public SysUser queryUser(Long projId, String username) {
+		return userDao.queryUser(projId, username);
+	}
+
 }

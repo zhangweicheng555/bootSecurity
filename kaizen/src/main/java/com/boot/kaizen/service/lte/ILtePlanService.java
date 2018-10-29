@@ -3,6 +3,8 @@ package com.boot.kaizen.service.lte;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.boot.kaizen.entity.LoginUser;
 import com.boot.kaizen.model.LtePlan;
 import com.boot.kaizen.util.JsonMsgUtil;
@@ -40,6 +42,14 @@ public interface ILtePlanService {
 	* @date 2018年10月28日 下午5:53:29
 	 */
 	public JsonMsgUtil delete(String ids);
+	
+	/**
+	 * 查询用户的任务   app
+	 * @param userId
+	 * @param projId
+	 * @return
+	 */
+	List<Map<String, Object>> queryPlanList(Long userId,Long projId);
 
 	
 }

@@ -1,6 +1,8 @@
 package com.boot.kaizen.config;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +24,7 @@ import com.boot.kaizen.entity.LoginUser;
 import com.boot.kaizen.entity.Token;
 import com.boot.kaizen.filter.TokenFilter;
 import com.boot.kaizen.service.TokenService;
+import com.boot.kaizen.util.AppUtil;
 import com.boot.kaizen.util.JsonMsgUtil;
 import com.boot.kaizen.util.ResponseUtil;
 
@@ -52,7 +55,13 @@ public class SecurityHandlerConfig {
 				LoginUser loginUser = (LoginUser) authentication.getPrincipal();
 
 				Token token = tokenService.saveToken(loginUser);
-				ResponseUtil.responseJson(response, HttpStatus.OK.value(), token);
+				
+				/**扩展app对接使用*/
+				Map<String, Object> map=new HashMap<String, Object>();
+				map.put("token", token);
+				AppUtil appUtil=new AppUtil(1, "登录成功", map);
+				
+				ResponseUtil.responseJson(response, HttpStatus.OK.value(), appUtil);
 			}
 		};
 	}

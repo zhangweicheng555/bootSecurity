@@ -42,5 +42,5 @@ public interface SysProjectDao {
 	 * @author weichengz
 	 * @date 2018年10月27日 下午11:40:12
 	 */
-	List<Map<String, Object>> queryProjects(String username);
+	List<Map<String, Object>> queryProjects(@Param("username") String username);
 }

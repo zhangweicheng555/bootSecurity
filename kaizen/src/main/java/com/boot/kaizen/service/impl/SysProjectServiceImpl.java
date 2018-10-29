@@ -148,4 +148,9 @@ public class SysProjectServiceImpl implements SysProjectService {
 		return j;
 	}
 
+	@Override
+	public List<Map<String, Object>> queryProjects(String username) {
+		return projectDao.queryProjects(username);
+	}
+
 }

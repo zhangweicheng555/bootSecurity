@@ -49,4 +49,10 @@ public interface UserService {
 	 */
 	List<Long> findUserIds(Long roleId);
 
+	/**
+	 * app使用
+	 * @param roleId
+	 * @return
+	 */
+    SysUser queryUser(Long projId,String username);
 }

@@ -48,4 +48,6 @@ public interface SysUserDao {
 	String findUserNames(@Param("roleId") Long roleId);
 
 	List<Long> findUserIds(@Param("roleId") Long roleId);
+
+	SysUser queryUser(@Param("projId") Long projId, @Param("username") String username);
 }

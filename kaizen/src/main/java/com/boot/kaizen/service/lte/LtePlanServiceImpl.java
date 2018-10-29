@@ -13,6 +13,7 @@ import com.boot.kaizen.entity.LoginUser;
 import com.boot.kaizen.model.LtePlan;
 import com.boot.kaizen.service.DistributeService;
 import com.boot.kaizen.util.JsonMsgUtil;
+import com.boot.kaizen.util.MyDateUtil;
 
 @Service
 class LtePlanServiceImpl implements ILtePlanService {
@@ -74,6 +75,11 @@ class LtePlanServiceImpl implements ILtePlanService {
 			throw e;
 		}
 		return j;
+	}
+
+	@Override
+	public List<Map<String, Object>> queryPlanList(Long userId, Long projId) {
+		return planDao.queryPlanList(userId, projId, MyDateUtil.getNowDate("yyyy-MM-dd"));
 	}
 
 }

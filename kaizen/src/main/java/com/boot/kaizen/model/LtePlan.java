@@ -1,7 +1,7 @@
 package com.boot.kaizen.model;
 
 /**
- * lte规划表设计  lte_plane
+ * lte规划表设计 lte_plane
  * 
  * @author weichengz
  * @date 2018年10月28日 上午3:37:57
@@ -22,7 +22,17 @@ public class LtePlan extends BaseEntity<Long> {
 	private String testPersonPhone;// 测试工程师电话
 	private String backPerson;// 后台工程师
 	private String backPersonPhone;// 后台工程师电话
-	private String testTime;// 测试时间
+	private String testTime;// 测试时间   yyyy-mm-dd
+
+	private Long dealPersonId;// 接收改计划任务的人的id
+
+	public Long getDealPersonId() {
+		return dealPersonId;
+	}
+
+	public void setDealPersonId(Long dealPersonId) {
+		this.dealPersonId = dealPersonId;
+	}
 
 	public String getmENodeBID() {
 		return mENodeBID;

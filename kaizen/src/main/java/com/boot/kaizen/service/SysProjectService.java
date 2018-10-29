@@ -3,6 +3,8 @@ package com.boot.kaizen.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.boot.kaizen.model.SysProject;
 import com.boot.kaizen.util.JsonMsgUtil;
 
@@ -72,4 +74,12 @@ public interface SysProjectService {
 	* @date 2018年10月27日 下午11:38:08
 	 */
 	public JsonMsgUtil queryProjectsForUsername(String username);
+	
+	
+	/**
+	 * 通过用户名字查询所属项目列表  app使用
+	 * @param username
+	 * @return
+	 */
+	List<Map<String, Object>> queryProjects(String username);
 }

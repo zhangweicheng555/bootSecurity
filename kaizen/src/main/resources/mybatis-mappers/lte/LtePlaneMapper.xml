@@ -30,6 +30,19 @@
 		 order by lp.testTime desc
 	</select>
 	
+	
+	<select id="queryPlanList" resultType="java.util.Map">
+		 select 
+		    id as  "planId",
+		    testTime as "testDate"
+		 from
+		 lte_plane lp 
+		 where 
+		    lp.testTime =#{nowDate}
+		    and dealPersonId =#{userId}
+		    and projId =#{projId}
+	</select>
+	
 	<delete id="delete">
 		 delete from lte_plane
 		 where id in

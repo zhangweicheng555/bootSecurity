@@ -35,6 +35,8 @@
 		 and r.id=ru.roleId
 		 and u.id=ru.userId
 		 
+		 and u.username=#{username}
+		 
 	</select>
 	
 	<select id="findRandomProj" resultType="java.lang.Long">
@@ -51,6 +53,7 @@
 		 and r.id=ru.roleId
 		 and u.id=ru.userId
 		 order by p.createTime desc
+		 and u.username=#{username}
 		 limit 1
 	</select>
 	
