@@ -2,6 +2,9 @@ package com.boot.kaizen.service.lte;
 
 import java.util.List;
 import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.boot.kaizen.model.LteCellCheck;
 import com.boot.kaizen.util.JsonMsgUtil;
 
@@ -17,10 +20,17 @@ public interface ILteCellCheckService {
 
 	/**
 	 * 
-	* @Description: 删除
-	* @author weichengz
-	* @date 2018年10月28日 下午11:05:44
+	 * @Description: 删除
+	 * @author weichengz
+	 * @date 2018年10月28日 下午11:05:44
 	 */
 	public JsonMsgUtil delete(String ids);
+
+	/**
+	 * 批量添加数据 app
+	 * 
+	 * @param stationChecks
+	 */
+	void batchInsert(List<LteCellCheck> cellChecks);
 
 }

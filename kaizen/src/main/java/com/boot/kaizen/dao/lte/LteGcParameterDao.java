@@ -7,42 +7,48 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import com.boot.kaizen.model.LteGcParameter;
 
-
 @Mapper
 public interface LteGcParameterDao {
 	/**
 	 * 
-	* @Description: 查询
-	* @author weichengz
-	* @date 2018年10月28日 下午4:42:04
+	 * @Description: 查询
+	 * @author weichengz
+	 * @date 2018年10月28日 下午4:42:04
 	 */
 	List<LteGcParameter> find(@Param("map") Map<String, Object> map);
 
 	/**
 	 * 
-	* @Description: 保存
-	* @author weichengz
-	* @date 2018年10月28日 下午4:42:11
+	 * @Description: 保存
+	 * @author weichengz
+	 * @date 2018年10月28日 下午4:42:11
 	 */
 	void save(LteGcParameter lteGcParameter);
 
 	/**
 	 * 
-	* @Description: 查询
-	* @author weichengz
-	* @date 2018年10月28日 下午5:03:03
+	 * @Description: 查询
+	 * @author weichengz
+	 * @date 2018年10月28日 下午5:03:03
 	 */
 	@Select("select * from lte_gc where id=#{id}")
 	LteGcParameter findById(@Param("id") Long id);
 
 	/**
 	 * 
-	* @Description: 修改
-	* @author weichengz
-	* @date 2018年10月28日 下午5:43:30
+	 * @Description: 修改
+	 * @author weichengz
+	 * @date 2018年10月28日 下午5:43:30
 	 */
 	void update(LteGcParameter lteGcParameter);
 
 	Integer delete(@Param("idsArray") Long[] array);
+
+	/**
+	 * 查询工参列表 app
+	 * 
+	 * @param mENodeBID
+	 */
+	List<LteGcParameter> queryGcParameterList(@Param("mENodeBID") String mENodeBID);
 
 }

@@ -42,5 +42,11 @@ public interface ILteGcParameterService {
 	 */
 	public JsonMsgUtil delete(String ids);
 
+	/**
+	 * 查询工参列表  app
+	 * @param getmENodeBID
+	 */
+	public List<LteGcParameter> queryGcParameterList(String mENodeBID);
+
 	
 }

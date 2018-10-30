@@ -1,4 +1,4 @@
-package com.boot.kaizen;
+package com.boot.kaizen.controller.lte.model;
 /**
  *  * 小区工程参数
  */
@@ -13,7 +13,7 @@ public class MCommunityProjectBean {
 	  
 	  
 	  
-	  
+
 	public String getmCellID() {
 		return mCellID;
 	}

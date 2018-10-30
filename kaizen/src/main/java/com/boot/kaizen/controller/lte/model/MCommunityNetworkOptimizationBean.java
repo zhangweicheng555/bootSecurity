@@ -1,4 +1,4 @@
-package com.boot.kaizen;
+package com.boot.kaizen.controller.lte.model;
 /**
  * 小区网优参数
  */

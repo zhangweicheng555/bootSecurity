@@ -113,6 +113,31 @@
 	</insert>
 	
 	
-
+	<select id="queryStationList" resultMap="queryStationListMap">
+		 select 
+		 	mENodeBID as mENodeBID
+		 	,mAltitude as mAltitude
+		 	,mBaseStationName as mBaseStationName
+		    ,mBaseStationType as mBaseStationType
+		    ,mLongitude as mLongitude
+		    ,mLatitude as mLatitude
+		    ,mTac as mTac
+		 from
+		  lte_plane lp 
+		 where 
+		    dealPersonId =#{userId}
+		    and testTime =#{testDate}
+		    and projId =#{projId}
+	</select>
+	
+	<resultMap type="com.boot.kaizen.controller.lte.model.BaseStationBean" id="queryStationListMap">
+		<id property="mENodeBID" column="mENodeBID" />
+		<result property="mAltitude" column="mAltitude" />
+		<result property="mBaseStationName" column="mBaseStationName" />
+		<result property="mBaseStationType" column="mBaseStationType" />
+		<result property="mLatitude" column="mLatitude" />
+		<result property="mLongitude" column="mLongitude" />
+		<result property="mTac" column="mTac" />
+	</resultMap>
 	
 </mapper>

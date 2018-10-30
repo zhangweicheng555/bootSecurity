@@ -2,19 +2,33 @@ package com.boot.kaizen.controller.app;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.boot.kaizen.controller.lte.model.BaseStationBean;
+import com.boot.kaizen.controller.lte.model.CommunityBean;
+import com.boot.kaizen.controller.lte.model.MCommunityNetworkOptimizationBean;
+import com.boot.kaizen.controller.lte.model.MCommunityProjectBean;
+import com.boot.kaizen.model.LteCellCheck;
+import com.boot.kaizen.model.LteConfig;
+import com.boot.kaizen.model.LteGcParameter;
+import com.boot.kaizen.model.LteStationCheck;
 import com.boot.kaizen.model.SysUser;
 import com.boot.kaizen.service.SysProjectService;
 import com.boot.kaizen.service.UserService;
+import com.boot.kaizen.service.lte.ILteCellCheckService;
+import com.boot.kaizen.service.lte.ILteConfigService;
+import com.boot.kaizen.service.lte.ILteGcParameterService;
 import com.boot.kaizen.service.lte.ILtePlanService;
+import com.boot.kaizen.service.lte.ILteStationCheckService;
 import com.boot.kaizen.util.AppUtil;
 
 /**
@@ -33,6 +47,14 @@ public class LteAppController {
 	private UserService userService;
 	@Autowired
 	private ILtePlanService ltePlanService;
+	@Autowired
+	private ILteGcParameterService lteGcParameterService;
+	@Autowired
+	private ILteStationCheckService lteStationCheckService;
+	@Autowired
+	private ILteCellCheckService lteCellCheckService;
+	@Autowired
+	private ILteConfigService lteConfigService;
 	// 0:失败;1:成功; 2:服务器异常
 
 	/**
@@ -93,7 +115,7 @@ public class LteAppController {
 	}
 
 	/**
-	 * 根据
+	 * 查询测试计划任务列表
 	 * 
 	 * @param username
 	 * @param projId
@@ -117,4 +139,134 @@ public class LteAppController {
 		}
 	}
 
+	/**
+	 * 拉取基站列表
+	 * 
+	 * @param userId
+	 * @param projId
+	 * @param testDate
+	 */
+	@RequestMapping(value = "/queryStationList", method = RequestMethod.GET)
+	public AppUtil queryStationList(@RequestParam(value = "userId", required = true) Long userId,
+			@RequestParam(value = "projId", required = true) Long projId,
+			@RequestParam(value = "testDate", required = true) String testDate) {
+		AppUtil appUtil = new AppUtil(1, "查询成功", "");
+		try {
+			List<BaseStationBean> stationList = ltePlanService.queryStationList(userId, projId, testDate);
+			if (stationList != null && stationList.size() > 0) {
+				for (BaseStationBean baseStationBean : stationList) {
+					List<LteGcParameter> lteGcParameters = lteGcParameterService
+							.queryGcParameterList(baseStationBean.getmENodeBID());
+					if (lteGcParameters != null && lteGcParameters.size() > 0) {
+						for (LteGcParameter lteGcParameter : lteGcParameters) {
+							CommunityBean communityBean = new CommunityBean();
+							communityBean.setmCommunityBeanName(lteGcParameter.getmCellName());
+
+							MCommunityProjectBean mCommunityProjectBean = new MCommunityProjectBean(
+									lteGcParameter.getmCellID(), lteGcParameter.getmFrequency(),
+									lteGcParameter.getmPCI());
+							communityBean.setmCommunityProject(mCommunityProjectBean);
+
+							MCommunityNetworkOptimizationBean mCommunityNetworkOptimizationBean = new MCommunityNetworkOptimizationBean(
+									lteGcParameter.getmRsPower(), lteGcParameter.getmAntennaHangUp(),
+									lteGcParameter.getmAzimuth(), lteGcParameter.getmMechanicalLowerInclination(),
+									lteGcParameter.getmPresetElectricDip(), lteGcParameter.getMtotalLowerInclination());
+							communityBean.setmCommunityNetworkOptimization(mCommunityNetworkOptimizationBean);
+
+							baseStationBean.getmCommunityBeanList().add(communityBean);
+						}
+					}
+				}
+			} else {
+				appUtil = new AppUtil(0, "查询信息列表为空", "");
+				return appUtil;
+			}
+			appUtil.setDataSource(stationList);
+			return appUtil;
+		} catch (Exception e) {
+			appUtil = new AppUtil(2, "系统异常：" + e.getMessage(), "");
+			return appUtil;
+		}
+	}
+
+	/**
+	 * 上传基站核查结果
+	 */
+	@RequestMapping(value = "/uploadStationCheck", method = RequestMethod.POST)
+	public AppUtil uploadStationCheck(@RequestBody List<LteStationCheck> stationChecks) {
+		AppUtil appUtil = new AppUtil(1, "查询成功", null);
+		try {
+			if (stationChecks == null || stationChecks.size() == 0) {
+				appUtil = new AppUtil(0, "接收基站核查列表为空", "");
+				return appUtil;
+			}
+			lteStationCheckService.batchInsert(stationChecks);
+			appUtil.setDataSource(null);
+			return appUtil;
+		} catch (Exception e) {
+			appUtil = new AppUtil(2, "系统异常：" + e.getMessage(), "");
+			return appUtil;
+		}
+	}
+
+	/**
+	 * 上传小区测试结果
+	 */
+	@RequestMapping(value = "/uploadCellCheck", method = RequestMethod.POST)
+	public AppUtil uploadCellCheck(@RequestBody List<LteCellCheck> cellChecks) {
+		AppUtil appUtil = new AppUtil(1, "查询成功", null);
+		try {
+			if (cellChecks == null || cellChecks.size() == 0) {
+				appUtil = new AppUtil(0, "接收小区测试列表为空", "");
+				return appUtil;
+			}
+			lteCellCheckService.batchInsert(cellChecks);
+			appUtil.setDataSource(null);
+			return appUtil;
+		} catch (Exception e) {
+			appUtil = new AppUtil(2, "系统异常：" + e.getMessage(), "");
+			return appUtil;
+		}
+	}
+	/**
+	 * 上传小区测试结果
+	 */
+	@RequestMapping(value = "/findTestConfig", method = RequestMethod.POST)
+	public AppUtil findTestConfig(@RequestParam("projId") Long projId,@RequestParam(value="userId",required=false) Long userId) {
+		AppUtil appUtil = new AppUtil(1, "查询成功", null);
+		try {
+			if (projId == null ) {
+				appUtil = new AppUtil(0, "项目projId不能为空", "");
+				return appUtil;
+			}
+			LteConfig lteConfig = lteConfigService.findInfoById(projId);
+			if (lteConfig == null ) {
+				appUtil = new AppUtil(0, "该项目下测试配置项不存在", "");
+				return appUtil;
+			}
+			Map<String, Object> mVoiceConfig=new HashMap<>();
+			Map<String, Object> mFtpConfig=new HashMap<>();
+			
+			mVoiceConfig.put("mVoiceCount", lteConfig.getmVoiceCount());
+			mVoiceConfig.put("mVoiceTarget", lteConfig.getmVoiceTarget());
+			
+			mFtpConfig.put("mFtpService", lteConfig.getmFtpService());
+			mFtpConfig.put("mFtpPort", lteConfig.getmFtpPort());
+			mFtpConfig.put("mFtpUserName", lteConfig.getmFtpUserName());
+			mFtpConfig.put("mFtpPaw", lteConfig.getmFtpPaw());
+			mFtpConfig.put("mFtpFileDownPath", lteConfig.getmFtpFileDownPath());
+			mFtpConfig.put("mFtpFileUpPath", lteConfig.getmFtpFileUpPath());
+			mFtpConfig.put("mFtpUpRateTarget", lteConfig.getmFtpUpRateTarget());
+			mFtpConfig.put("mFtpDownRateTarget", lteConfig.getmFtpDownRateTarget());
+			
+			Map<String, Object> finalMap=new HashMap<>();
+			finalMap.put("mVoiceConfig", mVoiceConfig);
+			finalMap.put("mFtpConfig", mFtpConfig);
+			appUtil.setDataSource(finalMap);
+			return appUtil;
+		} catch (Exception e) {
+			appUtil = new AppUtil(2, "系统异常：" + e.getMessage(), "");
+			return appUtil;
+		}
+	}
 }

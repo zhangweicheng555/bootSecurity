@@ -41,4 +41,9 @@ class LteStationCheckServiceImpl implements ILteStationCheckService {
 		return j;
 	}
 
+	@Override
+	public void batchInsert(List<LteStationCheck> stationChecks) {
+		stationCheckDao.batchInsert(stationChecks);
+	}
+
 }

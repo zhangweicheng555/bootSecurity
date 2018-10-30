@@ -15,7 +15,7 @@ public abstract class BaseEntity<T extends Serializable> implements Serializable
 	private static final long serialVersionUID = 2054813493011812469L;
 
 	private T id;// 主键ID 自增
-	private Date createTime;// 创建时间
+	private Date createTime=new Date();// 创建时间
 	private Date updateTime;// 修改时间
 	private T projId;// 项目ID
 	private T createAt;// 添加人

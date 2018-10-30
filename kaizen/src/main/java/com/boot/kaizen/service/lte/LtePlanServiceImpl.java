@@ -8,6 +8,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.stereotype.Service;
+
+import com.boot.kaizen.controller.lte.model.BaseStationBean;
 import com.boot.kaizen.dao.lte.LtePlanDao;
 import com.boot.kaizen.entity.LoginUser;
 import com.boot.kaizen.model.LtePlan;
@@ -80,6 +82,11 @@ class LtePlanServiceImpl implements ILtePlanService {
 	@Override
 	public List<Map<String, Object>> queryPlanList(Long userId, Long projId) {
 		return planDao.queryPlanList(userId, projId, MyDateUtil.getNowDate("yyyy-MM-dd"));
+	}
+
+	@Override
+	public List<BaseStationBean> queryStationList(Long userId, Long projId, String testDate) {
+		return planDao.queryStationList(userId, projId, testDate);
 	}
 
 }

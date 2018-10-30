@@ -18,10 +18,17 @@ public interface LteCellCheckDao {
 
 	/**
 	 *
-	* @Description: 删除
-	* @author weichengz
-	* @date 2018年10月28日 下午11:06:34
+	 * @Description: 删除
+	 * @author weichengz
+	 * @date 2018年10月28日 下午11:06:34
 	 */
 	Integer delete(@Param("idsArray") Long[] array);
+
+	/**
+	 * 批量添加数据 app
+	 * 
+	 * @param stationChecks
+	 */
+	void batchInsert(@Param("cellChecks") List<LteCellCheck> cellChecks);
 
 }

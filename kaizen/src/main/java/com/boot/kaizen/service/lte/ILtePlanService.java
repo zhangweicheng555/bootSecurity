@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.boot.kaizen.controller.lte.model.BaseStationBean;
 import com.boot.kaizen.entity.LoginUser;
 import com.boot.kaizen.model.LtePlan;
 import com.boot.kaizen.util.JsonMsgUtil;
@@ -21,35 +22,43 @@ public interface ILtePlanService {
 
 	/**
 	 * 
-	* @Description: 编辑
-	* @author weichengz
-	* @date 2018年10月28日 下午4:37:23
+	 * @Description: 编辑
+	 * @author weichengz
+	 * @date 2018年10月28日 下午4:37:23
 	 */
-	public JsonMsgUtil edit(LtePlan ltePlan,LoginUser loginUser);
+	public JsonMsgUtil edit(LtePlan ltePlan, LoginUser loginUser);
 
 	/**
 	 * 
-	* @Description: 查询
-	* @author weichengz
-	* @date 2018年10月28日 下午5:00:17
+	 * @Description: 查询
+	 * @author weichengz
+	 * @date 2018年10月28日 下午5:00:17
 	 */
 	public JsonMsgUtil findById(Long id);
 
 	/**
 	 * 
-	* @Description: 删除
-	* @author weichengz
-	* @date 2018年10月28日 下午5:53:29
+	 * @Description: 删除
+	 * @author weichengz
+	 * @date 2018年10月28日 下午5:53:29
 	 */
 	public JsonMsgUtil delete(String ids);
-	
+
 	/**
-	 * 查询用户的任务   app
+	 * 查询用户的任务 app
+	 * 
 	 * @param userId
 	 * @param projId
-	 * @return
 	 */
-	List<Map<String, Object>> queryPlanList(Long userId,Long projId);
+	List<Map<String, Object>> queryPlanList(Long userId, Long projId);
 
-	
+	/**
+	 * 拉取基站列表  app
+	 * 
+	 * @param userId
+	 * @param projId
+	 * @param testDate
+	 */
+	public List<BaseStationBean> queryStationList(Long userId, Long projId, String testDate);
+
 }

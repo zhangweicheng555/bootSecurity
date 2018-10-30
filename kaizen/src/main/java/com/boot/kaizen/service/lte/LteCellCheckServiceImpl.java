@@ -1,4 +1,5 @@
 package com.boot.kaizen.service.lte;
+
 import java.util.List;
 import java.util.Map;
 
@@ -40,6 +41,11 @@ class LteCellCheckServiceImpl implements ILteCellCheckService {
 			throw e;
 		}
 		return j;
+	}
+
+	@Override
+	public void batchInsert(List<LteCellCheck> cellChecks) {
+		cellCheckDao.batchInsert(cellChecks);
 	}
 
 }

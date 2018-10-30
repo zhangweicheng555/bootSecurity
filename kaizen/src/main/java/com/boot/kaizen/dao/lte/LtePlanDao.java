@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import com.boot.kaizen.controller.lte.model.BaseStationBean;
 import com.boot.kaizen.model.LtePlan;
 
 @Mapper
@@ -56,5 +57,15 @@ public interface LtePlanDao {
 	 */
 	List<Map<String, Object>> queryPlanList(@Param("userId") Long userId, @Param("projId") Long projId,
 			@Param("nowDate") String nowDate);
+
+	/**
+	 * 拉取基站列表 app
+	 * 
+	 * @param userId
+	 * @param projId
+	 * @param testDate
+	 */
+	List<BaseStationBean> queryStationList(@Param("userId") Long userId, @Param("projId") Long projId,
+			@Param("testDate") String testDate);
 
 }

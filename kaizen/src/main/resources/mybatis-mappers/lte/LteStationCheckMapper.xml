@@ -28,4 +28,15 @@
         </foreach>
 	</delete>
 	
+	<insert id ="batchInsert" parameterType="java.util.List" >
+           insert into lte_station_check
+           (eNodeBID,userId,testDate,latitude,longitude,tac,createTime,projId)
+           values
+            <foreach collection ="stationChecks" item="item" index= "index" separator =",">
+                (
+                	#{eNodeBID},#{userId},#{testDate},#{latitude},#{longitude},#{tac},#{createTime},#{projId}
+                )
+            </foreach >
+     </insert>
+	
 </mapper>

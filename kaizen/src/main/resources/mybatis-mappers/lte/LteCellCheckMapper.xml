@@ -28,4 +28,76 @@
         </foreach>
 	</delete>
 	
+	<insert id ="batchInsert" parameterType="java.util.List" >
+           insert into lte_station_check
+           (
+			userId
+			,eNodeBID
+			,communityName
+			,testDate
+			,csfbTestCount
+			,csfbFallSuccessCount
+			,csfbFallRate
+			,goodFtpUpAverageRsrp
+			,goodFtpUpAverageSinr
+			,goodFtpUpRate
+			,generalFtpUpAverageRsrp
+			,generalFtpUpAverageSinr
+			,generalFtpUpRate
+			,poorFtpUpAverageRsrp
+			,poorFtpUpAverageSinr
+			,poorFtpUpRate
+			,goodFtpDownAverageRsrp
+			,goodFtpDownAverageSinr
+			,goodFtpDownRate
+			,generalFtpDownAverageRsrp
+			,generalFtpDownAverageSinr
+			,generalFtpDownRate
+			,poorFtpDownAverageRsrp
+			,poorFtpDownAverageSinr
+			,poorFtpDownRate
+			,pci
+			,tac
+			,cellId
+			,frequency
+			,projId
+			,createTime
+			)
+           values
+            <foreach collection ="cellChecks" item="item" index= "index" separator =",">
+                (
+                	#{userId}
+					,#{eNodeBID}
+					,#{communityName}
+					,#{testDate}
+					,#{csfbTestCount}
+					,#{csfbFallSuccessCount}
+					,#{csfbFallRate}
+					,#{goodFtpUpAverageRsrp}
+					,#{goodFtpUpAverageSinr}
+					,#{goodFtpUpRate}
+					,#{generalFtpUpAverageRsrp}
+					,#{generalFtpUpAverageSinr}
+					,#{generalFtpUpRate}
+					,#{poorFtpUpAverageRsrp}
+					,#{poorFtpUpAverageSinr}
+					,#{poorFtpUpRate}
+					,#{goodFtpDownAverageRsrp}
+					,#{goodFtpDownAverageSinr}
+					,#{goodFtpDownRate}
+					,#{generalFtpDownAverageRsrp}
+					,#{generalFtpDownAverageSinr}
+					,#{generalFtpDownRate}
+					,#{poorFtpDownAverageRsrp}
+					,#{poorFtpDownAverageSinr}
+					,#{poorFtpDownRate}
+					,#{pci}
+					,#{tac}
+					,#{cellId}
+					,#{frequency}
+					,#{projId}
+					,#{createTime}
+                )
+            </foreach >
+     </insert>
 </mapper>

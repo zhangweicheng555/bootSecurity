@@ -12,6 +12,15 @@
 		 order by lp.createTime desc
 	</select>
 	
+	<select id="findInfoById" resultType="LteConfig">
+		 select lp.* 
+		 from
+		 lte_config lp 
+		 where 
+		 projId =#{projId}
+		 limit 1
+	</select>
+	
 	<delete id="delete">
 		 delete from lte_config
 		 where id in

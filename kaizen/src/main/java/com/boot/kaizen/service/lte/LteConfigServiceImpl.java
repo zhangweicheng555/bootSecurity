@@ -76,4 +76,9 @@ class LteConfigServiceImpl implements ILteConfigService {
 		return j;
 	}
 
+	@Override
+	public LteConfig findInfoById(Long projId) {
+		return configDao.findInfoById(projId);
+	}
+
 }

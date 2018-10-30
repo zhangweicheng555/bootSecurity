@@ -47,4 +47,9 @@ public interface LteConfigDao {
 
 	Integer delete(@Param("idsArray") Long[] array);
 
+	/**
+	 * 查询信息   app
+	 * @param projId
+	 */
+	LteConfig findInfoById(@Param("projId") Long projId);
 }
