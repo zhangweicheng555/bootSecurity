@@ -16,6 +16,68 @@ public class JsonMsgUtil {
 	private Integer code = 200;// 状态码
 	private Object object = null;// 返回的对象 这个就是返回的存储信息的地方
 
+	/*** app使用 */
+	private Integer resultCode;
+	private String mMessage;
+	private Long newTimestamp = new Date().getTime();
+	private Object dataSource;
+
+	public JsonMsgUtil(Integer code, String message, Integer resultCode, String mMessage) {
+		super();
+		this.message = message;
+		this.code = code;
+		this.resultCode = resultCode;
+		this.mMessage = mMessage;
+	}
+
+	public JsonMsgUtil(Integer resultCode, String mMessage, Long newTimestamp, Object dataSource) {
+		super();
+		this.resultCode = resultCode;
+		this.mMessage = mMessage;
+		this.newTimestamp = newTimestamp;
+		this.dataSource = dataSource;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public Integer getResultCode() {
+		return resultCode;
+	}
+
+	public void setResultCode(Integer resultCode) {
+		this.resultCode = resultCode;
+	}
+
+	public String getmMessage() {
+		return mMessage;
+	}
+
+	public void setmMessage(String mMessage) {
+		this.mMessage = mMessage;
+	}
+
+	public Long getNewTimestamp() {
+		return newTimestamp;
+	}
+
+	public void setNewTimestamp(Long newTimestamp) {
+		this.newTimestamp = newTimestamp;
+	}
+
+	public Object getDataSource() {
+		return dataSource;
+	}
+
+	public void setDataSource(Object dataSource) {
+		this.dataSource = dataSource;
+	}
+
 	public Long getTime() {
 		return time;
 	}
@@ -77,5 +139,4 @@ public class JsonMsgUtil {
 	public void setObject(Object object) {
 		this.object = object;
 	}
-
 }

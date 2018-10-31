@@ -1,5 +1,7 @@
 package com.boot.kaizen.controller.sys;
 
+import java.util.UUID;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -55,7 +57,7 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping(value = "/find", method = RequestMethod.POST)
 	public TableResultUtil find(RequestParamEntity param) {
-		
+
 		PageInfo<SysUser> pageInfo = PageHelper.startPage(param.getPage(), param.getLimit())
 				.doSelectPageInfo(new ISelect() {
 					@Override
@@ -95,7 +97,7 @@ public class UserController {
 	 * @author weichengz
 	 * @date 2018年10月14日 下午7:19:02
 	 */
-	@RequestMapping(value="/updateUser")
+	@RequestMapping(value = "/updateUser")
 	public JsonMsgUtil updateUser(SysUser sysUser) {
 		return userService.updateUser(sysUser);
 	}
@@ -141,9 +143,7 @@ public class UserController {
 	public JsonMsgUtil delete(@RequestParam("ids") String ids) {
 		return userService.delete(ids);
 	}
-	
-	
-	
+
 	@Value("${files.path}")
 	private String filesPath;
 
@@ -152,16 +152,30 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/upload")
 	@PreAuthorize("hasAuthority('sys:user:edit')")
-	public JsonMsgUtil upload(@RequestParam("file") MultipartFile file) {
-		String fileOrigName = file.getOriginalFilename();
-		if (!fileOrigName.contains(".")) {
-			throw new IllegalArgumentException("缺少后缀名");
-		}
+	public JsonMsgUtil upload(MultipartFile[] files) {
+		JsonMsgUtil j=new JsonMsgUtil(false);
+		if (files != null && files.length > 0) {
+			for (MultipartFile file : files) {
+				String fileOrigName = file.getOriginalFilename();
+				if (!fileOrigName.contains(".")) {
+					throw new IllegalArgumentException("缺少后缀名");
+				}
 
-		fileOrigName = fileOrigName.substring(fileOrigName.lastIndexOf("."));
-		String pathname = FileUtil.getPath() + "1111" + fileOrigName;
-		String fullPath = filesPath + pathname;
-		FileUtil.saveFile(file, fullPath);
-		return new JsonMsgUtil(true,fullPath,"success");
+				fileOrigName = fileOrigName.substring(fileOrigName.lastIndexOf("."));
+				String pathname = FileUtil.getPath("lte") + UUID.randomUUID().toString() + fileOrigName;
+			/**
+			 * 數據庫 保存  pathname
+			 * 
+			 * 
+			 * 前段  <img alt="" src="/statics/lte/e649f951-b375-4b82-85c6-331738d92117.png">
+			 * 
+			 * lte  是模塊名字
+			 */
+				System.out.println(pathname);
+				String fullPath = filesPath + pathname;
+				FileUtil.saveFile(file, fullPath);
+			}
+		}
+		return new JsonMsgUtil(true, "", "success");
 	}
 }

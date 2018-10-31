@@ -55,13 +55,7 @@ public class SecurityHandlerConfig {
 				LoginUser loginUser = (LoginUser) authentication.getPrincipal();
 
 				Token token = tokenService.saveToken(loginUser);
-				
-				/**扩展app对接使用*/
-				Map<String, Object> map=new HashMap<String, Object>();
-				map.put("token", token);
-				AppUtil appUtil=new AppUtil(1, "登录成功", map);
-				
-				ResponseUtil.responseJson(response, HttpStatus.OK.value(), appUtil);
+				ResponseUtil.responseJson(response, HttpStatus.OK.value(), token);
 			}
 		};
 	}

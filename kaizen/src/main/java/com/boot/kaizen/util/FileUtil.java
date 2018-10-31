@@ -72,6 +72,10 @@ public class FileUtil {
 	public static String getPath() {
 		return "/" + LocalDate.now().toString().replace("-", "/") + "/";
 	}
+	
+	public static String getPath(String modelName) {
+		return "/" + modelName + "/";
+	}
 
 	/**
 	 * 将文本写入文件
