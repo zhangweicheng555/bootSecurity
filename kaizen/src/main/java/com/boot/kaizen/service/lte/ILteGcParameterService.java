@@ -2,10 +2,8 @@ package com.boot.kaizen.service.lte;
 
 import java.util.List;
 import java.util.Map;
-
 import com.boot.kaizen.entity.LoginUser;
 import com.boot.kaizen.model.LteGcParameter;
-import com.boot.kaizen.model.LtePlan;
 import com.boot.kaizen.util.JsonMsgUtil;
 
 public interface ILteGcParameterService {

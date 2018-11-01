@@ -1,12 +1,9 @@
 package com.boot.kaizen.controller.sys;
 
-import java.util.UUID;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,13 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
-import com.boot.kaizen.dao.SysUserDao;
 import com.boot.kaizen.entity.RequestParamEntity;
 import com.boot.kaizen.model.SysUser;
 import com.boot.kaizen.model.UserDto;
 import com.boot.kaizen.service.UserService;
-import com.boot.kaizen.util.FileUtil;
 import com.boot.kaizen.util.JsonMsgUtil;
 import com.boot.kaizen.util.TableResultUtil;
 import com.boot.kaizen.util.UserUtil;
@@ -45,8 +39,6 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
-	@Autowired
-	private SysUserDao userDao;
 
 	/**
 	 * 
@@ -144,38 +136,4 @@ public class UserController {
 		return userService.delete(ids);
 	}
 
-	@Value("${files.path}")
-	private String filesPath;
-
-	/**
-	 * 测试上传
-	 */
-	@RequestMapping(value = "/upload")
-	@PreAuthorize("hasAuthority('sys:user:edit')")
-	public JsonMsgUtil upload(MultipartFile[] files) {
-		JsonMsgUtil j=new JsonMsgUtil(false);
-		if (files != null && files.length > 0) {
-			for (MultipartFile file : files) {
-				String fileOrigName = file.getOriginalFilename();
-				if (!fileOrigName.contains(".")) {
-					throw new IllegalArgumentException("缺少后缀名");
-				}
-
-				fileOrigName = fileOrigName.substring(fileOrigName.lastIndexOf("."));
-				String pathname = FileUtil.getPath("lte") + UUID.randomUUID().toString() + fileOrigName;
-			/**
-			 * 數據庫 保存  pathname
-			 * 
-			 * 
-			 * 前段  <img alt="" src="/statics/lte/e649f951-b375-4b82-85c6-331738d92117.png">
-			 * 
-			 * lte  是模塊名字
-			 */
-				System.out.println(pathname);
-				String fullPath = filesPath + pathname;
-				FileUtil.saveFile(file, fullPath);
-			}
-		}
-		return new JsonMsgUtil(true, "", "success");
-	}
 }

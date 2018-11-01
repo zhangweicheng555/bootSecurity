@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.time.LocalDate;
+import java.util.UUID;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,9 +22,29 @@ import org.springframework.web.multipart.MultipartFile;
  */
 public class FileUtil {
 
-	public static String saveFile(MultipartFile file, String pathname) {
+	/**
+	 * 數據庫 保存 pathname
+	 * 
+	 * 
+	 * 前段 <img alt="" src="/statics/lte/e649f951-b375-4b82-85c6-331738d92117.png">
+	 * 
+	 * lte 是模塊名字
+	 */
+	
+	public static String UpFile(MultipartFile file,String filesPath,String modelName) {
+		String fileOrigName = file.getOriginalFilename();
+		if (!fileOrigName.contains(".")) {
+			throw new IllegalArgumentException("缺少后缀名");
+		}
+
+		fileOrigName = fileOrigName.substring(fileOrigName.lastIndexOf("."));
+		String pathname = FileUtil.getPath(modelName) + MyDateUtil.getNowDate("yyyyMMddHHmmss")+"_"+UUID.randomUUID().toString() + fileOrigName;
+		return saveFile(file, filesPath + pathname,pathname);
+	}
+	
+	public static String saveFile(MultipartFile file, String fullname, String pathname) {
 		try {
-			File targetFile = new File(pathname);
+			File targetFile = new File(fullname);
 			if (targetFile.exists()) {
 				return pathname;
 			}
@@ -32,15 +53,18 @@ public class FileUtil {
 				targetFile.getParentFile().mkdirs();
 			}
 			file.transferTo(targetFile);
-
 			return pathname;
 		} catch (Exception e) {
 			e.printStackTrace();
+			try {
+				throw new IOException("文件上传异常");
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		}
-
 		return null;
 	}
-
+	
 	public static boolean deleteFile(String pathname) {
 		File file = new File(pathname);
 		if (file.exists()) {
@@ -72,7 +96,7 @@ public class FileUtil {
 	public static String getPath() {
 		return "/" + LocalDate.now().toString().replace("-", "/") + "/";
 	}
-	
+
 	public static String getPath(String modelName) {
 		return "/" + modelName + "/";
 	}

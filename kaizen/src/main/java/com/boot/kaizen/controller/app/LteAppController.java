@@ -2,16 +2,18 @@ package com.boot.kaizen.controller.app;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.boot.kaizen.controller.lte.model.BaseStationBean;
 import com.boot.kaizen.controller.lte.model.CommunityBean;
@@ -20,6 +22,7 @@ import com.boot.kaizen.controller.lte.model.MCommunityProjectBean;
 import com.boot.kaizen.model.LteCellCheck;
 import com.boot.kaizen.model.LteConfig;
 import com.boot.kaizen.model.LteGcParameter;
+import com.boot.kaizen.model.LteLoadTest;
 import com.boot.kaizen.model.LteStationCheck;
 import com.boot.kaizen.model.SysUser;
 import com.boot.kaizen.service.SysProjectService;
@@ -27,9 +30,11 @@ import com.boot.kaizen.service.UserService;
 import com.boot.kaizen.service.lte.ILteCellCheckService;
 import com.boot.kaizen.service.lte.ILteConfigService;
 import com.boot.kaizen.service.lte.ILteGcParameterService;
+import com.boot.kaizen.service.lte.ILteLoadTestService;
 import com.boot.kaizen.service.lte.ILtePlanService;
 import com.boot.kaizen.service.lte.ILteStationCheckService;
 import com.boot.kaizen.util.AppUtil;
+import com.boot.kaizen.util.FileUtil;
 
 /**
  * LTE app对接模块
@@ -40,6 +45,9 @@ import com.boot.kaizen.util.AppUtil;
 @RestController
 @RequestMapping("/lte/app")
 public class LteAppController {
+
+	@Value("${files.path}")
+	private String filesPath;
 
 	@Autowired
 	private SysProjectService projectService;
@@ -55,6 +63,8 @@ public class LteAppController {
 	private ILteCellCheckService lteCellCheckService;
 	@Autowired
 	private ILteConfigService lteConfigService;
+	@Autowired
+	private ILteLoadTestService lteLoadTestService;
 	// 0:失败;1:成功; 2:服务器异常
 
 	/**
@@ -228,28 +238,30 @@ public class LteAppController {
 			return appUtil;
 		}
 	}
+
 	/**
-	 * 上传小区测试结果
+	 * 获取测试项默认配置
 	 */
 	@RequestMapping(value = "/findTestConfig", method = RequestMethod.POST)
-	public AppUtil findTestConfig(@RequestParam("projId") Long projId,@RequestParam(value="userId",required=false) Long userId) {
+	public AppUtil findTestConfig(@RequestParam("projId") Long projId,
+			@RequestParam(value = "userId", required = false) Long userId) {
 		AppUtil appUtil = new AppUtil(1, "查询成功", null);
 		try {
-			if (projId == null ) {
+			if (projId == null) {
 				appUtil = new AppUtil(0, "项目projId不能为空", "");
 				return appUtil;
 			}
 			LteConfig lteConfig = lteConfigService.findInfoById(projId);
-			if (lteConfig == null ) {
+			if (lteConfig == null) {
 				appUtil = new AppUtil(0, "该项目下测试配置项不存在", "");
 				return appUtil;
 			}
-			Map<String, Object> mVoiceConfig=new HashMap<>();
-			Map<String, Object> mFtpConfig=new HashMap<>();
-			
+			Map<String, Object> mVoiceConfig = new HashMap<>();
+			Map<String, Object> mFtpConfig = new HashMap<>();
+
 			mVoiceConfig.put("mVoiceCount", lteConfig.getmVoiceCount());
 			mVoiceConfig.put("mVoiceTarget", lteConfig.getmVoiceTarget());
-			
+
 			mFtpConfig.put("mFtpService", lteConfig.getmFtpService());
 			mFtpConfig.put("mFtpPort", lteConfig.getmFtpPort());
 			mFtpConfig.put("mFtpUserName", lteConfig.getmFtpUserName());
@@ -258,8 +270,8 @@ public class LteAppController {
 			mFtpConfig.put("mFtpFileUpPath", lteConfig.getmFtpFileUpPath());
 			mFtpConfig.put("mFtpUpRateTarget", lteConfig.getmFtpUpRateTarget());
 			mFtpConfig.put("mFtpDownRateTarget", lteConfig.getmFtpDownRateTarget());
-			
-			Map<String, Object> finalMap=new HashMap<>();
+
+			Map<String, Object> finalMap = new HashMap<>();
 			finalMap.put("mVoiceConfig", mVoiceConfig);
 			finalMap.put("mFtpConfig", mFtpConfig);
 			appUtil.setDataSource(finalMap);
@@ -269,4 +281,57 @@ public class LteAppController {
 			return appUtil;
 		}
 	}
+
+	/**
+	 * 上传路测信息
+	 */
+	@RequestMapping(value = "/uploadRoadTest", method = RequestMethod.POST)
+	public AppUtil uploadRoadTest(@RequestParam("projId") Long projId, @RequestParam("userId") Long userId,
+			@RequestParam("eNodeBID") String eNodeBID, @RequestParam("communityName") String communityName,
+			@RequestParam("testDate") String testDate, @RequestParam("rsrpFtpUpImage") MultipartFile rsrpFtpUpImage,
+			@RequestParam("sinrFtpUpImage") MultipartFile sinrFtpUpImage,
+			@RequestParam("upFtpRateImage") MultipartFile upFtpRateImage,
+			@RequestParam("rsrpFtpDownImage") MultipartFile rsrpFtpDownImage,
+			@RequestParam("sinrFtpDownImage") MultipartFile sinrFtpDownImage,
+			@RequestParam("downFtpRateImage") MultipartFile downFtpRateImage,
+			@RequestParam("sinrThresholdImage") MultipartFile sinrThresholdImage,
+			@RequestParam("rsrpThresholdImage") MultipartFile rsrpThresholdImage,
+			@RequestParam("ftpRateThresholdImage") MultipartFile ftpRateThresholdImage,
+			@RequestParam("roadLogFile") MultipartFile roadLogFile) {
+		AppUtil appUtil = new AppUtil(1, "上传成功", null);
+		try {
+			if (projId == null || StringUtils.isBlank(eNodeBID) || userId == null) {
+				appUtil = new AppUtil(0, "项目projId、用户userId、基站号eNodeBID不能为空", "");
+				return appUtil;
+			}
+
+			String rsrpFtpUpImageName = upFile(rsrpFtpUpImage, "lte");
+			String sinrFtpUpImageName = upFile(sinrFtpUpImage, "lte");
+			String upFtpRateImageName = upFile(upFtpRateImage, "lte");
+			String rsrpFtpDownImageName = upFile(rsrpFtpDownImage, "lte");
+			String sinrFtpDownImageName = upFile(sinrFtpDownImage, "lte");
+			String downFtpRateImageName = upFile(downFtpRateImage, "lte");
+			String sinrThresholdImageName = upFile(sinrThresholdImage, "lte");
+			String rsrpThresholdImageName = upFile(rsrpThresholdImage, "lte");
+			String ftpRateThresholdImageName = upFile(ftpRateThresholdImage, "lte");
+			String roadLogFileName = upFile(roadLogFile, "lte");
+
+			LteLoadTest loadTest = new LteLoadTest(userId, eNodeBID, communityName, testDate, rsrpFtpUpImageName,
+					sinrFtpUpImageName, upFtpRateImageName, rsrpFtpDownImageName, sinrFtpDownImageName,
+					downFtpRateImageName, sinrThresholdImageName, rsrpThresholdImageName, ftpRateThresholdImageName,
+					roadLogFileName);
+
+			lteLoadTestService.save(loadTest);
+			appUtil.setDataSource("上传成功");
+			return appUtil;
+		} catch (Exception e) {
+			appUtil = new AppUtil(2, "系统异常：" + e.getMessage(), "");
+			return appUtil;
+		}
+	}
+
+	private String upFile(MultipartFile file, String modelName) {
+		return FileUtil.UpFile(file, filesPath, modelName);
+	}
+
 }

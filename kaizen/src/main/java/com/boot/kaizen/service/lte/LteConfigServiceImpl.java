@@ -30,7 +30,6 @@ class LteConfigServiceImpl implements ILteConfigService {
 		if (loginUser == null) {
 			throw new DisabledException("用户已过期，重新登陆");
 		}
-		JsonMsgUtil j = new JsonMsgUtil(false);
 		if (lteConfig.getId() != null) {// edit
 			lteConfig.setUpdateTime(new Date());
 			configDao.update(lteConfig);

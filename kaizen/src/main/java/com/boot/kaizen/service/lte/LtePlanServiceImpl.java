@@ -13,7 +13,6 @@ import com.boot.kaizen.controller.lte.model.BaseStationBean;
 import com.boot.kaizen.dao.lte.LtePlanDao;
 import com.boot.kaizen.entity.LoginUser;
 import com.boot.kaizen.model.LtePlan;
-import com.boot.kaizen.service.DistributeService;
 import com.boot.kaizen.util.JsonMsgUtil;
 import com.boot.kaizen.util.MyDateUtil;
 
@@ -33,7 +32,6 @@ class LtePlanServiceImpl implements ILtePlanService {
 		if (loginUser == null) {
 			throw new DisabledException("用户已过期，重新登陆");
 		}
-		JsonMsgUtil j = new JsonMsgUtil(false);
 		if (ltePlan.getId() != null) {// edit
 			ltePlan.setUpdateTime(new Date());
 			planDao.update(ltePlan);

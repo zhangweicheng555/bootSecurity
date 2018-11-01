@@ -11,7 +11,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import com.boot.kaizen.dao.PermissionDao;
 import com.boot.kaizen.entity.LoginUser;
 import com.boot.kaizen.model.LoginService;
 import com.boot.kaizen.model.Permission;

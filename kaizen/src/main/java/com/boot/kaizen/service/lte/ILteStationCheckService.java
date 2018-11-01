@@ -2,9 +2,6 @@ package com.boot.kaizen.service.lte;
 
 import java.util.List;
 import java.util.Map;
-
-import org.apache.ibatis.annotations.Param;
-
 import com.boot.kaizen.model.LteStationCheck;
 import com.boot.kaizen.util.JsonMsgUtil;
 
