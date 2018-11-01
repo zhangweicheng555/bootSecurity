@@ -20,6 +20,7 @@ import com.boot.kaizen.entity.Token;
 import com.boot.kaizen.filter.TokenFilter;
 import com.boot.kaizen.service.TokenService;
 import com.boot.kaizen.util.JsonMsgUtil;
+import com.boot.kaizen.util.JsonTokenUtil;
 import com.boot.kaizen.util.ResponseUtil;
 
 /**
@@ -49,7 +50,8 @@ public class SecurityHandlerConfig {
 				LoginUser loginUser = (LoginUser) authentication.getPrincipal();
 
 				Token token = tokenService.saveToken(loginUser);
-				ResponseUtil.responseJson(response, HttpStatus.OK.value(), token);
+				JsonTokenUtil j = new JsonTokenUtil(token.getToken(), token.getLoginTime(), 0, "登陆成功", null);
+				ResponseUtil.responseJson(response, HttpStatus.OK.value(), j);
 			}
 		};
 	}
@@ -72,7 +74,7 @@ public class SecurityHandlerConfig {
 				} else {
 					msg = exception.getMessage();
 				}
-				JsonMsgUtil j = new JsonMsgUtil(HttpStatus.UNAUTHORIZED.value(), msg,HttpStatus.UNAUTHORIZED.value(), msg);
+				JsonMsgUtil j = new JsonMsgUtil(HttpStatus.UNAUTHORIZED.value(), msg, 0, msg);
 				ResponseUtil.responseJson(response, HttpStatus.UNAUTHORIZED.value(), j);
 			}
 		};
@@ -91,7 +93,8 @@ public class SecurityHandlerConfig {
 			@Override
 			public void commence(HttpServletRequest request, HttpServletResponse response,
 					AuthenticationException authException) throws IOException, ServletException {
-				JsonMsgUtil j = new JsonMsgUtil(HttpStatus.UNAUTHORIZED.value(), "请先登录",HttpStatus.UNAUTHORIZED.value(), "请先登录");
+				JsonMsgUtil j = new JsonMsgUtil(HttpStatus.UNAUTHORIZED.value(), "请先登录",
+						HttpStatus.UNAUTHORIZED.value(), "请先登录");
 				ResponseUtil.responseJson(response, HttpStatus.UNAUTHORIZED.value(), j);
 			}
 		};
@@ -109,7 +112,7 @@ public class SecurityHandlerConfig {
 			@Override
 			public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response,
 					Authentication authentication) throws IOException, ServletException {
-				JsonMsgUtil j = new JsonMsgUtil(HttpStatus.OK.value(), "退出成功",HttpStatus.OK.value(), "退出成功");
+				JsonMsgUtil j = new JsonMsgUtil(HttpStatus.OK.value(), "退出成功", HttpStatus.OK.value(), "退出成功");
 				String token = TokenFilter.getToken(request);
 				tokenService.deleteToken(token);
 				ResponseUtil.responseJson(response, HttpStatus.OK.value(), j);

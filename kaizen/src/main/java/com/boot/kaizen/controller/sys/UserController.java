@@ -1,5 +1,12 @@
 package com.boot.kaizen.controller.sys;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -13,6 +20,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.boot.kaizen.backUpFile.thread.Example1;
+import com.boot.kaizen.backUpFile.thread.Example2;
+import com.boot.kaizen.backUpFile.thread.ThreadCallable;
 import com.boot.kaizen.entity.RequestParamEntity;
 import com.boot.kaizen.model.SysUser;
 import com.boot.kaizen.model.UserDto;
@@ -44,11 +55,13 @@ public class UserController {
 	 * 
 	 * @Description: 查询列表
 	 * @author weichengz
+	 * @throws ExecutionException
+	 * @throws InterruptedException
 	 * @date 2018年10月7日 上午11:24:20
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/find", method = RequestMethod.POST)
-	public TableResultUtil find(RequestParamEntity param) {
+	public TableResultUtil find(RequestParamEntity param) throws InterruptedException, ExecutionException {
 
 		PageInfo<SysUser> pageInfo = PageHelper.startPage(param.getPage(), param.getLimit())
 				.doSelectPageInfo(new ISelect() {

@@ -21,6 +21,7 @@ public class JsonMsgUtil {
 	private String mMessage;
 	private Long newTimestamp = new Date().getTime();
 	private Object dataSource;
+	
 
 	public JsonMsgUtil(Integer code, String message, Integer resultCode, String mMessage) {
 		super();

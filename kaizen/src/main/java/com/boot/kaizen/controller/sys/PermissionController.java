@@ -1,8 +1,12 @@
 package com.boot.kaizen.controller.sys;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +29,9 @@ import com.boot.kaizen.service.PermissionService;
 import com.boot.kaizen.util.JsonMsgUtil;
 import com.boot.kaizen.util.UserUtil;
 import com.google.common.collect.Lists;
+import com.google.common.util.concurrent.ListeningExecutorService;
+import com.google.common.util.concurrent.MoreExecutors;
+
 import io.swagger.annotations.Api;
 
 /**
@@ -216,5 +223,21 @@ public class PermissionController {
 	@PreAuthorize("hasAuthority('sys:menu:del')")
 	public JsonMsgUtil delete(@RequestParam(value = "id", required = true) Long id) {
 		return permissionService.delete(id);
+	}
+
+	/**
+	 * 测试多线程
+	 */
+	/**
+	 * 
+	 * @Description: 删除
+	 * @author weichengz
+	 * @throws InterruptedException
+	 * @date 2018年10月3日 下午4:42:42
+	 */
+	@RequestMapping(value = "/doubleThread")
+	public JsonMsgUtil doubleThread() throws InterruptedException {
+
+		return null;
 	}
 }

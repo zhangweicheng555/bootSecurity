@@ -4,6 +4,33 @@
 <mapper namespace="com.boot.kaizen.dao.SysUserDao">
 
 	
+	
+	<select resultType="SysUser" id="find">
+ 		select 
+ 		su.id
+ 		  ,su.username
+ 		  ,su.nickname
+ 		  ,su.phone
+ 		  ,su.telephone
+ 		  ,su.email
+ 		  ,su.birthday
+ 		  ,su.sex
+ 		  ,su.status
+ 		  ,su.createTime
+ 		from sys_user su 
+ 		where 1=1 
+	<if test="map.username != null and map.username != ''">
+		and su.username = #{map.username} 
+	</if>
+	<if test="map.nickname != null and map.nickname != ''">
+		and su.nickname = #{map.nickname} 
+	</if>
+	<if test="map.beginTime != null and map.beginTime != '' and (map.endTime == null or map.endTime == '')">
+		and su.createTime >= str_to_date(#{map.beginTime},'%Y-%m-%d %H:%i:%s') 
+	</if>
+		order by su.createTime desc 
+	</select>
+	
 	<select id="queryUser" resultType="SysUser">
 	
 		 select u.*
