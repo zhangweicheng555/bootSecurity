@@ -16,7 +16,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class KaizenApplicationTest {
 
 	
-	@SuppressWarnings("rawtypes")
 	@Test
 	public void Test() throws InterruptedException, ExecutionException {
 	
