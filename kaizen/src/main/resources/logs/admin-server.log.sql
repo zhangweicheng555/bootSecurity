@@ -500,3 +500,6 @@
 2018-11-01 18:18:18,234 [http-nio-8090-exec-9] ==> Parameters: 3(Integer)
 2018-11-01 18:18:18,235 [http-nio-8090-exec-6] <==      Total: 1
 2018-11-01 18:18:18,236 [http-nio-8090-exec-9] <==      Total: 1
+2018-11-01 18:31:11,498 [http-nio-8090-exec-3] ==>  Preparing: select * from t_token t where t.id = ? 
+2018-11-01 18:31:11,504 [http-nio-8090-exec-3] ==> Parameters: 309a0c41-bd8a-4053-aebc-c1bba7f76274(String)
+2018-11-01 18:31:11,512 [http-nio-8090-exec-3] <==      Total: 1

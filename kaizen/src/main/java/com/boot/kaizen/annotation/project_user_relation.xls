@@ -1,0 +1,489 @@
+<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+  <Version>16.00</Version>
+ </DocumentProperties>
+ <OfficeDocumentSettings xmlns="urn:schemas-microsoft-com:office:office">
+  <AllowPNG/>
+ </OfficeDocumentSettings>
+ <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
+  <WindowHeight>9012</WindowHeight>
+  <WindowWidth>23040</WindowWidth>
+  <WindowTopX>32767</WindowTopX>
+  <WindowTopY>32767</WindowTopY>
+  <ProtectStructure>False</ProtectStructure>
+  <ProtectWindows>False</ProtectWindows>
+ </ExcelWorkbook>
+ <Styles>
+  <Style ss:ID="Default" ss:Name="Normal">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font ss:FontName="Arial" x:Family="Swiss"/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="s65">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Font ss:FontName="Arial" x:Family="Swiss" ss:Color="#0000FF" ss:Bold="1"/>
+  </Style>
+  <Style ss:ID="s66">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+  </Style>
+ </Styles>
+ <Worksheet ss:Name="Sheet1">
+  <Table ss:ExpandedColumnCount="3" ss:ExpandedRowCount="85" x:FullColumns="1"
+   x:FullRows="1" ss:StyleID="s66" ss:DefaultColumnWidth="241.20000000000002"
+   ss:DefaultRowHeight="13.2">
+   <Column ss:Index="3" ss:StyleID="s66" ss:AutoFitWidth="0" ss:Width="477"/>
+   <Row>
+    <Cell ss:StyleID="s65"><Data ss:Type="String">id</Data></Cell>
+    <Cell ss:StyleID="s65"><Data ss:Type="String">name</Data></Cell>
+    <Cell ss:StyleID="s65"><Data ss:Type="String">group_concat(m.loginNo)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">405b-fe94-cd33965c-83dd-725a33eb8bb6</Data></Cell>
+    <Cell><Data ss:Type="String">贵州电信(Nokia)</Data></Cell>
+    <Cell><Data ss:Type="String">Ranmaozhao,sysadmin,Liangqishan,Liupeng,Gaohuizhen</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">40b8-da25-2d1f68be-be17-5a66d4ebcf41</Data></Cell>
+    <Cell><Data ss:Type="String">河北联通-沧州</Data></Cell>
+    <Cell><Data ss:Type="String">songyanda,yanqingwen,wangleijie,xuyibin,sysadmin,l</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">40c2-2214-f7de54ad-8ec9-bfc5348cf30a</Data></Cell>
+    <Cell><Data ss:Type="String">江西电信（贝尔）</Data></Cell>
+    <Cell><Data ss:Type="String">yangjian,huangmingxing,nikan,zhaojing,zhangbo1,gon</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">40c9-c84a-146ded79-a80e-86877f339a7d</Data></Cell>
+    <Cell><Data ss:Type="String">福建宁德联通</Data></Cell>
+    <Cell><Data ss:Type="String">sysadmin,liuliangchao,zhangzongyang</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">411e-ba4a-8132cf30-9b09-fc80affaa6c7</Data></Cell>
+    <Cell><Data ss:Type="String">河北联通-邯郸</Data></Cell>
+    <Cell><Data ss:Type="String">liuxuelei,sysadmin,yanqingwen,liyingyue</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">41a1-ff02-c5a3b197-b0a1-a64e78e5753d</Data></Cell>
+    <Cell><Data ss:Type="String">陕西联通</Data></Cell>
+    <Cell><Data ss:Type="String">wangyafeng,liweibin,wangzhuo,tianpeng,zhouwei,Huke</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">4278-b25a-1d94d1d0-a150-0f78a46b89fe</Data></Cell>
+    <Cell><Data ss:Type="String">内蒙古电信（贝尔）</Data></Cell>
+    <Cell><Data ss:Type="String">qiyi,NM_shenyj,NM_liuqiang,yanxin,NM_liusonglin,LU</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">428e-b1e6-61b2348a-8a2f-a4cd0c40a99c</Data></Cell>
+    <Cell><Data ss:Type="String">宁夏移动(贝尔)</Data></Cell>
+    <Cell><Data ss:Type="String">wangdelong,sysadmin,liyanpeng,shihongliang</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">429e-07c3-ed608c76-ad23-74cd41bf920f</Data></Cell>
+    <Cell><Data ss:Type="String">福建联通(贝尔)</Data></Cell>
+    <Cell><Data ss:Type="String">hongyongchao,shennan,chenkai,zhangzongyang,panweiq</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">42b3-e02d-24ffda5a-a6e0-738e8dfab9f1</Data></Cell>
+    <Cell><Data ss:Type="String">测试用</Data></Cell>
+    <Cell><Data ss:Type="String">sysadmin</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">42d3-17ef-3775bfc7-aecc-44fd688de1a5</Data></Cell>
+    <Cell><Data ss:Type="String">陕西移动（替换优化）</Data></Cell>
+    <Cell><Data ss:Type="String">liyongxin,sysadmin,wangyuan,tankun,jialiangliang,y</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">42d4-4c78-115306fa-b3c9-7b525f9a6c12</Data></Cell>
+    <Cell><Data ss:Type="String">Taiwan Star Telecom</Data></Cell>
+    <Cell><Data ss:Type="String">Kevin Lan,sysadmin</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">42ff-70c8-49a404b7-b33f-445a04ced50f</Data></Cell>
+    <Cell><Data ss:Type="String">浙江电信（贝尔）</Data></Cell>
+    <Cell><Data ss:Type="String">weizhong,fengjian,wangpeicheng,lihongyu,leijianron</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">4317-a255-57d0da48-ae3f-7cc64367b3be</Data></Cell>
+    <Cell><Data ss:Type="String">陕西电信(贝尔)</Data></Cell>
+    <Cell><Data ss:Type="String">qiangpengfei,zhangqiming,leijianfeng,fengzizhi,guo</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">432a-497e-ce436d60-8265-cd6df1927b4f</Data></Cell>
+    <Cell><Data ss:Type="String">贵州电信(Nokia)-黔东南</Data></Cell>
+    <Cell><Data ss:Type="String">Zhaojunwei,sysadmin,Gongguanghui,Liupeng,Gaohuizhe</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">4365-ab4a-1ff67159-8e89-f660ad7e6299</Data></Cell>
+    <Cell><Data ss:Type="String">宁夏移动(Nokia)</Data></Cell>
+    <Cell><Data ss:Type="String">lizhuang,liping,shihongliang,niuyujie,yangguoning,</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">4376-4367-64bfd868-a76b-db136948a316</Data></Cell>
+    <Cell><Data ss:Type="String">小张测试</Data></Cell>
+    <Cell><Data ss:Type="String">sysadmin</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">43f8-43b4-1b849684-89fb-1bb22e30f13c</Data></Cell>
+    <Cell><Data ss:Type="String">云南联通（nokia）</Data></Cell>
+    <Cell><Data ss:Type="String">sysadmin,zhoujunyi,wangxiyu,chenzhi,licong,pengaiy</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">43f8-57fe-c443fef5-bc2b-8516cbce18f2</Data></Cell>
+    <Cell><Data ss:Type="String">河北联通(Nokia)-石家庄</Data></Cell>
+    <Cell><Data ss:Type="String">zhangxiangya,liyingyue,sysadmin,Angang,qiyuefan,li</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">44a5-3918-23397237-a213-cf9a64d5ab74</Data></Cell>
+    <Cell><Data ss:Type="String">北京移动(Nokia)</Data></Cell>
+    <Cell><Data ss:Type="String">dongshuai,lichen,zhangjianteng,wufenglin,gaozhiyon</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">44b2-9389-cec0363e-8980-1efc21b8ece0</Data></Cell>
+    <Cell><Data ss:Type="String">河南电信(Nokia)</Data></Cell>
+    <Cell><Data ss:Type="String">wangchao,wujiabin,lichuanpeng,guoqiang,wangjing,xu</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">44e4-2419-ed78b023-a0f7-7580855d26b9</Data></Cell>
+    <Cell><Data ss:Type="String">江西移动(Nokia)</Data></Cell>
+    <Cell><Data ss:Type="String">sysadmin,zhaohaixing,zhangwenzhuang</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">44eb-c29d-a1ded94e-829d-304c77c196f4</Data></Cell>
+    <Cell><Data ss:Type="String">海南移动(Nokia)</Data></Cell>
+    <Cell><Data ss:Type="String">chenchengliang,fengqixue,renhongliang,chenguozhen,</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">4529-08f4-c4845a84-bfc7-b73e5b11d2a0</Data></Cell>
+    <Cell><Data ss:Type="String">广西电信（贝尔）</Data></Cell>
+    <Cell><Data ss:Type="String">xiaohongquan,liaoshihong,wangwei,xuejinliang,linre</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">452e-237f-f7ce8e14-a440-061f316600d0</Data></Cell>
+    <Cell><Data ss:Type="String">江苏联通（贝尔）</Data></Cell>
+    <Cell><Data ss:Type="String">liuyao,guanhaifeng,huangyunpeng,guandapeng,wangyi,</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">4530-a3bf-2acb128a-846d-a386f6aa3893</Data></Cell>
+    <Cell><Data ss:Type="String">贵州移动(贝尔)</Data></Cell>
+    <Cell><Data ss:Type="String">zhangyonglong,dingyuan,caomeng,LU HUACHEN,ligen,lv</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">456d-b050-923fe59a-a936-67afbccaac6a</Data></Cell>
+    <Cell><Data ss:Type="String">甘肃移动(贝尔)</Data></Cell>
+    <Cell><Data ss:Type="String">sysadmin,liyanzhaogs,liyulonggs,duyonghenggs,liyib</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">45a8-81f4-ec5db2c5-ae70-7e8c720d726b</Data></Cell>
+    <Cell><Data ss:Type="String">广西联通(Nokia)</Data></Cell>
+    <Cell><Data ss:Type="String">tangjianxiang,lijiawei,luoshifeng,zhukun,sysadmin,</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">45c3-6249-75ed77b2-9f53-7b08fecdb7b5</Data></Cell>
+    <Cell><Data ss:Type="String">陕西移动（工程优化）</Data></Cell>
+    <Cell><Data ss:Type="String">dangqi,wanghao,liuhaitao,dongshaocheng,pangzenghui</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">45f2-f839-3a97b8ab-b4d6-bfbbb501e8a4</Data></Cell>
+    <Cell><Data ss:Type="String">辽宁联通(Nokia)</Data></Cell>
+    <Cell><Data ss:Type="String">liuxu,weicheng,sz,liangxueming,fengxiangzhong,zhan</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">45ff-9c28-36a9c8c9-b95f-0892872d0e87</Data></Cell>
+    <Cell><Data ss:Type="String">四川联通(Nokia)</Data></Cell>
+    <Cell><Data ss:Type="String">sysadmin,tangjx,jilei,xionghj,laiy,huangzq</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">460f-40e8-8b21e55b-895f-033d5f656537</Data></Cell>
+    <Cell><Data ss:Type="String">新疆电信(Nokia)</Data></Cell>
+    <Cell><Data ss:Type="String">liuzhiming,dengxingxin,liuweixj,dingsongfeng,chenj</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">462e-0d32-791d9298-ab38-6273da68d2c6</Data></Cell>
+    <Cell><Data ss:Type="String">江西联通（贝尔）</Data></Cell>
+    <Cell><Data ss:Type="String">wangzefa,caiyaohui,zhoudongwen,wangweiren,zuobeiha</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">466a-56ff-93732928-b3e5-96c9320f5576</Data></Cell>
+    <Cell><Data ss:Type="String">山东电信</Data></Cell>
+    <Cell><Data ss:Type="String">zhangjun,JN_xinyu,DZ_mengfanbin,sysadmin,JN_xiejiz</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">46a9-4179-9a346485-bcf9-35388675e75e</Data></Cell>
+    <Cell><Data ss:Type="String">上海电信（贝尔）</Data></Cell>
+    <Cell><Data ss:Type="String">yanwentao,chenyu,hongyu,wangzhicai-shctc,dingbinbi</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">46f0-90af-1557560b-a87c-91d0cac69a55</Data></Cell>
+    <Cell><Data ss:Type="String">贵州电信(Nokia)-铜仁</Data></Cell>
+    <Cell><Data ss:Type="String">Fangbing,Zhangbaolei,Liangqishan,sysadmin,Gaohuizh</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">46f6-59ed-1fd4953b-abee-181755b0406a</Data></Cell>
+    <Cell><Data ss:Type="String">TEST-Hebei-MCC</Data></Cell>
+    <Cell><Data ss:Type="String">test,sysadmin</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">4714-707f-8918b4d9-bfbf-59ec05527242</Data></Cell>
+    <Cell><Data ss:Type="String">江苏移动（贝尔）</Data></Cell>
+    <Cell><Data ss:Type="String">BaoXuefeng,chenpeng,Wanghongyang,XiaXiaoxiang,meng</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">471b-79f6-d57d1efa-b1b7-0e4524268d0f</Data></Cell>
+    <Cell><Data ss:Type="String">河北联通(Nokia)-保定</Data></Cell>
+    <Cell><Data ss:Type="String">liyingyue,sysadmin,yanqingwen,wangdawei,yuzhenhai</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">473d-21a1-e30d7514-a292-62cea1a8e93a</Data></Cell>
+    <Cell><Data ss:Type="String">张三测试项目</Data></Cell>
+    <Cell><Data ss:Type="String">zhangsan,LU HUACHEN,sysadmin</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">474f-d3e9-2957cdad-97e9-7100ff9f730f</Data></Cell>
+    <Cell><Data ss:Type="String">上海移动</Data></Cell>
+    <Cell><Data ss:Type="String">weipeng,sysadmin,weicheng,libin,yanyong,shenjian,h</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">477d-1afc-c99dab7f-8ecf-e7c90428a36c</Data></Cell>
+    <Cell><Data ss:Type="String">移动测试项目</Data></Cell>
+    <Cell><Data ss:Type="String">sysadmin</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">47e7-83dc-163d3e06-8c75-089ff2842ba8</Data></Cell>
+    <Cell><Data ss:Type="String">四川移动(Nokia)</Data></Cell>
+    <Cell><Data ss:Type="String">Yangyong,Shiwei,Fanyanping,Lvjie,Danhanyu,Liqingch</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">4802-0150-3252e124-be05-636eac60c92d</Data></Cell>
+    <Cell><Data ss:Type="String">Chunghwa Telecom</Data></Cell>
+    <Cell><Data ss:Type="String">Dennis Chen,sysadmin</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">4880-1d24-2b2066fe-9a2b-6159e01d3935</Data></Cell>
+    <Cell><Data ss:Type="String">吉林移动（贝尔）</Data></Cell>
+    <Cell><Data ss:Type="String">liushaofeng,sysadmin,gaoxiyu,LU HUACHEN,zhangcheng</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">48ac-a6d7-3010b1e2-ad4d-2234f4d9a30e</Data></Cell>
+    <Cell><Data ss:Type="String">内蒙古联通(Nokia)</Data></Cell>
+    <Cell><Data ss:Type="String">gaorui,sysadmin,Jiangzhi,guwen,Mazhihui</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">48c3-1753-545aac58-8069-6fcad5af69f9</Data></Cell>
+    <Cell><Data ss:Type="String">河北移动(Nokia)</Data></Cell>
+    <Cell><Data ss:Type="String">lichangjiang,chenghao,zhangyongjun,huweikang,weiya</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">4906-07f3-2c0cc09d-a323-2fc7587658a1</Data></Cell>
+    <Cell><Data ss:Type="String">湖北电信（贝尔）</Data></Cell>
+    <Cell><Data ss:Type="String">sysadmin,Chengshishu,kongyangyang,luxiaokun,gaolun</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">4999-57e9-0273128f-9e08-f4eb8d3e433f</Data></Cell>
+    <Cell><Data ss:Type="String">HLJCUC</Data></Cell>
+    <Cell><Data ss:Type="String">hljzhaopeng,wangbaicheng,wangyijun,jiangchangbao,z</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">4a04-f7dc-2e54eb5a-98b0-ded38c73c9f2</Data></Cell>
+    <Cell><Data ss:Type="String">安徽电信(Nokia)</Data></Cell>
+    <Cell><Data ss:Type="String">helong,gongxun,zhangpan,xutao,wangjingjing,yangshe</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">4a24-1a18-64969e67-b994-b8f252af0782</Data></Cell>
+    <Cell><Data ss:Type="String">广东移动(Nokia)</Data></Cell>
+    <Cell><Data ss:Type="String">zhouqiujing,liujiashun,chenchunyu,liaoguangzheng,h</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">4a9f-d3e9-3aff903e-b9f4-052492dd4f2e</Data></Cell>
+    <Cell><Data ss:Type="String">云南移动(Nokia)</Data></Cell>
+    <Cell><Data ss:Type="String">yuanerjia,sysadmin,yangzonglin,Penghua,ZhaoXinghai</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">4aab-22d4-bc852ced-8f8e-280005981f58</Data></Cell>
+    <Cell><Data ss:Type="String">浙江移动(Nokia)</Data></Cell>
+    <Cell><Data ss:Type="String">lidiyang,weixuebin,huangchunhong,lichao,wangweihai</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">4ac3-bc55-ff988d89-b556-4956ee9242b1</Data></Cell>
+    <Cell><Data ss:Type="String">河南移动(Nokia)</Data></Cell>
+    <Cell><Data ss:Type="String">Xiayoujun,sysadmin</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">4b4b-73b5-47432e78-9459-6800df6778f8</Data></Cell>
+    <Cell><Data ss:Type="String">CMCC测试项目</Data></Cell>
+    <Cell><Data ss:Type="String">baiyang,baohongfei,anyang,beibei,admin,dongshuhai,</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">4b4f-8bdb-8790fdae-b3f3-ec0a07885134</Data></Cell>
+    <Cell><Data ss:Type="String">山东移动(Nokia)</Data></Cell>
+    <Cell><Data ss:Type="String">sysadmin,jiangdongyang,zhangjian,zhangbaohu,wangxu</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">4bd1-56bf-b5aad928-bfa9-f3fc3a3e0e8e</Data></Cell>
+    <Cell><Data ss:Type="String">黑龙江联通(贝尔)</Data></Cell>
+    <Cell><Data ss:Type="String">LU HUACHEN,sysadmin,zhuguodong,fanzhaobin,hansong</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">4bdf-2ead-628fec9c-a235-e2ea6da90dfb</Data></Cell>
+    <Cell><Data ss:Type="String">测试项目</Data></Cell>
+    <Cell><Data ss:Type="String">beibei,lanyue,huzhihe,yanxin,sysadmin</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">4bdf-5a46-e859bcac-a985-827fa411d277</Data></Cell>
+    <Cell><Data ss:Type="String">河北电信(Nokia)</Data></Cell>
+    <Cell><Data ss:Type="String">lihuan,lizuguang,baiyingkun,liyaqun,sysadmin,zhaoh</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">4c0d-49c7-7e8bb2d0-9447-0b9c413c7dd4</Data></Cell>
+    <Cell><Data ss:Type="String">安徽联通(Nokia)</Data></Cell>
+    <Cell><Data ss:Type="String">zhangxiaobin,yinchong,zhouxuan,wanghaipeng,sysadmi</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">4c2f-288f-ec59593b-b103-aafe18f682f1</Data></Cell>
+    <Cell><Data ss:Type="String">山东电信(贝尔)</Data></Cell>
+    <Cell><Data ss:Type="String">liushibin,chenzhujun,zhangjun,LU HUACHEN,wubin,sys</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">4c97-b73e-8f168730-959f-d929c03d7084</Data></Cell>
+    <Cell><Data ss:Type="String">黑龙江电信</Data></Cell>
+    <Cell><Data ss:Type="String">shanzhenqiang,songbo,huodabei,fengguoyang,jiangbin</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">4cb8-c5d5-0e81d7db-9aac-5e6665bd6168</Data></Cell>
+    <Cell><Data ss:Type="String">黑龙江联通(Nokia)</Data></Cell>
+    <Cell><Data ss:Type="String">zhangxinbo,songyang,yangliwei,wanghao,sysadmin,yan</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">4d47-38c1-47bf2e66-83ee-65f0c5bf4a6b</Data></Cell>
+    <Cell><Data ss:Type="String">河北联通(Nokia)-衡水</Data></Cell>
+    <Cell><Data ss:Type="String">yanqingwen,zhangmao,sysadmin,liyingyue</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">4d58-8b98-1bcd4baa-8c21-8a36caf75de5</Data></Cell>
+    <Cell><Data ss:Type="String">广西移动(贝尔)</Data></Cell>
+    <Cell><Data ss:Type="String">shizhi,shidengke,shizhi,wangguoqian,huangbingqing,</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">4d6d-b60d-75c9d7b7-b3c4-9103b30e6e27</Data></Cell>
+    <Cell><Data ss:Type="String">黑龙江移动(贝尔)</Data></Cell>
+    <Cell><Data ss:Type="String">sysadmin,jinxianming,liangchuang,LU HUACHEN</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">4da0-4fcb-bafcc284-823c-1b92e5be2d8e</Data></Cell>
+    <Cell><Data ss:Type="String">上海联通(Nokia)</Data></Cell>
+    <Cell><Data ss:Type="String">fanghk,shihao,zhouliming,sangdongqing,yangliu,funi</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">4dd7-e425-bf28803f-8b30-0086bf95b881</Data></Cell>
+    <Cell><Data ss:Type="String">甘肃联通(Nokia)</Data></Cell>
+    <Cell><Data ss:Type="String">zhouchong,yangchen,wangyong,fujiaqing,zhangyang,li</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">4df2-d363-57b4f73b-aa2f-9cea683754bd</Data></Cell>
+    <Cell><Data ss:Type="String">湖南移动(Nokia)</Data></Cell>
+    <Cell><Data ss:Type="String">zhoujin,yangkaihong,jiaomengfei,zhangshaojun,sysad</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">4df5-ca91-0a2ad10b-980c-e2b56112bfe2</Data></Cell>
+    <Cell><Data ss:Type="String">江苏电信(Nokia)</Data></Cell>
+    <Cell><Data ss:Type="String">oulingang,jiangxin,zhanghongai,lvquanhui,zhanghong</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">4e34-2ea7-44769a7f-85ba-066518e802c8</Data></Cell>
+    <Cell><Data ss:Type="String">辽宁电信</Data></Cell>
+    <Cell><Data ss:Type="String">zhangrongyu,sunyoujun,wangyongsheng,lixuecheng,wan</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">4e40-4288-688b4a1d-907b-345ff57bb893</Data></Cell>
+    <Cell><Data ss:Type="String">内蒙古移动(Nokia)</Data></Cell>
+    <Cell><Data ss:Type="String">wenbiao.jiang,xulong.zhao,gangqiang.dong,luodong.j</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">4e48-a793-54afc2f5-a176-9f19a3bab303</Data></Cell>
+    <Cell><Data ss:Type="String">江苏电信(贝尔)</Data></Cell>
+    <Cell><Data ss:Type="String">shiwenhui,liji,jintongsong,wangyan,sysadmin,tancha</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">4e49-1fce-f460d63f-a94a-473c249282e8</Data></Cell>
+    <Cell><Data ss:Type="String">安徽移动(Nokia)</Data></Cell>
+    <Cell><Data ss:Type="String">weixiaodong,zhangyu,xuxiaolong,xuchuanliang,panmao</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">4e60-3f13-0613853a-8d83-13ca454b6b38</Data></Cell>
+    <Cell><Data ss:Type="String">湖南联通(Nokia)</Data></Cell>
+    <Cell><Data ss:Type="String">licheng,zhanglei_HN,Zhanglinlin,kongdejun,shixiaoh</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">4e7f-0b8a-ae82e66d-8742-b35d814052e9</Data></Cell>
+    <Cell><Data ss:Type="String">新疆联通(NOKIA)</Data></Cell>
+    <Cell><Data ss:Type="String">yangzhihan,sysadmin</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">4f0a-e3a9-d46e05b7-bb89-c3f5a04d0f9b</Data></Cell>
+    <Cell><Data ss:Type="String">福建电信（贝尔）</Data></Cell>
+    <Cell><Data ss:Type="String">chixinhang,zhongzhiming,laijinhong,sysadmin,yangfe</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">4f0e-dcaa-91ea9487-8d65-785bf7c03607</Data></Cell>
+    <Cell><Data ss:Type="String">湖北移动(Nokia)</Data></Cell>
+    <Cell><Data ss:Type="String">sy-jiangcs,sy-zhoub,sy-zhangl,sy-xuj,sy-tangq,sy-h</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">4f20-5699-23c0d1c2-ad00-96e4727cf63a</Data></Cell>
+    <Cell><Data ss:Type="String">辽宁移动</Data></Cell>
+    <Cell><Data ss:Type="String">sungongchen,wangkun,wangyunguo,yudongsheng,donghan</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">4f28-44cf-e1e747d9-92da-f8cf9bdac0ec</Data></Cell>
+    <Cell><Data ss:Type="String">福建移动（NOKIA）</Data></Cell>
+    <Cell><Data ss:Type="String">sysadmin,zhangchaoyang,zengyuting,zhangqiang,ligui</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">4f65-8ccc-cdcf55d7-b7fb-b0e64722caa9</Data></Cell>
+    <Cell><Data ss:Type="String">新疆移动(Nokia)</Data></Cell>
+    <Cell><Data ss:Type="String">anmingwei,sysadmin,lixiaojun</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">4f85-83b8-abb5884c-ad7f-340b8250d738</Data></Cell>
+    <Cell><Data ss:Type="String">陕西移动NB-IOT优化</Data></Cell>
+    <Cell><Data ss:Type="String">jinxin,liuhongtao,wujun,sysadmin,chenxijing,hezeng</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">4f9c-2838-ce649213-aff1-9cee7399939b</Data></Cell>
+    <Cell><Data ss:Type="String">湖南电信项目</Data></Cell>
+    <Cell><Data ss:Type="String">liubo,huangaiguo,shengyunlong,tianli-hn,shenhui,di</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">4fb2-8f2f-10c8e9d9-a903-376a72714a78</Data></Cell>
+    <Cell><Data ss:Type="String">四川电信(Nokia)</Data></Cell>
+    <Cell><Data ss:Type="String">lihuan,zhoushan,yangshuai,liuhua,sysadmin,liliangh</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <Print>
+    <ValidPrinterInfo/>
+    <PaperSizeIndex>9</PaperSizeIndex>
+    <HorizontalResolution>600</HorizontalResolution>
+    <VerticalResolution>600</VerticalResolution>
+   </Print>
+   <Selected/>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+     <ActiveRow>3</ActiveRow>
+     <ActiveCol>2</ActiveCol>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+</Workbook>
