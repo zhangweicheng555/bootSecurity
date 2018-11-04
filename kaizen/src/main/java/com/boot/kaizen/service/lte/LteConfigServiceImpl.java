@@ -80,4 +80,9 @@ class LteConfigServiceImpl implements ILteConfigService {
 		return configDao.findInfoById(projId);
 	}
 
+	@Override
+	public void changeStatus(Long id,Long status) {
+		configDao.changeStatus(id,status);
+	}
+
 }

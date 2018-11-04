@@ -5,12 +5,29 @@
 
 	
 	<select id="findProjByUserName" resultType="java.lang.Long">
-		 select proj 
-		 from 
-		 sys_login_service
-		 where username=#{username}
-		 order by createTime desc
-		 limit 1
+		 
+		 select  
+		 	c.proj 
+		 from (
+		 		 select distinct s.proj,s.createTime
+				 from 
+				 sys_project p
+				 ,proj_role_relation pr
+				 ,sys_role r
+				 ,sys_role_user ru
+				 ,sys_user u
+				 
+				 ,sys_login_service s
+				 where 
+				 s.username=#{username}
+				 and p.id=pr.proj_id
+				 and pr.role_id=r.id
+				 and r.id=ru.roleId
+				 and u.id=ru.userId
+				 and s.proj=p.id
+				 order by s.createTime desc
+				 limit 1
+		) c
 	</select>
 	
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id" >

@@ -24,4 +24,5 @@ public interface PermissionService {
 	 * @date 2018年10月28日 上午12:42:01
 	 */
 	List<Permission> queryByUserIdAndProjId(String username, Long projId);
+	
 }

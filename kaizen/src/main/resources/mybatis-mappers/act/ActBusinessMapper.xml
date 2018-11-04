@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boot.kaizen.dao.act.ActBusinessDao">
+
+	
+	
+	<insert id="insert">
+		insert 
+		  into 
+		  business_activiti_relation(buss_type,create_time,buss_id,proj_id,act_piid,check_persion_id)
+		  values(#{map.bussType},#{map.createTime},#{map.bussId},#{map.projId},#{map.actPiid},#{map.assignIds})
+	</insert>
+	<insert id="insertAll">
+		insert 
+		  into 
+		  business_activiti_relation(check_result,buss_type,create_time,buss_id,check_persion_id,proj_id,act_task_name,act_task_key,act_piid)
+		  values(#{map.checkResult},#{map.bussType},#{map.createTime},#{map.bussId},#{map.checkAssignee},#{map.projId},#{map.actName},#{map.actId},#{map.piid})
+	</insert>
+	
+	<select id="queryPiid" resultType="java.lang.String">
+		select act_piid 
+		from 
+			business_activiti_relation 
+		where 
+			buss_id=#{id}
+			and buss_type=#{bussType}
+			order by create_time desc
+		limit 1
+	</select>
+	
+	<select id="findCheckInfo" resultType="java.util.Map">
+		select 
+		    c.id as "id"
+            ,c.result as "result"
+		    ,GROUP_CONCAT(c.nickname SEPARATOR ',')   as "checkname"
+        from (
+			select r.id as id
+                ,r.check_result as result
+                ,r.create_time as create_time
+                ,u.id as uid
+                ,u.nickname  as nickname
+			from 
+				business_activiti_relation  r
+				,sys_user u
+			where 
+				r.buss_id=#{id}
+				and r.buss_type=#{bussType}
+			    and find_in_set(u.id, r.check_persion_id)
+				order by r.create_time DESC
+		) c
+        group by c.id,c.result,c.create_time
+        limit 1
+	</select>
+	
+
+	
+</mapper>

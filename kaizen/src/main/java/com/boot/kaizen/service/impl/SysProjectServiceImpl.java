@@ -120,7 +120,8 @@ public class SysProjectServiceImpl implements SysProjectService {
 	@Override
 	public JsonMsgUtil queryProjectsForUsername(String username) {
 		Map<String, Object> objMap = new HashMap<>();
-
+		Map<String, Object> nowMap = new HashMap<>();
+		
 		JsonMsgUtil j = new JsonMsgUtil(false);
 		List<Map<String, Object>> projects = projectDao.queryProjects(username);
 		if (projects == null || projects.size() == 0) {
@@ -133,18 +134,16 @@ public class SysProjectServiceImpl implements SysProjectService {
 		for (Map<String, Object> map : projects) {
 			Long id = Long.valueOf(map.get("id").toString());
 			if (prjId.equals(id)) {
-				Map<String, Object> nowMap = new HashMap<>();
 				nowMap.put("id", prjId);
 				nowMap.put("projName", String.valueOf(map.get("projName")));
 				projects.remove(map);
-
-				objMap.put("nowProject", nowMap);
-				objMap.put("listProject", projects);
-				objMap.put("username", username);
-				j = new JsonMsgUtil(true, "操作成功", objMap);
 				break;
 			}
 		}
+		objMap.put("nowProject", nowMap);
+		objMap.put("listProject", projects);
+		objMap.put("username", username);
+		j = new JsonMsgUtil(true, "操作成功", objMap);
 		return j;
 	}
 

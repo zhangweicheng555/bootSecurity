@@ -1,7 +1,7 @@
 package com.boot.kaizen.model;
 
 /**
- * lte测试配置项  lte_config
+ * lte测试配置项 lte_config
  * 
  * @author weichengz
  * @date 2018年10月28日 上午3:44:34
@@ -23,6 +23,17 @@ public class LteConfig extends BaseEntity<Long> {
 	private String mFtpFileUpPath;// FTP上传文件路径
 	private String mFtpUpRateTarget;// FTP上传速率目标值
 	private String mFtpDownRateTarget;// FTP下载速率目标值
+
+	private Long status;// 流程审核的状态 默认是0 待审核 1正在审核 2 审核通过 3 审核不通过
+
+
+	public Long getStatus() {
+		return status;
+	}
+
+	public void setStatus(Long status) {
+		this.status = status;
+	}
 
 	public String getmVoiceCount() {
 		return mVoiceCount;

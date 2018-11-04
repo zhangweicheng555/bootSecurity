@@ -45,4 +45,12 @@ public interface ILteConfigService {
 	 * @param projId
 	 */
 	LteConfig findInfoById(Long projId);
+	
+	/**
+	 * 
+	* @Description: 改变流程状态状态
+	* @author weichengz
+	* @date 2018年11月4日 上午9:50:59
+	 */
+	void changeStatus(Long id,Long status);
 }

@@ -184,7 +184,8 @@ function initZtree(treeId,flag){
 	var setting = {
 			check: {
 				enable: true,
-				nocheckInherit: true
+				nocheckInherit: true,
+				chkboxType: { "Y": "ps", "N": "s" }
 			},
 			data: {
 				simpleData: {
@@ -206,4 +207,46 @@ function initZtree(treeId,flag){
 	       return $.fn.zTree.init($("#"+treeId), setting, data);
         }
     });
+}
+
+//初始化某个项目的  角色  人员树
+function initPersonZtree(treeId,flag){
+	var data={};
+	if(flag){
+		data = {"flag":flag};
+	}
+	
+	var setting = {
+			check: {
+				enable: true,
+				nocheckInherit: true
+			},
+			data: {
+				simpleData: {
+					enable: true,
+					idKey: "id",
+					pIdKey: "pId",
+					rootPId: 0
+				}
+			},
+			 callback: {//设置父节点不让选择
+		            beforeCheck: zTreeBeforeCheck
+		     }
+	};
+	
+	$.ajax({
+		type : 'post',
+		url : '/role/findRolePersion',
+		async : false,
+		data:data,
+		dataType: "json",
+		success : function(data) {
+			return $.fn.zTree.init($("#"+treeId), setting, data);
+		}
+	});
+}
+
+
+function zTreeBeforeCheck(treeId, treeNode) {
+    return !treeNode.isParent;
 }

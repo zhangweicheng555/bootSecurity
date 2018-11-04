@@ -2,6 +2,7 @@ package com.boot.kaizen.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -89,9 +90,12 @@ public class PermissionServiceImpl implements PermissionService {
 		return ztreeModels;
 	}
 
+	
+	
 	@Override
 	public List<Permission> queryByUserIdAndProjId(String username, Long projId) {
 		return permissionDao.queryByUserIdAndProjId(username,projId);
 	}
+
 
 }

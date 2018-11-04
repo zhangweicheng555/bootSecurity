@@ -1,9 +1,12 @@
 package com.boot.kaizen.dao;
 
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.boot.kaizen.model.Permission;
 import com.boot.kaizen.model.SysRole;
 
 @Mapper
@@ -21,5 +24,12 @@ public interface SysRoleDao {
 
 	void delete(@Param("id") Long id);
 
+	/**
+	 * 
+	* @Description: 查询项目下的各个角色的人员信息
+	* @author weichengz
+	* @date 2018年11月3日 下午11:40:40
+	 */
+	List<Map<String, Object>> findRolePersion(@Param("projId") Long projId);
 
 }

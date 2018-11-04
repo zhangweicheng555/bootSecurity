@@ -3,6 +3,7 @@ package com.boot.kaizen.service.impl;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -14,6 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.boot.kaizen.dao.SysRoleDao;
 import com.boot.kaizen.dao.SysRolePermissionDao;
 import com.boot.kaizen.entity.TreeTable;
+import com.boot.kaizen.entity.ZtreeModel;
+import com.boot.kaizen.model.Permission;
 import com.boot.kaizen.model.SysProject;
 import com.boot.kaizen.model.SysProjectRoleRelation;
 import com.boot.kaizen.model.SysRole;
@@ -136,4 +139,31 @@ public class RoleServiceImpl implements RoleService {
 		return j;
 	}
 
+	@Override
+	public List<ZtreeModel> findRolePersion(Long projId) {
+		List<ZtreeModel> ztreeModels = new ArrayList<ZtreeModel>();
+		List<Map<String, Object>> roleUsers = sysRoleDao.findRolePersion(projId);
+		if (roleUsers != null && roleUsers.size() > 0) {
+			for (Map<String, Object> map : roleUsers) {
+				Long roleId=Long.valueOf(map.get("roleId").toString());
+				
+				String roleName=map.get("roleName").toString();
+				String userList=map.get("userList").toString();
+				ZtreeModel ztreeModel=new ZtreeModel(roleId,0l,roleName);
+				ztreeModels.add(ztreeModel);
+				
+				if (userList != null) {
+					String[] array=userList.split(",");
+					for (String userIdName : array) {
+						String[] idName=userIdName.split("_");
+						Long userId=Long.valueOf(idName[0].toString());
+						String userName=idName[1].toString();
+						ZtreeModel ztreeModelChild=new ZtreeModel(userId,ztreeModel.getId(),userName);
+						ztreeModels.add(ztreeModelChild);
+					}
+				}
+			}
+		}
+		return ztreeModels;
+	}
 }

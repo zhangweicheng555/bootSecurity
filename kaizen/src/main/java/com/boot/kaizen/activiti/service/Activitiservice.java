@@ -1,11 +1,18 @@
 package com.boot.kaizen.activiti.service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.activiti.engine.runtime.ProcessInstance;
+import org.activiti.engine.task.Task;
+
+import com.boot.kaizen._interface.BusinessInterface;
+import com.boot.kaizen.activiti.model.StartActEntity;
+import com.boot.kaizen.entity.LoginUser;
+import com.boot.kaizen.util.JsonMsgUtil;
 
 /**
  * 工作流业务处理接口
@@ -104,4 +111,35 @@ public interface Activitiservice {
 	 * @param cascade
 	 */
 	public void deleteProcessByDefinationId(String processDefinationId, Boolean cascade);
+
+	/**
+	 * 启动流程实例
+	 * 
+	 * @author weichengz
+	 * @date 2018年11月4日 上午12:50:46
+	 */
+	public void startProcessInstance(StartActEntity startActEntity,BusinessInterface businessInterface);
+	
+	/**
+	 * 
+	* @Description: 查询任务
+	* @author weichengz
+	* @date 2018年11月4日 下午6:47:30
+	 */
+	public List<Task> queryMyActTask(String processDefinationKey,String taskAssign,Long projId);
+
+	/**
+	 * 
+	* @Description: 根据任务的id获取数据的id
+	* @author weichengz
+	* @date 2018年11月4日 下午8:13:58
+	 */
+	public JsonMsgUtil loadRecordId(String taskId, String bussType);
+	/**
+	 * 
+	* @Description: lteConfig审核
+	* @author weichengz
+	* @date 2018年11月4日 下午8:42:19
+	 */
+	public JsonMsgUtil checkLteConfigTask(Long recordId, String taskId, Long status, String checkResult,LoginUser user);
 }

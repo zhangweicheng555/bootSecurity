@@ -96,12 +96,22 @@ public class RoleController {
 	 * @date 2018年10月5日 上午11:56:40 flag:角色的id
 	 */
 	@RequestMapping(value = "/find")
-	@PreAuthorize("hasAuthority('sys:menu:list')")
+	@PreAuthorize("hasAuthority('sys:role:list')")
 	public List<ZtreeModel> find(@RequestParam(value = "flag", required = false) Long flag) {
 		List<Long> ids = roleService.findPermissionIdsByRoleId(flag);
 		if (ids == null) {
 			ids = new ArrayList<Long>();
 		}
 		return permissionService.find(ids);
+	}
+	/**
+	 * 
+	 * @Description: 查询角色对应的人员树
+	 * @author weichengz
+	 * @date 2018年10月5日 上午11:56:40 flag:角色的id
+	 */
+	@RequestMapping(value = "/findRolePersion")
+	public List<ZtreeModel> findRolePersion(@RequestParam(value = "flag", required = true) Long flag) {
+		return roleService.findRolePersion(flag);
 	}
 }

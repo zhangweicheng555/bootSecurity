@@ -52,8 +52,8 @@
 		 and pr.role_id=r.id
 		 and r.id=ru.roleId
 		 and u.id=ru.userId
-		 order by p.createTime desc
 		 and u.username=#{username}
+		 order by p.createTime desc
 		 limit 1
 	</select>
 	

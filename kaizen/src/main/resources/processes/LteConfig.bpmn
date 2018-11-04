@@ -3,7 +3,7 @@
   <process id="LteConfig" name="测试配置流程图" isExecutable="true">
     <startEvent id="startevent1" name="Start"></startEvent>
     <serviceTask id="servicetask2" name="测试配置信息" activiti:class="com.boot.kaizen.activiti.delegate.LteConfigDelegate"></serviceTask>
-    <userTask id="usertask1" name="配置信息审核" activiti:assignee="#{user}"></userTask>
+    <userTask id="usertask1" name="配置信息审核" activiti:assignee="#{user}" activiti:formKey="pages/activiti/lteConfigTaskCheck.html"></userTask>
     <sequenceFlow id="flow1" sourceRef="startevent1" targetRef="servicetask2"></sequenceFlow>
     <sequenceFlow id="flow2" sourceRef="servicetask2" targetRef="usertask1"></sequenceFlow>
     <endEvent id="endevent1" name="End"></endEvent>
@@ -12,28 +12,28 @@
   <bpmndi:BPMNDiagram id="BPMNDiagram_LteConfig">
     <bpmndi:BPMNPlane bpmnElement="LteConfig" id="BPMNPlane_LteConfig">
       <bpmndi:BPMNShape bpmnElement="startevent1" id="BPMNShape_startevent1">
-        <omgdc:Bounds height="35.0" width="35.0" x="140.0" y="240.0"></omgdc:Bounds>
+        <omgdc:Bounds height="35.0" width="35.0" x="130.0" y="100.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="servicetask2" id="BPMNShape_servicetask2">
-        <omgdc:Bounds height="55.0" width="105.0" x="280.0" y="230.0"></omgdc:Bounds>
+        <omgdc:Bounds height="55.0" width="105.0" x="301.0" y="90.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="usertask1" id="BPMNShape_usertask1">
-        <omgdc:Bounds height="55.0" width="105.0" x="490.0" y="230.0"></omgdc:Bounds>
+        <omgdc:Bounds height="55.0" width="105.0" x="544.0" y="91.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="endevent1" id="BPMNShape_endevent1">
-        <omgdc:Bounds height="35.0" width="35.0" x="700.0" y="240.0"></omgdc:Bounds>
+        <omgdc:Bounds height="35.0" width="35.0" x="810.0" y="101.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
-        <omgdi:waypoint x="175.0" y="257.0"></omgdi:waypoint>
-        <omgdi:waypoint x="280.0" y="257.0"></omgdi:waypoint>
+        <omgdi:waypoint x="165.0" y="117.0"></omgdi:waypoint>
+        <omgdi:waypoint x="301.0" y="117.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
-        <omgdi:waypoint x="385.0" y="257.0"></omgdi:waypoint>
-        <omgdi:waypoint x="490.0" y="257.0"></omgdi:waypoint>
+        <omgdi:waypoint x="406.0" y="117.0"></omgdi:waypoint>
+        <omgdi:waypoint x="544.0" y="118.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow3" id="BPMNEdge_flow3">
-        <omgdi:waypoint x="595.0" y="257.0"></omgdi:waypoint>
-        <omgdi:waypoint x="700.0" y="257.0"></omgdi:waypoint>
+        <omgdi:waypoint x="649.0" y="118.0"></omgdi:waypoint>
+        <omgdi:waypoint x="810.0" y="118.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

@@ -227,8 +227,8 @@ layui.use(['layer', 'element'], function() {
 					$("#nowProject").text(data.object.nowProject.projName);
 					var listProjects=data.object.listProject;
 					if(listProjects != null && listProjects.length >0){
+						$("#childDl").empty();
 						for(var i=0;i<listProjects.length;i++){
-							$("#childDl").empty();
 							var project=listProjects[i];
 							$("#childDl").append("<dd><a href='javascript:;' class='clsProj'  id='"+project.id+"'>"+project.projName+"</a></dd>");
 						}

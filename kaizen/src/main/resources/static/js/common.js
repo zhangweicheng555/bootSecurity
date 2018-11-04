@@ -88,13 +88,14 @@ layui.define(['layer','laydate','jquery'], function(exports) {
 							  $.ajax({
 								   type: "POST",url: submitUrl,data:$(checkfirstintroduce).serialize() ,dataType: "json",
 								   success: function(msg){
+									   console.info(msg);
 									   if(msg.success){
 										   parent.layer.close(indexModel);
-										   common.getMsgBlackDialog(msg.msg,2000);
+										   common.getMsgBlackDialog(msg.message,2000);
 										   fun();
 								       }else{
-								    	   if(msg.msg){
-								    		   common.getMsgDialog(msg.msg,5,2000);
+								    	   if(msg.message){
+								    		   common.getMsgDialog(msg.message,5,2000);
 								    	   }else{
 								    		   common.getMsgDialog("操作失败...",5,2000);
 								    	   }
@@ -148,7 +149,7 @@ layui.define(['layer','laydate','jquery'], function(exports) {
 					   success: function(msg){
 						   if(msg.success){
 							   parent.layer.close(index);
-							   common.getMsgBlackDialog(msg.msg,2000);
+							   common.getMsgBlackDialog(msg.message,2000);
 							   fun();
 					       }else{
 					    	   common.getMsgDialog("操作失败...",5,2000);
@@ -189,13 +190,13 @@ layui.define(['layer','laydate','jquery'], function(exports) {
 						   type: "POST",url: submitUrl,data:data,dataType: "json",
 						   success: function(msg){
 							   if(msg.success){
-								   common.getMsgBlackDialog(msg.msg,2000);
+								   common.getMsgBlackDialog(msg.message,2000);
 								   if(typeof funModel == 'function'){
 									   funModel();
 								   }
 						       }else{
-						    	   if(msg.msg){
-						    		   common.getMsgDialog(msg.msg,5,2000);
+						    	   if(msg.message){
+						    		   common.getMsgDialog(msg.message,5,2000);
 						    	   }else{
 						    		   common.getMsgDialog("操作失败...",5,2000);
 						    	   }

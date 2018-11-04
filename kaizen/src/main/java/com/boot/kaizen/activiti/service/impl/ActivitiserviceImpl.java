@@ -6,11 +6,10 @@ import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletResponse;
-
 import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.bpmn.model.FlowNode;
 import org.activiti.bpmn.model.SequenceFlow;
@@ -25,11 +24,20 @@ import org.activiti.engine.impl.RepositoryServiceImpl;
 import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
+import org.activiti.engine.task.Task;
 import org.activiti.image.ProcessDiagramGenerator;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
+import org.springframework.transaction.annotation.Transactional;
+import com.boot.kaizen._interface.BusinessInterface;
+import com.boot.kaizen._interface.LteConfigActBusiness;
+import com.boot.kaizen.activiti.model.StartActEntity;
 import com.boot.kaizen.activiti.service.Activitiservice;
+import com.boot.kaizen.entity.LoginUser;
+import com.boot.kaizen.service.act.IActBusinessService;
+import com.boot.kaizen.service.lte.ILteConfigService;
+import com.boot.kaizen.util.JsonMsgUtil;
 
 /**
  * 工作业务处理类
@@ -50,20 +58,22 @@ public class ActivitiserviceImpl implements Activitiservice {
 	private RepositoryService repositoryService;
 	@Autowired
 	private ProcessEngine processEngine;
-
+	@Autowired
+	private ILteConfigService lteConfigService;
+	@Autowired
+	private LteConfigActBusiness lteConfigActBusiness;
+	
+	
+	
 	@Override
 	public ProcessInstance srartProcessInstanceByKey(String processDefinationKey) {
 		ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(processDefinationKey);
-		System.out.println("创建了流程实例：" + processInstance.getId() + " " + processInstance.getDeploymentId() + " "
-				+ processInstance.getName());
 		return processInstance;
 	}
 
 	@Override
 	public ProcessInstance srartProcessInstanceByKeyV(String processDefinationKey, Map<String, Object> variables) {
 		ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(processDefinationKey, variables);
-		System.out.println("创建了流程实例：" + processInstance.getId() + " " + processInstance.getDeploymentId() + " "
-				+ processInstance.getName());
 		return processInstance;
 	}
 
@@ -230,6 +240,112 @@ public class ActivitiserviceImpl implements Activitiservice {
 		ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery()
 				.processDefinitionId(processDefinationId).singleResult();
 		repositoryService.deleteDeployment(processDefinition.getDeploymentId(), cascade);
+	}
+
+	@Transactional
+	@Override
+	public void startProcessInstance(StartActEntity startActEntity, BusinessInterface businessInterface) {
+		String businessKey = null;
+		if (startActEntity.getRecordId() == null || StringUtils.isBlank(startActEntity.getProcessKey())) {
+			throw new IllegalArgumentException("记录ID/流程定义的key不能为空");
+		}
+		businessKey = startActEntity.getProcessKey() + "_" + startActEntity.getRecordId();
+		Map<String, Object> variables = startActEntity.getTags();
+		variables.put("user", startActEntity.getAssignIds());
+		variables.put("recordId", startActEntity.getRecordId());
+		variables.put("projId", startActEntity.getProjId());
+
+		ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(startActEntity.getProcessKey(),
+				businessKey, variables);
+
+		if (businessInterface != null) {
+			// 修改业务状态
+			businessInterface.startProcessInstance(variables);
+
+			// 记录流程与业务表的关系
+			Map<String, Object> map = new HashMap<>();
+			map.put("bussType", startActEntity.getProcessKey());
+			map.put("createTime", new Date());
+			map.put("bussId", startActEntity.getRecordId());
+			map.put("projId", startActEntity.getProjId());
+			map.put("assignIds", startActEntity.getAssignIds());
+			map.put("actPiid", processInstance.getId());
+			businessInterface.recordActProcessWithBusioness(map);
+		} else {
+			throw new IllegalArgumentException("流程实例创建失败");
+		}
+
+	}
+
+	@Override
+	public List<Task> queryMyActTask(String processDefinationKey, String taskAssign, Long projId) {
+		List<Task> myTasks = new ArrayList<Task>();
+		List<Task> list = taskService.createTaskQuery()//
+				.processDefinitionKey(processDefinationKey)//
+				.processVariableValueEquals("projId", projId)//
+				.orderByTaskCreateTime().asc()//
+				.list();
+		if (list != null && list.size() > 0) {
+			for (Task task : list) {
+				String taskAssignee = task.getAssignee();
+				if (StringUtils.isNoneBlank(taskAssignee)) {
+					String[] userArray = taskAssignee.split(",");
+					for (String userId : userArray) {
+						if (userId.equals(taskAssign)) {
+							myTasks.add(task);
+							break;
+						}
+					}
+				}
+			}
+		}
+		return myTasks;
+	}
+
+	@Override
+	public JsonMsgUtil loadRecordId(String taskId, String bussType) {
+		JsonMsgUtil j = new JsonMsgUtil(false);
+		Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
+		if (task != null) {
+			ProcessInstance processInstance = runtimeService.createProcessInstanceQuery()
+					.processInstanceId(task.getProcessInstanceId()).singleResult();
+			if (processInstance != null) {
+				String businessKey = processInstance.getBusinessKey();
+				if (businessKey != null) {
+					String[] arrays = businessKey.split("_");
+					if (arrays.length == 2) {
+						j = new JsonMsgUtil(true, "查询成功", arrays[1]);
+					}
+				}
+			}
+
+		}
+		return j;
+	}
+
+	@Transactional
+	@Override
+	public JsonMsgUtil checkLteConfigTask(Long recordId, String taskId, Long status, String checkResult,LoginUser user) {
+		//完成任务
+		Task task=taskService.createTaskQuery().taskId(taskId).singleResult();
+		if (task != null) {
+			taskService.setAssignee(taskId, user.getId().toString());
+			taskService.complete(taskId);
+			//记录流程与业务表的关联关系
+			Map<String, Object> map=new HashMap<>();
+			map.put("checkResult", checkResult);
+			map.put("bussType", "LteConfig");
+			map.put("createTime", new Date());
+			map.put("bussId", recordId);
+			map.put("checkAssignee", user.getId());
+			map.put("projId", user.getProjId());
+			map.put("actName", task.getName());
+			map.put("actId", task.getId());
+			map.put("piid", task.getProcessInstanceId());
+			map.put("status", status);
+			lteConfigActBusiness.completeTask(map);
+		}
+		return new JsonMsgUtil(true,"审核成功","");
 	}
 
 }

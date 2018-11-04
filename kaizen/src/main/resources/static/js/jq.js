@@ -19,6 +19,8 @@ $.ajaxSetup({
 			layer.msg('未授权');
 		} else if (code == 500) {
 			layer.msg('系统错误：' + message);
+		}else{
+			layer.msg(message);
 		}
 	}
 });
@@ -91,6 +93,7 @@ function checkPermission() {
 		async : false,
 		success : function(data) {
 			pers = data;
+			console.info(pers);
 			$("[permission]").each(function() {
 				var per = $(this).attr("permission");
 				if ($.inArray(per, data) < 0) {
