@@ -4,11 +4,16 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.activiti.engine.HistoryService;
+import org.activiti.engine.impl.cmd.DeleteProcessInstanceCmd;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.boot.kaizen._interface.LteConfigActBusiness;
+import com.boot.kaizen.activiti.service.Activitiservice;
 import com.boot.kaizen.dao.lte.LteConfigDao;
 import com.boot.kaizen.entity.LoginUser;
 import com.boot.kaizen.model.LteConfig;
@@ -19,6 +24,10 @@ class LteConfigServiceImpl implements ILteConfigService {
 
 	@Autowired
 	private LteConfigDao configDao;
+	@Autowired
+	private LteConfigActBusiness lteConfigActBusiness;
+	@Autowired
+	private Activitiservice activitiservice;
 
 	@Override
 	public List<LteConfig> find(Map<String, Object> map) {
@@ -54,6 +63,7 @@ class LteConfigServiceImpl implements ILteConfigService {
 		return new JsonMsgUtil(true, "查询成功", lteConfig);
 	}
 
+	@Transactional
 	@Override
 	public JsonMsgUtil delete(String ids) {
 		JsonMsgUtil j = new JsonMsgUtil(false);
@@ -64,6 +74,8 @@ class LteConfigServiceImpl implements ILteConfigService {
 				for (int i = 0; i < idsArray.length; i++) {
 					String id = idsArray[i];
 					array[i] = Long.valueOf(id.trim());
+					// 删除关联表关系以及暂停所有正在运行的流程实例
+					handleProcessAndBusinessRelation(array[i], "LteConfig");
 				}
 				// 删除项目
 				Integer deleteNum = configDao.delete(array);
@@ -75,14 +87,26 @@ class LteConfigServiceImpl implements ILteConfigService {
 		return j;
 	}
 
+	private void handleProcessAndBusinessRelation(Long recordId, String bussType) {
+		List<String> processInstanceIds = lteConfigActBusiness.queryProcessInstanceIds(recordId, bussType);
+		if (processInstanceIds != null && processInstanceIds.size() > 0) {
+			for (String piid : processInstanceIds) {
+				// 暂停正在运行的流程实例
+				activitiservice.deleteProcessIntance(piid, "delete");
+			}
+		}
+		// 删除关系表
+		lteConfigActBusiness.deleteActBusinessRelation(recordId, bussType);
+	}
+
 	@Override
 	public LteConfig findInfoById(Long projId) {
 		return configDao.findInfoById(projId);
 	}
 
 	@Override
-	public void changeStatus(Long id,Long status) {
-		configDao.changeStatus(id,status);
+	public void changeStatus(Long id, Long status) {
+		configDao.changeStatus(id, status);
 	}
 
 }

@@ -133,7 +133,7 @@
 	  table.on('tool(infolist)', function(obj){
 	    var row = obj.data;
 	    if(obj.event === 'del'){//单行删除
-	    	common.getConfirmDelDialog("确定要删除吗？","删除【"+row.mENodeBID+"】记录",2,"/config/delete",{"ids":row.id},function(){deleteRow(obj);});
+	    	common.getConfirmDelDialog("确定要删除吗？","删除【"+row.id+"】记录",2,"/config/delete",{"ids":row.id},function(){deleteRow(obj);});
 	    } else if(obj.event === 'edit'){//编辑
 		    common.openEditDialog(fresh,"编辑项目","pages/lte/config/edit.html?id="+row.id,"1000px","570px",false,"确定","取消","/config/edit");
 	    }

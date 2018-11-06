@@ -1,6 +1,7 @@
 package com.boot.kaizen.service.act;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,5 +41,15 @@ public class ActBusinessService implements IActBusinessService {
 	@Override
 	public void insertAll(Map<String, Object> map) {
 		actBusinessDao.insertAll(map);
+	}
+
+	@Override
+	public void deleteByIdAndType(Long recordId, String bussType) {
+		actBusinessDao.deleteByIdAndType(recordId,bussType);
+	}
+
+	@Override
+	public List<String> queryProcessInstanceIds(Long recordId, String bussType) {
+		return actBusinessDao.queryProcessInstanceIds(recordId,bussType);
 	}
 }

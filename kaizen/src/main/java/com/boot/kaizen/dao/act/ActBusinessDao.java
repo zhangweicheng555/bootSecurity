@@ -1,5 +1,6 @@
 package com.boot.kaizen.dao.act;
 
+import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -12,7 +13,7 @@ public interface ActBusinessDao {
 	/**
 	 * buss_type,create_time,buss_id,proj_id,act_piid
 	 * 
-	 * @Description: 添加四项
+	 * @Description: 添加四项  主要用于启动流程实例
 	 * @author weichengz
 	 * @date 2018年11月4日 下午12:15:48
 	 */
@@ -41,5 +42,19 @@ public interface ActBusinessDao {
 	 * @date 2018年11月4日 下午9:01:08
 	 */
 	void insertAll(@Param("map") Map<String, Object> map);
+
+	/**
+	 * 跟怒业务表的id跟业务类型删除关系表
+	 * @param recordId
+	 * @param bussType
+	 */
+	void deleteByIdAndType(@Param("recordId") Long recordId,@Param("bussType")  String bussType);
+	/**
+	 * 根据业务表id跟业务类型 查询流程实例ids
+	 * @param recordId
+	 * @param bussType
+	 * @return
+	 */
+	List<String> queryProcessInstanceIds(@Param("recordId") Long recordId,@Param("bussType")  String bussType);
 
 }

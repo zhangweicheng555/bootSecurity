@@ -5,12 +5,21 @@
 
 	
 	
+	<select id="queryProcessInstanceIds">
+		select distinct act_piid from business_activiti_relation where buss_id=#{recordId} and buss_type=#{bussType}
+	</select>
+	
+	<insert id="deleteByIdAndType">
+		delete from business_activiti_relation where buss_id=#{recordId} and buss_type=#{bussType}
+	</insert>
+	
 	<insert id="insert">
 		insert 
 		  into 
 		  business_activiti_relation(buss_type,create_time,buss_id,proj_id,act_piid,check_persion_id)
 		  values(#{map.bussType},#{map.createTime},#{map.bussId},#{map.projId},#{map.actPiid},#{map.assignIds})
 	</insert>
+	
 	<insert id="insertAll">
 		insert 
 		  into 

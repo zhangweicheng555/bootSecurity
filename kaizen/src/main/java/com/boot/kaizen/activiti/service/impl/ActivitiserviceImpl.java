@@ -232,7 +232,10 @@ public class ActivitiserviceImpl implements Activitiservice {
 
 	@Override
 	public void deleteProcessIntance(String processInstanceId, String deleteReasoon) {
-		runtimeService.deleteProcessInstance(processInstanceId, deleteReasoon);
+		ProcessInstance processInstance = runtimeService.createProcessInstanceQuery().processInstanceId(processInstanceId).singleResult();
+		if (processInstance != null) {
+			runtimeService.deleteProcessInstance(processInstanceId, deleteReasoon);
+		}
 	}
 
 	@Override

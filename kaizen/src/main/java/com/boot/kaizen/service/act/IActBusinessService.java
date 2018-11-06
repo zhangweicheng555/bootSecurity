@@ -1,5 +1,6 @@
 package com.boot.kaizen.service.act;
 
+import java.util.List;
 import java.util.Map;
 
 import com.boot.kaizen.util.JsonMsgUtil;
@@ -7,7 +8,7 @@ import com.boot.kaizen.util.JsonMsgUtil;
 public interface IActBusinessService {
 
 	/**
-	 * 添加关系
+	 * 添加关系   主要用于启动流程实例
 	* @Description: TODO
 	* @author weichengz
 	* @date 2018年11月4日 下午1:13:52
@@ -37,4 +38,19 @@ public interface IActBusinessService {
 	* @date 2018年11月4日 下午9:00:27
 	 */
 	void insertAll(Map<String, Object> map);
+
+	/**
+	 * 根据业务表记录的id跟类型删除关系表
+	 * @param recordId
+	 * @param bussType
+	 */
+	void deleteByIdAndType(Long recordId, String bussType);
+
+	/**
+	 * 根据业务表的记录、业务类型查询流程实例
+	 * @param recordId
+	 * @param bussType
+	 * @return
+	 */
+	List<String> queryProcessInstanceIds(Long recordId, String bussType);
 }
