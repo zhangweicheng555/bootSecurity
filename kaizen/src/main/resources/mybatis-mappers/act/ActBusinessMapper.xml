@@ -30,27 +30,29 @@
 	</select>
 	
 	<select id="findCheckInfo" resultType="java.util.Map">
-		select 
-		    c.id as "id"
-            ,c.result as "result"
-		    ,GROUP_CONCAT(c.nickname SEPARATOR ',')   as "checkname"
-        from (
-			select r.id as id
-                ,r.check_result as result
-                ,r.create_time as create_time
-                ,u.id as uid
-                ,u.nickname  as nickname
-			from 
+		
+		SELECT 
+		    c.id AS "id"
+            ,c.result AS "result"
+		    ,GROUP_CONCAT(c.nickname SEPARATOR ',')   AS "checkname"
+        FROM (
+			SELECT r.id AS id
+                ,r.check_result AS result
+                ,r.create_time AS create_time
+                ,u.id AS uid
+                ,u.nickname  AS nickname
+			FROM 
 				business_activiti_relation  r
 				,sys_user u
-			where 
+			WHERE 
 				r.buss_id=#{id}
 				and r.buss_type=#{bussType}
-			    and find_in_set(u.id, r.check_persion_id)
-				order by r.create_time DESC
+			    AND FIND_IN_SET(u.id, r.check_persion_id)
+			    AND r.create_time =(SELECT MAX(create_time) FROM business_activiti_relation WHERE buss_id=#{id} AND buss_type=#{bussType})
+				
 		) c
-        group by c.id,c.result,c.create_time
-        limit 1
+        GROUP BY c.id,c.result,c.create_time
+        
 	</select>
 	
 

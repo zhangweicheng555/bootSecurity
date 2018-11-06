@@ -40,6 +40,6 @@ public interface ActBusinessDao {
 	 * @author weichengz
 	 * @date 2018年11月4日 下午9:01:08
 	 */
-	void insertAll(Map<String, Object> map);
+	void insertAll(@Param("map") Map<String, Object> map);
 
 }

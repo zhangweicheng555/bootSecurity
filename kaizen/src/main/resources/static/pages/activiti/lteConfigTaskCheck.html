@@ -90,7 +90,7 @@
 		      		<div class="layui-form-item">
 					    <label class="layui-form-label"  style="width: 155px;color: red;">审核结果</label>
 					     <div class="layui-input-block">
-						      <input type="radio" name="statusM" value="2" title="审核通过" checked>
+						      <input type="radio" name="statusM" value="2" title="审核通过" >
 						      <input type="radio" name="statusM" value="3" title="审核不通过">
 						</div>
 					</div>
@@ -137,15 +137,28 @@
 	function submitForm(){
 		$("#recordId").val($("#id").val());
 		$("#taskId").val(taskId);
-		$("#status").val($("#statusM").val());
 		$("#checkResult").val($("#checkResultM").val());
-		return true;
+		var checkResult=$("#checkResult").val();
+		var status=$("#status").val();
+		if(checkResult && status){
+			return true;
+		}else{
+			parent.layer.msg('审核信息和审核结果不能为空');
+			return false;
+		}
 	 }
 	
 	
 	var form;
 	layui.use(['layer', 'form','jquery'], function(){
 	  var layer = layui.layer,form = layui.form,$=layui.jquery;
+	  
+	  
+	  
+	  
+	  form.on('radio', function(data){
+		  $("#status").val(data.value);
+	   });  
 	  
 	  //初始化工作
 	  initData();

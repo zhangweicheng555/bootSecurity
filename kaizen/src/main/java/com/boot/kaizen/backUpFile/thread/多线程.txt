@@ -11,7 +11,7 @@
 
 	2	多线程无返回结果执行  	
  
-		final ExecutorService pool = Executors.newFixedThreadPool(4);
+		final ExecutorService pool = Executors.newFixedThreadPool(4);    //将这个改为  1的pool是最规范的
 		ListeningExecutorService service = MoreExecutors.listeningDecorator(pool);
 		
 		Runnable runKdsMeta = new Runnable() {
@@ -33,8 +33,8 @@
 		
 		....same..
 		.....same..
-		service.shutdown();
-		service.awaitTermination(Long.MAX_VALUE, TimeUnit.DAYS);
+		service.shutdown();//不允许别的线程再进来
+		service.awaitTermination(Long.MAX_VALUE, TimeUnit.DAYS);//等待所有的线程执行完毕  在继续
 		
 		
 		

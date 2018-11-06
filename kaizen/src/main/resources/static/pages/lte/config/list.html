@@ -149,10 +149,10 @@
 		  var len=checkDatas.data.length;
 		  if(len == 1){
 			  var row=checkDatas.data;
-			  if(0 == row[0].status){
+			  if(0 == row[0].status || 3 == row[0].status){
 				  common.openEditDialog(fresh,"推送审核","pages/lte/config/send.html?id="+row[0].id,"1000px","570px",false,"推送","取消","/act/startLteConfigProcessInstance");
 			  }else{
-				  parent.layer.msg('只能推送未审核的记录');
+				  parent.layer.msg('只能推送未审核、审核不通过的记录');
 			  }
 		  }else{
 			  parent.layer.msg('请选中要推送的一条记录');
