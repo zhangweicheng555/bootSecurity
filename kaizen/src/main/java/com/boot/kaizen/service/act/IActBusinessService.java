@@ -53,4 +53,11 @@ public interface IActBusinessService {
 	 * @return
 	 */
 	List<String> queryProcessInstanceIds(Long recordId, String bussType);
+	/**
+	 * 判断关联表中businessKey的模糊匹配记录数
+	 * @param recordId
+	 * @param bussType
+	 * @return
+	 */
+	Long queryCountMatchBusinessKey(String bussType,String content);
 }

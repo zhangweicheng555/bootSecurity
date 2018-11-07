@@ -5,8 +5,11 @@
 
 	
 	
-	<select id="queryProcessInstanceIds">
+	<select id="queryProcessInstanceIds" resultType="java.lang.String">
 		select distinct act_piid from business_activiti_relation where buss_id=#{recordId} and buss_type=#{bussType}
+	</select>
+	<select id="queryCountMatchBusinessKey" resultType="java.lang.Long">
+		select count(1) from business_activiti_relation where  buss_type=#{bussType} and act_business_key like '%${content}%'
 	</select>
 	
 	<insert id="deleteByIdAndType">
@@ -16,15 +19,15 @@
 	<insert id="insert">
 		insert 
 		  into 
-		  business_activiti_relation(buss_type,create_time,buss_id,proj_id,act_piid,check_persion_id)
-		  values(#{map.bussType},#{map.createTime},#{map.bussId},#{map.projId},#{map.actPiid},#{map.assignIds})
+		  business_activiti_relation(buss_type,create_time,buss_id,proj_id,act_piid,check_persion_id,act_business_key)
+		  values(#{map.bussType},#{map.createTime},#{map.bussId},#{map.projId},#{map.actPiid},#{map.assignIds},#{map.businessKey})
 	</insert>
 	
 	<insert id="insertAll">
 		insert 
 		  into 
-		  business_activiti_relation(check_result,buss_type,create_time,buss_id,check_persion_id,proj_id,act_task_name,act_task_key,act_piid)
-		  values(#{map.checkResult},#{map.bussType},#{map.createTime},#{map.bussId},#{map.checkAssignee},#{map.projId},#{map.actName},#{map.actId},#{map.piid})
+		  business_activiti_relation(check_result,buss_type,create_time,buss_id,check_persion_id,proj_id,act_task_name,act_task_key,act_piid,act_business_key)
+		  values(#{map.checkResult},#{map.bussType},#{map.createTime},#{map.bussId},#{map.checkAssignee},#{map.projId},#{map.actName},#{map.actId},#{map.piid},#{map.businessKey})
 	</insert>
 	
 	<select id="queryPiid" resultType="java.lang.String">

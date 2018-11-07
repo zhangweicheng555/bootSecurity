@@ -16,6 +16,14 @@ public class ActBusinessService implements IActBusinessService {
 	@Autowired
 	private ActBusinessDao actBusinessDao;
 
+	/**
+	 * buss_type,create_time,buss_id,proj_id,act_piid
+	 * #{map.bussType},#{map.createTime},#{map.bussId},#{map.projId},#{map.actPiid},#{map.assignIds}
+	 * 
+	 * @Description: 添加四项 主要用于启动流程实例
+	 * @author weichengz
+	 * @date 2018年11月4日 下午12:15:48
+	 */
 	@Override
 	public void insert(Map<String, Object> map) {
 		actBusinessDao.insert(map);
@@ -45,11 +53,16 @@ public class ActBusinessService implements IActBusinessService {
 
 	@Override
 	public void deleteByIdAndType(Long recordId, String bussType) {
-		actBusinessDao.deleteByIdAndType(recordId,bussType);
+		actBusinessDao.deleteByIdAndType(recordId, bussType);
 	}
 
 	@Override
 	public List<String> queryProcessInstanceIds(Long recordId, String bussType) {
-		return actBusinessDao.queryProcessInstanceIds(recordId,bussType);
+		return actBusinessDao.queryProcessInstanceIds(recordId, bussType);
+	}
+
+	@Override
+	public Long queryCountMatchBusinessKey(String bussType, String content) {
+		return actBusinessDao.queryCountMatchBusinessKey(bussType, content);
 	}
 }

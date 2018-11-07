@@ -271,6 +271,7 @@ public class ActivitiserviceImpl implements Activitiservice {
 			map.put("createTime", new Date());
 			map.put("bussId", startActEntity.getRecordId());
 			map.put("projId", startActEntity.getProjId());
+			map.put("businessKey", processInstance.getBusinessKey());
 			map.put("assignIds", startActEntity.getAssignIds());
 			map.put("actPiid", processInstance.getId());
 			businessInterface.recordActProcessWithBusioness(map);

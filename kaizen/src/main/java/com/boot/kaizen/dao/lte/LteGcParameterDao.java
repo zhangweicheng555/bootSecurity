@@ -23,7 +23,7 @@ public interface LteGcParameterDao {
 	 * @author weichengz
 	 * @date 2018年10月28日 下午4:42:11
 	 */
-	void save(LteGcParameter lteGcParameter);
+	Long save(LteGcParameter lteGcParameter);
 
 	/**
 	 * 

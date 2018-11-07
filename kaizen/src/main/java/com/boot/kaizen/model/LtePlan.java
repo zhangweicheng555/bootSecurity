@@ -22,12 +22,21 @@ public class LtePlan extends BaseEntity<Long> {
 	private String testPersonPhone;// 测试工程师电话
 	private String backPerson;// 后台工程师
 	private String backPersonPhone;// 后台工程师电话
-	private String testTime;// 测试时间   yyyy-mm-dd
+	private String testTime;// 测试时间 yyyy-mm-dd
 
 	private Long dealPersonId;// 接收改计划任务的人的id
+	private Long status = 0l;// 最终是不是报告可以审核 之后最后一步的时候 才设置为1 然后审核
 
 	public Long getDealPersonId() {
 		return dealPersonId;
+	}
+
+	public Long getStatus() {
+		return status;
+	}
+
+	public void setStatus(Long status) {
+		this.status = status;
 	}
 
 	public void setDealPersonId(Long dealPersonId) {

@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.activiti.engine.RuntimeService;
+import org.activiti.engine.TaskService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.DisabledException;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.boot.kaizen.dao.lte.LteGcParameterDao;
 import com.boot.kaizen.entity.LoginUser;
 import com.boot.kaizen.model.LteGcParameter;
+import com.boot.kaizen.service.act.IActBusinessService;
 import com.boot.kaizen.util.JsonMsgUtil;
 
 @Service
@@ -19,6 +22,10 @@ class LteGcParameterServiceImpl implements ILteGcParameterService {
 
 	@Autowired
 	private LteGcParameterDao gcParameterDao;
+	@Autowired
+	private IActBusinessService actBusinessService;
+	@Autowired
+	private TaskService taskService;
 
 	@Override
 	public List<LteGcParameter> find(Map<String, Object> map) {
@@ -37,7 +44,15 @@ class LteGcParameterServiceImpl implements ILteGcParameterService {
 			lteGcParameter.setProjId(loginUser.getProjId());
 			lteGcParameter.setCreateAt(loginUser.getId());
 			lteGcParameter.setCreateTime(new Date());
-			gcParameterDao.save(lteGcParameter);
+			//根据流程站号判断是不是存在规划表、主要是通过关联表判断
+			Long num = actBusinessService.queryCountMatchBusinessKey("LtePlan", "LtePlan_"+lteGcParameter.getmENodeBID()+"_");
+			if (num == 0) {
+				throw new IllegalArgumentException("规划表中不存在此站号的记录");
+			}
+			//完成任务
+			//记录关联表的关系
+			//保存数据
+			Long id = gcParameterDao.save(lteGcParameter);
 		}
 		return new JsonMsgUtil(true, "添加成功", lteGcParameter);
 	}
