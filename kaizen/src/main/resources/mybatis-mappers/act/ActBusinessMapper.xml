@@ -12,6 +12,17 @@
 		select count(1) from business_activiti_relation where  buss_type=#{bussType} and act_business_key like '%${content}%'
 	</select>
 	
+	<select id="queryMatchBusinessKey" resultType="java.lang.String">
+		select act_piid from business_activiti_relation where  buss_type=#{bussType} and act_business_key like '%${content}%'  limit 1 
+	</select>
+	<select id="findLinksMatchBusinessKey" resultType="java.lang.String">
+		select distinct a.act_task_name from business_activiti_relation a where a.act_business_key like '%${content}%'   
+	</select>
+	
+	<select id="queryCountMatchLink" resultType="java.lang.Long">
+		select count(1) from business_activiti_relation where  buss_type=#{bussType} and act_task_name = #{link}  and  act_piid=#{piid}
+	</select>
+	
 	<insert id="deleteByIdAndType">
 		delete from business_activiti_relation where buss_id=#{recordId} and buss_type=#{bussType}
 	</insert>

@@ -27,6 +27,7 @@ import com.boot.kaizen.model.LteStationCheck;
 import com.boot.kaizen.model.SysUser;
 import com.boot.kaizen.service.SysProjectService;
 import com.boot.kaizen.service.UserService;
+import com.boot.kaizen.service.act.IActBusinessService;
 import com.boot.kaizen.service.lte.ILteCellCheckService;
 import com.boot.kaizen.service.lte.ILteConfigService;
 import com.boot.kaizen.service.lte.ILteGcParameterService;
@@ -65,6 +66,8 @@ public class LteAppController {
 	private ILteConfigService lteConfigService;
 	@Autowired
 	private ILteLoadTestService lteLoadTestService;
+	@Autowired
+	private IActBusinessService actBusinessService;
 	// 0:失败;1:成功; 2:服务器异常
 
 	/**
@@ -230,6 +233,7 @@ public class LteAppController {
 				appUtil = new AppUtil(0, "接收小区测试列表为空", "");
 				return appUtil;
 			}
+			//批量添加
 			lteCellCheckService.batchInsert(cellChecks);
 			appUtil.setDataSource(null);
 			return appUtil;

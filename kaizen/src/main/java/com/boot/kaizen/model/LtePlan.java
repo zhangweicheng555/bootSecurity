@@ -3,6 +3,8 @@ package com.boot.kaizen.model;
 /**
  * lte规划表设计 lte_plane
  * 
+ * String businessKey = "LtePlan" + "_" + ltePlan.getmENodeBID() + "_" + ltePlan.getId();
+ * 
  * @author weichengz
  * @date 2018年10月28日 上午3:37:57
  */
