@@ -2,6 +2,9 @@ package com.boot.kaizen.service.lte;
 
 import java.util.List;
 import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.boot.kaizen.model.LteStationCheck;
 import com.boot.kaizen.util.JsonMsgUtil;
 
@@ -28,5 +31,12 @@ public interface ILteStationCheckService {
 	 * @param stationChecks
 	 */
 	void batchInsert(List<LteStationCheck> stationChecks);
+	
+	/**
+	 * 根据id查询
+	 * @param id
+	 * @return
+	 */
+	LteStationCheck findById(Long id);
 
 }

@@ -29,5 +29,13 @@ public interface LteStationCheckDao {
 	 * @param stationChecks
 	 */
 	void batchInsert(@Param("stationChecks") List<LteStationCheck> stationChecks);
+	
+	/**
+	 * 根据id查询
+	 * 
+	 * @param stationChecks
+	 * @return
+	 */
+	LteStationCheck findById(@Param("id") Long id);
 
 }

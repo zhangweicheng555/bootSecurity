@@ -1,4 +1,5 @@
 package com.boot.kaizen.service.lte;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +12,8 @@ import org.activiti.engine.task.Task;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.boot.kaizen.dao.lte.LteStationCheckDao;
 import com.boot.kaizen.model.LteCellCheck;
 import com.boot.kaizen.model.LteStationCheck;
@@ -34,6 +37,7 @@ class LteStationCheckServiceImpl implements ILteStationCheckService {
 		return stationCheckDao.find(map);
 	}
 
+	@Transactional
 	@Override
 	public JsonMsgUtil delete(String ids) {
 		JsonMsgUtil j = new JsonMsgUtil(false);
@@ -76,7 +80,7 @@ class LteStationCheckServiceImpl implements ILteStationCheckService {
 			throw new IllegalArgumentException("流程实例不存在");
 		}
 		Long num = actBusinessService.queryCountMatchLink("LteCellCheck", "小区核查", piid);
-		if (num==0) {
+		if (num == 0) {
 			// 查询小区核查的任务
 			Task task = taskService.createTaskQuery().processInstanceId(piid).taskName("小区核查").singleResult();
 			if (task == null) {
@@ -95,10 +99,15 @@ class LteStationCheckServiceImpl implements ILteStationCheckService {
 			mapAll.put("piid", piid);
 			mapAll.put("businessKey", processInstance.getBusinessKey());
 			actBusinessService.insertAll(mapAll);
-			//完成任务
+			// 完成任务
 			taskService.complete(task.getId());
 		}
 		stationCheckDao.batchInsert(stationChecks);
+	}
+
+	@Override
+	public LteStationCheck findById(Long id) {
+		return stationCheckDao.findById(id);
 	}
 
 }

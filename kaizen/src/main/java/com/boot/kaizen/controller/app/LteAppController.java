@@ -233,7 +233,7 @@ public class LteAppController {
 				appUtil = new AppUtil(0, "接收小区测试列表为空", "");
 				return appUtil;
 			}
-			//批量添加
+			// 批量添加
 			lteCellCheckService.batchInsert(cellChecks);
 			appUtil.setDataSource(null);
 			return appUtil;
@@ -260,6 +260,11 @@ public class LteAppController {
 				appUtil = new AppUtil(0, "该项目下测试配置项不存在", "");
 				return appUtil;
 			}
+			if (lteConfig.getStatus() !=2) {
+				appUtil = new AppUtil(0, "该项目下测试配置项未通过审核", "");
+				return appUtil;
+			}
+			
 			Map<String, Object> mVoiceConfig = new HashMap<>();
 			Map<String, Object> mFtpConfig = new HashMap<>();
 

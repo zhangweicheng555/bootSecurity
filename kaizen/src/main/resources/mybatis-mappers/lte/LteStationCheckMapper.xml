@@ -19,6 +19,13 @@
 		 order by lp.createTime desc
 	</select>
 	
+	<select id="findById" resultType="LteStationCheck">
+		 select *
+		 from
+		 lte_station_check  
+		 where id=#{id}
+	</select>
+	
 	<delete id="delete">
 		 delete from lte_station_check
 		 where id in
