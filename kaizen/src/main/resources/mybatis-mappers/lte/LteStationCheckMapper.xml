@@ -26,6 +26,10 @@
 		 where id=#{id}
 	</select>
 	
+	<delete id="deleteByeNodeBID">
+		 delete from lte_cell_check
+		 where eNodeBID =#{mENodeBID}
+	</delete>
 	
 	<select id="findListByMenodeBID" resultType="LteStationCheck">
 		 select *

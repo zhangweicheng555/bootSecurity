@@ -79,4 +79,9 @@ class LteLoadTestServiceImpl implements ILteLoadTestService {
 		loadTestDao.save(lteLoadTest);
 	}
 
+	@Override
+	public void deleteByeNodeBID(String mENodeBID) {
+		loadTestDao.deleteByeNodeBID(mENodeBID);
+	}
+
 }

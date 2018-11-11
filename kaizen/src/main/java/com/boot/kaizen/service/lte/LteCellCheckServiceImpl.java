@@ -64,14 +64,16 @@ class LteCellCheckServiceImpl implements ILteCellCheckService {
 
 		LteCellCheck cellCheck = cellChecks.get(0);
 		// 查询此节点与上个节点是不是存在
-		List<String> links = actBusinessService.findLinksMatchBusinessKey("LtePlan" + "_" + cellCheck.geteNodeBID()+"_");
+		List<String> links = actBusinessService
+				.findLinksMatchBusinessKey("LtePlan" + "_" + cellCheck.geteNodeBID() + "_");
 		if (links == null || links.size() == 0) {
 			throw new IllegalArgumentException("系统未录入站号为：" + cellCheck.geteNodeBID() + "的信息");
 		}
 		if (!links.contains("工参信息")) {
 			throw new IllegalArgumentException("工参信息未录入");
 		}
-		String piid = actBusinessService.queryMatchBusinessKey("LtePlan", "LtePlan" + "_" + cellCheck.geteNodeBID()+"_");
+		String piid = actBusinessService.queryMatchBusinessKey("LtePlan",
+				"LtePlan" + "_" + cellCheck.geteNodeBID() + "_");
 		if (StringUtils.isBlank(piid)) {
 			throw new IllegalArgumentException("流程实例不存在");
 		}
@@ -81,7 +83,7 @@ class LteCellCheckServiceImpl implements ILteCellCheckService {
 			throw new IllegalArgumentException("流程实例不存在");
 		}
 		Long num = actBusinessService.queryCountMatchLink("LteCellCheck", "小区核查", piid);
-		if (num==0) {
+		if (num == 0) {
 			// 查询小区核查的任务
 			Task task = taskService.createTaskQuery().processInstanceId(piid).taskName("小区核查").singleResult();
 			if (task == null) {
@@ -100,11 +102,16 @@ class LteCellCheckServiceImpl implements ILteCellCheckService {
 			mapAll.put("piid", piid);
 			mapAll.put("businessKey", processInstance.getBusinessKey());
 			actBusinessService.insertAll(mapAll);
-			//完成任务
+			// 完成任务
 			taskService.complete(task.getId());
 		}
 		// 添加数据
 		cellCheckDao.batchInsert(cellChecks);
+	}
+
+	@Override
+	public void deleteByeNodeBID(String mENodeBID) {
+		cellCheckDao.deleteByeNodeBID(mENodeBID);
 	}
 
 }

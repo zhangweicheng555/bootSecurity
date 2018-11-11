@@ -51,6 +51,11 @@
 			order by create_time desc
 		limit 1
 	</select>
+	<delete id="queryPiid" >
+		delete from business_activiti_relation 
+		where act_business_key= #{businessKey} and act_task_name in ('基站核查','小区核查','路测核查','审核报告')
+			
+	</delete>
 	
 	<select id="findCheckInfo" resultType="java.util.Map">
 		

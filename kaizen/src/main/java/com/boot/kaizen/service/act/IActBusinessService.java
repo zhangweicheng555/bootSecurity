@@ -90,4 +90,12 @@ public interface IActBusinessService {
 	 * @return
 	 */
 	List<String> findLinksMatchBusinessKey(String content);
+
+	/**
+	 * 删除此key对应的小区核查/路测核查/基站核查/报告喝茶
+	* @Description: TODO
+	* @author weichengz
+	* @date 2018年11月11日 下午10:39:46
+	 */
+	void deleteActBusinessBykey(String businessKey);
 }

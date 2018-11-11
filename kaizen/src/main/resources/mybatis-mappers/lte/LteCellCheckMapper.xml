@@ -34,6 +34,11 @@
         </foreach>
 	</delete>
 	
+	<delete id="deleteByeNodeBID">
+		 delete from lte_cell_check
+		 where eNodeBID =#{mENodeBID}
+	</delete>
+	
 	<insert id ="batchInsert" parameterType="java.util.List" >
            insert into lte_cell_check
            (

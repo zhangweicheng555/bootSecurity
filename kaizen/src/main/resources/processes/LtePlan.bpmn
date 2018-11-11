@@ -21,7 +21,12 @@
     <userTask id="usertask6" name="审核报告"></userTask>
     <sequenceFlow id="flow10" sourceRef="parallelgateway2" targetRef="usertask6"></sequenceFlow>
     <endEvent id="endevent1" name="End"></endEvent>
-    <sequenceFlow id="flow11" sourceRef="usertask6" targetRef="endevent1"></sequenceFlow>
+    <sequenceFlow id="flow11" name="通过" sourceRef="usertask6" targetRef="endevent1">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[#{pass==1}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow12" name="数据重新上传" sourceRef="usertask6" targetRef="parallelgateway1">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[#{pass==0}]]></conditionExpression>
+    </sequenceFlow>
   </process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_LtePlan">
     <bpmndi:BPMNPlane bpmnElement="LtePlan" id="BPMNPlane_LtePlan">
@@ -53,7 +58,7 @@
         <omgdc:Bounds height="55.0" width="105.0" x="950.0" y="223.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="endevent1" id="BPMNShape_endevent1">
-        <omgdc:Bounds height="35.0" width="35.0" x="1100.0" y="233.0"></omgdc:Bounds>
+        <omgdc:Bounds height="35.0" width="35.0" x="1160.0" y="233.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
         <omgdi:waypoint x="125.0" y="247.0"></omgdi:waypoint>
@@ -101,7 +106,19 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow11" id="BPMNEdge_flow11">
         <omgdi:waypoint x="1055.0" y="250.0"></omgdi:waypoint>
-        <omgdi:waypoint x="1100.0" y="250.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1160.0" y="250.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="16.0" width="100.0" x="1069.0" y="230.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow12" id="BPMNEdge_flow12">
+        <omgdi:waypoint x="1002.0" y="278.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1002.0" y="438.0"></omgdi:waypoint>
+        <omgdi:waypoint x="509.0" y="438.0"></omgdi:waypoint>
+        <omgdi:waypoint x="510.0" y="267.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="48.0" width="100.0" x="700.0" y="449.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

@@ -52,6 +52,8 @@
         </foreach>
 	</delete>
 	
+	
+	
 	<update id="update">
 		update lte_plane 
 		set mENodeBID=#{mENodeBID}

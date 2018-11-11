@@ -53,7 +53,10 @@
 		)
 	</insert>
 	
-	
+	<delete id="deleteByeNodeBID">
+		 delete from lte_load_test
+		 where eNodeBID =#{mENodeBID}
+	</delete>
 
 	
 </mapper>

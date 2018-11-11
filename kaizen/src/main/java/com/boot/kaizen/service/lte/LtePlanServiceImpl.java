@@ -42,8 +42,14 @@ class LtePlanServiceImpl implements ILtePlanService {
 	@Autowired
 	private IActBusinessService actBusinessService;
 	@Autowired
+	private ILteCellCheckService lteCellCheckService;
+	@Autowired
 	private Activitiservice activitiservice;
-
+	@Autowired
+	private ILteLoadTestService lteLoadTestService; 
+	@Autowired
+	private ILteStationCheckService lteStationCheckService; 
+	
 	@Override
 	public List<LtePlan> find(Map<String, Object> map) {
 		return planDao.find(map);
@@ -216,24 +222,51 @@ class LtePlanServiceImpl implements ILtePlanService {
 			if (task == null) {
 				throw new IllegalArgumentException("审核报告环节不存在");
 			}
-			// 记录关联表的关系
-			Map<String, Object> mapAll = new HashMap<>();
-			mapAll.put("checkResult", "");
-			mapAll.put("bussType", "LtePlan");
-			mapAll.put("createTime", new Date());
-			mapAll.put("bussId", ltePlan.getId());
-			mapAll.put("checkAssignee", "");
-			mapAll.put("projId", ltePlan.getProjId());
-			mapAll.put("actName", "审核报告");
-			mapAll.put("actId", task.getTaskDefinitionKey());
-			mapAll.put("piid", piid);
-			mapAll.put("businessKey", "LtePlan" + "_" + ltePlan.getmENodeBID()+"_"+id);
-			actBusinessService.insertAll(mapAll);
-			//完成任务
-			taskService.complete(task.getId());
+			
+			if (1==statusM) {
+				// 记录关联表的关系
+				Map<String, Object> mapAll = new HashMap<>();
+				mapAll.put("checkResult", "");
+				mapAll.put("bussType", "LtePlan");
+				mapAll.put("createTime", new Date());
+				mapAll.put("bussId", ltePlan.getId());
+				mapAll.put("checkAssignee", "");
+				mapAll.put("projId", ltePlan.getProjId());
+				mapAll.put("actName", "审核报告");
+				mapAll.put("actId", task.getTaskDefinitionKey());
+				mapAll.put("piid", piid);
+				mapAll.put("businessKey", "LtePlan" + "_" + ltePlan.getmENodeBID()+"_"+id);
+				actBusinessService.insertAll(mapAll);
+				//完成任务
+				Map<String, Object> map=new HashMap<>();
+				map.put("pass", 1);
+				taskService.complete(task.getId(),map);
+			}
+			if (2==statusM) {
+				//完成任务
+				Map<String, Object> map=new HashMap<>();
+				map.put("pass", 0);
+				taskService.complete(task.getId(),map);
+				//删除上传的信息
+				actBusinessService.deleteActBusinessBykey("LtePlan_"+ltePlan.getmENodeBID()+"_"+ltePlan.getId());
+				//删除三表的数据
+				lteCellCheckService.deleteByeNodeBID(ltePlan.getmENodeBID());
+				lteLoadTestService.deleteByeNodeBID(ltePlan.getmENodeBID());
+				lteStationCheckService.deleteByeNodeBID(ltePlan.getmENodeBID());
+			}
+		}else {
+			if (2==statusM) {
+				//删除上传的信息
+				actBusinessService.deleteActBusinessBykey("LtePlan_"+ltePlan.getmENodeBID()+"_"+ltePlan.getId());
+				//删除三表的数据
+				lteCellCheckService.deleteByeNodeBID(ltePlan.getmENodeBID());
+				lteLoadTestService.deleteByeNodeBID(ltePlan.getmENodeBID());
+				lteStationCheckService.deleteByeNodeBID(ltePlan.getmENodeBID());
+			}
 		}
 		 planDao.check(id,statusM);
 		 return new JsonMsgUtil(true,"审核完成","");
 	}
 
+	
 }

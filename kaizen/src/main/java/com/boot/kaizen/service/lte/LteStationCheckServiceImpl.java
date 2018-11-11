@@ -111,4 +111,9 @@ class LteStationCheckServiceImpl implements ILteStationCheckService {
 		return stationCheckDao.findById(id);
 	}
 
+	@Override
+	public void deleteByeNodeBID(String mENodeBID) {
+		stationCheckDao.deleteByeNodeBID(mENodeBID);
+	}
+
 }

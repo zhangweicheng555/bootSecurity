@@ -65,4 +65,6 @@ public interface ActBusinessDao {
 
 	List<String> findLinksMatchBusinessKey(@Param("content")  String content);
 
+	void deleteActBusinessBykey(@Param("businessKey") String businessKey);
+
 }

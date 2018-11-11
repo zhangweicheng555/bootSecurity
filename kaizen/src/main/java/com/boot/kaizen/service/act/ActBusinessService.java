@@ -80,4 +80,9 @@ public class ActBusinessService implements IActBusinessService {
 	public List<String> findLinksMatchBusinessKey(String content) {
 		return actBusinessDao.findLinksMatchBusinessKey(content);
 	}
+
+	@Override
+	public void deleteActBusinessBykey(String businessKey) {
+		 actBusinessDao.deleteActBusinessBykey(businessKey);
+	}
 }

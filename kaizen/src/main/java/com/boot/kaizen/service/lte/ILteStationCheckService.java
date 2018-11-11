@@ -39,4 +39,5 @@ public interface ILteStationCheckService {
 	 */
 	LteStationCheck findById(Long id);
 
+	void deleteByeNodeBID(String mENodeBID);
 }
