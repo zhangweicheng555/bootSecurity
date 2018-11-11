@@ -59,6 +59,7 @@ class LteStationCheckServiceImpl implements ILteStationCheckService {
 		return j;
 	}
 
+	@Transactional
 	@Override
 	public void batchInsert(List<LteStationCheck> stationChecks) {
 		LteStationCheck cellCheck = stationChecks.get(0);
@@ -79,22 +80,22 @@ class LteStationCheckServiceImpl implements ILteStationCheckService {
 		if (processInstance == null) {
 			throw new IllegalArgumentException("流程实例不存在");
 		}
-		Long num = actBusinessService.queryCountMatchLink("LteCellCheck", "小区核查", piid);
+		Long num = actBusinessService.queryCountMatchLink("LteCellCheck", "基站核查", piid);
 		if (num == 0) {
 			// 查询小区核查的任务
-			Task task = taskService.createTaskQuery().processInstanceId(piid).taskName("小区核查").singleResult();
+			Task task = taskService.createTaskQuery().processInstanceId(piid).taskName("基站核查").singleResult();
 			if (task == null) {
-				throw new IllegalArgumentException("小区核查环节不存在");
+				throw new IllegalArgumentException("基站核查环节不存在");
 			}
 			// 记录关联表的关系
 			Map<String, Object> mapAll = new HashMap<>();
 			mapAll.put("checkResult", "");
 			mapAll.put("bussType", "LteCellCheck");
 			mapAll.put("createTime", new Date());
-			mapAll.put("bussId", "");
+			mapAll.put("bussId", 0);
 			mapAll.put("checkAssignee", "");
 			mapAll.put("projId", cellCheck.getProjId());
-			mapAll.put("actName", "小区核查");
+			mapAll.put("actName", "基站核查");
 			mapAll.put("actId", task.getTaskDefinitionKey());
 			mapAll.put("piid", piid);
 			mapAll.put("businessKey", processInstance.getBusinessKey());

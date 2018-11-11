@@ -130,8 +130,15 @@
 		    and projId =#{projId}
 	</select>
 	
+	<update id="check" >
+		 update 
+		 lte_plane 
+		 set status=#{statusM} 
+		 where id=#{id}
+	</update>
+	
 	<select id="queryLtePlanInfo" resultMap="queryLtePlanInfoMap">
-		
+		select * from lte_plane where id=#{id}
 	</select>
 	
 	<resultMap type="com.boot.kaizen.model.LtePlanInfo" id="queryLtePlanInfoMap">
@@ -149,8 +156,11 @@
 		<result property="backPersonPhone" column="backPersonPhone" />
 		<result property="testTime" column="testTime" />
 		<result property="dealPersonId" column="dealPersonId" />
-		<result property=status column="status" />
-		<collection property="roles" column="mENodeBID" ofType="com.boot.kaizen.model.SysRole" select="com.boot.kaizen.dao.SysRoleDao.queryByProId" />
+		<result property="status" column="status" />
+		<collection property="gcParameters" column="mENodeBID" ofType="com.boot.kaizen.model.LteGcParameter" select="com.boot.kaizen.dao.lte.LteGcParameterDao.queryGcParameterList" />
+		<collection property="stationChecks" column="mENodeBID" ofType="com.boot.kaizen.model.LteStationCheck" select="com.boot.kaizen.dao.lte.LteStationCheckDao.findListByMenodeBID" />
+		<collection property="loadTests" column="mENodeBID" ofType="com.boot.kaizen.model.LteLoadTest" select="com.boot.kaizen.dao.lte.LteLoadTestDao.findListByMenodeBID" />
+		<collection property="cellChecks" column="mENodeBID" ofType="com.boot.kaizen.model.LteCellCheck" select="com.boot.kaizen.dao.lte.LteCellCheckDao.findListByMenodeBID" />
 	</resultMap>
 	
 	<resultMap type="com.boot.kaizen.controller.lte.model.BaseStationBean" id="queryStationListMap">

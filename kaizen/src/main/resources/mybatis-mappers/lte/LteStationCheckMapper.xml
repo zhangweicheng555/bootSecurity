@@ -26,6 +26,14 @@
 		 where id=#{id}
 	</select>
 	
+	
+	<select id="findListByMenodeBID" resultType="LteStationCheck">
+		 select *
+		 from
+		 lte_station_check  
+		 where eNodeBID=#{mENodeBID}
+	</select>
+	
 	<delete id="delete">
 		 delete from lte_station_check
 		 where id in
@@ -41,7 +49,7 @@
            values
             <foreach collection ="stationChecks" item="item" index= "index" separator =",">
                 (
-                	#{eNodeBID},#{userId},#{testDate},#{latitude},#{longitude},#{tac},#{createTime},#{projId}
+                	#{item.eNodeBID},#{item.userId},#{item.testDate},#{item.latitude},#{item.longitude},#{item.tac},#{item.createTime},#{item.projId}
                 )
             </foreach >
      </insert>

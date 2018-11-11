@@ -2,6 +2,11 @@ package com.boot.kaizen.service.lte;
 
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.boot.kaizen.controller.lte.model.BaseStationBean;
 import com.boot.kaizen.entity.LoginUser;
 import com.boot.kaizen.model.LtePlan;
@@ -57,5 +62,29 @@ public interface ILtePlanService {
 	 * @param testDate
 	 */
 	public List<BaseStationBean> queryStationList(Long userId, Long projId, String testDate);
+	
+	/**
+	 * 
+	 * @Description: 查询规划表相关的所有表的信息
+	 * @author weichengz
+	 * @date 2018年11月11日 上午8:41:06
+	 */
+	JsonMsgUtil queryLtePlanInfo(Long id,LoginUser user);
+
+	/**
+	 * 
+	* @Description: 查看流程图
+	* @author weichengz
+	* @date 2018年11月11日 上午10:18:52
+	 */
+	public void findLteConfigActivitiImage(Long id, HttpServletResponse response);
+
+	/**
+	 * 审核
+	* @Description: TODO
+	* @author weichengz
+	* @date 2018年11月11日 下午6:59:49
+	 */
+	public JsonMsgUtil check(Long id, Long statusM);
 
 }

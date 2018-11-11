@@ -4,6 +4,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
 import org.activiti.engine.runtime.ProcessInstance;
@@ -18,7 +21,9 @@ import com.boot.kaizen.activiti.service.Activitiservice;
 import com.boot.kaizen.controller.lte.model.BaseStationBean;
 import com.boot.kaizen.dao.lte.LtePlanDao;
 import com.boot.kaizen.entity.LoginUser;
+import com.boot.kaizen.model.LteCellCheck;
 import com.boot.kaizen.model.LtePlan;
+import com.boot.kaizen.model.LtePlanInfo;
 import com.boot.kaizen.service.act.IActBusinessService;
 import com.boot.kaizen.util.JsonMsgUtil;
 import com.boot.kaizen.util.MyDateUtil;
@@ -28,6 +33,8 @@ class LtePlanServiceImpl implements ILtePlanService {
 
 	@Autowired
 	private LtePlanDao planDao;
+	@Autowired
+	private ILteConfigService lteConfigService;
 	@Autowired
 	private RuntimeService runtimeService;
 	@Autowired
@@ -161,6 +168,72 @@ class LtePlanServiceImpl implements ILtePlanService {
 	@Override
 	public List<BaseStationBean> queryStationList(Long userId, Long projId, String testDate) {
 		return planDao.queryStationList(userId, projId, testDate);
+	}
+
+	@Override
+	public JsonMsgUtil queryLtePlanInfo(Long id,LoginUser user) {
+		JsonMsgUtil j=new JsonMsgUtil(false);
+		LtePlanInfo planInfo = planDao.queryLtePlanInfo(id);
+		if (planInfo != null) {
+			/**查询测试配置*/
+			if (user == null) {
+				throw new IllegalArgumentException("登陆超时");
+			}
+			planInfo.setConfigs(lteConfigService.queryListByProjId(user.getProjId()));
+			j=new JsonMsgUtil(true, "查询规划信息成功", planInfo);
+		}else {
+			j.setMessage("查询的规划信息不存在");
+		}
+		return j;
+	}
+
+	@Override
+	public void findLteConfigActivitiImage(Long id, HttpServletResponse response) {
+		String piid = actBusinessService.queryPiid(id, "LtePlan");
+		if (StringUtils.isBlank(piid)) {
+			throw new IllegalArgumentException("流程实例不存在");
+		}
+		activitiservice.findActivitiProccessImage(piid, response);
+	}
+
+	@Override
+	public JsonMsgUtil check(Long id, Long statusM) {
+		LtePlan ltePlan=planDao.findById(id);
+		if (ltePlan == null) {
+			throw new IllegalArgumentException("测试计划已被删除");
+		};
+		
+		
+		String piid = actBusinessService.queryMatchBusinessKey("LtePlan", "LtePlan" + "_" + ltePlan.getmENodeBID()+"_"+id);
+		if (StringUtils.isBlank(piid)) {
+			throw new IllegalArgumentException("流程实例不存在");
+		}
+		
+		Long num = actBusinessService.queryCountMatchLink("LtePlan", "审核报告", piid);
+		if (num==0) {
+			// 查询小区核查的任务
+			Task task = taskService.createTaskQuery().processInstanceId(piid).taskName("审核报告").singleResult();
+			if (task == null) {
+				throw new IllegalArgumentException("审核报告环节不存在");
+			}
+			// 记录关联表的关系
+			Map<String, Object> mapAll = new HashMap<>();
+			mapAll.put("checkResult", "");
+			mapAll.put("bussType", "LtePlan");
+			mapAll.put("createTime", new Date());
+			mapAll.put("bussId", ltePlan.getId());
+			mapAll.put("checkAssignee", "");
+			mapAll.put("projId", ltePlan.getProjId());
+			mapAll.put("actName", "审核报告");
+			mapAll.put("actId", task.getTaskDefinitionKey());
+			mapAll.put("piid", piid);
+			mapAll.put("businessKey", "LtePlan" + "_" + ltePlan.getmENodeBID()+"_"+id);
+			actBusinessService.insertAll(mapAll);
+			//完成任务
+			taskService.complete(task.getId());
+		}
+		 planDao.check(id,statusM);
+		 return new JsonMsgUtil(true,"审核完成","");
 	}
 
 }

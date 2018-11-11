@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import com.boot.kaizen.model.LteConfig;
+import com.boot.kaizen.model.LteLoadTest;
 
 @Mapper
 public interface LteConfigDao {
@@ -60,4 +61,16 @@ public interface LteConfigDao {
 	 * @date 2018年11月4日 上午9:51:44
 	 */
 	void changeStatus(@Param("id") Long id,@Param("status") Long status);
+
+	List<LteConfig> queryListByEnodeBid(@Param("eNodeBID") String eNodeBID);
+
+	/**
+	 * 
+	* @Description: 根据项目id查询配置信息
+	* @author weichengz
+	* @date 2018年11月11日 上午10:54:41
+	 */
+	List<LteConfig> queryListByProjId(@Param("projId") Long projId);
+	
+	
 }

@@ -70,7 +70,7 @@
 		        parent.layer.load(); //上传loading
 		    }
 		    ,data: {//上传时额外传递的参数
-		    	  token: "eyJhbGciOiJIUzI1NiJ9.eyJMT0dJTl9VU0VSX0tFWSI6IjMwOWEwYzQxLWJkOGEtNDA1My1hZWJjLWMxYmJhN2Y3NjI3NCJ9.vTRNvxWBKuiqJZXQ2sZ8fxX72WXidAb9KOyOf9jeW3Y"
+		    	  token: "eyJhbGciOiJIUzI1NiJ9.eyJMT0dJTl9VU0VSX0tFWSI6Ijc3YzUyMjVjLWZhZTktNDJmNS1iN2NjLTU5MWY3NzFhNWM5OCJ9.HJDD2944FcYpjTzOKjju4FkvKCNDmN-21Ibvp95GDVM"
 		    		}
 		    ,done: function(res){//上传完毕回调  返回的json格式  如果上传后，出现文件下载框（一般为ie下），那么你需要在服务端对response的header设置 Content-Type: text/html
 		    	parent.layer.closeAll('loading'); //关闭loading
@@ -124,7 +124,6 @@
 		  
 		  
 		  $(".layui-upload-img").click(function(){
-			  alert("122");
 			  $(this).remove();
 		  });
 	});

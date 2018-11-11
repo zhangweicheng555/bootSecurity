@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import com.boot.kaizen.model.LteGcParameter;
 import com.boot.kaizen.model.LteStationCheck;
 
 @Mapper
@@ -37,5 +39,13 @@ public interface LteStationCheckDao {
 	 * @return
 	 */
 	LteStationCheck findById(@Param("id") Long id);
+	
+	/**
+	 * 
+	* @Description: 查询
+	* @author weichengz
+	* @date 2018年11月11日 上午8:28:32
+	 */
+	List<LteStationCheck> findListByMenodeBID(@Param("mENodeBID") String mENodeBID);
 
 }

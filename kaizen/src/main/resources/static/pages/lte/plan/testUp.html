@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>添加计划表</title>
+<link rel="stylesheet" type="text/css" media="screen" href="../../../../css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" media="screen" href="../../../../layui/css/layui.css">
+</head>
+<body>
+
+	
+	
+	<form action="/lte/app/uploadRoadTest" method="post" enctype="multipart/form-data">
+	     <input type="text" name="projId"  value="479"/>
+	     <input type="text" name="token"  value="eyJhbGciOiJIUzI1NiJ9.eyJMT0dJTl9VU0VSX0tFWSI6Ijc3YzUyMjVjLWZhZTktNDJmNS1iN2NjLTU5MWY3NzFhNWM5OCJ9.HJDD2944FcYpjTzOKjju4FkvKCNDmN-21Ibvp95GDVM"/>
+	     <input type="text" name="userId"  value="10"/>
+	     <input type="text" name="eNodeBID"  value="123456"/>
+	     <input type="text" name="communityName"  value="1"/>
+	     <input type="text" name="testDate"  value="2018-11-11"/>
+	     <input type="file" name="rsrpFtpUpImage" value="选择jar包"/>
+	     <input type="file" name="sinrFtpUpImage" value="选择jar包"/>
+	     <input type="file" name="upFtpRateImage" value="选择jar包"/>
+	     <input type="file" name="rsrpFtpDownImage" value="选择jar包"/>
+	     <input type="file" name="sinrFtpDownImage" value="选择jar包"/>
+	     <input type="file" name="downFtpRateImage" value="选择jar包"/>
+	     <input type="file" name="sinrThresholdImage" value="选择jar包"/>
+	     <input type="file" name="rsrpThresholdImage" value="选择jar包"/>
+	     <input type="file" name="ftpRateThresholdImage " value="选择jar包"/>
+	     <input type="file" name="roadLogFile " value="选择jar包"/>
+	     <input id="submit_form" type="submit" class="btn btn-success save" value="保存"/>
+	</form>
+	
+	
+	
+	
+	
+	<script type="text/javascript" src="../../../../js/libs/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="../../../../layui/layui.js"></script>
+	<script type="text/javascript" src="../../../../js/jq.js"></script>
+	
+<script>
+
+	var flag=false;
+	
+	var token = localStorage.getItem("token");
+	$("#zwc").val(token);
+	
+	function submitForm(){
+		$("#formDemoBtn").click();
+		return flag;
+	 }
+	
+	
+	
+	layui.use(['layer', 'form','jquery','laydate'], function(){
+	  var layer = layui.layer,form = layui.form,$=layui.jquery;
+	  var laydate = layui.laydate;
+	//监听提交
+	  form.on('submit(formDemo)', function(data){
+		  //JSON.stringify(data.field)  将form表格序列化了
+		//layer.msg(JSON.stringify(data.field));
+		flag=true;
+	    return false;
+	  });
+	
+	
+	
+
+	  /**日期框*/
+	  laydate.render({
+	     elem: '#testTime'
+	    ,max: 0
+	    ,theme: 'molv'
+   	    ,done: function(val, date, endDate){
+   	    	$("#beginTime").val(val);//给搜索赋值
+   		 }
+	  });
+	});
+	
+</script> 
+
+</body>
+</html>

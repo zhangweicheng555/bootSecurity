@@ -71,11 +71,15 @@ public class LteAppController {
 	// 0:失败;1:成功; 2:服务器异常
 
 	/**
+	 * 根据用户名密码获取 token username password login
+	 */
+
+	/**
 	 * 根据登录的用户查询拥有的项目
 	 * 
 	 * @param username
 	 */
-	@RequestMapping(value = "/queryProjectList", method = RequestMethod.GET)
+	@RequestMapping(value = "/queryProjectList", method = RequestMethod.POST)
 	public AppUtil queryProjectList(@RequestParam(value = "name", required = true) String name) {
 		AppUtil appUtil = new AppUtil(1, "查询成功", "");
 		List<Map<String, Object>> list = new ArrayList<>();
@@ -85,10 +89,14 @@ public class LteAppController {
 				appUtil = new AppUtil(0, "查询项目列表为空", "");
 				return appUtil;
 			}
+
 			for (Map<String, Object> map : queryProjects) {
 				Map<String, Object> model = new HashMap<>();
-				model.put("proName", map.get("projName"));
-				model.put("projId", map.get("id"));
+				Long projId = Long.valueOf(map.get("id").toString());
+				model.put("proName", map.get("projName").toString());
+				model.put("projId", projId);
+				SysUser user = userService.queryUser(projId, name);
+				model.put("userId", user.getId());
 				list.add(model);
 			}
 			appUtil.setDataSource(list);
@@ -100,12 +108,12 @@ public class LteAppController {
 	}
 
 	/**
-	 * 根据用户名字 项目id查询个人信息
+	 * 根据用户名字 项目id查询个人信息 内部使用
 	 * 
 	 * @param username
 	 * @param projId
 	 */
-	@RequestMapping(value = "/queryUserInfo", method = RequestMethod.GET)
+	@RequestMapping(value = "/queryUserInfo", method = RequestMethod.POST)
 	public AppUtil queryUserInfo(@RequestParam(value = "name", required = true) String name,
 			@RequestParam(value = "projId", required = true) Long projId) {
 		AppUtil appUtil = new AppUtil(1, "查询成功", "");
@@ -133,7 +141,7 @@ public class LteAppController {
 	 * @param username
 	 * @param projId
 	 */
-	@RequestMapping(value = "/queryPlanList", method = RequestMethod.GET)
+	@RequestMapping(value = "/queryPlanList", method = RequestMethod.POST)
 	public AppUtil queryUserInfo(@RequestParam(value = "userId", required = true) Long userId,
 			@RequestParam(value = "projId", required = true) Long projId) {
 		AppUtil appUtil = new AppUtil(1, "查询成功", "");
@@ -159,7 +167,7 @@ public class LteAppController {
 	 * @param projId
 	 * @param testDate
 	 */
-	@RequestMapping(value = "/queryStationList", method = RequestMethod.GET)
+	@RequestMapping(value = "/queryStationList", method = RequestMethod.POST)
 	public AppUtil queryStationList(@RequestParam(value = "userId", required = true) Long userId,
 			@RequestParam(value = "projId", required = true) Long projId,
 			@RequestParam(value = "testDate", required = true) String testDate) {
@@ -206,13 +214,16 @@ public class LteAppController {
 	 * 上传基站核查结果
 	 */
 	@RequestMapping(value = "/uploadStationCheck", method = RequestMethod.POST)
-	public AppUtil uploadStationCheck(@RequestBody List<LteStationCheck> stationChecks) {
+	public AppUtil uploadStationCheck(LteStationCheck stationCheck) {
 		AppUtil appUtil = new AppUtil(1, "查询成功", null);
+
+		if (stationCheck == null) {
+			appUtil = new AppUtil(0, "接收基站核查列表为空", "");
+			return appUtil;
+		}
+		List<LteStationCheck> stationChecks = new ArrayList<LteStationCheck>();
+		stationChecks.add(stationCheck);
 		try {
-			if (stationChecks == null || stationChecks.size() == 0) {
-				appUtil = new AppUtil(0, "接收基站核查列表为空", "");
-				return appUtil;
-			}
 			lteStationCheckService.batchInsert(stationChecks);
 			appUtil.setDataSource(null);
 			return appUtil;
@@ -226,13 +237,16 @@ public class LteAppController {
 	 * 上传小区测试结果
 	 */
 	@RequestMapping(value = "/uploadCellCheck", method = RequestMethod.POST)
-	public AppUtil uploadCellCheck(@RequestBody List<LteCellCheck> cellChecks) {
+	public AppUtil uploadCellCheck(LteCellCheck cellCheck) {
 		AppUtil appUtil = new AppUtil(1, "查询成功", null);
+		if (cellCheck == null) {
+			appUtil = new AppUtil(0, "接收小区测试列表为空", "");
+			return appUtil;
+		}
+
+		List<LteCellCheck> cellChecks = new ArrayList<>();
+		cellChecks.add(cellCheck);
 		try {
-			if (cellChecks == null || cellChecks.size() == 0) {
-				appUtil = new AppUtil(0, "接收小区测试列表为空", "");
-				return appUtil;
-			}
 			// 批量添加
 			lteCellCheckService.batchInsert(cellChecks);
 			appUtil.setDataSource(null);
@@ -260,11 +274,11 @@ public class LteAppController {
 				appUtil = new AppUtil(0, "该项目下测试配置项不存在", "");
 				return appUtil;
 			}
-			if (lteConfig.getStatus() !=2) {
+			if (lteConfig.getStatus() != 2) {
 				appUtil = new AppUtil(0, "该项目下测试配置项未通过审核", "");
 				return appUtil;
 			}
-			
+
 			Map<String, Object> mVoiceConfig = new HashMap<>();
 			Map<String, Object> mFtpConfig = new HashMap<>();
 
@@ -329,7 +343,7 @@ public class LteAppController {
 					sinrFtpUpImageName, upFtpRateImageName, rsrpFtpDownImageName, sinrFtpDownImageName,
 					downFtpRateImageName, sinrThresholdImageName, rsrpThresholdImageName, ftpRateThresholdImageName,
 					roadLogFileName);
-
+			loadTest.setProjId(projId);
 			lteLoadTestService.save(loadTest);
 			appUtil.setDataSource("上传成功");
 			return appUtil;

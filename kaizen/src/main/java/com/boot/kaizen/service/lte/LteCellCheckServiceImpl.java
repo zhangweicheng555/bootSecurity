@@ -64,14 +64,14 @@ class LteCellCheckServiceImpl implements ILteCellCheckService {
 
 		LteCellCheck cellCheck = cellChecks.get(0);
 		// 查询此节点与上个节点是不是存在
-		List<String> links = actBusinessService.findLinksMatchBusinessKey("LtePlan" + "_" + cellCheck.geteNodeBID());
+		List<String> links = actBusinessService.findLinksMatchBusinessKey("LtePlan" + "_" + cellCheck.geteNodeBID()+"_");
 		if (links == null || links.size() == 0) {
 			throw new IllegalArgumentException("系统未录入站号为：" + cellCheck.geteNodeBID() + "的信息");
 		}
 		if (!links.contains("工参信息")) {
 			throw new IllegalArgumentException("工参信息未录入");
 		}
-		String piid = actBusinessService.queryMatchBusinessKey("LtePlan", "LtePlan" + "_" + cellCheck.geteNodeBID());
+		String piid = actBusinessService.queryMatchBusinessKey("LtePlan", "LtePlan" + "_" + cellCheck.geteNodeBID()+"_");
 		if (StringUtils.isBlank(piid)) {
 			throw new IllegalArgumentException("流程实例不存在");
 		}
@@ -92,7 +92,7 @@ class LteCellCheckServiceImpl implements ILteCellCheckService {
 			mapAll.put("checkResult", "");
 			mapAll.put("bussType", "LteCellCheck");
 			mapAll.put("createTime", new Date());
-			mapAll.put("bussId", "");
+			mapAll.put("bussId", 0);
 			mapAll.put("checkAssignee", "");
 			mapAll.put("projId", cellCheck.getProjId());
 			mapAll.put("actName", "小区核查");

@@ -12,6 +12,8 @@ import org.activiti.engine.task.Task;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.boot.kaizen.dao.lte.LteLoadTestDao;
 import com.boot.kaizen.model.LteLoadTest;
 import com.boot.kaizen.service.act.IActBusinessService;
@@ -28,18 +30,19 @@ class LteLoadTestServiceImpl implements ILteLoadTestService {
 	@Autowired
 	private TaskService taskService;
 
+	@Transactional
 	@Override
 	public void save(LteLoadTest lteLoadTest) {
 		// 保存关联表 路测核查
 		// 查询此节点与上个节点是不是存在
-		List<String> links = actBusinessService.findLinksMatchBusinessKey("LtePlan" + "_" + lteLoadTest.geteNodeBID());
+		List<String> links = actBusinessService.findLinksMatchBusinessKey("LtePlan" + "_" + lteLoadTest.geteNodeBID()+"_");
 		if (links == null || links.size() == 0) {
 			throw new IllegalArgumentException("系统未录入站号为：" + lteLoadTest.geteNodeBID() + "的信息");
 		}
 		if (!links.contains("工参信息")) {
 			throw new IllegalArgumentException("工参信息未录入");
 		}
-		String piid = actBusinessService.queryMatchBusinessKey("LtePlan", "LtePlan" + "_" + lteLoadTest.geteNodeBID());
+		String piid = actBusinessService.queryMatchBusinessKey("LtePlan", "LtePlan" + "_" + lteLoadTest.geteNodeBID()+"_");
 		if (StringUtils.isBlank(piid)) {
 			throw new IllegalArgumentException("流程实例不存在");
 		}
@@ -60,7 +63,7 @@ class LteLoadTestServiceImpl implements ILteLoadTestService {
 			mapAll.put("checkResult", "");
 			mapAll.put("bussType", "LteLoadTest");
 			mapAll.put("createTime", new Date());
-			mapAll.put("bussId", "");
+			mapAll.put("bussId", 0);
 			mapAll.put("checkAssignee", "");
 			mapAll.put("projId", lteLoadTest.getProjId());
 			mapAll.put("actName", "路测核查");

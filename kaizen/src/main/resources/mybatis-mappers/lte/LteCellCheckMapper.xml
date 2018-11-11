@@ -18,6 +18,12 @@
         </if>
 		 order by lp.createTime desc
 	</select>
+	<select id="findListByMenodeBID" resultType="LteCellCheck">
+		 select lp.* 
+		 from
+		 lte_cell_check lp 
+         where  lp.eNodeBID =#{mENodeBID}
+	</select>
 	
 	<delete id="delete">
 		 delete from lte_cell_check
@@ -29,11 +35,11 @@
 	</delete>
 	
 	<insert id ="batchInsert" parameterType="java.util.List" >
-           insert into lte_station_check
+           insert into lte_cell_check
            (
 			userId
 			,eNodeBID
-			,communityName
+			,communityName  
 			,testDate
 			,csfbTestCount
 			,csfbFallSuccessCount
@@ -66,37 +72,37 @@
            values
             <foreach collection ="cellChecks" item="item" index= "index" separator =",">
                 (
-                	#{userId}
-					,#{eNodeBID}
-					,#{communityName}
-					,#{testDate}
-					,#{csfbTestCount}
-					,#{csfbFallSuccessCount}
-					,#{csfbFallRate}
-					,#{goodFtpUpAverageRsrp}
-					,#{goodFtpUpAverageSinr}
-					,#{goodFtpUpRate}
-					,#{generalFtpUpAverageRsrp}
-					,#{generalFtpUpAverageSinr}
-					,#{generalFtpUpRate}
-					,#{poorFtpUpAverageRsrp}
-					,#{poorFtpUpAverageSinr}
-					,#{poorFtpUpRate}
-					,#{goodFtpDownAverageRsrp}
-					,#{goodFtpDownAverageSinr}
-					,#{goodFtpDownRate}
-					,#{generalFtpDownAverageRsrp}
-					,#{generalFtpDownAverageSinr}
-					,#{generalFtpDownRate}
-					,#{poorFtpDownAverageRsrp}
-					,#{poorFtpDownAverageSinr}
-					,#{poorFtpDownRate}
-					,#{pci}
-					,#{tac}
-					,#{cellId}
-					,#{frequency}
-					,#{projId}
-					,#{createTime}
+                	#{item.userId}
+					,#{item.eNodeBID}
+					,#{item.communityName}
+					,#{item.testDate}
+					,#{item.csfbTestCount}
+					,#{item.csfbFallSuccessCount}
+					,#{item.csfbFallRate}
+					,#{item.goodFtpUpAverageRsrp}
+					,#{item.goodFtpUpAverageSinr}
+					,#{item.goodFtpUpRate}
+					,#{item.generalFtpUpAverageRsrp}
+					,#{item.generalFtpUpAverageSinr}
+					,#{item.generalFtpUpRate}
+					,#{item.poorFtpUpAverageRsrp}
+					,#{item.poorFtpUpAverageSinr}
+					,#{item.poorFtpUpRate}
+					,#{item.goodFtpDownAverageRsrp}
+					,#{item.goodFtpDownAverageSinr}
+					,#{item.goodFtpDownRate}
+					,#{item.generalFtpDownAverageRsrp}
+					,#{item.generalFtpDownAverageSinr}
+					,#{item.generalFtpDownRate}
+					,#{item.poorFtpDownAverageRsrp}
+					,#{item.poorFtpDownAverageSinr}
+					,#{item.poorFtpDownRate}
+					,#{item.pci}
+					,#{item.tac}
+					,#{item.cellId}
+					,#{item.frequency}
+					,#{item.projId}
+					,#{item.createTime}
                 )
             </foreach >
      </insert>

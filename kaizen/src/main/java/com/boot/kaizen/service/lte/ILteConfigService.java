@@ -53,4 +53,12 @@ public interface ILteConfigService {
 	* @date 2018年11月4日 上午9:50:59
 	 */
 	void changeStatus(Long id,Long status);
+
+	/**
+	 * 
+	* @Description: 查询测试配置信息
+	* @author weichengz
+	* @date 2018年11月11日 上午10:48:22
+	 */
+	public List<LteConfig> queryListByProjId(Long projId);
 }

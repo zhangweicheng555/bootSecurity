@@ -25,6 +25,7 @@
 		
 		 order by lp.createTime desc
 	</select>
+	
 	<select id="queryGcParameterList" resultType="LteGcParameter">
 		 select 
 		   lp.* 

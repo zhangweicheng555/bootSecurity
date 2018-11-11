@@ -27,7 +27,7 @@ public class LtePlan extends BaseEntity<Long> {
 	private String testTime;// 测试时间 yyyy-mm-dd
 
 	private Long dealPersonId;// 接收改计划任务的人的id
-	private Long status = 0l;// 最终是不是报告可以审核 之后最后一步的时候 才设置为1 然后审核
+	private Long status = 0l;// 最终是不是报告可以审核 之后最后一步的时候 才设置为1  0 未审核  1审核通过  2审核不通过
 
 	public Long getDealPersonId() {
 		return dealPersonId;

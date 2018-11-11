@@ -1,5 +1,8 @@
 package com.boot.kaizen.controller.lte;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -60,6 +63,19 @@ public class LtePlanController {
 		return ltePlanService.edit(ltePlan, loginUser);
 	}
 
+	
+
+	/**
+	 * 
+	 * @Description: 查看流程图
+	 * @author weichengz
+	 * @date 2018年11月11日 上午10:18:31
+	 */
+	@RequestMapping(value = "/findLteConfigActivitiImage")
+	public void findLteConfigActivitiImage(@RequestParam("id") Long id, HttpServletResponse response) {
+		ltePlanService.findLteConfigActivitiImage(id, response);
+	}
+
 	/**
 	 * 
 	 * @Description: 根据id查询
@@ -70,6 +86,31 @@ public class LtePlanController {
 	@RequestMapping(value = "/findById", method = RequestMethod.POST)
 	public JsonMsgUtil findById(@RequestParam("id") Long id) {
 		return ltePlanService.findById(id);
+	}
+
+	/**
+	 * 
+	 * @Description: 审核规划表
+	 * @author weichengz
+	 * @date 2018年10月28日 下午5:00:01
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/check", method = RequestMethod.POST)
+	public JsonMsgUtil check(@RequestParam("id") Long id, @RequestParam("statusM") Long statusM) {
+		return ltePlanService.check(id, statusM);
+	}
+
+	/**
+	 * 
+	 * @Description: 根据id查询
+	 * @author weichengz
+	 * @date 2018年10月28日 下午5:00:01
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/queryLtePlanInfo", method = RequestMethod.POST)
+	public JsonMsgUtil queryLtePlanInfo(@RequestParam("id") Long id) {
+		LoginUser LoginUser = UserUtil.getLoginUser();
+		return ltePlanService.queryLtePlanInfo(id, LoginUser);
 	}
 
 	/**

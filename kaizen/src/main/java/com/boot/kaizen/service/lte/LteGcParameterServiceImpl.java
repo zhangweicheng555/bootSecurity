@@ -47,8 +47,7 @@ class LteGcParameterServiceImpl implements ILteGcParameterService {
 		}
 
 		// 根据流程站号判断是不是存在规划表、主要是通过关联表判断
-		String piid = actBusinessService.queryMatchBusinessKey("LtePlan",
-				"LtePlan_" + lteGcParameter.getmENodeBID() + "_");
+		String piid = actBusinessService.queryMatchBusinessKey("LtePlan","LtePlan_" + lteGcParameter.getmENodeBID() + "_");
 		if (StringUtils.isBlank(piid)) {
 			throw new IllegalArgumentException("规划表中不存在此站号的记录");
 		}

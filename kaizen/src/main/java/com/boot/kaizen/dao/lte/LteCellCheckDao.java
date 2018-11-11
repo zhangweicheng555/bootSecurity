@@ -5,6 +5,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import com.boot.kaizen.model.LteCellCheck;
+import com.boot.kaizen.model.LteStationCheck;
 
 @Mapper
 public interface LteCellCheckDao {
@@ -30,5 +31,13 @@ public interface LteCellCheckDao {
 	 * @param stationChecks
 	 */
 	void batchInsert(@Param("cellChecks") List<LteCellCheck> cellChecks);
+
+	/**
+	 * 
+	 * @Description: 查询
+	 * @author weichengz
+	 * @date 2018年11月11日 上午8:28:32
+	 */
+	List<LteCellCheck> findListByMenodeBID(@Param("mENodeBID") String mENodeBID);
 
 }

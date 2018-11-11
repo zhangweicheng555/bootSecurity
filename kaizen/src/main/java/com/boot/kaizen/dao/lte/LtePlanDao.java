@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.Select;
 
 import com.boot.kaizen.controller.lte.model.BaseStationBean;
 import com.boot.kaizen.model.LtePlan;
+import com.boot.kaizen.model.LtePlanInfo;
+import com.boot.kaizen.util.JsonMsgUtil;
 
 @Mapper
 public interface LtePlanDao {
@@ -18,6 +20,14 @@ public interface LtePlanDao {
 	 * @date 2018年10月28日 下午4:42:04
 	 */
 	List<LtePlan> find(@Param("map") Map<String, Object> map);
+
+	/**
+	 * 
+	 * @Description: 查询规划表相关的所有表的信息
+	 * @author weichengz
+	 * @date 2018年11月11日 上午8:41:06
+	 */
+	LtePlanInfo queryLtePlanInfo(@Param("id") Long id);
 
 	/**
 	 * 
@@ -65,5 +75,14 @@ public interface LtePlanDao {
 	 */
 	List<BaseStationBean> queryStationList(@Param("userId") Long userId, @Param("projId") Long projId,
 			@Param("testDate") String testDate);
+
+	/**
+	 * 审核
+	 * 
+	 * @Description: TODO
+	 * @author weichengz
+	 * @date 2018年11月11日 下午7:02:24
+	 */
+	void check(@Param("id") Long id, @Param("statusM") Long statusM);
 
 }

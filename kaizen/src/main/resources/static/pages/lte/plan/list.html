@@ -41,6 +41,9 @@
 							<button id="deleteBtnModel" class="layui-btn layui-btn-sm  layui-btn-danger" style="margin-left: 1px;"  permission="lte:plan:del">
 								  <i class="layui-icon">&#xe640;</i>删除
 							</button>
+							<button id="exportBtnModel" class="layui-btn layui-btn-sm  layui-btn-normal" style="margin-left: 1px;"  >
+								  <i class="layui-icon">&#xe640;</i>导出报告
+							</button>
 						</td>
 					</tr>
 				</table>
@@ -91,6 +94,7 @@
 	    ,cols: [[        
 	      {field:'id', width:30, title: 'ID', sort: true,type:'checkbox'}
 	      ,{title: '序号',width:70,templet: '#indexTpl',align:'center'}
+	      ,{field:'status', width:150, title: '审核状态',align:'center', templet: '#statusTpl'}
 	      ,{field:'mENodeBID',   minWidth:150, title: '基站号',align:'center'}
 	      ,{field:'mBaseStationName',   minWidth:300, title: '基站名称',align:'center'}
 	      ,{field:'mBaseStationType',  minWidth:150, title: '基站类型',align:'center'}
@@ -147,6 +151,8 @@
 	    	common.getConfirmDelDialog("确定要删除吗？","删除【"+row.mENodeBID+"】记录",2,"/plan/delete",{"ids":row.id},function(){deleteRow(obj);});
 	    } else if(obj.event === 'edit'){//编辑
 		    common.openEditDialog(fresh,"编辑项目","pages/lte/plan/edit.html?id="+row.id,"1000px","520px",false,"确定","取消","/plan/edit");
+	    }else if(obj.event === 'check'){//审核
+		    common.openEditDialog(fresh,"信息审核","pages/lte/plan/check.html?id="+row.id,"1200px","520px",false,"通过","取消","/plan/check");
 	    }
 	  });
 	  
@@ -262,8 +268,37 @@
    	    	$("#endTime").val(val);
    		 }
 	  });
-	  
+	
+	  var pers = checkPermission();
 });
+
+</script>
+
+<script type="text/html" id="statusTpl">
+	
+ 
+{{#  
+  var checkStatusFn = function(r){
+	if(0==r){
+		return '<a href="#" class="layui-table-link" style="color: red;">待审核</a>';
+	}
+	if(2==r){
+		return '<a href="#" class="layui-table-link" style="color: blue;">审核不通过</a>';
+	}
+	if(1==r){
+		return '<a href="#" class="layui-table-link" style="color: green;">审核通过</a>';
+	}
+	
+    return '<a href="#" class="layui-table-link" style="color: red;">待审核</a> ';
+  }; 
+}}
+      
+	{{#  if(d.status){ }}
+  		{{ checkStatusFn(d.status) }}
+	{{#  } else { }}
+  		<a href="#" class="layui-table-link" style="color: black;">待审核</a> 
+	{{#  } }}           	
+  
 
 </script>
 
@@ -274,4 +309,5 @@
 <script type="text/html" id="editBtnBar">
   <a class="layui-btn layui-btn-xs" lay-event="edit"  permission="lte:plan:edit">编辑</a>
   <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" style="margin-left: 1px;"  permission="lte:plan:del">删除</a>
+  <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="check" style="margin-left: 1px;"  permission="lte:plan:check">审核</a>
 </script>

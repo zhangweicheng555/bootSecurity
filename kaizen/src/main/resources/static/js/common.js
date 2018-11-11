@@ -88,7 +88,6 @@ layui.define(['layer','laydate','jquery'], function(exports) {
 							  $.ajax({
 								   type: "POST",url: submitUrl,data:$(checkfirstintroduce).serialize() ,dataType: "json",
 								   success: function(msg){
-									   console.info(msg);
 									   if(msg.success){
 										   parent.layer.close(indexModel);
 										   common.getMsgBlackDialog(msg.message,2000);

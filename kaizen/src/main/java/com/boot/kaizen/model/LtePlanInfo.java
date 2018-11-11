@@ -32,10 +32,19 @@ public class LtePlanInfo extends BaseEntity<Long> {
 	private Long dealPersonId;// 接收改计划任务的人的id
 	private Long status = 0l;// 最终是不是报告可以审核 之后最后一步的时候 才设置为1 然后审核
 
+	private List<LteConfig> configs;// 测试配置项
 	private List<LteGcParameter> gcParameters;// 工参列表
 	private List<LteStationCheck> stationChecks;// 基站核查结果列表
 	private List<LteLoadTest> loadTests;// 路测信息列表
 	private List<LteCellCheck> cellChecks;// 小区核查信息列表
+
+	public List<LteConfig> getConfigs() {
+		return configs;
+	}
+
+	public void setConfigs(List<LteConfig> configs) {
+		this.configs = configs;
+	}
 
 	public List<LteStationCheck> getStationChecks() {
 		return stationChecks;

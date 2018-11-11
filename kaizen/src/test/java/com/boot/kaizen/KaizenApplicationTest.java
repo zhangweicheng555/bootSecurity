@@ -25,7 +25,7 @@ public class KaizenApplicationTest {
 	
 	@Test
 	public void Test() throws InterruptedException, ExecutionException {
-		activitiservice.deleteProcessByDefinationId("LteConfig:2:30007", true);
+		activitiservice.deleteProcessByDefinationId("LteConfig:1:35007", true);
 	}
 
 }

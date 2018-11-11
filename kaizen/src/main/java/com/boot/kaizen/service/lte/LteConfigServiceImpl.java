@@ -1,5 +1,6 @@
 package com.boot.kaizen.service.lte;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -107,6 +108,16 @@ class LteConfigServiceImpl implements ILteConfigService {
 	@Override
 	public void changeStatus(Long id, Long status) {
 		configDao.changeStatus(id, status);
+	}
+
+	@Override
+	public List<LteConfig> queryListByProjId(Long projId) {
+		List<LteConfig> list = new ArrayList<>();
+		List<LteConfig> lteConfigs = configDao.queryListByProjId(projId);
+		if (lteConfigs != null) {
+			list = lteConfigs;
+		}
+		return list;
 	}
 
 }

@@ -10,17 +10,17 @@ $.ajaxSetup({
 		var code = response.code;
 		var message = response.message;
 		if (code == 400) {
-			layer.msg(message);
+			parent.layer.msg(message);
 		} else if (code == 401) {
 			localStorage.removeItem("token");
 			location.href = '/login.html';
 		} else if (code == 403) {
 			console.log("未授权:" + message);
-			layer.msg('未授权');
+			parent.layer.msg('未授权');
 		} else if (code == 500) {
-			layer.msg('系统错误：' + message);
+			parent.layer.msg('系统错误：' + message);
 		}else{
-			layer.msg(message);
+			parent.layer.msg(message);
 		}
 	}
 });

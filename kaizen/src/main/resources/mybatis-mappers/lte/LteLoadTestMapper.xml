@@ -5,6 +5,13 @@
 
 	
 	
+		<select id="findListByMenodeBID" resultType="LteLoadTest">
+		 select *
+		 from
+		 lte_load_test  
+		 where eNodeBID=#{mENodeBID}
+		</select>
+	
 	<insert id="save"  useGeneratedKeys="true" keyProperty="id">
 		insert into  lte_load_test
 		(
@@ -23,6 +30,7 @@
 			,ftpRateThresholdImage
 			,roadLogFile
 			,projId
+			,createTime
 		) 
 		values
 		(
@@ -41,7 +49,7 @@
 			,#{ftpRateThresholdImage}
 			,#{roadLogFile}
 			,#{projId}
-			
+			,#{createTime}
 		)
 	</insert>
 	

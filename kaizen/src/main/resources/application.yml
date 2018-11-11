@@ -49,7 +49,7 @@ pagehelper:
     params: true
     
 files:
-  path: ${file-path:d:/files}
+  path: ${file-path:d:/kaizen}
 logging:
   config: classpath:logback-admin.xml
 log: 
