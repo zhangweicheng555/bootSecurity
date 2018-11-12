@@ -32,14 +32,17 @@ public class FileUtil {
 	 */
 	
 	public static String UpFile(MultipartFile file,String filesPath,String modelName) {
-		String fileOrigName = file.getOriginalFilename();
-		if (!fileOrigName.contains(".")) {
-			throw new IllegalArgumentException("缺少后缀名");
+		if (file != null) {
+			String fileOrigName = file.getOriginalFilename();
+			if (!fileOrigName.contains(".")) {
+				throw new IllegalArgumentException("缺少后缀名");
+			}
+			
+			fileOrigName = fileOrigName.substring(fileOrigName.lastIndexOf("."));
+			String pathname = FileUtil.getPath(modelName) + MyDateUtil.getNowDate("yyyyMMddHHmmss")+"_"+UUID.randomUUID().toString() + fileOrigName;
+			return saveFile(file, filesPath + pathname,pathname);
 		}
-
-		fileOrigName = fileOrigName.substring(fileOrigName.lastIndexOf("."));
-		String pathname = FileUtil.getPath(modelName) + MyDateUtil.getNowDate("yyyyMMddHHmmss")+"_"+UUID.randomUUID().toString() + fileOrigName;
-		return saveFile(file, filesPath + pathname,pathname);
+		return "";
 	}
 	
 	public static String saveFile(MultipartFile file, String fullname, String pathname) {

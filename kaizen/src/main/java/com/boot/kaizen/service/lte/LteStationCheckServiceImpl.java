@@ -80,7 +80,7 @@ class LteStationCheckServiceImpl implements ILteStationCheckService {
 		if (processInstance == null) {
 			throw new IllegalArgumentException("流程实例不存在");
 		}
-		Long num = actBusinessService.queryCountMatchLink("LteCellCheck", "基站核查", piid);
+		Long num = actBusinessService.queryCountMatchLink("LteStationCheck", "基站核查", piid);
 		if (num == 0) {
 			// 查询小区核查的任务
 			Task task = taskService.createTaskQuery().processInstanceId(piid).taskName("基站核查").singleResult();
@@ -90,7 +90,7 @@ class LteStationCheckServiceImpl implements ILteStationCheckService {
 			// 记录关联表的关系
 			Map<String, Object> mapAll = new HashMap<>();
 			mapAll.put("checkResult", "");
-			mapAll.put("bussType", "LteCellCheck");
+			mapAll.put("bussType", "LteStationCheck");
 			mapAll.put("createTime", new Date());
 			mapAll.put("bussId", 0);
 			mapAll.put("checkAssignee", "");

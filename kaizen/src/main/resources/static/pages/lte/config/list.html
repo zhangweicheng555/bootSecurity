@@ -81,6 +81,7 @@
 	    ,cols: [[        
 	      {field:'id', width:30, title: 'ID', sort: true,type:'checkbox'}
 	      ,{title: '序号',width:50,templet: '#indexTpl',align:'center'}
+	      ,{field:'status', width:150, title: '审核状态',align:'center', templet: '#checkTpl'}
 	      ,{field:'mVoiceCount',   width:150, title: '语音测试次数',align:'center'}
 	      ,{field:'mVoiceTarget',   width:150, title: '成功率目标值',align:'center'}
 	      ,{field:'mFtpService',  minWidth:150, title: 'FTP服务器地址',align:'center'}
@@ -91,7 +92,6 @@
 	      ,{field:'mFtpFileUpPath', width:150, title: 'FTP上传文件路径',align:'center'}
 	      ,{field:'mFtpUpRateTarget', width:150, title: 'FTP上传速率目标值',align:'center'}
 	      ,{field:'mFtpDownRateTarget', width:150, title: 'FTP下载速率目标值',align:'center'} */
-	      ,{field:'status', width:150, title: '审核状态',align:'center', templet: '#checkTpl'}
 	      ,{title:'操作', toolbar: '#editBtnBar', width:150,align:'center', fixed: 'right'}
 	    ]]
 	    ,page: true
