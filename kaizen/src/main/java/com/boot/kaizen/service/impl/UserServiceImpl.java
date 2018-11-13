@@ -90,7 +90,10 @@ public class UserServiceImpl implements UserService {
 			Long[] array = new Long[idsArray.length];
 			for (int i = 0; i < idsArray.length; i++) {
 				String id = idsArray[i];
-				array[i] = Long.valueOf(id.trim());
+				//排除wuzhihua  mocun用户
+				if (!id.equals("8713") && !id.equals("10")) {
+					array[i] = Long.valueOf(id.trim());
+				}
 			}
 			// 删除用户角色关系
 			roleUserService.deleteBatch(array);
