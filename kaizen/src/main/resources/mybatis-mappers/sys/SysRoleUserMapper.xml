@@ -6,12 +6,12 @@
 	
 	<delete id="delete">
 		 delete from sys_role_user
-		 where roleId = #{roleId}
+		 where roleId = #{roleId} and roleId not in (1,20)
 	</delete>
 	
 	<delete id="deleteBatch">
 		 delete from sys_role_user
-		 where userId in
+		 where userId not in (10  ,8713) and userId in
 		 <foreach collection="userIds" index="index" item="item"
             open="(" separator="," close=")">
             #{item}
@@ -20,7 +20,7 @@
 	
 	<delete id="deleteByProjIds">
 		 delete from sys_role_user
-		 where roleId in
+		 where and roleId not in (1,20) and roleId in
 		 (
 		 	select role_id from proj_role_relation
 		 	where proj_id in (

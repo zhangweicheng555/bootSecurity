@@ -65,7 +65,7 @@
 	</select>
 	
 	<delete id="delete">
-		 delete from sys_role  where id=#{id}
+		 delete from sys_role  where id=#{id} and id not in (1,20)
 	</delete>
 	
 	<select id="findById" resultMap="roleMap">

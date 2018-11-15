@@ -59,7 +59,7 @@
 	
 	<delete id="delete">
 		 delete from sys_project
-		 where id in
+		 where id != 9 and id in
 		 <foreach collection="idsArray" index="index" item="item"
             open="(" separator="," close=")">
             #{item}

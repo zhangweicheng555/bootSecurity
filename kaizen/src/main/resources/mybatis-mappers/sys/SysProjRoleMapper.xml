@@ -7,7 +7,7 @@
 	
 	<delete id="deleteByProIds">
 		 delete from proj_role_relation
-		 where proj_id in
+		 where proj_id !=9 and  proj_id in
 		 <foreach collection="arrayIds" index="index" item="item"
             open="(" separator="," close=")">
             #{item}
@@ -28,7 +28,7 @@
      
 	<delete id ="deleteByRoleAndProId">
 			delete from proj_role_relation
-			where role_id=#{roleId} 
+			where role_id=#{roleId}  and role_id not in (1,20)
      </delete>
 	
 	

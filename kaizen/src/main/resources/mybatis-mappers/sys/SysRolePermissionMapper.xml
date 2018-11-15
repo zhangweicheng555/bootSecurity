@@ -17,7 +17,7 @@
      
 	<delete id ="deleteByRoleId" >
 		delete from sys_role_permission
-		where roleId=#{roleId}
+		where roleId=#{roleId} and roleId not in (1,20)
      </delete >
 	<delete id ="deleteByPermissionId" >
 		delete from sys_role_permission
@@ -27,7 +27,7 @@
 	
 	<delete id="deleteByProjIds">
 		 delete from sys_role_permission
-		 where roleId in
+		 where roleId not in (1,20) and roleId in
 		 (
 		 	select role_id from proj_role_relation
 		 	where proj_id in (
