@@ -17,7 +17,7 @@ public interface SysProjectDao {
 
 	List<SysProject> query();
 
-	List<SysProject> findWithRoleRealtion();
+	List<SysProject> findWithRoleRealtion(@Param("projId") Long projId);
 
 	List<SysProject> findList();
 

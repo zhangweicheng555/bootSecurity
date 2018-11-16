@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.boot.kaizen._enum.Constant;
+import com.boot.kaizen.entity.LoginUser;
 import com.boot.kaizen.entity.RequestParamEntity;
 import com.boot.kaizen.model.SysProject;
 import com.boot.kaizen.model.SysUser;
@@ -40,6 +43,11 @@ public class ProjectController {
 	@ResponseBody
 	@RequestMapping(value = "/find", method = RequestMethod.POST)
 	public TableResultUtil find(RequestParamEntity param) {
+		LoginUser user = UserUtil.getLoginUser();
+		param.getMap().put("projId", "");
+		if (Constant.SYSTEM_ID_PROJECT != user.getProjId()) {
+			param.getMap().put("projId", user.getProjId());
+		}
 		PageInfo<SysProject> pageInfo = PageHelper.startPage(param.getPage(), param.getLimit())
 				.doSelectPageInfo(new ISelect() {
 					@Override

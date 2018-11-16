@@ -14,7 +14,10 @@
 		 from 
 		 sys_project p
 		 ,proj_role_relation r
-		 where p.id=r.proj_id
+		 where p.id=r.proj_id 
+		 <if test="projId != null and projId != ''">
+            and p.id=#{projId}
+        </if>
 		 order by p.sort asc
 	</select>
 	
@@ -77,7 +80,10 @@
 		 on sp.id=prr.proj_id
 		 left join sys_role sr
 		 on sr.id=prr.role_id
-		 where 1=1
+		 where 1=1 
+		 <if test="map.projId != null and map.projId != ''">
+            and sp.id=#{map.projId}
+        </if>
 		 <if test="map.projName != null and map.projName != ''">
             and sp.proj_name like '%${map.projName}%'
         </if>

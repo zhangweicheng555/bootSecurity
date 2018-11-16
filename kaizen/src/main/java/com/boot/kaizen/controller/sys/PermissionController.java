@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.boot.kaizen._enum.Constant;
 import com.boot.kaizen.dao.PermissionDao;
 import com.boot.kaizen.entity.LoginUser;
 import com.boot.kaizen.model.Permission;
@@ -222,7 +223,13 @@ public class PermissionController {
 	@RequestMapping(value = "/delete")
 	@PreAuthorize("hasAuthority('sys:menu:del')")
 	public JsonMsgUtil delete(@RequestParam(value = "id", required = true) Long id) {
-		return permissionService.delete(id);
+		LoginUser user = UserUtil.getLoginUser();
+		Long userId=user.getId();
+		if (Constant.USER_ID==userId || Constant.USER_ID_MASTER==userId) {
+			return new JsonMsgUtil(true, "非系统管理员不可删除资源", "");
+		}else {
+			return permissionService.delete(id);
+		}
 	}
 
 	/**

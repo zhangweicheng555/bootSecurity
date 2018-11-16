@@ -21,9 +21,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.boot.kaizen._enum.Constant;
 import com.boot.kaizen.backUpFile.thread.Example1;
 import com.boot.kaizen.backUpFile.thread.Example2;
 import com.boot.kaizen.backUpFile.thread.ThreadCallable;
+import com.boot.kaizen.entity.LoginUser;
 import com.boot.kaizen.entity.RequestParamEntity;
 import com.boot.kaizen.model.SysUser;
 import com.boot.kaizen.model.UserDto;
@@ -62,7 +64,13 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping(value = "/find", method = RequestMethod.POST)
 	public TableResultUtil find(RequestParamEntity param) throws InterruptedException, ExecutionException {
-
+		
+		LoginUser user = UserUtil.getLoginUser();
+		param.getMap().put("projId", "");
+		if (Constant.SYSTEM_ID_PROJECT != user.getProjId()) {
+			param.getMap().put("projId", user.getProjId());
+		}
+		
 		PageInfo<SysUser> pageInfo = PageHelper.startPage(param.getPage(), param.getLimit())
 				.doSelectPageInfo(new ISelect() {
 					@Override

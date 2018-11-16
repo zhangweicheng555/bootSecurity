@@ -12,8 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.boot.kaizen._enum.Constant;
 import com.boot.kaizen.dao.SysRoleDao;
 import com.boot.kaizen.dao.SysRolePermissionDao;
+import com.boot.kaizen.entity.LoginUser;
 import com.boot.kaizen.entity.TreeTable;
 import com.boot.kaizen.entity.ZtreeModel;
 import com.boot.kaizen.model.Permission;
@@ -46,9 +48,14 @@ public class RoleServiceImpl implements RoleService {
 	private SysRoleUserService roleUserService;
 
 	@Override
-	public List<TreeTable> list() {
+	public List<TreeTable> list(LoginUser user) {
+		
+		Long projId=null;
+		if (Constant.SYSTEM_ID_PROJECT != user.getProjId()) {
+			projId=user.getProjId();
+		}
 		List<TreeTable> treeTables = new ArrayList<TreeTable>();
-		List<SysProject> projects = projectService.findWithRoleRealtion();
+		List<SysProject> projects = projectService.findWithRoleRealtion(projId);
 		if (projects != null && projects.size() > 0) {
 			for (SysProject project : projects) {
 				TreeTable table = new TreeTable(project.getId(), project.getProjName(), "", project.getCreateTime(),

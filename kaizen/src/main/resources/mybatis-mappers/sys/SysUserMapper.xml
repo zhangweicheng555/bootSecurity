@@ -6,7 +6,7 @@
 	
 	
 	<select resultType="SysUser" id="find">
- 		select 
+ 		select distinct 
  		su.id
  		  ,su.username
  		  ,su.nickname
@@ -17,8 +17,21 @@
  		  ,su.sex
  		  ,su.status
  		  ,su.createTime
- 		from sys_user su 
+ 		from 
+ 		  sys_user su 
+ 		 ,sys_role_user ru
+		 ,sys_role r
+		 ,proj_role_relation pr
+ 		 ,sys_project p
  		where 1=1 
+ 		 and p.id=pr.proj_id
+		 and pr.role_id=r.id
+		 and r.id=ru.roleId
+		 and su.id=ru.userId
+		 
+	<if test="map.projId != null and map.projId != ''">
+		and p.id=#{map.projId}
+	</if>
 	<if test="map.username != null and map.username != ''">
 		and su.username = #{map.username} 
 	</if>

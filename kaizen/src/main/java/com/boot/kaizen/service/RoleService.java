@@ -2,6 +2,7 @@ package com.boot.kaizen.service;
 
 import java.util.List;
 
+import com.boot.kaizen.entity.LoginUser;
 import com.boot.kaizen.entity.TreeTable;
 import com.boot.kaizen.entity.ZtreeModel;
 import com.boot.kaizen.model.SysRole;
@@ -9,7 +10,7 @@ import com.boot.kaizen.util.JsonMsgUtil;
 
 public interface RoleService {
 
-	public List<TreeTable> list();
+	public List<TreeTable> list(LoginUser user);
 
 	public JsonMsgUtil edit(SysRole sysRole, String permissionIds,String projId);
 

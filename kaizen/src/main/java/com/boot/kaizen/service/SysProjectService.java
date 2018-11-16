@@ -2,6 +2,9 @@ package com.boot.kaizen.service;
 
 import java.util.List;
 import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.boot.kaizen.model.SysProject;
 import com.boot.kaizen.util.JsonMsgUtil;
 
@@ -55,7 +58,7 @@ public interface SysProjectService {
 	 * @author weichengz
 	 * @date 2018年10月4日 上午1:54:49
 	 */
-	public List<SysProject> findWithRoleRealtion();
+	public List<SysProject> findWithRoleRealtion(@Param("projId") Long projId);
 
 	/**
 	 * @Description: 通过用户名字随机查询所在项目中的一个项目
