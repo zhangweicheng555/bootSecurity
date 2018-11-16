@@ -1,14 +1,9 @@
 package com.boot.kaizen.controller.sys;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.CollectionUtils;
@@ -19,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.boot.kaizen._enum.Constant;
@@ -30,9 +24,6 @@ import com.boot.kaizen.service.PermissionService;
 import com.boot.kaizen.util.JsonMsgUtil;
 import com.boot.kaizen.util.UserUtil;
 import com.google.common.collect.Lists;
-import com.google.common.util.concurrent.ListeningExecutorService;
-import com.google.common.util.concurrent.MoreExecutors;
-
 import io.swagger.annotations.Api;
 
 /**
@@ -92,8 +83,8 @@ public class PermissionController {
 	@RequestMapping(value = "/list")
 	@PreAuthorize("hasAuthority('sys:menu:list')")
 	public List<Permission> permissionsList() {
-		List<Permission> permissionsAll = permissionDao.listAll();
 		List<Permission> list = Lists.newArrayList();
+		List<Permission> permissionsAll = permissionDao.listAll();
 		setPermissionsList(0L, permissionsAll, list);
 		return list;
 	}
@@ -224,27 +215,16 @@ public class PermissionController {
 	@PreAuthorize("hasAuthority('sys:menu:del')")
 	public JsonMsgUtil delete(@RequestParam(value = "id", required = true) Long id) {
 		LoginUser user = UserUtil.getLoginUser();
-		Long userId=user.getId();
-		if (Constant.USER_ID==userId || Constant.USER_ID_MASTER==userId) {
+		Long userId = user.getId();
+		if (Constant.USER_ID == userId || Constant.USER_ID_MASTER == userId) {
+			if (Constant.SYSTEM_ID_PROJECT == user.getProjId()) {
+				return permissionService.delete(id);
+			} else {
+				return new JsonMsgUtil(true, "非系统管理员不可删除资源", "");
+			}
+		} else {
 			return new JsonMsgUtil(true, "非系统管理员不可删除资源", "");
-		}else {
-			return permissionService.delete(id);
 		}
 	}
 
-	/**
-	 * 测试多线程
-	 */
-	/**
-	 * 
-	 * @Description: 删除
-	 * @author weichengz
-	 * @throws InterruptedException
-	 * @date 2018年10月3日 下午4:42:42
-	 */
-	@RequestMapping(value = "/doubleThread")
-	public JsonMsgUtil doubleThread() throws InterruptedException {
-
-		return null;
-	}
 }

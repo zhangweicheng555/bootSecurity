@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.boot.kaizen._enum.Constant;
+import com.boot.kaizen.annotation.LogAnnotation;
 import com.boot.kaizen.backUpFile.thread.Example1;
 import com.boot.kaizen.backUpFile.thread.Example2;
 import com.boot.kaizen.backUpFile.thread.ThreadCallable;
@@ -61,6 +62,7 @@ public class UserController {
 	 * @throws InterruptedException
 	 * @date 2018年10月7日 上午11:24:20
 	 */
+	@LogAnnotation(flag="user")
 	@ResponseBody
 	@RequestMapping(value = "/find", method = RequestMethod.POST)
 	public TableResultUtil find(RequestParamEntity param) throws InterruptedException, ExecutionException {
@@ -154,7 +156,12 @@ public class UserController {
 	@RequestMapping(value = "/delete")
 	@PreAuthorize("hasAuthority('sys:user:edit')")
 	public JsonMsgUtil delete(@RequestParam("ids") String ids) {
-		return userService.delete(ids);
+		LoginUser user = UserUtil.getLoginUser();
+		Long projId=null;
+		if (Constant.SYSTEM_ID_PROJECT !=user.getProjId()) {
+			projId=user.getProjId();
+		}
+		return userService.delete(ids,projId);
 	}
 
 }

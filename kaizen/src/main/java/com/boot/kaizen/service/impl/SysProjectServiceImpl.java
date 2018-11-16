@@ -45,15 +45,26 @@ public class SysProjectServiceImpl implements SysProjectService {
 
 	@Transactional
 	@Override
-	public JsonMsgUtil delete(String ids) {
+	public JsonMsgUtil delete(String ids, Long projId) {
 		JsonMsgUtil j = new JsonMsgUtil(false);
 		try {
 			if (StringUtils.isNoneBlank(ids)) {
 				String[] idsArray = ids.trim().split(",");
 				Long[] array = new Long[idsArray.length];
-				for (int i = 0; i < idsArray.length; i++) {
-					String id = idsArray[i];
-					array[i] = Long.valueOf(id.trim());
+				if (projId == null) {
+					for (int i = 0; i < idsArray.length; i++) {
+						String id = idsArray[i];
+						array[i] = Long.valueOf(id.trim());
+					}
+				} else {
+					for (int i = 0; i < idsArray.length; i++) {
+						String id = idsArray[i];
+						Long projIdM = Long.valueOf(id.trim());
+						if (projId == projIdM) {
+							array[i] = projId;
+							break;
+						}
+					}
 				}
 				// 删除角色跟用户的关系表
 				roleUserService.deleteByProjIds(array);
@@ -121,7 +132,7 @@ public class SysProjectServiceImpl implements SysProjectService {
 	public JsonMsgUtil queryProjectsForUsername(String username) {
 		Map<String, Object> objMap = new HashMap<>();
 		Map<String, Object> nowMap = new HashMap<>();
-		
+
 		JsonMsgUtil j = new JsonMsgUtil(false);
 		List<Map<String, Object>> projects = projectDao.queryProjects(username);
 		if (projects == null || projects.size() == 0) {

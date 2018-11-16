@@ -61,8 +61,12 @@ public class ProjectController {
 	@ResponseBody
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	public JsonMsgUtil delete(@RequestParam("ids") String ids) {
-
-		return projectService.delete(ids);
+		LoginUser user = UserUtil.getLoginUser();
+		Long projId=null;
+		if (Constant.SYSTEM_ID_PROJECT !=user.getProjId()) {
+			projId=user.getProjId();
+		}
+		return projectService.delete(ids,projId);
 	}
 
 	/**

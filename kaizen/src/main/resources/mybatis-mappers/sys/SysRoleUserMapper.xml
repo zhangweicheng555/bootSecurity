@@ -6,7 +6,7 @@
 	
 	<delete id="delete">
 		 delete from sys_role_user
-		 where roleId = #{roleId} and roleId not in (1,20)
+		 where roleId = #{roleId} 
 	</delete>
 	
 	<delete id="deleteBatch">
@@ -20,7 +20,7 @@
 	
 	<delete id="deleteByProjIds">
 		 delete from sys_role_user
-		 where and roleId not in (1,20) and roleId in
+		 where  roleId in
 		 (
 		 	select role_id from proj_role_relation
 		 	where proj_id in (

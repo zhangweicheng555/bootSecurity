@@ -43,7 +43,7 @@ public interface SysUserDao {
 
 	List<SysUser> find(@Param("map") Map<String, Object> map);
 
-	void deleteBatch(@Param("idsArray") Long[] array);
+	void deleteBatch(@Param("idsArray") Long[] array,@Param("projId") Long projId);
 
 	String findUserNames(@Param("roleId") Long roleId);
 

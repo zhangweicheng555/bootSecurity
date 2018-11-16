@@ -32,9 +32,9 @@ public class DistributeServiceImpl implements DistributeService {
 	private UserService userService;
 
 	@Override
-	public List<DistributeTreeTable> list() {
+	public List<DistributeTreeTable> list(Long projId) {
 		List<DistributeTreeTable> treeTables = new ArrayList<DistributeTreeTable>();
-		List<SysProject> projects = projectService.findWithRoleRealtion(null);
+		List<SysProject> projects = projectService.findWithRoleRealtion(projId);
 		if (projects != null && projects.size() > 0) {
 			for (SysProject project : projects) {
 				DistributeTreeTable table = new DistributeTreeTable(project.getId(), project.getProjName(), "", -1l);

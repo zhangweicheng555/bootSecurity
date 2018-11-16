@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.boot.kaizen._enum.Constant;
 import com.boot.kaizen.dao.SysUserDao;
 import com.boot.kaizen.model.SysUser;
 import com.boot.kaizen.model.SysUser.Status;
@@ -82,7 +84,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public JsonMsgUtil delete(String ids) {
+	public JsonMsgUtil delete(String ids,Long projId) {
 		JsonMsgUtil j = new JsonMsgUtil(false);
 
 		if (StringUtils.isNoneBlank(ids)) {
@@ -91,13 +93,13 @@ public class UserServiceImpl implements UserService {
 			for (int i = 0; i < idsArray.length; i++) {
 				String id = idsArray[i];
 				//排除wuzhihua  mocun用户
-				if (!id.equals("8713") && !id.equals("10")) {
+				if (!id.equals(Constant.USER_ID.toString()) && !id.equals(Constant.USER_ID_MASTER.toString())) {
 					array[i] = Long.valueOf(id.trim());
 				}
 			}
 			// 删除用户角色关系
 			roleUserService.deleteBatch(array);
-			userDao.deleteBatch(array);
+			userDao.deleteBatch(array,projId);
 			j = new JsonMsgUtil(true, "删除操作成功", "");
 		}
 

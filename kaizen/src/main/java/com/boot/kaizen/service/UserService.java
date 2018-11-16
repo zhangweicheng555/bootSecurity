@@ -30,7 +30,7 @@ public interface UserService {
 	 */
 	List<SysUser> find(Map<String, Object> map);
 
-	JsonMsgUtil delete(String ids);
+	JsonMsgUtil delete(String ids,Long projId);
 
 	JsonMsgUtil findById(Long id);
 

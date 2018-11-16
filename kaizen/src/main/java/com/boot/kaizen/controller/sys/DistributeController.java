@@ -6,9 +6,13 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.boot.kaizen._enum.Constant;
 import com.boot.kaizen.entity.DistributeTreeTable;
+import com.boot.kaizen.entity.LoginUser;
 import com.boot.kaizen.service.DistributeService;
 import com.boot.kaizen.util.JsonMsgUtil;
+import com.boot.kaizen.util.UserUtil;
 
 /**
  * 权限分配
@@ -27,7 +31,12 @@ public class DistributeController {
 	@PreAuthorize("hasAuthority('sys:distribute:list')")
 	@RequestMapping(value = "/list")
 	public List<DistributeTreeTable> list() {
-		return distributeService.list();
+		LoginUser user = UserUtil.getLoginUser();
+		Long projId=null;
+		if (Constant.SYSTEM_ID_PROJECT !=projId) {
+			projId=user.getProjId();
+		}
+		return distributeService.list(projId);
 	}
 
 	@RequestMapping(value = "/findUserIds")

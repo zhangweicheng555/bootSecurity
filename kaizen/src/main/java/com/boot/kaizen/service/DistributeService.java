@@ -12,7 +12,7 @@ public interface DistributeService {
 	 * @author weichengz
 	 * @date 2018年10月21日 上午10:26:29
 	 */
-	public List<DistributeTreeTable> list();
+	public List<DistributeTreeTable> list(Long projId);
 
 	/**
 	 * 

@@ -55,7 +55,8 @@ public class SecurityHandlerConfig {
 			}
 		};
 	}
-
+	
+	
 	/**
 	 * @Description: 登陆失败处理器
 	 * @author weichengz
@@ -69,6 +70,7 @@ public class SecurityHandlerConfig {
 			public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
 					AuthenticationException exception) throws IOException, ServletException {
 				String msg = null;
+				//String username=request.getParameter("username");
 				if (exception instanceof BadCredentialsException) {
 					msg = "密码错误";
 				} else {
