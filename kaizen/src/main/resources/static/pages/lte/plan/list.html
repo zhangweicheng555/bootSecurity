@@ -62,6 +62,12 @@
 </div>
 
 	
+	
+	<iframe src="about:blank" name="blankFrame" id="blankFrame" style="display: none;"></iframe>
+	<form id="myform" target="blankFrame" action="/plan/exportPlanDoc" method="post">
+		<input id="id"  name="id" type="hidden"/>
+		<input id="token"  name="token" type="hidden"/>
+	</form> 
 
 </body>
 </html>
@@ -174,6 +180,23 @@
 			  layer.msg('未选中要删除的记录');
 		  }
 		  
+	  });
+	  /**导出报告*/
+	  $("#exportBtnModel").click(function(){
+		  var token = localStorage.getItem("token");
+		  if (token != null && token.trim().length != 0) {
+			  if(checkArray && checkArray.length == 1){
+			  	  common.showLoadingTimeDialog(5000);
+			  	  var id =checkArray[0];
+			  	  $("#id").val(id);
+			  	  $("#token").val(token);
+			  	  $("#myform").submit();
+			  }else{
+				  parent.layer.msg('请选中要导出的一条规划记录');
+			  }
+		  }else{
+				  parent.layer.msg('请重新登录');
+		  }
 	  });
 	  
 	  //currData  checkArray  监听checkbox  选中取消事件

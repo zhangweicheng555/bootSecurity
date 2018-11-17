@@ -4,12 +4,11 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.ibatis.annotations.Param;
-
+import javax.servlet.http.HttpSession;
 import com.boot.kaizen.controller.lte.model.BaseStationBean;
 import com.boot.kaizen.entity.LoginUser;
 import com.boot.kaizen.model.LtePlan;
+import com.boot.kaizen.model.LtePlanInfo;
 import com.boot.kaizen.util.JsonMsgUtil;
 
 public interface ILtePlanService {
@@ -55,36 +54,56 @@ public interface ILtePlanService {
 	List<Map<String, Object>> queryPlanList(Long userId, Long projId);
 
 	/**
-	 * 拉取基站列表  app
+	 * 拉取基站列表 app
 	 * 
 	 * @param userId
 	 * @param projId
 	 * @param testDate
 	 */
 	public List<BaseStationBean> queryStationList(Long userId, Long projId, String testDate);
-	
+
 	/**
 	 * 
 	 * @Description: 查询规划表相关的所有表的信息
 	 * @author weichengz
 	 * @date 2018年11月11日 上午8:41:06
 	 */
-	JsonMsgUtil queryLtePlanInfo(Long id,LoginUser user);
+	JsonMsgUtil queryLtePlanInfo(Long id, LoginUser user);
 
 	/**
 	 * 
-	* @Description: 查看流程图
-	* @author weichengz
-	* @date 2018年11月11日 上午10:18:52
+	 * @Description: 查看流程图
+	 * @author weichengz
+	 * @date 2018年11月11日 上午10:18:52
 	 */
 	public void findLteConfigActivitiImage(Long id, HttpServletResponse response);
 
 	/**
 	 * 审核
-	* @Description: TODO
-	* @author weichengz
-	* @date 2018年11月11日 下午6:59:49
+	 * 
+	 * @Description: TODO
+	 * @author weichengz
+	 * @date 2018年11月11日 下午6:59:49
 	 */
 	public JsonMsgUtil check(Long id, Long statusM);
+
+	/**
+	 * 根据id查询 规划表的详细信息
+	 * 
+	 * @Description: TODO
+	 * @author weichengz
+	 * @date 2018年11月17日 上午11:03:02
+	 */
+	public LtePlanInfo queryLtePlanInfoByEnobId(Long id);
+
+	/**
+	 * 导出报告
+	 * 
+	 * @Description: TODO
+	 * @author weichengz
+	 * @date 2018年11月17日 下午6:41:51
+	 */
+	public void exportPlanDoc(String absolutePathModelExcel, LtePlanInfo ltePlanInfo, Map<String, String> map,
+			HttpServletResponse response, HttpSession session);
 
 }

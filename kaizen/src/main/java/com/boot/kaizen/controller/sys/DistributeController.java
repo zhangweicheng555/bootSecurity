@@ -33,7 +33,7 @@ public class DistributeController {
 	public List<DistributeTreeTable> list() {
 		LoginUser user = UserUtil.getLoginUser();
 		Long projId=null;
-		if (Constant.SYSTEM_ID_PROJECT !=projId) {
+		if (Constant.SYSTEM_ID_PROJECT !=user.getProjId()) {
 			projId=user.getProjId();
 		}
 		return distributeService.list(projId);
