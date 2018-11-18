@@ -133,4 +133,9 @@ public class UserServiceImpl implements UserService {
 		return userDao.queryUser(projId, username);
 	}
 
+	@Override
+	public List<Map<String, Object>> queryUserByProjId(Long projId) {
+		return userDao.queryUserByProjId(projId);
+	}
+
 }

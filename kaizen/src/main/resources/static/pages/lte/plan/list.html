@@ -156,7 +156,7 @@
 	    if(obj.event === 'del'){//单行删除
 	    	common.getConfirmDelDialog("确定要删除吗？","删除【"+row.mENodeBID+"】记录",2,"/plan/delete",{"ids":row.id},function(){deleteRow(obj);});
 	    } else if(obj.event === 'edit'){//编辑
-		    common.openEditDialog(fresh,"编辑项目","pages/lte/plan/edit.html?id="+row.id,"1000px","520px",false,"确定","取消","/plan/edit");
+		    common.openEditDialog(fresh,"编辑","pages/lte/plan/edit.html?id="+row.id,"1000px","520px",false,"确定","取消","/plan/edit");
 	    }else if(obj.event === 'check'){//审核
 		    common.openEditDialog(fresh,"信息审核","pages/lte/plan/check.html?id="+row.id,"1200px","520px",false,"通过","取消","/plan/check");
 	    }
@@ -164,7 +164,7 @@
 	  
 	  /**添加*/
 	  $("#addProjectBtn").click(function(){//添加
-		  common.openEditDialog(fresh,"添加项目","pages/lte/plan/add.html","1000px","520px",false,"确定","取消","/plan/edit");
+		  common.openEditDialog(fresh,"添加","pages/lte/plan/add.html","1000px","520px",false,"确定","取消","/plan/edit");
 	  });
 	  
 	  /**搜索*/

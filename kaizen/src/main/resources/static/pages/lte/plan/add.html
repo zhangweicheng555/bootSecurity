@@ -84,6 +84,14 @@
 	    </div>
 	  </div>
 	  
+	  <div class="layui-form-item">
+	    <label class="layui-form-label" style="width: 150px;">处理人</label>
+	    <div class="layui-input-inline" id="dealPersonIdDiv">
+		      <select name="dealPersonId" id="dealPersonId" lay-verify="required">
+		      </select>
+	    </div>
+	  </div>
+	  
 		<button class="layui-btn" id="formDemoBtn" style="display: none;" lay-submit lay-filter="formDemo">立即提交</button>
 	</form>
 	
@@ -114,15 +122,11 @@
 	  var laydate = layui.laydate;
 	//监听提交
 	  form.on('submit(formDemo)', function(data){
-		  //JSON.stringify(data.field)  将form表格序列化了
-		//layer.msg(JSON.stringify(data.field));
 		flag=true;
 	    return false;
 	  });
 	
 	
-	
-
 	  /**日期框*/
 	  laydate.render({
 	     elem: '#testTime'
@@ -132,6 +136,9 @@
    	    	$("#beginTime").val(val);//给搜索赋值
    		 }
 	  });
+	    //加载项目下的所有的用户
+	    queryUserByProjId("dealPersonId",null);
+	    form.render('select'); 
 	});
 	
 </script> 

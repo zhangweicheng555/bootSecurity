@@ -70,6 +70,7 @@
 		,testTime=#{testTime} 
 		,mTac=#{mTac} 
 		,updateTime=#{updateTime} 
+		,dealPersonId=#{dealPersonId} 
 			
 		where id=#{id}
 	</update>
@@ -91,6 +92,7 @@
 			testTime,
 			createTime,
 			createAt,
+			dealPersonId,
 			projId
 		) 
 		values
@@ -110,6 +112,7 @@
 			#{testTime},
 			#{createTime},
 			#{createAt},
+			#{dealPersonId},
 			#{projId}
 		)
 	</insert>

@@ -104,8 +104,8 @@
 	      ,{title:'操作', toolbar: '#editBtnBar', width:150,align:'center', fixed: 'right'}
 	    ]]
 	    ,page: true
-	    ,limit:3
-	    ,limits:[3,10,20,50,100,200,500,1000,2000,20000] 
+	    ,limit:10
+	    ,limits:[10,20,50,100,200,500,1000,2000,20000] 
         ,loading:true
         ,text: {
             none: '无数据' 
@@ -144,13 +144,13 @@
 	    if(obj.event === 'del'){//单行删除
 	    	common.getConfirmDelDialog("确定要删除吗？","删除【"+row.mENodeBID+"】记录",2,"/gc/delete",{"ids":row.id},function(){deleteRow(obj);});
 	    } else if(obj.event === 'edit'){//编辑
-		    common.openEditDialog(fresh,"编辑项目","pages/lte/gcbparameter/edit.html?id="+row.id,"1000px","570px",false,"确定","取消","/gc/edit");
+		    common.openEditDialog(fresh,"编辑","pages/lte/gcbparameter/edit.html?id="+row.id,"1000px","570px",false,"确定","取消","/gc/edit");
 	    }
 	  });
 	  
 	  /**添加*/
 	  $("#addProjectBtn").click(function(){//添加
-		  common.openEditDialog(fresh,"添加项目","pages/lte/gcbparameter/add.html","1000px","570px",false,"确定","取消","/gc/edit");
+		  common.openEditDialog(fresh,"添加","pages/lte/gcbparameter/add.html","1000px","570px",false,"确定","取消","/gc/edit");
 	  });
 	  
 	  /**搜索*/

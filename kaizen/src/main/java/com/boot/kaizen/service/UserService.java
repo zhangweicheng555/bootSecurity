@@ -55,4 +55,12 @@ public interface UserService {
 	 * @return
 	 */
     SysUser queryUser(Long projId,String username);
+
+    /**
+     * 通过项目的id查询用户  id   username
+    * @Description: TODO
+    * @author weichengz
+    * @date 2018年11月18日 上午8:20:01
+     */
+    List<Map<String, Object>> queryUserByProjId(Long projId);
 }

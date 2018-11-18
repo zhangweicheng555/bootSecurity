@@ -12,6 +12,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.boot.kaizen.model.SysUser;
+import com.boot.kaizen.util.JsonMsgUtil;
 
 @Mapper
 public interface SysUserDao {
@@ -50,4 +51,6 @@ public interface SysUserDao {
 	List<Long> findUserIds(@Param("roleId") Long roleId);
 
 	SysUser queryUser(@Param("projId") Long projId, @Param("username") String username);
+
+	List<Map<String, Object>> queryUserByProjId(@Param("projId") Long projId);
 }

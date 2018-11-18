@@ -86,6 +86,17 @@
 	    </div>
 	  </div>
 	  
+	  
+	  <div class="layui-form-item">
+	    <label class="layui-form-label" style="width: 150px;">处理人</label>
+	    <input type="hidden" id="dealPersonIdModel" name="dealPersonIdModel" />
+	    <div class="layui-input-inline" id="dealPersonIdDiv" >
+		      <select name="dealPersonId" id="dealPersonId" lay-verify="required">
+		        <option value=""></option>
+		      </select>
+	    </div>
+	  </div>
+	  
 		<button class="layui-btn" id="formDemoBtn" style="display: none;" lay-submit lay-filter="formDemo">立即提交</button>
 	</form>
 	
@@ -108,15 +119,30 @@
 	 }
 	
 	
+	
+	
 	var form;
-	layui.use(['layer', 'form','jquery'], function(){
+	layui.use(['layer', 'form','jquery','laydate'], function(){
 	  var layer = layui.layer,form = layui.form,$=layui.jquery;
+	  var laydate = layui.laydate;
 	  
+	  
+	  /**日期框*/
+	  laydate.render({
+	     elem: '#testTime'
+	    ,max: 0
+	    ,theme: 'molv'
+   	    ,done: function(val, date, endDate){
+   	    	$("#beginTime").val(val);//给搜索赋值
+   		 }
+	  });
 	//监听提交
 	  form.on('submit(formDemo)', function(data){
 		flag=true;
 	    return false;
 	  });
+	
+
 	
 	  //初始化工作
 	  initData();
@@ -145,13 +171,18 @@
 				 		  ,"backPerson": obj.backPerson
 				 		  ,"backPersonPhone": obj.backPersonPhone
 				 		  ,"testTime": obj.testTime
+				 		  ,"dealPersonIdModel": obj.dealPersonId
 				 		});
+				 		//加载项目下的所有的用户
+						  queryUserByProjId("dealPersonId",$("#dealPersonIdModel").val());
+						  form.render('select'); 
 				     }else{
 				    	 layer.msg('返回修改数据信息异常');
 				     }
 				   }
 			});
 		};
+		
 	});
 	
 	

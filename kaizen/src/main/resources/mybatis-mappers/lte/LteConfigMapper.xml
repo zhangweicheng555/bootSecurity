@@ -8,7 +8,10 @@
 	<select id="find" resultType="LteConfig">
 		 select lp.* 
 		 from
-		 lte_config lp 
+		 lte_config lp where 1=1
+		 <if test="map.projId != null and map.projId != ''">
+            and lp.projId = #{map.projId}
+        </if>
 		 order by lp.createTime desc
 	</select>
 	

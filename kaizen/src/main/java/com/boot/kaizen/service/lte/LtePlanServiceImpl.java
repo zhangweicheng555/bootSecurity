@@ -38,6 +38,7 @@ import com.boot.kaizen.dao.lte.LtePlanDao;
 import com.boot.kaizen.entity.LoginUser;
 import com.boot.kaizen.model.LtePlan;
 import com.boot.kaizen.model.LtePlanInfo;
+import com.boot.kaizen.service.UserService;
 import com.boot.kaizen.service.act.IActBusinessService;
 import com.boot.kaizen.util.JsonMsgUtil;
 import com.boot.kaizen.util.MyDateUtil;
@@ -63,6 +64,8 @@ class LtePlanServiceImpl implements ILtePlanService {
 	private ILteLoadTestService lteLoadTestService;
 	@Autowired
 	private ILteStationCheckService lteStationCheckService;
+	@Autowired
+	private UserService userService;
 
 	@Override
 	public List<LtePlan> find(Map<String, Object> map) {
@@ -835,5 +838,15 @@ class LtePlanServiceImpl implements ILtePlanService {
 	public String getPictureType(String fileName) {
 		String proType = fileName.substring(fileName.lastIndexOf(".") + 1);
 		return proType;
+	}
+
+	@Override
+	public JsonMsgUtil queryUserByProjId(Long projId) {
+		JsonMsgUtil j = new JsonMsgUtil(false);
+		List<Map<String, Object>> listMaps = userService.queryUserByProjId(projId);
+		if (listMaps != null && listMaps.size() > 0) {
+			j = new JsonMsgUtil(true, "查询成功", listMaps);
+		}
+		return j;
 	}
 }

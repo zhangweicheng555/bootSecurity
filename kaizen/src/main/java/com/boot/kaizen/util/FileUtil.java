@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -30,21 +31,23 @@ public class FileUtil {
 	 * 
 	 * lte 是模塊名字
 	 */
-	
-	public static String UpFile(MultipartFile file,String filesPath,String modelName) {
+
+	public static String UpFile(MultipartFile file, String filesPath, String modelName) {
 		if (file != null) {
 			String fileOrigName = file.getOriginalFilename();
-			if (!fileOrigName.contains(".")) {
-				throw new IllegalArgumentException("缺少后缀名");
+			if (StringUtils.isNoneBlank(fileOrigName)) {
+				if (!fileOrigName.contains(".")) {
+					throw new IllegalArgumentException("缺少后缀名");
+				}
+				fileOrigName = fileOrigName.substring(fileOrigName.lastIndexOf("."));
+				String pathname = FileUtil.getPath(modelName) + MyDateUtil.getNowDate("yyyyMMddHHmmss") + "_"
+						+ UUID.randomUUID().toString() + fileOrigName;
+				return saveFile(file, filesPath + pathname, pathname);
 			}
-			
-			fileOrigName = fileOrigName.substring(fileOrigName.lastIndexOf("."));
-			String pathname = FileUtil.getPath(modelName) + MyDateUtil.getNowDate("yyyyMMddHHmmss")+"_"+UUID.randomUUID().toString() + fileOrigName;
-			return saveFile(file, filesPath + pathname,pathname);
 		}
 		return "";
 	}
-	
+
 	public static String saveFile(MultipartFile file, String fullname, String pathname) {
 		try {
 			File targetFile = new File(fullname);
@@ -67,7 +70,7 @@ public class FileUtil {
 		}
 		return null;
 	}
-	
+
 	public static boolean deleteFile(String pathname) {
 		File file = new File(pathname);
 		if (file.exists()) {

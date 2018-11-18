@@ -142,7 +142,7 @@ public class LteAppController {
 	 * @param projId
 	 */
 	@RequestMapping(value = "/queryPlanList", method = RequestMethod.POST)
-	public AppUtil queryUserInfo(@RequestParam(value = "userId", required = true) Long userId,
+	public AppUtil queryPlanList(@RequestParam(value = "userId", required = true) Long userId,
 			@RequestParam(value = "projId", required = true) Long projId) {
 		AppUtil appUtil = new AppUtil(1, "查询成功", "");
 		try {
@@ -215,7 +215,7 @@ public class LteAppController {
 	 */
 	@RequestMapping(value = "/uploadStationCheck", method = RequestMethod.POST)
 	public AppUtil uploadStationCheck(LteStationCheck stationCheck) {
-		AppUtil appUtil = new AppUtil(1, "查询成功", null);
+		AppUtil appUtil = new AppUtil(1, "操作成功", null);
 
 		if (stationCheck == null) {
 			appUtil = new AppUtil(0, "接收基站核查列表为空", "");

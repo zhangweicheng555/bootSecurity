@@ -3,7 +3,8 @@ package com.boot.kaizen.model;
 /**
  * lte规划表设计 lte_plane
  * 
- * String businessKey = "LtePlan" + "_" + ltePlan.getmENodeBID() + "_" + ltePlan.getId();
+ * String businessKey = "LtePlan" + "_" + ltePlan.getmENodeBID() + "_" +
+ * ltePlan.getId();
  * 
  * @author weichengz
  * @date 2018年10月28日 上午3:37:57
@@ -26,12 +27,8 @@ public class LtePlan extends BaseEntity<Long> {
 	private String backPersonPhone;// 后台工程师电话
 	private String testTime;// 测试时间 yyyy-mm-dd
 
-	private Long dealPersonId;// 接收改计划任务的人的id
-	private Long status = 0l;// 最终是不是报告可以审核 之后最后一步的时候 才设置为1  0 未审核  1审核通过  2审核不通过
-
-	public Long getDealPersonId() {
-		return dealPersonId;
-	}
+	private String dealPersonId;// 接收改计划任务的人的id
+	private Long status = 0l;// 最终是不是报告可以审核 之后最后一步的时候 才设置为1 0 未审核 1审核通过 2审核不通过
 
 	public Long getStatus() {
 		return status;
@@ -41,7 +38,11 @@ public class LtePlan extends BaseEntity<Long> {
 		this.status = status;
 	}
 
-	public void setDealPersonId(Long dealPersonId) {
+	public String getDealPersonId() {
+		return dealPersonId;
+	}
+
+	public void setDealPersonId(String dealPersonId) {
 		this.dealPersonId = dealPersonId;
 	}
 
@@ -147,7 +148,7 @@ public class LtePlan extends BaseEntity<Long> {
 
 	public LtePlan(String mENodeBID, String mBaseStationName, String mBaseStationType, String mAltitude,
 			String mLongitude, String mLatitude, String mTac, String testPerson, String testPersonPhone,
-			String backPerson, String backPersonPhone, String testTime) {
+			String backPerson, String backPersonPhone, String testTime, String dealPersonId, Long status) {
 		super();
 		this.mENodeBID = mENodeBID;
 		this.mBaseStationName = mBaseStationName;
@@ -161,6 +162,8 @@ public class LtePlan extends BaseEntity<Long> {
 		this.backPerson = backPerson;
 		this.backPersonPhone = backPersonPhone;
 		this.testTime = testTime;
+		this.dealPersonId = dealPersonId;
+		this.status = status;
 	}
 
 }

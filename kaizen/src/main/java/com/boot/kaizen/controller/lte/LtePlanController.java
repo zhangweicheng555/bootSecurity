@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.boot.kaizen._enum.Constant;
 import com.boot.kaizen.entity.LoginUser;
 import com.boot.kaizen.entity.RequestParamEntity;
 import com.boot.kaizen.model.LteCellCheck;
@@ -93,6 +95,22 @@ public class LtePlanController {
 	@RequestMapping(value = "/findById", method = RequestMethod.POST)
 	public JsonMsgUtil findById(@RequestParam("id") Long id) {
 		return ltePlanService.findById(id);
+	}
+	/**
+	 * 
+	* @Description: 根据当前的登陆用户查询该项目下的所有用户
+	* @author weichengz
+	* @date 2018年11月18日 上午8:16:45
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/queryUserByProjId", method = RequestMethod.POST)
+	public JsonMsgUtil queryUserByProjId() {
+		LoginUser user = UserUtil.getLoginUser();
+		Long projId=null;
+		if (Constant.SYSTEM_ID_PROJECT !=projId) {
+			projId=user.getProjId();
+		}
+		return ltePlanService.queryUserByProjId(projId);
 	}
 
 	/**

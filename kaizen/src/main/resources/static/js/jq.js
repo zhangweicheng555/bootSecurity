@@ -105,3 +105,32 @@ function checkPermission() {
 	
 	return pers;
 }
+
+function queryUserByProjId(item,selectName) {
+	$.ajax({
+		type : 'get',
+		url : '/plan/queryUserByProjId',
+		data: {},
+		type:"post",
+		dataType:"json",
+		async : false,
+		success : function(data) {
+			if(data.success){
+				$("#"+item).empty();
+				var rows=data.object;
+				var html="";
+				for(var i=0;i<rows.length;i++){
+					var obj=rows[i];
+					if(rows[i].id == selectName){
+						html =html+'<option selected value="'+obj.id+'">'+obj.username+'</option>';
+					}else{
+						html =html+'<option value="'+obj.id+'">'+obj.username+'</option>';
+					}
+				}
+				$("#"+item).append(html);
+			}else{
+				parent.layer.msg("查询出错误了...");
+			}
+		}
+	});
+}

@@ -106,4 +106,13 @@ public interface ILtePlanService {
 	public void exportPlanDoc(String absolutePathModelExcel, LtePlanInfo ltePlanInfo, Map<String, String> map,
 			HttpServletResponse response, HttpSession session);
 
+	/**
+	 * 根据项目id获取所有的用户
+	 * 
+	 * @Description: TODO
+	 * @author weichengz
+	 * @date 2018年11月18日 上午8:18:24
+	 */
+	public JsonMsgUtil queryUserByProjId(Long projId);
+
 }
