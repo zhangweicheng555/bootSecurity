@@ -446,15 +446,15 @@ class LtePlanServiceImpl implements ILtePlanService {
 				createExcelPic(workbook, patriarch, rsrpThresholdImage2, (short) 19, 9, (short) 26, 10);
 				createExcelPic(workbook, patriarch, ftpRateThresholdImage2, (short) 13, 11, (short) 19, 12);
 
-				createExcelPic(workbook, patriarch, rsrpFtpUpImage2, (short) 26, 3, (short) 32, 4);
-				createExcelPic(workbook, patriarch, sinrFtpUpImage2, (short) 32, 3, (short) 39, 4);
-				createExcelPic(workbook, patriarch, upFtpRateImage2, (short) 26, 5, (short) 32, 6);
-				createExcelPic(workbook, patriarch, rsrpFtpDownImage2, (short) 32, 5, (short) 39, 6);
-				createExcelPic(workbook, patriarch, sinrFtpDownImage2, (short) 26, 7, (short) 32, 8);
-				createExcelPic(workbook, patriarch, downFtpRateImage2, (short) 32, 7, (short) 39, 8);
-				createExcelPic(workbook, patriarch, sinrThresholdImage2, (short) 26, 9, (short) 32, 10);
-				createExcelPic(workbook, patriarch, rsrpThresholdImage2, (short) 32, 9, (short) 39, 10);
-				createExcelPic(workbook, patriarch, ftpRateThresholdImage2, (short) 26, 11, (short) 32, 12);
+				createExcelPic(workbook, patriarch, rsrpFtpUpImage3, (short) 26, 3, (short) 32, 4);
+				createExcelPic(workbook, patriarch, sinrFtpUpImage3, (short) 32, 3, (short) 39, 4);
+				createExcelPic(workbook, patriarch, upFtpRateImage3, (short) 26, 5, (short) 32, 6);
+				createExcelPic(workbook, patriarch, rsrpFtpDownImage3, (short) 32, 5, (short) 39, 6);
+				createExcelPic(workbook, patriarch, sinrFtpDownImage3, (short) 26, 7, (short) 32, 8);
+				createExcelPic(workbook, patriarch, downFtpRateImage3, (short) 32, 7, (short) 39, 8);
+				createExcelPic(workbook, patriarch, sinrThresholdImage3, (short) 26, 9, (short) 32, 10);
+				createExcelPic(workbook, patriarch, rsrpThresholdImage3, (short) 32, 9, (short) 39, 10);
+				createExcelPic(workbook, patriarch, ftpRateThresholdImage3, (short) 26, 11, (short) 32, 12);
 
 				HSSFCell cell;
 				HSSFRow row;
