@@ -1,5 +1,6 @@
 package com.boot.kaizen;
 
+import java.io.File;
 import java.util.concurrent.ExecutionException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,7 +21,6 @@ public class KaizenApplicationTest {
 	
 	@Test
 	public void Test() throws InterruptedException, ExecutionException {
-		
 	}
 
 }

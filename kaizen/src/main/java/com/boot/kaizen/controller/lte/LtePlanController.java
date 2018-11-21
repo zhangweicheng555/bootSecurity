@@ -2,6 +2,7 @@ package com.boot.kaizen.controller.lte;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +33,8 @@ import com.boot.kaizen.util.UserUtil;
 import com.github.pagehelper.ISelect;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+
+import net.bytebuddy.asm.Advice.This;
 
 /**
  * 
@@ -432,13 +436,12 @@ public class LtePlanController {
 		}
 		// 模板的路径
 		File file = null;
-		try {
-			file = ResourceUtils.getFile("classpath:static/exportExcelModel/lteExcelModel.xls");
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+//		file = ResourceUtils.getFile("classpath:static/exportExcelModel/lteExcelModel.xls");
+		URL url = ClassPathResource.class.getClassLoader().getResource("com/boot/kaizen/excelModel/lteExcelModel.xls");
+		file=new File(url.getFile());
 
 		ltePlanService.exportPlanDoc(file.getAbsolutePath(), ltePlanInfo, map, response, session);
 	}
 
+	
 }
