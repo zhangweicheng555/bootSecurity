@@ -436,10 +436,6 @@ public class LtePlanController {
 		// 模板的路径
 		File file = null;
 		file = new File(lteExcel);
-		System.out.println("------------------------------------------------------------------------------------");
-		System.out.println("-----------------------------------------"+lteExcel+"-----------------------------------------");
-		System.out.println("-----------------------------------------"+lteImage+"-----------------------------------------");
-		System.out.println("------------------------------------------------------------------------------------");
 		ltePlanService.exportPlanDoc(file.getAbsolutePath(), ltePlanInfo, map, response, session);
 	}
 
