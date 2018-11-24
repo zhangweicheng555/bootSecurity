@@ -27,11 +27,10 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.boot.kaizen._enum.Constant;
 import com.boot.kaizen.activiti.service.Activitiservice;
 import com.boot.kaizen.controller.lte.model.BaseStationBean;
 import com.boot.kaizen.dao.lte.LtePlanDao;
@@ -66,7 +65,9 @@ class LtePlanServiceImpl implements ILtePlanService {
 	private ILteStationCheckService lteStationCheckService;
 	@Autowired
 	private UserService userService;
-
+	@Value("${files.lteImage}")
+	private String lteImage;
+	
 	@Override
 	public List<LtePlan> find(Map<String, Object> map) {
 		return planDao.find(map);
@@ -305,125 +306,125 @@ class LtePlanServiceImpl implements ILtePlanService {
 
 				String rsrpFtpUpImage1 = map.get("rsrpFtpUpImage1");
 				if (StringUtils.isNoneBlank(rsrpFtpUpImage1)) {
-					rsrpFtpUpImage1 = Constant.PATH_PREFIX + rsrpFtpUpImage1;
+					rsrpFtpUpImage1 = lteImage + rsrpFtpUpImage1;
 				}
 				String sinrFtpUpImage1 = map.get("sinrFtpUpImage1");
 				if (StringUtils.isNoneBlank(sinrFtpUpImage1)) {
-					sinrFtpUpImage1 = Constant.PATH_PREFIX + sinrFtpUpImage1;
+					sinrFtpUpImage1 = lteImage + sinrFtpUpImage1;
 				}
 				String upFtpRateImage1 = map.get("upFtpRateImage1");
 				if (StringUtils.isNoneBlank(upFtpRateImage1)) {
-					upFtpRateImage1 = Constant.PATH_PREFIX + upFtpRateImage1;
+					upFtpRateImage1 = lteImage + upFtpRateImage1;
 				}
 				String rsrpFtpDownImage1 = map.get("rsrpFtpDownImage1");
 				if (StringUtils.isNoneBlank(rsrpFtpDownImage1)) {
-					rsrpFtpDownImage1 = Constant.PATH_PREFIX + rsrpFtpDownImage1;
+					rsrpFtpDownImage1 = lteImage + rsrpFtpDownImage1;
 				}
 				String sinrFtpDownImage1 = map.get("sinrFtpDownImage1");
 				if (StringUtils.isNoneBlank(sinrFtpDownImage1)) {
-					sinrFtpDownImage1 = Constant.PATH_PREFIX + sinrFtpDownImage1;
+					sinrFtpDownImage1 = lteImage + sinrFtpDownImage1;
 				}
 				String downFtpRateImage1 = map.get("downFtpRateImage1");
 				if (StringUtils.isNoneBlank(downFtpRateImage1)) {
-					downFtpRateImage1 = Constant.PATH_PREFIX + downFtpRateImage1;
+					downFtpRateImage1 = lteImage + downFtpRateImage1;
 				}
 				String sinrThresholdImage1 = map.get("sinrThresholdImage1");
 				if (StringUtils.isNoneBlank(sinrThresholdImage1)) {
-					sinrThresholdImage1 = Constant.PATH_PREFIX + sinrThresholdImage1;
+					sinrThresholdImage1 = lteImage + sinrThresholdImage1;
 				}
 				String rsrpThresholdImage1 = map.get("rsrpThresholdImage1");
 				if (StringUtils.isNoneBlank(rsrpThresholdImage1)) {
-					rsrpThresholdImage1 = Constant.PATH_PREFIX + rsrpThresholdImage1;
+					rsrpThresholdImage1 = lteImage + rsrpThresholdImage1;
 				}
 				String ftpRateThresholdImage1 = map.get("ftpRateThresholdImage1");
 				if (StringUtils.isNoneBlank(ftpRateThresholdImage1)) {
-					ftpRateThresholdImage1 = Constant.PATH_PREFIX + ftpRateThresholdImage1;
+					ftpRateThresholdImage1 = lteImage + ftpRateThresholdImage1;
 				}
 				String roadLogFile1 = map.get("roadLogFile1");
 				if (StringUtils.isNoneBlank(roadLogFile1)) {
-					roadLogFile1 = Constant.PATH_PREFIX + roadLogFile1;
+					roadLogFile1 = lteImage + roadLogFile1;
 				}
 
 				String rsrpFtpUpImage2 = map.get("rsrpFtpUpImage2");
 				if (StringUtils.isNoneBlank(rsrpFtpUpImage2)) {
-					rsrpFtpUpImage2 = Constant.PATH_PREFIX + rsrpFtpUpImage2;
+					rsrpFtpUpImage2 = lteImage + rsrpFtpUpImage2;
 				}
 				String sinrFtpUpImage2 = map.get("sinrFtpUpImage2");
 				if (StringUtils.isNoneBlank(sinrFtpUpImage2)) {
-					sinrFtpUpImage2 = Constant.PATH_PREFIX + sinrFtpUpImage2;
+					sinrFtpUpImage2 = lteImage + sinrFtpUpImage2;
 				}
 				String upFtpRateImage2 = map.get("upFtpRateImage2");
 				if (StringUtils.isNoneBlank(upFtpRateImage2)) {
-					upFtpRateImage2 = Constant.PATH_PREFIX + upFtpRateImage2;
+					upFtpRateImage2 = lteImage + upFtpRateImage2;
 				}
 				String rsrpFtpDownImage2 = map.get("rsrpFtpDownImage2");
 				if (StringUtils.isNoneBlank(rsrpFtpDownImage2)) {
-					rsrpFtpDownImage2 = Constant.PATH_PREFIX + rsrpFtpDownImage2;
+					rsrpFtpDownImage2 = lteImage + rsrpFtpDownImage2;
 				}
 				String sinrFtpDownImage2 = map.get("sinrFtpDownImage2");
 				if (StringUtils.isNoneBlank(sinrFtpDownImage2)) {
-					sinrFtpDownImage2 = Constant.PATH_PREFIX + sinrFtpDownImage2;
+					sinrFtpDownImage2 = lteImage + sinrFtpDownImage2;
 				}
 				String downFtpRateImage2 = map.get("downFtpRateImage2");
 				if (StringUtils.isNoneBlank(downFtpRateImage2)) {
-					downFtpRateImage2 = Constant.PATH_PREFIX + downFtpRateImage2;
+					downFtpRateImage2 = lteImage + downFtpRateImage2;
 				}
 				String sinrThresholdImage2 = map.get("sinrThresholdImage2");
 				if (StringUtils.isNoneBlank(sinrThresholdImage2)) {
-					sinrThresholdImage2 = Constant.PATH_PREFIX + sinrThresholdImage2;
+					sinrThresholdImage2 = lteImage + sinrThresholdImage2;
 				}
 				String rsrpThresholdImage2 = map.get("rsrpThresholdImage2");
 				if (StringUtils.isNoneBlank(rsrpThresholdImage2)) {
-					rsrpThresholdImage2 = Constant.PATH_PREFIX + rsrpThresholdImage2;
+					rsrpThresholdImage2 = lteImage + rsrpThresholdImage2;
 				}
 				String ftpRateThresholdImage2 = map.get("ftpRateThresholdImage2");
 				if (StringUtils.isNoneBlank(ftpRateThresholdImage2)) {
-					ftpRateThresholdImage2 = Constant.PATH_PREFIX + ftpRateThresholdImage2;
+					ftpRateThresholdImage2 = lteImage + ftpRateThresholdImage2;
 				}
 				String roadLogFile2 = map.get("roadLogFile2");
 				if (StringUtils.isNoneBlank(roadLogFile2)) {
-					roadLogFile2 = Constant.PATH_PREFIX + roadLogFile2;
+					roadLogFile2 = lteImage + roadLogFile2;
 				}
 
 				String rsrpFtpUpImage3 = map.get("rsrpFtpUpImage3");
 				if (StringUtils.isNoneBlank(rsrpFtpUpImage3)) {
-					rsrpFtpUpImage3 = Constant.PATH_PREFIX + rsrpFtpUpImage3;
+					rsrpFtpUpImage3 = lteImage + rsrpFtpUpImage3;
 				}
 				String sinrFtpUpImage3 = map.get("sinrFtpUpImage3");
 				if (StringUtils.isNoneBlank(sinrFtpUpImage3)) {
-					sinrFtpUpImage3 = Constant.PATH_PREFIX + sinrFtpUpImage3;
+					sinrFtpUpImage3 = lteImage + sinrFtpUpImage3;
 				}
 				String upFtpRateImage3 = map.get("upFtpRateImage3");
 				if (StringUtils.isNoneBlank(upFtpRateImage3)) {
-					upFtpRateImage3 = Constant.PATH_PREFIX + upFtpRateImage3;
+					upFtpRateImage3 = lteImage + upFtpRateImage3;
 				}
 				String rsrpFtpDownImage3 = map.get("rsrpFtpDownImage3");
 				if (StringUtils.isNoneBlank(rsrpFtpDownImage3)) {
-					rsrpFtpDownImage3 = Constant.PATH_PREFIX + rsrpFtpDownImage3;
+					rsrpFtpDownImage3 = lteImage + rsrpFtpDownImage3;
 				}
 				String sinrFtpDownImage3 = map.get("sinrFtpDownImage3");
 				if (StringUtils.isNoneBlank(sinrFtpDownImage3)) {
-					sinrFtpDownImage3 = Constant.PATH_PREFIX + sinrFtpDownImage3;
+					sinrFtpDownImage3 = lteImage + sinrFtpDownImage3;
 				}
 				String downFtpRateImage3 = map.get("downFtpRateImage3");
 				if (StringUtils.isNoneBlank(downFtpRateImage3)) {
-					downFtpRateImage3 = Constant.PATH_PREFIX + downFtpRateImage3;
+					downFtpRateImage3 = lteImage + downFtpRateImage3;
 				}
 				String sinrThresholdImage3 = map.get("sinrThresholdImage3");
 				if (StringUtils.isNoneBlank(sinrThresholdImage3)) {
-					sinrThresholdImage3 = Constant.PATH_PREFIX + sinrThresholdImage3;
+					sinrThresholdImage3 = lteImage + sinrThresholdImage3;
 				}
 				String rsrpThresholdImage3 = map.get("rsrpThresholdImage3");
 				if (StringUtils.isNoneBlank(rsrpThresholdImage3)) {
-					rsrpThresholdImage3 = Constant.PATH_PREFIX + rsrpThresholdImage3;
+					rsrpThresholdImage3 = lteImage + rsrpThresholdImage3;
 				}
 				String ftpRateThresholdImage3 = map.get("ftpRateThresholdImage3");
 				if (StringUtils.isNoneBlank(ftpRateThresholdImage3)) {
-					ftpRateThresholdImage3 = Constant.PATH_PREFIX + ftpRateThresholdImage3;
+					ftpRateThresholdImage3 = lteImage + ftpRateThresholdImage3;
 				}
 				String roadLogFile3 = map.get("roadLogFile3");
 				if (StringUtils.isNoneBlank(roadLogFile3)) {
-					roadLogFile3 = Constant.PATH_PREFIX + roadLogFile3;
+					roadLogFile3 = lteImage + roadLogFile3;
 				}
 
 				createExcelPic(workbook, patriarch, rsrpFtpUpImage1, (short) 0, 3, (short) 6, 4);

@@ -2053,3 +2053,195 @@
 2018-11-24 20:51:54,946 [http-nio-8090-exec-1] ==>  Preparing: select * from sys_permission t where t.id = ? 
 2018-11-24 20:51:54,946 [http-nio-8090-exec-1] ==> Parameters: 107(Long)
 2018-11-24 20:51:54,948 [http-nio-8090-exec-1] <==      Total: 1
+2018-11-24 23:11:19,531 [http-nio-8090-exec-10] ==>  Preparing: select * from t_token t where t.id = ? 
+2018-11-24 23:11:19,545 [http-nio-8090-exec-10] ==> Parameters: 0d44cb33-ace1-47e3-adcc-5f5f2df3e223(String)
+2018-11-24 23:11:19,561 [http-nio-8090-exec-10] <==      Total: 1
+2018-11-24 23:11:19,655 [http-nio-8090-exec-4] ==>  Preparing: select * from t_token t where t.id = ? 
+2018-11-24 23:11:19,655 [http-nio-8090-exec-4] ==> Parameters: 0d44cb33-ace1-47e3-adcc-5f5f2df3e223(String)
+2018-11-24 23:11:19,655 [http-nio-8090-exec-4] <==      Total: 1
+2018-11-24 23:11:25,315 [http-nio-8090-exec-1] ==>  Preparing: select * from sys_user t where t.username = ? 
+2018-11-24 23:11:25,326 [http-nio-8090-exec-1] ==> Parameters: wuzhihua(String)
+2018-11-24 23:11:25,327 [http-nio-8090-exec-1] <==      Total: 1
+2018-11-24 23:11:25,327 [http-nio-8090-exec-1] ==>  Preparing: select c.proj from ( select distinct s.proj,s.createTime from sys_project p ,proj_role_relation pr ,sys_role r ,sys_role_user ru ,sys_user u ,sys_login_service s where s.username=? and p.id=pr.proj_id and pr.role_id=r.id and r.id=ru.roleId and u.id=ru.userId and s.proj=p.id order by s.createTime desc limit 1 ) c 
+2018-11-24 23:11:25,327 [http-nio-8090-exec-1] ==> Parameters: wuzhihua(String)
+2018-11-24 23:11:25,327 [http-nio-8090-exec-1] <==      Total: 1
+2018-11-24 23:11:25,343 [http-nio-8090-exec-1] ==>  Preparing: select distinct sp.* from sys_project p ,proj_role_relation pr ,sys_role r ,sys_role_user ru ,sys_user u ,sys_role_permission rp ,sys_permission sp where p.id=pr.proj_id and pr.role_id=r.id and r.id=ru.roleId and u.id=ru.userId and rp.roleId=r.id and sp.id=rp.permissionId and u.username=? and p.id=? 
+2018-11-24 23:11:25,343 [http-nio-8090-exec-1] ==> Parameters: wuzhihua(String), 9(Long)
+2018-11-24 23:11:25,343 [http-nio-8090-exec-1] <==      Total: 37
+2018-11-24 23:11:25,436 [http-nio-8090-exec-1] ==>  Preparing: insert into t_token(id, val, expireTime, createTime, updateTime) values (?, ?, ?, ?, ?) 
+2018-11-24 23:11:25,452 [http-nio-8090-exec-1] ==> Parameters: e7611fed-d1a2-487d-96a2-b4638d4c6a6d(String), {"accountNonExpired":true,"accountNonLocked":true,"authorities":[{"authority":"lte:gcb:list"},{"authority":"lte:config:list"},{"authority":"sys:act:list"},{"authority":"lte:plan:check"},{"authority":"sys:menu:list"},{"authority":"lte:stationcheck:del"},{"authority":"lte:config:del"},{"authority":"sys:role:edit"},{"authority":"lte:loadtest:list"},{"authority":"sys:project:del"},{"authority":"lte:stationcheck:edit"},{"authority":"lte:plan:del"},{"authority":"sys:distribute:edit"},{"authority":"lte:cellcheck:list"},{"authority":"sys:role:list"},{"authority":"sys:lte:manage"},{"authority":"lte:config:edit"},{"authority":"lte:plan:list"},{"authority":"lte:cellcheck:del"},{"authority":"sys:user:del"},{"authority":"sys:role:del"},{"authority":"sys:act:lteconfig"},{"authority":"lte:config:send"},{"authority":"sys:user:list"},{"authority":"lte:gcb:del"},{"authority":"lte:stationcheck:list"},{"authority":"sys:project:edit"},{"authority":"sys:menu:del"},{"authority":"sys:project:list"},{"authority":"sys:distribute:list"},{"authority":"lte:cellcheck:edit"},{"authority":"lte:gcb:edit"},{"authority":"sys:user:edit"},{"authority":"sys:sys:system"},{"authority":"sys:menu:edit"},{"authority":"lte:plan:edit"},{"authority":"sys:diatribute:del"}],"birthday":1538496000000,"createTime":1541240539000,"credentialsNonExpired":true,"email":"19348243@qq.com","enabled":true,"expireTime":1543079485436,"id":10,"loginTime":1543072285436,"nickname":"吴志华","password":"$2a$10$WKXh/sBTxdI2n0dbcyaml.viBOoRo/A4tx6vtLxkyPFq8ZsF4Bgqa","permissions":[{"css":"fa-cog","href":"","id":71,"name":"系统管理","parentId":0,"permission":"sys:sys:system","sort":1,"type":1},{"css":"fa-sitemap","href":"pages/menu/list.html","id":78,"name":"资源管理","parentId":71,"permission":"sys:menu:list","sort":3,"type":1},{"css":"","href":"","id":79,"name":"编辑","parentId":78,"permission":"sys:menu:edit","sort":31,"type":2},{"css":"","href":"","id":80,"name":"删除","parentId":78,"permission":"sys:menu:del","sort":32,"type":2},{"css":"fa-credit-card","href":"pages/project/list.html","id":72,"name":"项目管理","parentId":71,"permission":"sys:project:list","sort":11,"type":1},{"css":"","href":"","id":73,"name":"编辑","parentId":72,"permission":"sys:project:edit","sort":12,"type":2},{"css":"","href":"","id":74,"name":"删除","parentId":72,"permission":"sys:project:del","sort":100,"type":2},{"css":"fa-user-md","href":"pages/role/list.html","id":75,"name":"角色管理","parentId":71,"permission":"sys:role:list","sort":21,"type":1},{"css":"","href":"","id":76,"name":"编辑","parentId":75,"permission":"sys:role:edit","sort":22,"type":2},{"css":"fa-times","href":"","id":77,"name":"删除","parentId":75,"permission":"sys:role:del","sort":23,"type":2},{"css":"fa-user","href":"pages/user/list.html","id":81,"name":"用户管理","parentId":71,"permission":"sys:user:list","sort":24,"type":1},{"css":"","href":"","id":82,"name":"编辑","parentId":81,"permission":"sys:user:edit","sort":100,"type":2},{"css":"","href":"","id":83,"name":"删除","parentId":81,"permission":"sys:user:del","sort":101,"type":2},{"css":"fa-cab","href":"pages/distribute/list.html","id":85,"name":"权限分配","parentId":71,"permission":"sys:distribute:list","sort":200,"type":1},{"css":"","href":"","id":86,"name":"编辑","parentId":85,"permission":"sys:distribute:edit","sort":1,"type":2},{"css":"fa-cab","href":"","id":87,"name":"删除","parentId":85,"permission":"sys:diatribute:del","sort":2,"type":2},{"css":"fa-university","href":"","id":88,"name":"LTE单验","parentId":0,"permission":"sys:lte:manage","sort":2,"type":1},{"css":"fa-send-o","href":"pages/lte/plan/list.html","id":89,"name":"规划表","parentId":88,"permission":"lte:plan:list","sort":3,"type":1},{"css":"","href":"","id":95,"name":"编辑","parentId":89,"permission":"lte:plan:edit","sort":100,"type":2},{"css":"","href":"","id":96,"name":"删除","parentId":89,"permission":"lte:plan:del","sort":100,"type":2},{"css":"","href":"","id":108,"name":"报告审核","parentId":89,"permission":"lte:plan:check","sort":100,"type":2},{"css":"fa-bookmark-o","href":"pages/lte/gcbparameter/list.html","id":90,"name":"工参表","parentId":88,"permission":"lte:gcb:list","sort":4,"type":1},{"css":"","href":"","id":97,"name":"编辑","parentId":90,"permission":"lte:gcb:edit","sort":100,"type":2},{"css":"","href":"","id":98,"name":"删除","parentId":90,"permission":"lte:gcb:del","sort":100,"type":2},{"css":"fa-cogs","href":"pages/lte/config/list.html","id":93,"name":"测试配置项","parentId":88,"permission":"lte:config:list","sort":5,"type":1},{"css":"","href":"","id":99,"name":"编辑","parentId":93,"permission":"lte:config:edit","sort":100,"type":2},{"css":"","href":"","id":100,"name":"删除","parentId":93,"permission":"lte:config:del","sort":100,"type":2},{"css":"","href":"","id":106,"name":"流程推送","parentId":93,"permission":"lte:config:send","sort":100,"type":2},{"css":"fa-codepen","href":"pages/lte/stationtest/list.html","id":91,"name":"基站核查结果","parentId":88,"permission":"lte:stationcheck:list","sort":6,"type":1},{"css":"","href":"","id":102,"name":"编辑","parentId":91,"permission":"lte:stationcheck:edit","sort":2,"type":2},{"css":"","href":"","id":101,"name":"删除","parentId":91,"permission":"lte:stationcheck:del","sort":100,"type":2},{"css":"fa-file-archive-o","href":"pages/lte/cellcheck/list.html","id":92,"name":"小区测试结果","parentId":88,"permission":"lte:cellcheck:list","sort":7,"type":1},{"css":"","href":"","id":103,"name":"编辑","parentId":92,"permission":"lte:cellcheck:edit","sort":100,"type":2},{"css":"","href":"","id":104,"name":"删除","parentId":92,"permission":"lte:cellcheck:del","sort":100,"type":2},{"css":"fa-taxi","href":"","id":94,"name":"路测信息","parentId":88,"permission":"lte:loadtest:list","sort":8,"type":1},{"css":"fa-random","href":"","id":105,"name":"流程管理","parentId":0,"permission":"sys:act:list","sort":3,"type":1},{"css":"fa-bar-chart-o","href":"pages/activiti/lteConfigTaskList.html","id":107,"name":"测试配置项任务","parentId":105,"permission":"sys:act:lteconfig","sort":100,"type":1}],"phone":"18301601124","projId":9,"sex":0,"status":1,"telephone":"18301601124","token":"e7611fed-d1a2-487d-96a2-b4638d4c6a6d","username":"wuzhihua"}(String), 2018-11-25 01:11:25.436(Timestamp), 2018-11-24 23:11:25.436(Timestamp), 2018-11-24 23:11:25.436(Timestamp)
+2018-11-24 23:11:25,452 [http-nio-8090-exec-1] <==    Updates: 1
+2018-11-24 23:11:25,624 [http-nio-8090-exec-1] ==>  Preparing: select * from t_token t where t.id = ? 
+2018-11-24 23:11:25,624 [http-nio-8090-exec-1] ==> Parameters: e7611fed-d1a2-487d-96a2-b4638d4c6a6d(String)
+2018-11-24 23:11:25,624 [http-nio-8090-exec-1] <==      Total: 1
+2018-11-24 23:11:25,702 [http-nio-8090-exec-3] ==>  Preparing: select * from t_token t where t.id = ? 
+2018-11-24 23:11:25,702 [http-nio-8090-exec-3] ==> Parameters: e7611fed-d1a2-487d-96a2-b4638d4c6a6d(String)
+2018-11-24 23:11:25,702 [http-nio-8090-exec-3] <==      Total: 1
+2018-11-24 23:11:25,811 [http-nio-8090-exec-2] ==>  Preparing: select * from t_token t where t.id = ? 
+2018-11-24 23:11:25,811 [http-nio-8090-exec-2] ==> Parameters: e7611fed-d1a2-487d-96a2-b4638d4c6a6d(String)
+2018-11-24 23:11:25,811 [http-nio-8090-exec-2] <==      Total: 1
+2018-11-24 23:11:25,827 [http-nio-8090-exec-2] ==>  Preparing: select distinct p.id as "id" ,p.proj_name as "projName" from sys_project p ,proj_role_relation pr ,sys_role r ,sys_role_user ru ,sys_user u where p.id=pr.proj_id and pr.role_id=r.id and r.id=ru.roleId and u.id=ru.userId and u.username=? 
+2018-11-24 23:11:25,827 [http-nio-8090-exec-2] ==> Parameters: wuzhihua(String)
+2018-11-24 23:11:25,843 [http-nio-8090-exec-2] <==      Total: 2
+2018-11-24 23:11:25,843 [http-nio-8090-exec-2] ==>  Preparing: select c.proj from ( select distinct s.proj,s.createTime from sys_project p ,proj_role_relation pr ,sys_role r ,sys_role_user ru ,sys_user u ,sys_login_service s where s.username=? and p.id=pr.proj_id and pr.role_id=r.id and r.id=ru.roleId and u.id=ru.userId and s.proj=p.id order by s.createTime desc limit 1 ) c 
+2018-11-24 23:11:25,843 [http-nio-8090-exec-2] ==> Parameters: wuzhihua(String)
+2018-11-24 23:11:25,843 [http-nio-8090-exec-2] <==      Total: 1
+2018-11-24 23:11:27,389 [http-nio-8090-exec-8] ==>  Preparing: select * from t_token t where t.id = ? 
+2018-11-24 23:11:27,400 [http-nio-8090-exec-8] ==> Parameters: e7611fed-d1a2-487d-96a2-b4638d4c6a6d(String)
+2018-11-24 23:11:27,401 [http-nio-8090-exec-8] <==      Total: 1
+2018-11-24 23:11:27,418 [http-nio-8090-exec-9] ==>  Preparing: select * from t_token t where t.id = ? 
+2018-11-24 23:11:27,418 [http-nio-8090-exec-9] ==> Parameters: e7611fed-d1a2-487d-96a2-b4638d4c6a6d(String)
+2018-11-24 23:11:27,418 [http-nio-8090-exec-9] <==      Total: 1
+2018-11-24 23:11:27,481 [http-nio-8090-exec-8] ==>  Preparing: SELECT count(0) FROM lte_plane lp WHERE 1 = 1 AND lp.projId = ? 
+2018-11-24 23:11:27,481 [http-nio-8090-exec-8] ==> Parameters: 9(Long)
+2018-11-24 23:11:27,481 [http-nio-8090-exec-8] <==      Total: 1
+2018-11-24 23:11:30,136 [http-nio-8090-exec-2] ==>  Preparing: insert into sys_login_service(username,proj,createTime) values(?,?,?) 
+2018-11-24 23:11:30,139 [http-nio-8090-exec-2] ==> Parameters: wuzhihua(String), 479(Long), 2018-11-24 23:11:30.136(Timestamp)
+2018-11-24 23:11:30,140 [http-nio-8090-exec-2] <==    Updates: 1
+2018-11-24 23:11:30,140 [http-nio-8090-exec-2] ==>  Preparing: select * from t_token t where t.id = ? 
+2018-11-24 23:11:30,140 [http-nio-8090-exec-2] ==> Parameters: e7611fed-d1a2-487d-96a2-b4638d4c6a6d(String)
+2018-11-24 23:11:30,140 [http-nio-8090-exec-2] <==      Total: 1
+2018-11-24 23:11:30,156 [http-nio-8090-exec-2] ==>  Preparing: select distinct sp.* from sys_project p ,proj_role_relation pr ,sys_role r ,sys_role_user ru ,sys_user u ,sys_role_permission rp ,sys_permission sp where p.id=pr.proj_id and pr.role_id=r.id and r.id=ru.roleId and u.id=ru.userId and rp.roleId=r.id and sp.id=rp.permissionId and u.username=? and p.id=? 
+2018-11-24 23:11:30,156 [http-nio-8090-exec-2] ==> Parameters: wuzhihua(String), 479(Long)
+2018-11-24 23:11:30,156 [http-nio-8090-exec-2] <==      Total: 37
+2018-11-24 23:11:30,156 [http-nio-8090-exec-2] ==>  Preparing: select * from t_token t where t.id = ? 
+2018-11-24 23:11:30,156 [http-nio-8090-exec-2] ==> Parameters: e7611fed-d1a2-487d-96a2-b4638d4c6a6d(String)
+2018-11-24 23:11:30,156 [http-nio-8090-exec-2] <==      Total: 1
+2018-11-24 23:11:30,156 [http-nio-8090-exec-2] ==>  Preparing: update t_token t set t.val = ?, t.expireTime = ?, t.updateTime = ? where t.id = ? 
+2018-11-24 23:11:30,156 [http-nio-8090-exec-2] ==> Parameters: {"accountNonExpired":true,"accountNonLocked":true,"authorities":[{"authority":"lte:gcb:list"},{"authority":"lte:config:list"},{"authority":"sys:act:list"},{"authority":"lte:plan:check"},{"authority":"sys:menu:list"},{"authority":"lte:stationcheck:del"},{"authority":"lte:config:del"},{"authority":"sys:role:edit"},{"authority":"lte:loadtest:list"},{"authority":"sys:project:del"},{"authority":"lte:stationcheck:edit"},{"authority":"lte:plan:del"},{"authority":"sys:distribute:edit"},{"authority":"lte:cellcheck:list"},{"authority":"sys:role:list"},{"authority":"sys:lte:manage"},{"authority":"lte:config:edit"},{"authority":"lte:plan:list"},{"authority":"lte:cellcheck:del"},{"authority":"sys:user:del"},{"authority":"sys:role:del"},{"authority":"sys:act:lteconfig"},{"authority":"lte:config:send"},{"authority":"sys:user:list"},{"authority":"lte:gcb:del"},{"authority":"lte:stationcheck:list"},{"authority":"sys:project:edit"},{"authority":"sys:menu:del"},{"authority":"sys:project:list"},{"authority":"sys:distribute:list"},{"authority":"lte:cellcheck:edit"},{"authority":"lte:gcb:edit"},{"authority":"sys:user:edit"},{"authority":"sys:sys:system"},{"authority":"sys:menu:edit"},{"authority":"lte:plan:edit"},{"authority":"sys:diatribute:del"}],"birthday":1538496000000,"createTime":1541240539000,"credentialsNonExpired":true,"email":"19348243@qq.com","enabled":true,"expireTime":1543079490156,"id":10,"loginTime":1543072290156,"nickname":"吴志华","password":"$2a$10$WKXh/sBTxdI2n0dbcyaml.viBOoRo/A4tx6vtLxkyPFq8ZsF4Bgqa","permissions":[{"css":"fa-cog","href":"","id":71,"name":"系统管理","parentId":0,"permission":"sys:sys:system","sort":1,"type":1},{"css":"fa-sitemap","href":"pages/menu/list.html","id":78,"name":"资源管理","parentId":71,"permission":"sys:menu:list","sort":3,"type":1},{"css":"","href":"","id":79,"name":"编辑","parentId":78,"permission":"sys:menu:edit","sort":31,"type":2},{"css":"","href":"","id":80,"name":"删除","parentId":78,"permission":"sys:menu:del","sort":32,"type":2},{"css":"fa-credit-card","href":"pages/project/list.html","id":72,"name":"项目管理","parentId":71,"permission":"sys:project:list","sort":11,"type":1},{"css":"","href":"","id":73,"name":"编辑","parentId":72,"permission":"sys:project:edit","sort":12,"type":2},{"css":"","href":"","id":74,"name":"删除","parentId":72,"permission":"sys:project:del","sort":100,"type":2},{"css":"fa-user-md","href":"pages/role/list.html","id":75,"name":"角色管理","parentId":71,"permission":"sys:role:list","sort":21,"type":1},{"css":"","href":"","id":76,"name":"编辑","parentId":75,"permission":"sys:role:edit","sort":22,"type":2},{"css":"fa-times","href":"","id":77,"name":"删除","parentId":75,"permission":"sys:role:del","sort":23,"type":2},{"css":"fa-user","href":"pages/user/list.html","id":81,"name":"用户管理","parentId":71,"permission":"sys:user:list","sort":24,"type":1},{"css":"","href":"","id":82,"name":"编辑","parentId":81,"permission":"sys:user:edit","sort":100,"type":2},{"css":"","href":"","id":83,"name":"删除","parentId":81,"permission":"sys:user:del","sort":101,"type":2},{"css":"fa-cab","href":"pages/distribute/list.html","id":85,"name":"权限分配","parentId":71,"permission":"sys:distribute:list","sort":200,"type":1},{"css":"","href":"","id":86,"name":"编辑","parentId":85,"permission":"sys:distribute:edit","sort":1,"type":2},{"css":"fa-cab","href":"","id":87,"name":"删除","parentId":85,"permission":"sys:diatribute:del","sort":2,"type":2},{"css":"fa-university","href":"","id":88,"name":"LTE单验","parentId":0,"permission":"sys:lte:manage","sort":2,"type":1},{"css":"fa-send-o","href":"pages/lte/plan/list.html","id":89,"name":"规划表","parentId":88,"permission":"lte:plan:list","sort":3,"type":1},{"css":"","href":"","id":95,"name":"编辑","parentId":89,"permission":"lte:plan:edit","sort":100,"type":2},{"css":"","href":"","id":96,"name":"删除","parentId":89,"permission":"lte:plan:del","sort":100,"type":2},{"css":"","href":"","id":108,"name":"报告审核","parentId":89,"permission":"lte:plan:check","sort":100,"type":2},{"css":"fa-bookmark-o","href":"pages/lte/gcbparameter/list.html","id":90,"name":"工参表","parentId":88,"permission":"lte:gcb:list","sort":4,"type":1},{"css":"","href":"","id":97,"name":"编辑","parentId":90,"permission":"lte:gcb:edit","sort":100,"type":2},{"css":"","href":"","id":98,"name":"删除","parentId":90,"permission":"lte:gcb:del","sort":100,"type":2},{"css":"fa-cogs","href":"pages/lte/config/list.html","id":93,"name":"测试配置项","parentId":88,"permission":"lte:config:list","sort":5,"type":1},{"css":"","href":"","id":99,"name":"编辑","parentId":93,"permission":"lte:config:edit","sort":100,"type":2},{"css":"","href":"","id":100,"name":"删除","parentId":93,"permission":"lte:config:del","sort":100,"type":2},{"css":"","href":"","id":106,"name":"流程推送","parentId":93,"permission":"lte:config:send","sort":100,"type":2},{"css":"fa-codepen","href":"pages/lte/stationtest/list.html","id":91,"name":"基站核查结果","parentId":88,"permission":"lte:stationcheck:list","sort":6,"type":1},{"css":"","href":"","id":102,"name":"编辑","parentId":91,"permission":"lte:stationcheck:edit","sort":2,"type":2},{"css":"","href":"","id":101,"name":"删除","parentId":91,"permission":"lte:stationcheck:del","sort":100,"type":2},{"css":"fa-file-archive-o","href":"pages/lte/cellcheck/list.html","id":92,"name":"小区测试结果","parentId":88,"permission":"lte:cellcheck:list","sort":7,"type":1},{"css":"","href":"","id":103,"name":"编辑","parentId":92,"permission":"lte:cellcheck:edit","sort":100,"type":2},{"css":"","href":"","id":104,"name":"删除","parentId":92,"permission":"lte:cellcheck:del","sort":100,"type":2},{"css":"fa-taxi","href":"","id":94,"name":"路测信息","parentId":88,"permission":"lte:loadtest:list","sort":8,"type":1},{"css":"fa-random","href":"","id":105,"name":"流程管理","parentId":0,"permission":"sys:act:list","sort":3,"type":1},{"css":"fa-bar-chart-o","href":"pages/activiti/lteConfigTaskList.html","id":107,"name":"测试配置项任务","parentId":105,"permission":"sys:act:lteconfig","sort":100,"type":1}],"phone":"18301601124","projId":479,"sex":0,"status":1,"telephone":"18301601124","token":"e7611fed-d1a2-487d-96a2-b4638d4c6a6d","username":"wuzhihua"}(String), 2018-11-25 01:11:30.156(Timestamp), 2018-11-24 23:11:30.156(Timestamp), e7611fed-d1a2-487d-96a2-b4638d4c6a6d(String)
+2018-11-24 23:11:30,172 [http-nio-8090-exec-2] <==    Updates: 1
+2018-11-24 23:11:30,312 [http-nio-8090-exec-7] ==>  Preparing: select * from t_token t where t.id = ? 
+2018-11-24 23:11:30,312 [http-nio-8090-exec-7] ==> Parameters: e7611fed-d1a2-487d-96a2-b4638d4c6a6d(String)
+2018-11-24 23:11:30,312 [http-nio-8090-exec-7] <==      Total: 1
+2018-11-24 23:11:30,344 [http-nio-8090-exec-3] ==>  Preparing: select * from t_token t where t.id = ? 
+2018-11-24 23:11:30,344 [http-nio-8090-exec-3] ==> Parameters: e7611fed-d1a2-487d-96a2-b4638d4c6a6d(String)
+2018-11-24 23:11:30,344 [http-nio-8090-exec-3] <==      Total: 1
+2018-11-24 23:11:30,437 [http-nio-8090-exec-10] ==>  Preparing: select * from t_token t where t.id = ? 
+2018-11-24 23:11:30,437 [http-nio-8090-exec-10] ==> Parameters: e7611fed-d1a2-487d-96a2-b4638d4c6a6d(String)
+2018-11-24 23:11:30,437 [http-nio-8090-exec-10] <==      Total: 1
+2018-11-24 23:11:30,437 [http-nio-8090-exec-10] ==>  Preparing: select distinct p.id as "id" ,p.proj_name as "projName" from sys_project p ,proj_role_relation pr ,sys_role r ,sys_role_user ru ,sys_user u where p.id=pr.proj_id and pr.role_id=r.id and r.id=ru.roleId and u.id=ru.userId and u.username=? 
+2018-11-24 23:11:30,437 [http-nio-8090-exec-10] ==> Parameters: wuzhihua(String)
+2018-11-24 23:11:30,437 [http-nio-8090-exec-10] <==      Total: 2
+2018-11-24 23:11:30,453 [http-nio-8090-exec-10] ==>  Preparing: select c.proj from ( select distinct s.proj,s.createTime from sys_project p ,proj_role_relation pr ,sys_role r ,sys_role_user ru ,sys_user u ,sys_login_service s where s.username=? and p.id=pr.proj_id and pr.role_id=r.id and r.id=ru.roleId and u.id=ru.userId and s.proj=p.id order by s.createTime desc limit 1 ) c 
+2018-11-24 23:11:30,453 [http-nio-8090-exec-10] ==> Parameters: wuzhihua(String)
+2018-11-24 23:11:30,453 [http-nio-8090-exec-10] <==      Total: 1
+2018-11-24 23:11:31,890 [http-nio-8090-exec-4] ==>  Preparing: select * from t_token t where t.id = ? 
+2018-11-24 23:11:31,899 [http-nio-8090-exec-4] ==> Parameters: e7611fed-d1a2-487d-96a2-b4638d4c6a6d(String)
+2018-11-24 23:11:31,900 [http-nio-8090-exec-4] <==      Total: 1
+2018-11-24 23:11:31,901 [http-nio-8090-exec-4] ==>  Preparing: SELECT count(0) FROM lte_plane lp WHERE 1 = 1 AND lp.projId = ? 
+2018-11-24 23:11:31,901 [http-nio-8090-exec-4] ==> Parameters: 479(Long)
+2018-11-24 23:11:31,901 [http-nio-8090-exec-4] <==      Total: 1
+2018-11-24 23:11:31,901 [http-nio-8090-exec-4] ==>  Preparing: select lp.* from lte_plane lp where 1=1 and lp.projId = ? order by lp.testTime desc LIMIT ? 
+2018-11-24 23:11:31,901 [http-nio-8090-exec-4] ==> Parameters: 479(Long), 10(Integer)
+2018-11-24 23:11:31,901 [http-nio-8090-exec-10] ==>  Preparing: select * from t_token t where t.id = ? 
+2018-11-24 23:11:31,901 [http-nio-8090-exec-4] <==      Total: 2
+2018-11-24 23:11:31,901 [http-nio-8090-exec-10] ==> Parameters: e7611fed-d1a2-487d-96a2-b4638d4c6a6d(String)
+2018-11-24 23:11:31,901 [http-nio-8090-exec-10] <==      Total: 1
+2018-11-24 23:11:34,620 [http-nio-8090-exec-2] ==>  Preparing: select * from t_token t where t.id = ? 
+2018-11-24 23:11:34,625 [http-nio-8090-exec-2] ==> Parameters: e7611fed-d1a2-487d-96a2-b4638d4c6a6d(String)
+2018-11-24 23:11:34,627 [http-nio-8090-exec-2] <==      Total: 1
+2018-11-24 23:11:34,627 [http-nio-8090-exec-2] ==>  Preparing: select * from lte_plane where id=? 
+2018-11-24 23:11:34,627 [http-nio-8090-exec-2] ==> Parameters: 10(Long)
+2018-11-24 23:11:34,627 [http-nio-8090-exec-2] ====>  Preparing: select lp.* from lte_gc lp where lp.mENodeBID =? order by lp.mCellID asc 
+2018-11-24 23:11:34,627 [http-nio-8090-exec-2] ====> Parameters: 123456(String)
+2018-11-24 23:11:34,627 [http-nio-8090-exec-2] <====      Total: 3
+2018-11-24 23:11:34,627 [http-nio-8090-exec-2] ====>  Preparing: select * from lte_station_check where eNodeBID=? 
+2018-11-24 23:11:34,643 [http-nio-8090-exec-2] ====> Parameters: 123456(String)
+2018-11-24 23:11:34,643 [http-nio-8090-exec-2] <====      Total: 1
+2018-11-24 23:11:34,643 [http-nio-8090-exec-2] ====>  Preparing: select * from lte_load_test where eNodeBID=? 
+2018-11-24 23:11:34,643 [http-nio-8090-exec-2] ====> Parameters: 123456(String)
+2018-11-24 23:11:34,643 [http-nio-8090-exec-2] <====      Total: 1
+2018-11-24 23:11:34,643 [http-nio-8090-exec-2] ====>  Preparing: select lp.* from lte_cell_check lp where lp.eNodeBID =? 
+2018-11-24 23:11:34,643 [http-nio-8090-exec-2] ====> Parameters: 123456(String)
+2018-11-24 23:11:34,643 [http-nio-8090-exec-2] <====      Total: 3
+2018-11-24 23:11:34,658 [http-nio-8090-exec-2] <==      Total: 1
+2018-11-24 23:23:15,033 [http-nio-8090-exec-1] ==>  Preparing: select * from t_token t where t.id = ? 
+2018-11-24 23:23:15,044 [http-nio-8090-exec-1] ==> Parameters: e7611fed-d1a2-487d-96a2-b4638d4c6a6d(String)
+2018-11-24 23:23:15,044 [http-nio-8090-exec-1] <==      Total: 1
+2018-11-24 23:23:15,184 [http-nio-8090-exec-3] ==>  Preparing: select * from t_token t where t.id = ? 
+2018-11-24 23:23:15,184 [http-nio-8090-exec-3] ==> Parameters: e7611fed-d1a2-487d-96a2-b4638d4c6a6d(String)
+2018-11-24 23:23:15,184 [http-nio-8090-exec-3] <==      Total: 1
+2018-11-24 23:23:15,294 [http-nio-8090-exec-7] ==>  Preparing: select * from t_token t where t.id = ? 
+2018-11-24 23:23:15,294 [http-nio-8090-exec-7] ==> Parameters: e7611fed-d1a2-487d-96a2-b4638d4c6a6d(String)
+2018-11-24 23:23:15,294 [http-nio-8090-exec-7] <==      Total: 1
+2018-11-24 23:23:15,309 [http-nio-8090-exec-7] ==>  Preparing: select distinct p.id as "id" ,p.proj_name as "projName" from sys_project p ,proj_role_relation pr ,sys_role r ,sys_role_user ru ,sys_user u where p.id=pr.proj_id and pr.role_id=r.id and r.id=ru.roleId and u.id=ru.userId and u.username=? 
+2018-11-24 23:23:15,309 [http-nio-8090-exec-7] ==> Parameters: wuzhihua(String)
+2018-11-24 23:23:15,309 [http-nio-8090-exec-7] <==      Total: 2
+2018-11-24 23:23:15,309 [http-nio-8090-exec-7] ==>  Preparing: select c.proj from ( select distinct s.proj,s.createTime from sys_project p ,proj_role_relation pr ,sys_role r ,sys_role_user ru ,sys_user u ,sys_login_service s where s.username=? and p.id=pr.proj_id and pr.role_id=r.id and r.id=ru.roleId and u.id=ru.userId and s.proj=p.id order by s.createTime desc limit 1 ) c 
+2018-11-24 23:23:15,325 [http-nio-8090-exec-7] ==> Parameters: wuzhihua(String)
+2018-11-24 23:23:15,325 [http-nio-8090-exec-7] <==      Total: 1
+2018-11-24 23:23:16,840 [http-nio-8090-exec-8] ==>  Preparing: select * from t_token t where t.id = ? 
+2018-11-24 23:23:16,840 [http-nio-8090-exec-8] ==> Parameters: e7611fed-d1a2-487d-96a2-b4638d4c6a6d(String)
+2018-11-24 23:23:16,851 [http-nio-8090-exec-8] <==      Total: 1
+2018-11-24 23:23:16,852 [http-nio-8090-exec-9] ==>  Preparing: select * from t_token t where t.id = ? 
+2018-11-24 23:23:16,852 [http-nio-8090-exec-9] ==> Parameters: e7611fed-d1a2-487d-96a2-b4638d4c6a6d(String)
+2018-11-24 23:23:16,852 [http-nio-8090-exec-9] <==      Total: 1
+2018-11-24 23:23:16,930 [http-nio-8090-exec-8] ==>  Preparing: SELECT count(0) FROM lte_plane lp WHERE 1 = 1 AND lp.projId = ? 
+2018-11-24 23:23:16,930 [http-nio-8090-exec-8] ==> Parameters: 479(Long)
+2018-11-24 23:23:16,930 [http-nio-8090-exec-8] <==      Total: 1
+2018-11-24 23:23:16,930 [http-nio-8090-exec-8] ==>  Preparing: select lp.* from lte_plane lp where 1=1 and lp.projId = ? order by lp.testTime desc LIMIT ? 
+2018-11-24 23:23:16,930 [http-nio-8090-exec-8] ==> Parameters: 479(Long), 10(Integer)
+2018-11-24 23:23:16,946 [http-nio-8090-exec-8] <==      Total: 2
+2018-11-24 23:23:18,800 [http-nio-8090-exec-7] ==>  Preparing: select * from t_token t where t.id = ? 
+2018-11-24 23:23:18,800 [http-nio-8090-exec-7] ==> Parameters: e7611fed-d1a2-487d-96a2-b4638d4c6a6d(String)
+2018-11-24 23:23:18,812 [http-nio-8090-exec-7] <==      Total: 1
+2018-11-24 23:23:18,813 [http-nio-8090-exec-7] ==>  Preparing: select * from lte_plane where id=? 
+2018-11-24 23:23:18,813 [http-nio-8090-exec-7] ==> Parameters: 10(Long)
+2018-11-24 23:23:18,829 [http-nio-8090-exec-7] ====>  Preparing: select lp.* from lte_gc lp where lp.mENodeBID =? order by lp.mCellID asc 
+2018-11-24 23:23:18,829 [http-nio-8090-exec-7] ====> Parameters: 123456(String)
+2018-11-24 23:23:18,829 [http-nio-8090-exec-7] <====      Total: 3
+2018-11-24 23:23:18,829 [http-nio-8090-exec-7] ====>  Preparing: select * from lte_station_check where eNodeBID=? 
+2018-11-24 23:23:18,829 [http-nio-8090-exec-7] ====> Parameters: 123456(String)
+2018-11-24 23:23:18,829 [http-nio-8090-exec-7] <====      Total: 1
+2018-11-24 23:23:18,844 [http-nio-8090-exec-7] ====>  Preparing: select * from lte_load_test where eNodeBID=? 
+2018-11-24 23:23:18,844 [http-nio-8090-exec-7] ====> Parameters: 123456(String)
+2018-11-24 23:23:18,844 [http-nio-8090-exec-7] <====      Total: 1
+2018-11-24 23:23:18,844 [http-nio-8090-exec-7] ====>  Preparing: select lp.* from lte_cell_check lp where lp.eNodeBID =? 
+2018-11-24 23:23:18,844 [http-nio-8090-exec-7] ====> Parameters: 123456(String)
+2018-11-24 23:23:18,844 [http-nio-8090-exec-7] <====      Total: 3
+2018-11-24 23:23:18,844 [http-nio-8090-exec-7] <==      Total: 1
+2018-11-24 23:28:06,027 [http-nio-8090-exec-10] ==>  Preparing: select * from t_token t where t.id = ? 
+2018-11-24 23:28:06,030 [http-nio-8090-exec-10] ==> Parameters: e7611fed-d1a2-487d-96a2-b4638d4c6a6d(String)
+2018-11-24 23:28:06,046 [http-nio-8090-exec-10] <==      Total: 1
+2018-11-24 23:28:06,186 [http-nio-8090-exec-3] ==>  Preparing: select * from t_token t where t.id = ? 
+2018-11-24 23:28:06,233 [http-nio-8090-exec-3] ==> Parameters: e7611fed-d1a2-487d-96a2-b4638d4c6a6d(String)
+2018-11-24 23:28:06,233 [http-nio-8090-exec-3] <==      Total: 1
+2018-11-24 23:28:06,343 [http-nio-8090-exec-9] ==>  Preparing: select * from t_token t where t.id = ? 
+2018-11-24 23:28:06,343 [http-nio-8090-exec-9] ==> Parameters: e7611fed-d1a2-487d-96a2-b4638d4c6a6d(String)
+2018-11-24 23:28:06,343 [http-nio-8090-exec-9] <==      Total: 1
+2018-11-24 23:28:06,358 [http-nio-8090-exec-9] ==>  Preparing: select distinct p.id as "id" ,p.proj_name as "projName" from sys_project p ,proj_role_relation pr ,sys_role r ,sys_role_user ru ,sys_user u where p.id=pr.proj_id and pr.role_id=r.id and r.id=ru.roleId and u.id=ru.userId and u.username=? 
+2018-11-24 23:28:06,374 [http-nio-8090-exec-9] ==> Parameters: wuzhihua(String)
+2018-11-24 23:28:06,374 [http-nio-8090-exec-9] <==      Total: 2
+2018-11-24 23:28:06,374 [http-nio-8090-exec-9] ==>  Preparing: select c.proj from ( select distinct s.proj,s.createTime from sys_project p ,proj_role_relation pr ,sys_role r ,sys_role_user ru ,sys_user u ,sys_login_service s where s.username=? and p.id=pr.proj_id and pr.role_id=r.id and r.id=ru.roleId and u.id=ru.userId and s.proj=p.id order by s.createTime desc limit 1 ) c 
+2018-11-24 23:28:06,374 [http-nio-8090-exec-9] ==> Parameters: wuzhihua(String)
+2018-11-24 23:28:06,374 [http-nio-8090-exec-9] <==      Total: 1
+2018-11-24 23:28:07,561 [http-nio-8090-exec-7] ==>  Preparing: select * from t_token t where t.id = ? 
+2018-11-24 23:28:07,578 [http-nio-8090-exec-7] ==> Parameters: e7611fed-d1a2-487d-96a2-b4638d4c6a6d(String)
+2018-11-24 23:28:07,579 [http-nio-8090-exec-7] <==      Total: 1
+2018-11-24 23:28:07,580 [http-nio-8090-exec-8] ==>  Preparing: select * from t_token t where t.id = ? 
+2018-11-24 23:28:07,580 [http-nio-8090-exec-8] ==> Parameters: e7611fed-d1a2-487d-96a2-b4638d4c6a6d(String)
+2018-11-24 23:28:07,595 [http-nio-8090-exec-8] <==      Total: 1
+2018-11-24 23:28:07,658 [http-nio-8090-exec-7] ==>  Preparing: SELECT count(0) FROM lte_plane lp WHERE 1 = 1 AND lp.projId = ? 
+2018-11-24 23:28:07,658 [http-nio-8090-exec-7] ==> Parameters: 479(Long)
+2018-11-24 23:28:07,658 [http-nio-8090-exec-7] <==      Total: 1
+2018-11-24 23:28:07,658 [http-nio-8090-exec-7] ==>  Preparing: select lp.* from lte_plane lp where 1=1 and lp.projId = ? order by lp.testTime desc LIMIT ? 
+2018-11-24 23:28:07,658 [http-nio-8090-exec-7] ==> Parameters: 479(Long), 10(Integer)
+2018-11-24 23:28:07,673 [http-nio-8090-exec-7] <==      Total: 2
+2018-11-24 23:28:09,204 [http-nio-8090-exec-2] ==>  Preparing: select * from t_token t where t.id = ? 
+2018-11-24 23:28:09,214 [http-nio-8090-exec-2] ==> Parameters: e7611fed-d1a2-487d-96a2-b4638d4c6a6d(String)
+2018-11-24 23:28:09,216 [http-nio-8090-exec-2] <==      Total: 1
+2018-11-24 23:28:09,216 [http-nio-8090-exec-2] ==>  Preparing: select * from lte_plane where id=? 
+2018-11-24 23:28:09,216 [http-nio-8090-exec-2] ==> Parameters: 10(Long)
+2018-11-24 23:28:09,232 [http-nio-8090-exec-2] ====>  Preparing: select lp.* from lte_gc lp where lp.mENodeBID =? order by lp.mCellID asc 
+2018-11-24 23:28:09,232 [http-nio-8090-exec-2] ====> Parameters: 123456(String)
+2018-11-24 23:28:09,232 [http-nio-8090-exec-2] <====      Total: 3
+2018-11-24 23:28:09,232 [http-nio-8090-exec-2] ====>  Preparing: select * from lte_station_check where eNodeBID=? 
+2018-11-24 23:28:09,232 [http-nio-8090-exec-2] ====> Parameters: 123456(String)
+2018-11-24 23:28:09,232 [http-nio-8090-exec-2] <====      Total: 1
+2018-11-24 23:28:09,232 [http-nio-8090-exec-2] ====>  Preparing: select * from lte_load_test where eNodeBID=? 
+2018-11-24 23:28:09,232 [http-nio-8090-exec-2] ====> Parameters: 123456(String)
+2018-11-24 23:28:09,232 [http-nio-8090-exec-2] <====      Total: 1
+2018-11-24 23:28:09,232 [http-nio-8090-exec-2] ====>  Preparing: select lp.* from lte_cell_check lp where lp.eNodeBID =? 
+2018-11-24 23:28:09,248 [http-nio-8090-exec-2] ====> Parameters: 123456(String)
+2018-11-24 23:28:09,248 [http-nio-8090-exec-2] <====      Total: 3
+2018-11-24 23:28:09,248 [http-nio-8090-exec-2] <==      Total: 1

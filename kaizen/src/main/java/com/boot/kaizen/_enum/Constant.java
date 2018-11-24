@@ -8,7 +8,4 @@ public class Constant {
 	
 	/**系统项目*/
 	public static final Long  SYSTEM_ID_PROJECT=9L;
-	
-	/**静态文件路径*/
-	public static final String PATH_PREFIX = "d:/kaizen";
 }

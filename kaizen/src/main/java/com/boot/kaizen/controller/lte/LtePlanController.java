@@ -1,8 +1,6 @@
 package com.boot.kaizen.controller.lte;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,14 +8,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.boot.kaizen._enum.Constant;
 import com.boot.kaizen.entity.LoginUser;
 import com.boot.kaizen.entity.RequestParamEntity;
@@ -34,8 +30,6 @@ import com.github.pagehelper.ISelect;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
-import net.bytebuddy.asm.Advice.This;
-
 /**
  * 
  * @author weichengz
@@ -47,6 +41,10 @@ public class LtePlanController {
 
 	@Autowired
 	private ILtePlanService ltePlanService;
+	@Value("${files.lteExcel}")
+	private String lteExcel;
+	@Value("${files.lteImage}")
+	private String lteImage;
 
 	@ResponseBody
 	@RequestMapping(value = "/find", method = RequestMethod.POST)
@@ -100,19 +98,20 @@ public class LtePlanController {
 	public JsonMsgUtil findById(@RequestParam("id") Long id) {
 		return ltePlanService.findById(id);
 	}
+
 	/**
 	 * 
-	* @Description: 根据当前的登陆用户查询该项目下的所有用户
-	* @author weichengz
-	* @date 2018年11月18日 上午8:16:45
+	 * @Description: 根据当前的登陆用户查询该项目下的所有用户
+	 * @author weichengz
+	 * @date 2018年11月18日 上午8:16:45
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/queryUserByProjId", method = RequestMethod.POST)
 	public JsonMsgUtil queryUserByProjId() {
 		LoginUser user = UserUtil.getLoginUser();
-		Long projId=null;
-		if (Constant.SYSTEM_ID_PROJECT !=projId) {
-			projId=user.getProjId();
+		Long projId = null;
+		if (Constant.SYSTEM_ID_PROJECT != projId) {
+			projId = user.getProjId();
 		}
 		return ltePlanService.queryUserByProjId(projId);
 	}
@@ -436,15 +435,12 @@ public class LtePlanController {
 		}
 		// 模板的路径
 		File file = null;
-//		file = ResourceUtils.getFile("classpath:static/exportExcelModel/lteExcelModel.xls");
-		URL url = ClassPathResource.class.getClassLoader().getResource("com/boot/kaizen/excelModel/lteExcelModel.xls");
-		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
-		System.out.println("+++++++++++++++++++++++模板的路径"+url.getFile()+"++++++++++++++++++++++++++++++");
-		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
-		file=new File(url.getFile());
-
+		file = new File(lteExcel);
+		System.out.println("------------------------------------------------------------------------------------");
+		System.out.println("-----------------------------------------"+lteExcel+"-----------------------------------------");
+		System.out.println("-----------------------------------------"+lteImage+"-----------------------------------------");
+		System.out.println("------------------------------------------------------------------------------------");
 		ltePlanService.exportPlanDoc(file.getAbsolutePath(), ltePlanInfo, map, response, session);
 	}
 
-	
 }

@@ -49,7 +49,9 @@ pagehelper:
     params: true
     
 files:
-  path: ${file-path:d:/kaizen}
+  path: ${file-path:d:/kaizen/doc}
+  lteExcel: d:/kaizen/doc/excelModel/lteExcelModel.xls
+  lteImage: d:/kaizen/doc
 logging:
   config: classpath:logback-admin.xml
 log: 
