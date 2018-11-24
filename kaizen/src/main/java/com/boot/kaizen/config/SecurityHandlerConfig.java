@@ -1,6 +1,8 @@
 package com.boot.kaizen.config;
 
 import java.io.IOException;
+import java.util.Date;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,10 +17,15 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
+
+import com.alibaba.fastjson.JSONObject;
 import com.boot.kaizen.entity.LoginUser;
 import com.boot.kaizen.entity.Token;
 import com.boot.kaizen.filter.TokenFilter;
+import com.boot.kaizen.model.LoginLog;
 import com.boot.kaizen.service.TokenService;
+import com.boot.kaizen.service.log.ISysLogService;
+import com.boot.kaizen.util.HttpUtil;
 import com.boot.kaizen.util.JsonMsgUtil;
 import com.boot.kaizen.util.JsonTokenUtil;
 import com.boot.kaizen.util.ResponseUtil;
@@ -34,7 +41,9 @@ public class SecurityHandlerConfig {
 
 	@Autowired
 	private TokenService tokenService;
-
+	@Autowired
+	private ISysLogService sysLogService;
+	
 	/**
 	 * @Description: 登陆成功处理器
 	 * @author weichengz
@@ -51,6 +60,14 @@ public class SecurityHandlerConfig {
 
 				Token token = tokenService.saveToken(loginUser);
 				JsonTokenUtil j = new JsonTokenUtil(token.getToken(), token.getLoginTime(), 0, "登陆成功", null);
+				
+				try {//切换项目 记录登陆成功
+					LoginLog loginLog=new LoginLog(loginUser.getProjId(),loginUser.getUsername(), HttpUtil.getIp(request), HttpUtil.queryRegionByIp(HttpUtil.getIp(request)), LoginLog.StatusV.SUCCESS+"", new Date(), JSONObject.toJSONString(loginUser));
+					sysLogService.save(loginLog);
+				} catch (Exception e) {//记录登陆错误日志
+					
+				}
+				
 				ResponseUtil.responseJson(response, HttpStatus.OK.value(), j);
 			}
 		};
@@ -70,12 +87,21 @@ public class SecurityHandlerConfig {
 			public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
 					AuthenticationException exception) throws IOException, ServletException {
 				String msg = null;
-				//String username=request.getParameter("username");
+				String username=request.getParameter("username");
 				if (exception instanceof BadCredentialsException) {
 					msg = "密码错误";
 				} else {
 					msg = exception.getMessage();
 				}
+				
+				try {//记录登陆失败
+					String ip=HttpUtil.getIp(request);
+					LoginLog loginLog=new LoginLog(-1L,username, ip, HttpUtil.queryRegionByIp(ip), LoginLog.StatusV.FAIL+"", new Date(), "用户【"+username+"】登陆失败，"+exception.getMessage());
+					sysLogService.save(loginLog);
+				} catch (Exception e) {
+					
+				}
+				
 				JsonMsgUtil j = new JsonMsgUtil(HttpStatus.UNAUTHORIZED.value(), msg, 0, msg);
 				ResponseUtil.responseJson(response, HttpStatus.UNAUTHORIZED.value(), j);
 			}

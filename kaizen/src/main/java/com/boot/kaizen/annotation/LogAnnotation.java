@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 
 /**
  * log注解 定义在方法上 用@LogAnnotation(flag="") 配合日志拦截器使用
- * flag：表名
+ * flag：crud
  * @author a-zhangweicheng
  *
  */

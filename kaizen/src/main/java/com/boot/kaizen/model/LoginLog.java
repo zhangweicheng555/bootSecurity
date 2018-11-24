@@ -1,22 +1,34 @@
 package com.boot.kaizen.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 登录日志 监听登录的所有信息
+ * 登录日志 监听登录的所有信息 login_log
  * 
  * @author a-zhangweicheng
  *
  */
-public class LoginLog {
+public class LoginLog implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private Long id;
+	private Long projId;
 	private String username;
 	private String ipNo;
 	private String loginAddress;
-	private String statusFlag;// 成功 失败
+	private String statusFlag;// 成功1 失败0 就这两个
 	private Date loginTime;
 	private String msg;// 附加信息
+
+	public Long getProjId() {
+		return projId;
+	}
+
+	public void setProjId(Long projId) {
+		this.projId = projId;
+	}
 
 	public Long getId() {
 		return id;
@@ -51,7 +63,13 @@ public class LoginLog {
 	}
 
 	public String getStatusFlag() {
-		return statusFlag;
+		if (("1").equals(statusFlag)) {
+			return "成功";
+		} else if (("0").equals(statusFlag)) {
+			return "失败";
+		} else {
+			return "";
+		}
 	}
 
 	public void setStatusFlag(String statusFlag) {
@@ -74,10 +92,23 @@ public class LoginLog {
 		this.msg = msg;
 	}
 
-	public LoginLog(Long id, String username, String ipNo, String loginAddress, String statusFlag, Date loginTime,
-			String msg) {
+	public LoginLog(Long id, Long projId, String username, String ipNo, String loginAddress, String statusFlag,
+			Date loginTime, String msg) {
 		super();
 		this.id = id;
+		this.projId = projId;
+		this.username = username;
+		this.ipNo = ipNo;
+		this.loginAddress = loginAddress;
+		this.statusFlag = statusFlag;
+		this.loginTime = loginTime;
+		this.msg = msg;
+	}
+
+	public LoginLog(Long projId, String username, String ipNo, String loginAddress, String statusFlag, Date loginTime,
+			String msg) {
+		super();
+		this.projId = projId;
 		this.username = username;
 		this.ipNo = ipNo;
 		this.loginAddress = loginAddress;
@@ -88,6 +119,11 @@ public class LoginLog {
 
 	public LoginLog() {
 		super();
+	}
+
+	public interface StatusV {
+		int SUCCESS = 1;// 成功
+		int FAIL = 0;// 失败
 	}
 
 }

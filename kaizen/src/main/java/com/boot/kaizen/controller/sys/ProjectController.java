@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.boot.kaizen._enum.Constant;
+import com.boot.kaizen.annotation.LogAnnotation;
 import com.boot.kaizen.entity.LoginUser;
 import com.boot.kaizen.entity.RequestParamEntity;
 import com.boot.kaizen.model.SysProject;
@@ -58,6 +59,7 @@ public class ProjectController {
 		return new TableResultUtil(0l, "操作成功", pageInfo.getTotal(), pageInfo.getList());
 	}
 
+	@LogAnnotation(flag="delete")
 	@ResponseBody
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	public JsonMsgUtil delete(@RequestParam("ids") String ids) {

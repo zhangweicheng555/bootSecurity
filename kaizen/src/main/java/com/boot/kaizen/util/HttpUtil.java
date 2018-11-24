@@ -26,7 +26,7 @@ public class HttpUtil {
 	 * @param request
 	 * @return
 	 */
-	public static String getIpAdrress(HttpServletRequest request) {
+	public static String getIp(HttpServletRequest request) {
 		String Xip = request.getHeader("X-Real-IP");
 		String XFor = request.getHeader("X-Forwarded-For");
 		if (StringUtils.isNotEmpty(XFor) && !"unKnown".equalsIgnoreCase(XFor)) {
@@ -66,7 +66,7 @@ public class HttpUtil {
 	 * @param ip
 	 * @return
 	 */
-	public static String queryRegionLocation(String ip) {
+	public static String queryRegionByIp(String ip) {
 		// ip = "219.136.134.157";
 		if (StringUtils.isBlank(ip)) {
 			return "";

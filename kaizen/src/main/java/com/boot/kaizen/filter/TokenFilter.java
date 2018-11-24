@@ -8,7 +8,6 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
@@ -17,13 +16,16 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-
+import com.alibaba.fastjson.JSONObject;
 import com.boot.kaizen.entity.LoginUser;
+import com.boot.kaizen.model.LoginLog;
 import com.boot.kaizen.model.LoginService;
 import com.boot.kaizen.model.Permission;
 import com.boot.kaizen.service.PermissionService;
 import com.boot.kaizen.service.SysLoginServiceService;
 import com.boot.kaizen.service.TokenService;
+import com.boot.kaizen.service.log.ISysLogService;
+import com.boot.kaizen.util.HttpUtil;
 
 /**
  * token过滤器
@@ -42,6 +44,8 @@ public class TokenFilter extends OncePerRequestFilter {
 	private PermissionService permissionService;
 	@Autowired
 	private SysLoginServiceService sysLoginServiceService;
+	@Autowired
+	private ISysLogService sysLogService;
 
 	private static final Long MINUTES_10 = 10 * 60 * 1000L;
 	private static final String SPRING_SECURITY_PROJ = "proj";
@@ -73,6 +77,13 @@ public class TokenFilter extends OncePerRequestFilter {
 					loginUser.setPermissions(listPermissions);
 					loginUser.setProjId(Long.valueOf(projId));
 					tokenService.refresh(loginUser);
+					
+					try {//切换项目 记录登陆成功
+						LoginLog loginLog=new LoginLog(loginUser.getProjId(),loginUser.getUsername(), HttpUtil.getIp(request), HttpUtil.queryRegionByIp(HttpUtil.getIp(request)), LoginLog.StatusV.SUCCESS+"", new Date(), JSONObject.toJSONString(loginUser));
+						sysLogService.save(loginLog);
+					} catch (Exception e) {//记录登陆错误日志
+						
+					}
 				} else {
 					loginUser = checkLoginTime(loginUser);
 				}
