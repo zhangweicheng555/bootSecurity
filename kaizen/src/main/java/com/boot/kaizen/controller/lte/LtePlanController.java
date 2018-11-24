@@ -438,6 +438,9 @@ public class LtePlanController {
 		File file = null;
 //		file = ResourceUtils.getFile("classpath:static/exportExcelModel/lteExcelModel.xls");
 		URL url = ClassPathResource.class.getClassLoader().getResource("com/boot/kaizen/excelModel/lteExcelModel.xls");
+		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println("+++++++++++++++++++++++模板的路径"+url.getFile()+"++++++++++++++++++++++++++++++");
+		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
 		file=new File(url.getFile());
 
 		ltePlanService.exportPlanDoc(file.getAbsolutePath(), ltePlanInfo, map, response, session);
