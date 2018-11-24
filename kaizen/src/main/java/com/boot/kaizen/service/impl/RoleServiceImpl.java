@@ -49,10 +49,10 @@ public class RoleServiceImpl implements RoleService {
 
 	@Override
 	public List<TreeTable> list(LoginUser user) {
-		
-		Long projId=null;
+
+		Long projId = null;
 		if (Constant.SYSTEM_ID_PROJECT != user.getProjId()) {
-			projId=user.getProjId();
+			projId = user.getProjId();
 		}
 		List<TreeTable> treeTables = new ArrayList<TreeTable>();
 		List<SysProject> projects = projectService.findWithRoleRealtion(projId);
@@ -152,25 +152,35 @@ public class RoleServiceImpl implements RoleService {
 		List<Map<String, Object>> roleUsers = sysRoleDao.findRolePersion(projId);
 		if (roleUsers != null && roleUsers.size() > 0) {
 			for (Map<String, Object> map : roleUsers) {
-				Long roleId=Long.valueOf(map.get("roleId").toString());
-				
-				String roleName=map.get("roleName").toString();
-				String userList=map.get("userList").toString();
-				ZtreeModel ztreeModel=new ZtreeModel(roleId,0l,roleName);
+				Long roleId = Long.valueOf(map.get("roleId").toString());
+
+				String roleName = map.get("roleName").toString();
+				String userList = map.get("userList").toString();
+				ZtreeModel ztreeModel = new ZtreeModel(roleId, 0l, roleName);
 				ztreeModels.add(ztreeModel);
-				
+
 				if (userList != null) {
-					String[] array=userList.split(",");
+					String[] array = userList.split(",");
 					for (String userIdName : array) {
-						String[] idName=userIdName.split("_");
-						Long userId=Long.valueOf(idName[0].toString());
-						String userName=idName[1].toString();
-						ZtreeModel ztreeModelChild=new ZtreeModel(userId,ztreeModel.getId(),userName);
+						String[] idName = userIdName.split("_");
+						Long userId = Long.valueOf(idName[0].toString());
+						String userName = idName[1].toString();
+						ZtreeModel ztreeModelChild = new ZtreeModel(userId, ztreeModel.getId(), userName);
 						ztreeModels.add(ztreeModelChild);
 					}
 				}
 			}
 		}
 		return ztreeModels;
+	}
+
+	@Override
+	public JsonMsgUtil chechUnique(String name, Long projId) {
+		JsonMsgUtil j = new JsonMsgUtil(false, "改角色名称已经存在", "");
+		Long num = sysRoleDao.chechUnique(name, projId);
+		if (num != null && num == 0L) {
+			j=new JsonMsgUtil(true,"不存在的角色名称","");
+		}
+		return j;
 	}
 }

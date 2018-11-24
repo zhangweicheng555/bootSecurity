@@ -32,4 +32,12 @@ public interface SysRoleDao {
 	 */
 	List<Map<String, Object>> findRolePersion(@Param("projId") Long projId);
 
+	/**
+	 * 
+	* @Description: 校验唯一性
+	* @author weichengz
+	* @date 2018年11月24日 下午8:03:02
+	 */
+	Long chechUnique(@Param("name") String name,@Param("projId")  Long projId);
+
 }

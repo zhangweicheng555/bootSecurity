@@ -109,10 +109,29 @@
 		    	}
 		    }
 		    
+		    //验证同一项目下是不是存在相同的项目名称
+		    $.ajax({
+				type : 'post',
+				url : '/role/chechUnique',
+				dataType: "json", 
+				async: false,
+				data : {"name":$("#name").val()},
+				success : function(msg) {
+					if(msg.success){
+						submit();
+					}else{
+						parent.layer.msg(msg.message);
+					}
+				}
+			});
+		}
+		//提交
+		function submit(){
 			$.ajax({
 				type : 'post',
 				url : '/role/edit',
 				dataType: "json", 
+				async: false,
 				data : $("#formDemo").serialize(),
 				success : function(msg) {
 					if(msg.success){
@@ -124,7 +143,6 @@
 				}
 			});
 		}
-		
 		
 	</script>
 </body>

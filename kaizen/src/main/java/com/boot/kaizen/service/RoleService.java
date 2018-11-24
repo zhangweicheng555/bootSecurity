@@ -28,5 +28,13 @@ public interface RoleService {
 	 */
 	List<ZtreeModel> findRolePersion(Long projId);
 
+	/**
+	 * 
+	* @Description: 同一项目下的统一名字验证
+	* @author weichengz
+	* @date 2018年11月24日 下午7:56:44
+	 */
+	public JsonMsgUtil chechUnique(String name,Long projId);
+
 
 }

@@ -84,8 +84,14 @@ public class PermissionController {
 	@PreAuthorize("hasAuthority('sys:menu:list')")
 	public List<Permission> permissionsList() {
 		List<Permission> list = Lists.newArrayList();
-		List<Permission> permissionsAll = permissionDao.listAll();
-		setPermissionsList(0L, permissionsAll, list);
+		List<Permission> permissionsAll = null;
+		
+		LoginUser user = UserUtil.getLoginUser();
+		
+		if (Constant.SYSTEM_ID_PROJECT==user.getProjId()) {
+			permissionsAll = permissionDao.listAll();
+			setPermissionsList(0L, permissionsAll, list);
+		}
 		return list;
 	}
 

@@ -84,6 +84,20 @@
 		 and sr.id=#{id}
 		 order by sr.sort
 	</select>
+	
+	<select id="chechUnique" resultType="java.lang.Long">
+		 select 
+		    count(1)
+		 from 
+		 sys_role sr
+		 ,proj_role_relation prr 
+		 ,sys_project sp 
+		 where 1=1
+		 and sr.id=prr.role_id
+		 and prr.proj_id=sp.id
+		 and sr.name=#{name}
+		 and sp.id=#{projId}
+	</select>
 	<select id="findPermissionIdsByRoleId" resultType="java.lang.Long">
 		 select 
 		   	sp.id

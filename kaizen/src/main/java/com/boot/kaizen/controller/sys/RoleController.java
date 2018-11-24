@@ -123,4 +123,15 @@ public class RoleController {
 	public List<ZtreeModel> findRolePersion(@RequestParam(value = "flag", required = true) Long flag) {
 		return roleService.findRolePersion(flag);
 	}
+	/**
+	 * 
+	* @Description: 验证角色的唯一性
+	* @author weichengz
+	* @date 2018年11月24日 下午7:56:11
+	 */
+	@RequestMapping(value = "/chechUnique")
+	public JsonMsgUtil chechUnique(@RequestParam(value = "name", required = true) String name) {
+		LoginUser loginUser = UserUtil.getLoginUser();
+		return roleService.chechUnique(name,loginUser.getProjId());
+	}
 }
