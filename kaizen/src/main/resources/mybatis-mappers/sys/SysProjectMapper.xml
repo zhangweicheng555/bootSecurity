@@ -102,7 +102,14 @@
 		 order by sp.sort
 	</select>
 	<select id="findList" resultMap="SysProjectFMap">
-		 select * from  sys_project sp order by sp.sort
+		 select * 
+		 from  
+		 sys_project sp 
+		 where  1=1
+		 <if test="projId != null">
+            and sp.id =#{projId}
+        </if>
+		 order by sp.sort
 	</select>
 	
 	

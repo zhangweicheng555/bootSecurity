@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.boot.kaizen._enum.Constant;
 import com.boot.kaizen.entity.LoginUser;
 import com.boot.kaizen.entity.TreeTable;
 import com.boot.kaizen.entity.ZtreeModel;
@@ -56,7 +57,12 @@ public class RoleController {
 	 */
 	@RequestMapping(value = "/projSelect")
 	public List<SysProject> projSelect() {
-		return projectService.findList();
+		LoginUser user = UserUtil.getLoginUser();
+		Long projId=null;
+		if (Constant.SYSTEM_ID_PROJECT != user.getProjId()) {
+			projId=user.getProjId();
+		}
+		return projectService.findList(projId);
 	}
 
 	/**

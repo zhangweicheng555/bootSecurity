@@ -24,7 +24,7 @@ public interface SysProjectService {
 	 * @author weichengz
 	 * @date 2018年10月4日 上午2:41:05
 	 */
-	public List<SysProject> findList();
+	public List<SysProject> findList(Long projId);
 
 	/**
 	 * 返回角色的id/名字串

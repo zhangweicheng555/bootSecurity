@@ -19,7 +19,7 @@ public interface SysProjectDao {
 
 	List<SysProject> findWithRoleRealtion(@Param("projId") Long projId);
 
-	List<SysProject> findList();
+	List<SysProject> findList(@Param("projId") Long projId);
 
 	List<SysProject> find(@Param("map") Map<String, Object> map);
 

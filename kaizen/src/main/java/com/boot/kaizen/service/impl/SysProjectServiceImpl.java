@@ -119,8 +119,8 @@ public class SysProjectServiceImpl implements SysProjectService {
 	}
 
 	@Override
-	public List<SysProject> findList() {
-		return projectDao.findList();
+	public List<SysProject> findList(Long projId) {
+		return projectDao.findList(projId);
 	}
 
 	@Override
