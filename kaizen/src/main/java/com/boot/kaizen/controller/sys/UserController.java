@@ -91,18 +91,18 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/saveUser")
 	public JsonMsgUtil saveUser(SysUser sysUser) {
-		JsonMsgUtil j = new JsonMsgUtil(false);
-		try {
-			SysUser u = userService.getUser(sysUser.getUsername());
-			if (u != null) {
-				throw new IllegalArgumentException(sysUser.getUsername() + "已存在");
-			}
-			userService.saveUser(sysUser);
-			j = new JsonMsgUtil(true, "操作成功", "");
-		} catch (Exception e) {
-			j.setMsg("操作失败");
-			e.printStackTrace();
+		SysUser u = userService.getUser(sysUser.getUsername());
+		if (u != null) {
+			throw new IllegalArgumentException(sysUser.getUsername() + "已存在");
 		}
+		
+		LoginUser user = UserUtil.getLoginUser();
+		if (Constant.SYSTEM_ID_PROJECT != user.getProjId()) {
+			throw new IllegalArgumentException("无操作权限");
+		}
+		
+		userService.saveUser(sysUser);
+		JsonMsgUtil j = new JsonMsgUtil(true, "操作成功", "");
 		return j;
 	}
 
@@ -161,7 +161,7 @@ public class UserController {
 		if (Constant.SYSTEM_ID_PROJECT !=user.getProjId()) {
 			projId=user.getProjId();
 		}
-		return userService.delete(ids,projId);
+		return userService.delete(ids,projId,user.getId());
 	}
 
 }

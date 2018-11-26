@@ -106,26 +106,6 @@
 		    
 		    
 		    
-/* 		    var upload = layui.upload;
-		    //执行实例
-		    var uploadInst = upload.render({
-		      elem: '#test1' //绑定元素
-		      ,url: '/users/upload' //上传接口
-		     // ,headers: {token: 'sasasas'}
-		      ,accept:'images'
-		      ,exts:'jpg|png|jpeg'
-		      ,auto: false
-		      ,field:'file'
-		      ,bindAction: '#test9'
-		      ,drag:false
-		      ,done: function(res){
-		    	  console.info(res);
-		      }
-		      ,error: function(){
-		      }
-		    }); */
-		  
-		    
 		    laydate.render({
 		    	elem: '#birthday'
 	   		    ,max: 0
@@ -151,6 +131,7 @@
 				dataType: "json", 
 				data : $("#form").serialize(),
 				success : function(data) {
+					console.info(data);
 					if(data.success){
 						location.href = "/pages/user/list.html";
 						parent.layer.msg("添加成功");

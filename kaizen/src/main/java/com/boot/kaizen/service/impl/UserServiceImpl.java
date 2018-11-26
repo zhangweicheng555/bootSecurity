@@ -84,7 +84,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public JsonMsgUtil delete(String ids,Long projId) {
+	public JsonMsgUtil delete(String ids, Long projId, Long userId) {
 		JsonMsgUtil j = new JsonMsgUtil(false);
 
 		if (StringUtils.isNoneBlank(ids)) {
@@ -92,14 +92,17 @@ public class UserServiceImpl implements UserService {
 			Long[] array = new Long[idsArray.length];
 			for (int i = 0; i < idsArray.length; i++) {
 				String id = idsArray[i];
-				//排除wuzhihua  mocun用户
+				// 排除wuzhihua mocun用户
 				if (!id.equals(Constant.USER_ID.toString()) && !id.equals(Constant.USER_ID_MASTER.toString())) {
-					array[i] = Long.valueOf(id.trim());
+					Long userid = Long.valueOf(id.trim());
+					if (userid != userId) {// 不能删除自己
+						array[i] = userid;
+					}
 				}
 			}
 			// 删除用户角色关系
 			roleUserService.deleteBatch(array);
-			userDao.deleteBatch(array,projId);
+			userDao.deleteBatch(array, projId);
 			j = new JsonMsgUtil(true, "删除操作成功", "");
 		}
 
