@@ -59,7 +59,7 @@ public class SecurityHandlerConfig {
 				LoginUser loginUser = (LoginUser) authentication.getPrincipal();
 
 				Token token = tokenService.saveToken(loginUser);
-				JsonTokenUtil j = new JsonTokenUtil(token.getToken(), token.getLoginTime(), 0, "登陆成功", null);
+				JsonTokenUtil j = new JsonTokenUtil(token.getToken(), token.getLoginTime(), 1, "登陆成功", null);
 				
 				try {//切换项目 记录登陆成功
 					LoginLog loginLog=new LoginLog(loginUser.getProjId(),loginUser.getUsername(), HttpUtil.getIp(request), HttpUtil.queryRegionByIp(HttpUtil.getIp(request)), LoginLog.StatusV.SUCCESS+"", new Date(), JSONObject.toJSONString(loginUser));
