@@ -1,5 +1,7 @@
 package com.boot.kaizen.model;
 
+import org.springframework.web.multipart.MultipartFile;
+
 /**
  * lte路测信息 lte_load_test
  * 
@@ -22,12 +24,35 @@ public class LteLoadTest extends BaseEntity<Long> {
 	private String downFtpRateImage;// FTP下载测试-速率打点截图
 	private String sinrThresholdImage;// SINR阈值图
 	private String rsrpThresholdImage;// RSRP阈值图
-	private String ftpRateThresholdImage;// FTP速率阈值图
+	//private String ftpRateThresholdImage;// FTP上行速率阈值图
+	private String upFtpRateThresholdImage;// FTP上行速率阈值图
+	private String downFtpRateThresholdImage;// FTP上行速率阈值图
 	private String roadLogFile;// 路测Log文件
 
 	public Long getUserId() {
 		return userId;
 	}
+
+	
+	public String getUpFtpRateThresholdImage() {
+		return upFtpRateThresholdImage;
+	}
+
+
+	public void setUpFtpRateThresholdImage(String upFtpRateThresholdImage) {
+		this.upFtpRateThresholdImage = upFtpRateThresholdImage;
+	}
+
+
+	public String getDownFtpRateThresholdImage() {
+		return downFtpRateThresholdImage;
+	}
+
+
+	public void setDownFtpRateThresholdImage(String downFtpRateThresholdImage) {
+		this.downFtpRateThresholdImage = downFtpRateThresholdImage;
+	}
+
 
 	public void setUserId(Long userId) {
 		this.userId = userId;
@@ -121,13 +146,7 @@ public class LteLoadTest extends BaseEntity<Long> {
 		this.rsrpThresholdImage = rsrpThresholdImage;
 	}
 
-	public String getFtpRateThresholdImage() {
-		return ftpRateThresholdImage;
-	}
-
-	public void setFtpRateThresholdImage(String ftpRateThresholdImage) {
-		this.ftpRateThresholdImage = ftpRateThresholdImage;
-	}
+	
 
 	public String getRoadLogFile() {
 		return roadLogFile;
@@ -137,10 +156,13 @@ public class LteLoadTest extends BaseEntity<Long> {
 		this.roadLogFile = roadLogFile;
 	}
 
+
+	
+	
 	public LteLoadTest(Long userId, String eNodeBID, String communityName, String testDate, String rsrpFtpUpImage,
 			String sinrFtpUpImage, String upFtpRateImage, String rsrpFtpDownImage, String sinrFtpDownImage,
-			String downFtpRateImage, String sinrThresholdImage, String rsrpThresholdImage, String ftpRateThresholdImage,
-			String roadLogFile) {
+			String downFtpRateImage, String sinrThresholdImage, String rsrpThresholdImage,
+			String upFtpRateThresholdImage, String downFtpRateThresholdImage, String roadLogFile) {
 		super();
 		this.userId = userId;
 		this.eNodeBID = eNodeBID;
@@ -154,12 +176,17 @@ public class LteLoadTest extends BaseEntity<Long> {
 		this.downFtpRateImage = downFtpRateImage;
 		this.sinrThresholdImage = sinrThresholdImage;
 		this.rsrpThresholdImage = rsrpThresholdImage;
-		this.ftpRateThresholdImage = ftpRateThresholdImage;
+		this.upFtpRateThresholdImage = upFtpRateThresholdImage;
+		this.downFtpRateThresholdImage = downFtpRateThresholdImage;
 		this.roadLogFile = roadLogFile;
 	}
+
 
 	public LteLoadTest() {
 		super();
 	}
+
+
+	
 
 }

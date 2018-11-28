@@ -319,7 +319,8 @@ public class LteAppController {
 			@RequestParam("downFtpRateImage") MultipartFile downFtpRateImage,
 			@RequestParam("sinrThresholdImage") MultipartFile sinrThresholdImage,
 			@RequestParam("rsrpThresholdImage") MultipartFile rsrpThresholdImage,
-			@RequestParam("ftpRateThresholdImage") MultipartFile ftpRateThresholdImage,
+			@RequestParam("upFtpRateThresholdImage") MultipartFile upFtpRateThresholdImage,
+			@RequestParam("downFtpRateThresholdImage") MultipartFile downFtpRateThresholdImage,
 			@RequestParam("roadLogFile") MultipartFile roadLogFile) {
 		AppUtil appUtil = new AppUtil(1, "上传成功", null);
 		try {
@@ -336,12 +337,13 @@ public class LteAppController {
 			String downFtpRateImageName = upFile(downFtpRateImage, "lte");
 			String sinrThresholdImageName = upFile(sinrThresholdImage, "lte");
 			String rsrpThresholdImageName = upFile(rsrpThresholdImage, "lte");
-			String ftpRateThresholdImageName = upFile(ftpRateThresholdImage, "lte");
+			String upFtpRateThresholdImageName = upFile(upFtpRateThresholdImage, "lte");
+			String downFtpRateThresholdImageName = upFile(downFtpRateThresholdImage, "lte");
 			String roadLogFileName = upFile(roadLogFile, "lte");
 
 			LteLoadTest loadTest = new LteLoadTest(userId, eNodeBID, communityName, testDate, rsrpFtpUpImageName,
 					sinrFtpUpImageName, upFtpRateImageName, rsrpFtpDownImageName, sinrFtpDownImageName,
-					downFtpRateImageName, sinrThresholdImageName, rsrpThresholdImageName, ftpRateThresholdImageName,
+					downFtpRateImageName, sinrThresholdImageName, rsrpThresholdImageName,upFtpRateThresholdImageName ,downFtpRateThresholdImageName,
 					roadLogFileName);
 			loadTest.setProjId(projId);
 			lteLoadTestService.save(loadTest);

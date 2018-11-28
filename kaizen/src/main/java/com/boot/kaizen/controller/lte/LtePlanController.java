@@ -420,7 +420,7 @@ public class LtePlanController {
 							map.put("downFtpRateImage" + w, lteLoadTest.getDownFtpRateImage());
 							map.put("sinrThresholdImage" + w, lteLoadTest.getSinrThresholdImage());
 							map.put("rsrpThresholdImage" + w, lteLoadTest.getRsrpThresholdImage());
-							map.put("ftpRateThresholdImage" + w, lteLoadTest.getFtpRateThresholdImage());
+							//map.put("ftpRateThresholdImage" + w, lteLoadTest.getFtpRateThresholdImage());
 							map.put("roadLogFile" + w, lteLoadTest.getRoadLogFile());
 							w++;
 						}

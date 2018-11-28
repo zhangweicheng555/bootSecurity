@@ -27,7 +27,8 @@
 			,downFtpRateImage
 			,sinrThresholdImage
 			,rsrpThresholdImage
-			,ftpRateThresholdImage
+			,upFtpRateThresholdImage
+			,downFtpRateThresholdImage
 			,roadLogFile
 			,projId
 			,createTime
@@ -46,7 +47,8 @@
 			,#{downFtpRateImage}
 			,#{sinrThresholdImage}
 			,#{rsrpThresholdImage}
-			,#{ftpRateThresholdImage}
+			,#{upFtpRateThresholdImage}
+			,#{downFtpRateThresholdImage}
 			,#{roadLogFile}
 			,#{projId}
 			,#{createTime}
