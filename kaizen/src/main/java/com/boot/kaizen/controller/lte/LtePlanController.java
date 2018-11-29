@@ -22,6 +22,7 @@ import com.boot.kaizen.model.LteGcParameter;
 import com.boot.kaizen.model.LteLoadTest;
 import com.boot.kaizen.model.LtePlan;
 import com.boot.kaizen.model.LtePlanInfo;
+import com.boot.kaizen.model.LteStationCheck;
 import com.boot.kaizen.service.lte.ILtePlanService;
 import com.boot.kaizen.util.JsonMsgUtil;
 import com.boot.kaizen.util.TableResultUtil;
@@ -168,12 +169,17 @@ public class LtePlanController {
 		LtePlanInfo ltePlanInfo = null;
 		try {
 			if (id != null) {
-				map.put("mENodeBID", "");// 站号
 				map.put("mBaseStationName", "");// 站名
 				map.put("mBaseStationType", "");// 类型
+				map.put("mENodeBID", "");// 站号
 				map.put("mLongitude", "");// 经度
 				map.put("mLatitude", "");// 纬度
 				map.put("mTac", "");// tac
+				
+				map.put("mENodeBIDs", "");// 实测站号
+				map.put("mLongitudes", "");// 实测经度
+				map.put("mLatitudes", "");// 实测纬度
+				map.put("mTacs", "");// 实测tac
 
 				map.put("mAntennaHangUp1", "");// 天线挂高
 				map.put("mAzimuth1", "");// 方位角
@@ -424,6 +430,16 @@ public class LtePlanController {
 							map.put("roadLogFile" + w, lteLoadTest.getRoadLogFile());
 							w++;
 						}
+					}
+					
+					//基站核查
+					List<LteStationCheck> stationChecks = ltePlanInfo.getStationChecks();
+					if (stationChecks != null && stationChecks.size()>0) {
+						LteStationCheck lteStationCheck=stationChecks.get(0);
+						map.put("mENodeBIDs", lteStationCheck.geteNodeBID());// 实测站号
+						map.put("mLongitudes", lteStationCheck.getLongitude());// 实测经度
+						map.put("mLatitudes", lteStationCheck.getLatitude());// 实测纬度
+						map.put("mTacs", lteStationCheck.getTac());// 实测tac
 					}
 				}
 			} else {

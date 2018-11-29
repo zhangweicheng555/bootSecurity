@@ -483,26 +483,27 @@ class LtePlanServiceImpl implements ILtePlanService {
 				cell = row.getCell(7);
 				cell.setCellValue(map.get("mBaseStationType"));
 
+				
 				row = sheetOne.getRow(7);
 				cell = row.getCell(2);
 				cell.setCellValue(map.get("mLongitude"));
 				cell = row.getCell(6);
-				cell.setCellValue(map.get("mLongitude"));
+				cell.setCellValue(map.get("mLongitudes"));
 				row = sheetOne.getRow(8);
 				cell = row.getCell(2);
 				cell.setCellValue(map.get("mLatitude"));
 				cell = row.getCell(6);
-				cell.setCellValue(map.get("mLatitude"));
+				cell.setCellValue(map.get("mLatitudes"));
 				row = sheetOne.getRow(9);
 				cell = row.getCell(2);
 				cell.setCellValue(map.get("mTac"));
 				cell = row.getCell(6);
-				cell.setCellValue(map.get("mTac"));
+				cell.setCellValue(map.get("mTacs"));
 				row = sheetOne.getRow(10);
 				cell = row.getCell(2);
 				cell.setCellValue(map.get("mENodeBID"));
 				cell = row.getCell(6);
-				cell.setCellValue(map.get("mENodeBID"));
+				cell.setCellValue(map.get("mENodeBIDs"));
 
 				row = sheetOne.getRow(13);
 				cell = row.getCell(2);
