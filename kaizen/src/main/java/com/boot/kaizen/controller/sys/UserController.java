@@ -1,12 +1,7 @@
 package com.boot.kaizen.controller.sys;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -23,9 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.boot.kaizen._enum.Constant;
 import com.boot.kaizen.annotation.LogAnnotation;
-import com.boot.kaizen.backUpFile.thread.Example1;
-import com.boot.kaizen.backUpFile.thread.Example2;
-import com.boot.kaizen.backUpFile.thread.ThreadCallable;
 import com.boot.kaizen.entity.LoginUser;
 import com.boot.kaizen.entity.RequestParamEntity;
 import com.boot.kaizen.model.SysUser;
@@ -53,7 +45,11 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
-
+	
+	public static void main(String[] args) {
+		System.out.println(UUID.randomUUID().toString());
+	}
+	
 	/**
 	 * 
 	 * @Description: 查询列表
@@ -66,7 +62,7 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping(value = "/find", method = RequestMethod.POST)
 	public TableResultUtil find(RequestParamEntity param) throws InterruptedException, ExecutionException {
-		
+		System.out.println("-----------sasa------");
 		LoginUser user = UserUtil.getLoginUser();
 		param.getMap().put("projId", "");
 		if (Constant.SYSTEM_ID_PROJECT != user.getProjId()) {
@@ -163,5 +159,7 @@ public class UserController {
 		}
 		return userService.delete(ids,projId,user.getId());
 	}
+	
+	
 
 }
