@@ -1,6 +1,0 @@
-
-
-
-throw new IllegalArgumentException("缺少后缀名");
-
-throw new IOException("文件上传异常");
