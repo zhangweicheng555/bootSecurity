@@ -1,6 +1,7 @@
 package com.boot.kaizen.service.lteFdd;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -85,6 +86,25 @@ public class LteFddStationServiceImpl implements ILteFddStationService {
 			j = new JsonMsgUtil(true, "删除操作成功,成功删除【"+deleteNum+"】条数据", null);
 		}
 		return j;
+	}
+
+	@Override
+	public void upSert(LteFddStation lteFddStation) {
+		Map<String, Object> map=new HashMap<>();
+		map.put("projId", lteFddStation.getProjId());
+		map.put("eNodeBID", lteFddStation.geteNodeBID());
+		map.put("testDate", lteFddStation.getTestDate());
+		List<LteFddStation> lteFddStations = lteFddStatrionMapper.query(map);
+		if (lteFddStations != null  && lteFddStations.size()>0) {//修改
+			LteFddStation model=lteFddStations.get(0);
+			lteFddStation.setId(model.getId());
+			lteFddStation.setUpdateTime(new Date());
+			lteFddStatrionMapper.updateByPrimaryKeySelective(lteFddStation);
+		}else {//添加
+			lteFddStation.setId(MyUtil.getUuid());
+			lteFddStation.setCreateTime(new Date());
+			insertSelective(lteFddStation);
+		}
 	}
 
 }

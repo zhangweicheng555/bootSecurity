@@ -57,4 +57,12 @@ public interface ILteFddStationService {
 	 * @date 2018年12月31日 下午12:13:07
 	 */
 	JsonMsgUtil delete(String ids);
+
+	/**
+	 * 添加更新  app对接
+	* @Description: TODO
+	* @author weichengz
+	* @date 2019年1月1日 上午11:33:10
+	 */
+	void upSert(LteFddStation lteFddStation);
 }

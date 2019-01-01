@@ -10,23 +10,21 @@
 
 	
 	
-	<form action="/lte/app/uploadRoadTest" method="post" enctype="multipart/form-data">
-	     <input type="text" name="projId"  value="479"/>
-	     <input type="text" name="token"  value="eyJhbGciOiJIUzI1NiJ9.eyJMT0dJTl9VU0VSX0tFWSI6IjMxYWMyMGIwLTgwN2EtNDk0ZS1iNDdkLWJlMGFlNjRlNTkzNyJ9.3tK_RBPs7PBxQkt32mynqVxEd29FlOSS5Lwi0lwLiSA"/>
+	<form action="/lte/app/uploadCellCheck" method="post" enctype="multipart/form-data">
+	     <input type="text" name="projId"  value="9"/>
+	     <input type="text" name="token"  value="eyJhbGciOiJIUzI1NiJ9.eyJMT0dJTl9VU0VSX0tFWSI6ImIxYjgxMzc5LWIyYzUtNDA1OC04NDhmLTAxNTJkZTVhYTM0OSJ9.SO94FHdhC4PaAuhtonbeV83ceL2WvWoceaTkygcOvrk"/>
 	     <input type="text" name="userId"  value="10"/>
-	     <input type="text" name="eNodeBID"  value="123456"/>
-	     <input type="text" name="communityName"  value="1"/>
-	     <input type="text" name="testDate"  value="2018-11-11"/>
-	     <input type="file" name="rsrpFtpUpImage" value="选择jar包"/>
-	     <input type="file" name="sinrFtpUpImage" value="选择jar包"/>
-	     <input type="file" name="upFtpRateImage" value="选择jar包"/>
-	     <input type="file" name="rsrpFtpDownImage" value="选择jar包"/>
-	     <input type="file" name="sinrFtpDownImage" value="选择jar包"/>
-	     <input type="file" name="downFtpRateImage" value="选择jar包"/>
-	     <input type="file" name="sinrThresholdImage" value="选择jar包"/>
-	     <input type="file" name="rsrpThresholdImage" value="选择jar包"/>
-	     <input type="file" name="ftpRateThresholdImage " value="选择jar包"/>
-	     <input type="file" name="roadLogFile " value="选择jar包"/>
+	     <input type="text" name="eNodeBID"  value="123"/>
+	     <input type="text" name="testDate"  value="2019-01-01"/>
+	     <input type="text" name="cellId"  value="1"/>
+	     
+	     
+	     <input type="file" name="rsrpPicMulti" value="rsrpPicMulti"/>
+	     <input type="file" name="sinrPicMulti" value="sinrPicMulti"/>
+	     <input type="file" name="upRatePicMulti" value="upRatePicMulti"/>
+	     <input type="file" name="rsrpWirePicMulti" value="rsrpWirePicMulti"/>
+	     
+	     
 	     <input id="submit_form" type="submit" class="btn btn-success save" value="保存"/>
 	</form>
 	

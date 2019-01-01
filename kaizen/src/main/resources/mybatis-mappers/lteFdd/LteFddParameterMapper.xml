@@ -3,7 +3,7 @@
 <mapper namespace="com.boot.kaizen.dao.lteFdd.LteFddParameterMapper">
   <resultMap id="BaseResultMap" type="com.boot.kaizen.model.lteFddModel.LteFddParameter">
     <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="mENodeBID" jdbcType="VARCHAR" property="mENodeBID" />
+    <result column="eNodeBID" jdbcType="VARCHAR" property="eNodeBID" />
     <result column="mBaseStationName" jdbcType="VARCHAR" property="mBaseStationName" />
     <result column="cellId" jdbcType="VARCHAR" property="cellId" />
     <result column="cellName" jdbcType="VARCHAR" property="cellName" />
@@ -62,9 +62,10 @@
     <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
     <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="createAt" jdbcType="INTEGER" property="createAt" />
+    <result column="testDate" jdbcType="VARCHAR" property="testDate" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, mENodeBID, mBaseStationName, cellId, cellName, eci, earfcn, pci, tac, csfbCallSuccAttempt, 
+    id, eNodeBID, mBaseStationName, cellId, cellName, eci, earfcn, pci, tac, csfbCallSuccAttempt, 
     csfbCallSuccSucc, csfbCallSuccfailure, csfbPassiveCallSuccAttempt, csfbPassiveCallSuccSucc, 
     csfbPassiveCallSuccfailure, volteWirelessConnFirst, volteWirelessConnSecond, volteWirelessConnBad, 
     volteWirelessConnRandom, csfbVoiceSuccAttempt, csfbVoiceSuccSucc, csfbVoiceSuccfailure, 
@@ -74,7 +75,7 @@
     ftpDownThroughputRandom, ftpUpRsrpFirst, ftpUpRsrpSecond, ftpUpRsrpBad, ftpUpRsrpRandom, 
     ftpUpSinrFirst, ftpUpSinrSecond, ftpUpSinrBad, ftpUpSinrRandom, ftpUpThroughputFirst, 
     ftpUpThroughputSecond, ftpUpThroughputBad, ftpUpThroughputRandom, rsrpPic, sinrPic, 
-    downRatePic, upRatePic, rsrpWirePic, projId, createTime, updateTime, createAt,ftpDownPass,ftpUpPass
+    downRatePic, upRatePic, rsrpWirePic, projId, createTime, updateTime, createAt,ftpDownPass,ftpUpPass,testDate
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -104,17 +105,20 @@
      <if test="map.projId != null">
            and projId = #{map.projId}
        </if>
-	 <if test="map.mENodeBID != null and map.mENodeBID != ''">
-           and mENodeBID = #{map.mENodeBID}
+	 <if test="map.eNodeBID != null and map.eNodeBID != ''">
+           and eNodeBID = #{map.eNodeBID}
      </if>
 	 <if test="map.cellId != null and map.cellId != ''">
            and cellId = #{map.cellId}
+     </if>
+	 <if test="map.testDate != null and map.testDate != ''">
+           and testDate = #{map.testDate}
      </if>
   </select>
   
   
   <insert id="insert" parameterType="com.boot.kaizen.model.lteFddModel.LteFddParameter">
-    insert into lte_fdd_parameter (id, mENodeBID, mBaseStationName, 
+    insert into lte_fdd_parameter (id, eNodeBID, mBaseStationName, 
       cellId, cellName, eci, 
       earfcn, pci, tac, csfbCallSuccAttempt, 
       csfbCallSuccSucc, csfbCallSuccfailure, 
@@ -137,7 +141,7 @@
       downRatePic, upRatePic, rsrpWirePic, 
       projId, createTime, updateTime, 
       createAt)
-    values (#{id,jdbcType=VARCHAR}, #{mENodeBID,jdbcType=VARCHAR}, #{mBaseStationName,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{eNodeBID,jdbcType=VARCHAR}, #{mBaseStationName,jdbcType=VARCHAR}, 
       #{cellId,jdbcType=VARCHAR}, #{cellName,jdbcType=VARCHAR}, #{eci,jdbcType=VARCHAR}, 
       #{earfcn,jdbcType=VARCHAR}, #{pci,jdbcType=VARCHAR}, #{tac,jdbcType=VARCHAR}, #{csfbCallSuccAttempt,jdbcType=VARCHAR}, 
       #{csfbCallSuccSucc,jdbcType=VARCHAR}, #{csfbCallSuccfailure,jdbcType=VARCHAR}, 
@@ -167,8 +171,8 @@
       <if test="id != null">
         id,
       </if>
-      <if test="mENodeBID != null">
-        mENodeBID,
+      <if test="eNodeBID != null">
+        eNodeBID,
       </if>
       <if test="mBaseStationName != null">
         mBaseStationName,
@@ -344,13 +348,16 @@
       <if test="ftpUpPass != null">
         ftpUpPass,
       </if>
+      <if test="testDate != null">
+        testDate,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=VARCHAR},
       </if>
-      <if test="mENodeBID != null">
-        #{mENodeBID,jdbcType=VARCHAR},
+      <if test="eNodeBID != null">
+        #{eNodeBID,jdbcType=VARCHAR},
       </if>
       <if test="mBaseStationName != null">
         #{mBaseStationName,jdbcType=VARCHAR},
@@ -526,13 +533,16 @@
       <if test="ftpUpPass != null">
         #{ftpDownPass,jdbcType=VARCHAR},
       </if>
+      <if test="testDate != null">
+        #{testDate,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.boot.kaizen.model.lteFddModel.LteFddParameter">
     update lte_fdd_parameter
     <set>
-      <if test="mENodeBID != null">
-        mENodeBID = #{mENodeBID,jdbcType=VARCHAR},
+      <if test="eNodeBID != null">
+        eNodeBID = #{eNodeBID,jdbcType=VARCHAR},
       </if>
       <if test="mBaseStationName != null">
         mBaseStationName = #{mBaseStationName,jdbcType=VARCHAR},
@@ -709,12 +719,15 @@
       <if test="ftpUpPass != null">
         ftpUpPass = #{ftpUpPass,jdbcType=VARCHAR},
       </if>
+      <if test="testDate != null">
+        testDate = #{testDate,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.boot.kaizen.model.lteFddModel.LteFddParameter">
     update lte_fdd_parameter
-    set mENodeBID = #{mENodeBID,jdbcType=VARCHAR},
+    set eNodeBID = #{eNodeBID,jdbcType=VARCHAR},
       mBaseStationName = #{mBaseStationName,jdbcType=VARCHAR},
       cellId = #{cellId,jdbcType=VARCHAR},
       cellName = #{cellName,jdbcType=VARCHAR},

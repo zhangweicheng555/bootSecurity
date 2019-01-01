@@ -84,6 +84,7 @@ CREATE TABLE `lte_fdd_plane` (
                 `tdLteChangeSucc` varchar(100) DEFAULT NULL,             
                 `tdLteChangeFailure` varchar(100) DEFAULT NULL,          
                 `lteFddChangeAttempt` varchar(100) DEFAULT NULL,         
+                `frequency` varchar(100) DEFAULT NULL,         
                 `lteFddChangeSucc` varchar(100) DEFAULT NULL,            
                 `lteFddChangeFailure` varchar(100) DEFAULT NULL,         
                 `systemChangeAttempt` varchar(100) DEFAULT NULL,         

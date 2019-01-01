@@ -57,6 +57,8 @@
     <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
     <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="createAt" jdbcType="INTEGER" property="createAt" />
+    <result column="frequency" jdbcType="VARCHAR" property="frequency" />
+    <result column="testTime" jdbcType="VARCHAR" property="testTime" />
   </resultMap>
   <sql id="Base_Column_List">
     id, mENodeBID, mBaseStationName, cellId, cellName, upDownRatio, specialRatio, pci, 
@@ -68,7 +70,7 @@
     lteFddCxSucc, lteFddCxFailure, tdLteChangeAttempt, tdLteChangeSucc, tdLteChangeFailure, 
     lteFddChangeAttempt, lteFddChangeSucc, lteFddChangeFailure, systemChangeAttempt, 
     systemChangeSucc, systemChangeFailure, csfbReturnAttempt, csfbReturnSucc, csfbReturnFailure, 
-    projId, createTime, updateTime, createAt
+    projId, createTime, updateTime, createAt,frequency,testTime
   </sql>
   
   
@@ -77,6 +79,15 @@
     <include refid="Base_Column_List" />
     from lte_fdd_cell 
     where 1=1
+     <if test="map.projId != null and map.projId != ''">
+           and projId = #{map.projId}
+     </if>
+     <if test="map.mENodeBID != null and map.mENodeBID != ''">
+           and mENodeBID = #{map.mENodeBID}
+     </if>
+     <if test="map.testTime != null and map.testTime != ''">
+           and testTime = #{map.testTime}
+     </if>
   </select>
   
   
@@ -313,6 +324,12 @@
       <if test="createAt != null">
         createAt,
       </if>
+      <if test="frequency != null">
+        frequency,
+      </if>
+      <if test="testTime != null">
+        testTime,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -480,6 +497,12 @@
       <if test="createAt != null">
         #{createAt,jdbcType=INTEGER},
       </if>
+      <if test="frequency != null">
+        #{frequency,jdbcType=VARCHAR},
+      </if>
+      <if test="testTime != null">
+        #{testTime,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.boot.kaizen.model.lteFddModel.LteFddCellCheck">
@@ -503,6 +526,9 @@
       <if test="specialRatio != null">
         specialRatio = #{specialRatio,jdbcType=VARCHAR},
       </if>
+      <if test="frequency != null">
+        frequency = #{frequency,jdbcType=VARCHAR},
+      </if>
       <if test="pci != null">
         pci = #{pci,jdbcType=VARCHAR},
       </if>
@@ -517,6 +543,9 @@
       </if>
       <if test="rsPower != null">
         rsPower = #{rsPower,jdbcType=VARCHAR},
+      </if>
+      <if test="testTime != null">
+        testTime = #{testTime,jdbcType=VARCHAR},
       </if>
       <if test="pa != null">
         pa = #{pa,jdbcType=VARCHAR},

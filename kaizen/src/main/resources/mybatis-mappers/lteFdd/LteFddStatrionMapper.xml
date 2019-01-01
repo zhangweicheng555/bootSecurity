@@ -3,7 +3,7 @@
 <mapper namespace="com.boot.kaizen.dao.lteFdd.LteFddStatrionMapper">
   <resultMap id="BaseResultMap" type="com.boot.kaizen.model.lteFddModel.LteFddStation">
     <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="mENodeBID" jdbcType="VARCHAR" property="mENodeBID" />
+    <result column="eNodeBID" jdbcType="VARCHAR" property="eNodeBID" />
     <result column="mBaseStationName" jdbcType="VARCHAR" property="mBaseStationName" />
     <result column="csfbFunctionTest" jdbcType="VARCHAR" property="csfbFunctionTest" />
     <result column="volteFunctionTest" jdbcType="VARCHAR" property="volteFunctionTest" />
@@ -33,20 +33,22 @@
     <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
     <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="createAt" jdbcType="INTEGER" property="createAt" />
-    <result column="ftpDownPass" jdbcType="VARCHAR" property="ftpDownPass" />
-    <result column="ftpUpPass" jdbcType="VARCHAR" property="ftpUpPass" />
+    <result column="testDate" jdbcType="VARCHAR" property="testDate" />
+    <result column="latitude" jdbcType="VARCHAR" property="latitude" />
+    <result column="longitude" jdbcType="VARCHAR" property="longitude" />
+    <result column="tac" jdbcType="VARCHAR" property="tac" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, mENodeBID, mBaseStationName, csfbFunctionTest, volteFunctionTest, fourCoverCheck, 
+    id, eNodeBID, mBaseStationName, csfbFunctionTest, volteFunctionTest, fourCoverCheck, 
     heightLocationDirectionCheck, skyBlockCheck, wireBackCheck, allViewPic, stationEntrancePic, 
     roofViewPic, cellFirstPic, cellScecondPic, cellThirdPic, stationDirection0, stationDirection45, 
     stationDirection90, stationDirection135, stationDirection180, stationDirection225, 
     stationDirection270, stationDirection315, stationRsrpPic, stationSinrPic, stationDownRatePic, 
-    stationPciPic, projId, createTime, updateTime, createAt, ftpDownPass, ftpUpPass
+    stationPciPic, projId, createTime, updateTime, createAt,testDate,latitude,longitude,tac
   </sql>
   
   
-  
+ 
    <select id="query"  resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -55,11 +57,16 @@
      <if test="map.projId != null">
            and projId = #{map.projId}
        </if>
-	 <if test="map.mENodeBID != null and map.mENodeBID != ''">
-           and mENodeBID = #{map.mENodeBID}
+	 <if test="map.eNodeBID != null and map.eNodeBID != ''">
+           and eNodeBID = #{map.eNodeBID}
+     </if>
+	 <if test="map.testDate != null and map.testDate != ''">
+           and testDate = #{map.testDate}
      </if>
 	
   </select>
+  
+  
   
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -83,7 +90,7 @@
    </delete>
   
   <insert id="insert" parameterType="com.boot.kaizen.model.lteFddModel.LteFddStation">
-    insert into lte_fdd_station (id, mENodeBID, mBaseStationName, 
+    insert into lte_fdd_station (id, eNodeBID, mBaseStationName, 
       csfbFunctionTest, volteFunctionTest, fourCoverCheck, 
       heightLocationDirectionCheck, skyBlockCheck, 
       wireBackCheck, allViewPic, stationEntrancePic, 
@@ -94,9 +101,8 @@
       stationDirection270, stationDirection315, 
       stationRsrpPic, stationSinrPic, stationDownRatePic, 
       stationPciPic, projId, createTime, 
-      updateTime, createAt, ftpDownPass, 
-      ftpUpPass)
-    values (#{id,jdbcType=VARCHAR}, #{mENodeBID,jdbcType=VARCHAR}, #{mBaseStationName,jdbcType=VARCHAR}, 
+      updateTime, createAt)
+    values (#{id,jdbcType=VARCHAR}, #{eNodeBID,jdbcType=VARCHAR}, #{mBaseStationName,jdbcType=VARCHAR}, 
       #{csfbFunctionTest,jdbcType=VARCHAR}, #{volteFunctionTest,jdbcType=VARCHAR}, #{fourCoverCheck,jdbcType=VARCHAR}, 
       #{heightLocationDirectionCheck,jdbcType=VARCHAR}, #{skyBlockCheck,jdbcType=VARCHAR}, 
       #{wireBackCheck,jdbcType=VARCHAR}, #{allViewPic,jdbcType=VARCHAR}, #{stationEntrancePic,jdbcType=VARCHAR}, 
@@ -107,8 +113,7 @@
       #{stationDirection270,jdbcType=VARCHAR}, #{stationDirection315,jdbcType=VARCHAR}, 
       #{stationRsrpPic,jdbcType=VARCHAR}, #{stationSinrPic,jdbcType=VARCHAR}, #{stationDownRatePic,jdbcType=VARCHAR}, 
       #{stationPciPic,jdbcType=VARCHAR}, #{projId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{createAt,jdbcType=INTEGER}, #{ftpDownPass,jdbcType=VARCHAR}, 
-      #{ftpUpPass,jdbcType=VARCHAR})
+      #{updateTime,jdbcType=TIMESTAMP}, #{createAt,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.boot.kaizen.model.lteFddModel.LteFddStation">
     insert into lte_fdd_station
@@ -116,8 +121,8 @@
       <if test="id != null">
         id,
       </if>
-      <if test="mENodeBID != null">
-        mENodeBID,
+      <if test="eNodeBID != null">
+        eNodeBID,
       </if>
       <if test="mBaseStationName != null">
         mBaseStationName,
@@ -206,19 +211,26 @@
       <if test="createAt != null">
         createAt,
       </if>
-      <if test="ftpDownPass != null">
-        ftpDownPass,
+     
+      <if test="testDate != null">
+        testDate,
       </if>
-      <if test="ftpUpPass != null">
-        ftpUpPass,
+      <if test="latitude != null">
+        latitude,
+      </if>
+      <if test="longitude != null">
+        longitude,
+      </if>
+      <if test="tac != null">
+        tac,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=VARCHAR},
       </if>
-      <if test="mENodeBID != null">
-        #{mENodeBID,jdbcType=VARCHAR},
+      <if test="eNodeBID != null">
+        #{eNodeBID,jdbcType=VARCHAR},
       </if>
       <if test="mBaseStationName != null">
         #{mBaseStationName,jdbcType=VARCHAR},
@@ -307,19 +319,27 @@
       <if test="createAt != null">
         #{createAt,jdbcType=INTEGER},
       </if>
-      <if test="ftpDownPass != null">
-        #{ftpDownPass,jdbcType=VARCHAR},
+     
+      <if test="testDate != null">
+        #{testDate,jdbcType=VARCHAR},
       </if>
-      <if test="ftpUpPass != null">
-        #{ftpUpPass,jdbcType=VARCHAR},
+      <if test="latitude != null">
+        #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null">
+        #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="tac != null">
+        #{tac,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
+  
   <update id="updateByPrimaryKeySelective" parameterType="com.boot.kaizen.model.lteFddModel.LteFddStation">
     update lte_fdd_station
     <set>
-      <if test="mENodeBID != null">
-        mENodeBID = #{mENodeBID,jdbcType=VARCHAR},
+      <if test="eNodeBID != null">
+        eNodeBID = #{eNodeBID,jdbcType=VARCHAR},
       </if>
       <if test="mBaseStationName != null">
         mBaseStationName = #{mBaseStationName,jdbcType=VARCHAR},
@@ -408,18 +428,26 @@
       <if test="createAt != null">
         createAt = #{createAt,jdbcType=INTEGER},
       </if>
-      <if test="ftpDownPass != null">
-        ftpDownPass = #{ftpDownPass,jdbcType=VARCHAR},
+     
+      <if test="testDate != null">
+        testDate = #{testDate,jdbcType=VARCHAR},
       </if>
-      <if test="ftpUpPass != null">
-        ftpUpPass = #{ftpUpPass,jdbcType=VARCHAR},
+      <if test="latitude != null">
+        latitude = #{latitude,jdbcType=VARCHAR},
       </if>
+      <if test="longitude != null">
+        longitude = #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="tac != null">
+        tac = #{tac,jdbcType=VARCHAR},
+      </if>
+      
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.boot.kaizen.model.lteFddModel.LteFddStation">
     update lte_fdd_station
-    set mENodeBID = #{mENodeBID,jdbcType=VARCHAR},
+    set eNodeBID = #{eNodeBID,jdbcType=VARCHAR},
       mBaseStationName = #{mBaseStationName,jdbcType=VARCHAR},
       csfbFunctionTest = #{csfbFunctionTest,jdbcType=VARCHAR},
       volteFunctionTest = #{volteFunctionTest,jdbcType=VARCHAR},
@@ -448,9 +476,7 @@
       projId = #{projId,jdbcType=INTEGER},
       createTime = #{createTime,jdbcType=TIMESTAMP},
       updateTime = #{updateTime,jdbcType=TIMESTAMP},
-      createAt = #{createAt,jdbcType=INTEGER},
-      ftpDownPass = #{ftpDownPass,jdbcType=VARCHAR},
-      ftpUpPass = #{ftpUpPass,jdbcType=VARCHAR}
+      createAt = #{createAt,jdbcType=INTEGER}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

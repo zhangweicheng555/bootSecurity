@@ -16,12 +16,13 @@ public class LteFddParameter implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String id;
-	private String mENodeBID;// 基站号
+	private String eNodeBID;// 基站号
 	private String mBaseStationName;// 基站名
 
 	/** 小区工程参数 **/
 	private String cellId;// 小区号
 	private String cellName;// 小区名称
+	private String testDate;// 测试时间
 
 	private String eci;
 	private String earfcn;
@@ -87,6 +88,9 @@ public class LteFddParameter implements Serializable {
 	private String ftpUpThroughputBad;// 下行吞吐率 差点
 	private String ftpUpThroughputRandom;// 下行吞吐率 任意点
 
+	private String ftpDownPass;// FTP下载是否通过
+	private String ftpUpPass;// FTP上传是否通过
+
 	/**
 	 * 图片
 	 */
@@ -96,19 +100,20 @@ public class LteFddParameter implements Serializable {
 	private String upRatePic;// 上传速率
 	private String rsrpWirePic;// RSRP拉线图
 
-	
-	private String ftpDownPass;//FTP下载是否通过
-	private String ftpUpPass;//FTP上传是否通过
-	
-	
 	// common
 	private Integer projId;
 	private Date createTime;
 	private Date updateTime;
 	private Integer createAt;
 
-	
-	
+	public String getTestDate() {
+		return testDate;
+	}
+
+	public void setTestDate(String testDate) {
+		this.testDate = testDate;
+	}
+
 	public String getFtpDownPass() {
 		return ftpDownPass;
 	}
@@ -166,12 +171,12 @@ public class LteFddParameter implements Serializable {
 		this.createAt = createAt;
 	}
 
-	public String getmENodeBID() {
-		return mENodeBID;
+	public String geteNodeBID() {
+		return eNodeBID;
 	}
 
-	public void setmENodeBID(String mENodeBID) {
-		this.mENodeBID = mENodeBID;
+	public void seteNodeBID(String eNodeBID) {
+		this.eNodeBID = eNodeBID;
 	}
 
 	public String getmBaseStationName() {
@@ -590,25 +595,29 @@ public class LteFddParameter implements Serializable {
 		this.rsrpWirePic = rsrpWirePic;
 	}
 
-	public LteFddParameter(String mENodeBID, String mBaseStationName, String cellId, String cellName, String eci,
-			String earfcn, String pci, String tac, String csfbCallSuccAttempt, String csfbCallSuccSucc,
-			String csfbCallSuccfailure, String csfbPassiveCallSuccAttempt, String csfbPassiveCallSuccSucc,
-			String csfbPassiveCallSuccfailure, String volteWirelessConnFirst, String volteWirelessConnSecond,
-			String volteWirelessConnBad, String volteWirelessConnRandom, String csfbVoiceSuccAttempt,
-			String csfbVoiceSuccSucc, String csfbVoiceSuccfailure, String csfbCallDelay, String csfbPassiveCallDelay,
-			String csfbVoiceDelay, String ftpDownRsrpFirst, String ftpDownRsrpSecond, String ftpDownRsrpBad,
-			String ftpDownRsrpRandom, String ftpDownSinrFirst, String ftpDownSinrSecond, String ftpDownSinrBad,
-			String ftpDownSinrRandom, String ftpDownThroughputFirst, String ftpDownThroughputSecond,
-			String ftpDownThroughputBad, String ftpDownThroughputRandom, String ftpUpRsrpFirst, String ftpUpRsrpSecond,
-			String ftpUpRsrpBad, String ftpUpRsrpRandom, String ftpUpSinrFirst, String ftpUpSinrSecond,
-			String ftpUpSinrBad, String ftpUpSinrRandom, String ftpUpThroughputFirst, String ftpUpThroughputSecond,
-			String ftpUpThroughputBad, String ftpUpThroughputRandom, String rsrpPic, String sinrPic, String downRatePic,
-			String upRatePic, String rsrpWirePic) {
+	public LteFddParameter(String id, String eNodeBID, String mBaseStationName, String cellId, String cellName,
+			String testDate, String eci, String earfcn, String pci, String tac, String csfbCallSuccAttempt,
+			String csfbCallSuccSucc, String csfbCallSuccfailure, String csfbPassiveCallSuccAttempt,
+			String csfbPassiveCallSuccSucc, String csfbPassiveCallSuccfailure, String volteWirelessConnFirst,
+			String volteWirelessConnSecond, String volteWirelessConnBad, String volteWirelessConnRandom,
+			String csfbVoiceSuccAttempt, String csfbVoiceSuccSucc, String csfbVoiceSuccfailure, String csfbCallDelay,
+			String csfbPassiveCallDelay, String csfbVoiceDelay, String ftpDownRsrpFirst, String ftpDownRsrpSecond,
+			String ftpDownRsrpBad, String ftpDownRsrpRandom, String ftpDownSinrFirst, String ftpDownSinrSecond,
+			String ftpDownSinrBad, String ftpDownSinrRandom, String ftpDownThroughputFirst,
+			String ftpDownThroughputSecond, String ftpDownThroughputBad, String ftpDownThroughputRandom,
+			String ftpUpRsrpFirst, String ftpUpRsrpSecond, String ftpUpRsrpBad, String ftpUpRsrpRandom,
+			String ftpUpSinrFirst, String ftpUpSinrSecond, String ftpUpSinrBad, String ftpUpSinrRandom,
+			String ftpUpThroughputFirst, String ftpUpThroughputSecond, String ftpUpThroughputBad,
+			String ftpUpThroughputRandom, String ftpDownPass, String ftpUpPass, String rsrpPic, String sinrPic,
+			String downRatePic, String upRatePic, String rsrpWirePic, Integer projId, Date createTime, Date updateTime,
+			Integer createAt) {
 		super();
-		this.mENodeBID = mENodeBID;
+		this.id = id;
+		this.eNodeBID = eNodeBID;
 		this.mBaseStationName = mBaseStationName;
 		this.cellId = cellId;
 		this.cellName = cellName;
+		this.testDate = testDate;
 		this.eci = eci;
 		this.earfcn = earfcn;
 		this.pci = pci;
@@ -653,11 +662,17 @@ public class LteFddParameter implements Serializable {
 		this.ftpUpThroughputSecond = ftpUpThroughputSecond;
 		this.ftpUpThroughputBad = ftpUpThroughputBad;
 		this.ftpUpThroughputRandom = ftpUpThroughputRandom;
+		this.ftpDownPass = ftpDownPass;
+		this.ftpUpPass = ftpUpPass;
 		this.rsrpPic = rsrpPic;
 		this.sinrPic = sinrPic;
 		this.downRatePic = downRatePic;
 		this.upRatePic = upRatePic;
 		this.rsrpWirePic = rsrpWirePic;
+		this.projId = projId;
+		this.createTime = createTime;
+		this.updateTime = updateTime;
+		this.createAt = createAt;
 	}
 
 	public LteFddParameter() {

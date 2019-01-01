@@ -6,7 +6,9 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.boot.kaizen.controller.lte.model.BaseStationBean;
 import com.boot.kaizen.model.lteFddModel.LteFddPlan;
+import com.boot.kaizen.model.lteFddModel.LteFddPlanInfo;
 
 @Mapper
 public interface LteFddPlanMapper {
@@ -25,4 +27,7 @@ public interface LteFddPlanMapper {
 	int updateByPrimaryKey(LteFddPlan record);
 
 	Integer delete(@Param("idsArray") String[] idsArray);
+	
+	List<BaseStationBean> queryStationList(@Param("userId") Long userId, @Param("projId") Long projId,
+			@Param("testDate") String testDate);
 }

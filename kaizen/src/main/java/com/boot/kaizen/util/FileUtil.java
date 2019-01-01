@@ -45,7 +45,7 @@ public class FileUtil {
 				return saveFile(file, filesPath + pathname, pathname);
 			}
 		}
-		return "";
+		return null;
 	}
 
 	public static String saveFile(MultipartFile file, String fullname, String pathname) {

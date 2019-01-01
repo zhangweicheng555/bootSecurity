@@ -22,6 +22,8 @@ public class LteFddCellCheck implements Serializable {
 	private String upDownRatio;// 上下行子帧配比
 	private String specialRatio;// 特殊子帧配比
 
+	private String frequency;// 频点
+
 	private String pci;// PCI
 	private String eci;// eci
 	private String tac;// TAC
@@ -88,6 +90,8 @@ public class LteFddCellCheck implements Serializable {
 	private String csfbReturnSucc;
 	private String csfbReturnFailure;
 
+	private String testTime;
+
 	// common
 	private Integer projId;
 	private Date createTime;
@@ -96,6 +100,22 @@ public class LteFddCellCheck implements Serializable {
 
 	public String getId() {
 		return id;
+	}
+
+	public String getTestTime() {
+		return testTime;
+	}
+
+	public void setTestTime(String testTime) {
+		this.testTime = testTime;
+	}
+
+	public String getFrequency() {
+		return frequency;
+	}
+
+	public void setFrequency(String frequency) {
+		this.frequency = frequency;
 	}
 
 	public void setId(String id) {

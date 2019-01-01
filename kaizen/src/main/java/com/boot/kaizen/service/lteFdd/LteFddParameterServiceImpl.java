@@ -89,7 +89,7 @@ public class LteFddParameterServiceImpl implements ILteFddParameterService {
 	@Override
 	public void upSert(LteFddParameter lteFddParameter) {
 		Integer projId=lteFddParameter.getProjId();
-		String eNodeBID=lteFddParameter.getmENodeBID();
+		String eNodeBID=lteFddParameter.geteNodeBID();
 		String cellId=lteFddParameter.getCellId();
 		Integer createAt=lteFddParameter.getCreateAt();
 		if (projId == null || createAt==null || StringUtils.isBlank(eNodeBID) || StringUtils.isBlank(cellId)) {
@@ -98,8 +98,9 @@ public class LteFddParameterServiceImpl implements ILteFddParameterService {
 		
 		Map<String, Object> map=new HashMap<>();
 		map.put("projId", projId);
-		map.put("mENodeBID", eNodeBID);
+		map.put("eNodeBID", eNodeBID);
 		map.put("cellId", cellId);
+		map.put("testDate", lteFddParameter.getTestDate());
 		
 		List<LteFddParameter> lteFddParameters = lteFddParameterMapper.query(map);
 		if (lteFddParameters != null  && lteFddParameters.size()>0) {//更新

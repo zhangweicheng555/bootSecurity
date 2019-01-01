@@ -18,7 +18,7 @@
 							<form class="form-inline" onsubmit="return false">
 								<div class="form-group">
 									基站号：
-									<input id="mENodeBID" name="mENodeBID" type="text" class="form-control" placeholder="精确查询"> 
+									<input id="eNodeBID" name="eNodeBID" type="text" class="form-control" placeholder="精确查询"> 
 									
 									<button id="searchBt" class="layui-btn layui-btn-sm">
 										<i class="layui-icon">&#xe615;</i>搜索
@@ -70,18 +70,18 @@
 	    ,url:'/fdd/station/query'  
 	    ,method:'post' 
 	    ,where:{
-			   "map[mENodeBID]":$("#mENodeBID").val()
+			   "map[eNodeBID]":$("#eNodeBID").val()
 			   }
 	    ,cols: [[        
 	      {field:'id', width:'4%', title: 'ID', sort: true,type:'checkbox'}
 	      ,{title: '序号',width:'5%',templet: '#indexTpl',align:'center'}
-	      ,{field:'mENodeBID', width:'13%', title: '站号',align:'center'}
+	      ,{field:'eNodeBID', width:'13%', title: '站号',align:'center'}
 	      ,{field:'mBaseStationName', width:'13%', title: '站名',align:'center'}
 	      ,{field:'csfbFunctionTest',   width:'13%', title: 'CSFB功能测试',align:'center'}
 	      ,{field:'volteFunctionTest',   width:'13%', title: 'VoLTE功能测试',align:'center'}
 	      ,{field:'fourCoverCheck',   width:'16%', title: '四超(超近、超远、超高、超重叠覆盖)检查',align:'center'}
-	      ,{field:'heightLocationDirectionCheck',width:'16%', title: '天线挂高、位置、方向检查',align:'center'}
-	      ,{title:'操作', toolbar: '#editBtnBar', width:'7%',align:'center', fixed: 'right'}
+	      ,{field:'heightLocationDirectionCheck',width:'13%', title: '天线挂高、位置、方向检查',align:'center'}
+	      ,{title:'操作', toolbar: '#editBtnBar', width:'10%',align:'center', fixed: 'right'}
 	    ]]
 	    ,page: true
 	    ,limit:10
@@ -122,7 +122,7 @@
 	  table.on('tool(infolist)', function(obj){
 	    var row = obj.data;
 	    if(obj.event === 'del'){//单行删除
-	    	common.getConfirmDelDialog("确定要删除吗？","删除【"+row.mENodeBID+"】记录",2,"/fdd/station/delete",{"ids":row.id},function(){deleteRow(obj);});
+	    	common.getConfirmDelDialog("确定要删除吗？","删除【"+row.eNodeBID+"】记录",2,"/fdd/station/delete",{"ids":row.id},function(){deleteRow(obj);});
 	    }
 	    else if(obj.event === 'view'){//预览
 		    common.openEditDialogView("预览","pages/lteFdd/station/view.html?id="+row.id,"1200px","620px",false);
@@ -198,7 +198,7 @@
 	  
 	  /**清空*/
 	  $("#clearBt").click(function(){
-		  $("#mENodeBID").val("");
+		  $("#eNodeBID").val("");
 		  $("#cellId").val("");
 		  fresh();
 	  });
@@ -207,7 +207,7 @@
 	  function fresh(){
 		  table.reload('infolist'
 				   ,{where:{
-					   "map[mENodeBID]":$("#mENodeBID").val()
+					   "map[eNodeBID]":$("#eNodeBID").val()
 					   }
 				   ,page: {curr: 1}
 		  		   }

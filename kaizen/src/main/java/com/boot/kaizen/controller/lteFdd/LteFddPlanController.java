@@ -103,4 +103,16 @@ public class LteFddPlanController {
 		return lteFddPlanService.delete(ids);
 	}
 	
+	
+	/**
+	 * 通过规划表的id查询所有的相关的审核信息
+	* @Description: TODO
+	* @author weichengz
+	* @date 2019年1月1日 下午6:33:10
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/queryCheckInfoById", method = RequestMethod.POST)
+	public JsonMsgUtil queryCheckInfoById(@RequestParam("id") String id) {
+		return lteFddPlanService.queryCheckInfoById(id);
+	}
 }

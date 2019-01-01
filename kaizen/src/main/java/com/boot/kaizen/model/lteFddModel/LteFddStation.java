@@ -14,7 +14,7 @@ public class LteFddStation implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String id;
-	private String mENodeBID;// 基站号
+	private String eNodeBID;// 基站号
 	private String mBaseStationName;// 基站名
 
 	private String csfbFunctionTest;// CSFB功能测试 是否通过
@@ -25,8 +25,19 @@ public class LteFddStation implements Serializable {
 	private String skyBlockCheck;// 天面阻挡情况检查 是否通过
 	private String wireBackCheck;// 天线后期可调整情况检查 是否通过
 
+	// common
+	private Integer projId;
+	private Date createTime;
+	private Date updateTime;
+	private Integer createAt;// 登陆人的id  
+
+	private String testDate;// 测试时间
+	private String latitude;// 经度
+	private String longitude;// 纬度
+	private String tac;// TAC
+
 	/**
-	 * 图片
+	 * 以下为上传图片的名字
 	 */
 	private String allViewPic;// 建筑物全景照（从地面仰视）
 	private String stationEntrancePic;// 站点入口图
@@ -53,12 +64,7 @@ public class LteFddStation implements Serializable {
 	private String stationDownRatePic;// 下载速率
 	private String stationPciPic;// PCI
 
-	// common
-	private Integer projId;
-	private Date createTime;
-	private Date updateTime;
-	private Integer createAt;// 登陆人
-
+	
 	public String getId() {
 		return id;
 	}
@@ -67,12 +73,44 @@ public class LteFddStation implements Serializable {
 		this.id = id;
 	}
 
-	public String getmENodeBID() {
-		return mENodeBID;
+	public String geteNodeBID() {
+		return eNodeBID;
 	}
 
-	public void setmENodeBID(String mENodeBID) {
-		this.mENodeBID = mENodeBID;
+	public void seteNodeBID(String eNodeBID) {
+		this.eNodeBID = eNodeBID;
+	}
+
+	public String getTestDate() {
+		return testDate;
+	}
+
+	public void setTestDate(String testDate) {
+		this.testDate = testDate;
+	}
+
+	public String getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+
+	public String getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
+	}
+
+	public String getTac() {
+		return tac;
+	}
+
+	public void setTac(String tac) {
+		this.tac = tac;
 	}
 
 	public String getmBaseStationName() {
@@ -307,17 +345,17 @@ public class LteFddStation implements Serializable {
 		this.createAt = createAt;
 	}
 
-	public LteFddStation(String id, String mENodeBID, String mBaseStationName, String csfbFunctionTest,
+	public LteFddStation(String id, String eNodeBID, String mBaseStationName, String csfbFunctionTest,
 			String volteFunctionTest, String fourCoverCheck, String heightLocationDirectionCheck, String skyBlockCheck,
 			String wireBackCheck, String allViewPic, String stationEntrancePic, String roofViewPic, String cellFirstPic,
 			String cellScecondPic, String cellThirdPic, String stationDirection0, String stationDirection45,
 			String stationDirection90, String stationDirection135, String stationDirection180,
 			String stationDirection225, String stationDirection270, String stationDirection315, String stationRsrpPic,
 			String stationSinrPic, String stationDownRatePic, String stationPciPic, Integer projId, Date createTime,
-			Date updateTime, Integer createAt) {
+			Date updateTime, Integer createAt, String testDate, String latitude, String longitude, String tac) {
 		super();
 		this.id = id;
-		this.mENodeBID = mENodeBID;
+		this.eNodeBID = eNodeBID;
 		this.mBaseStationName = mBaseStationName;
 		this.csfbFunctionTest = csfbFunctionTest;
 		this.volteFunctionTest = volteFunctionTest;
@@ -347,6 +385,10 @@ public class LteFddStation implements Serializable {
 		this.createTime = createTime;
 		this.updateTime = updateTime;
 		this.createAt = createAt;
+		this.testDate = testDate;
+		this.latitude = latitude;
+		this.longitude = longitude;
+		this.tac = tac;
 	}
 
 	public LteFddStation() {
