@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.boot.kaizen.dao.lte.LteGcParameterDao;
 import com.boot.kaizen.entity.LoginUser;
-import com.boot.kaizen.model.LteGcParameter;
+import com.boot.kaizen.model.lte.LteGcParameter;
 import com.boot.kaizen.service.act.IActBusinessService;
 import com.boot.kaizen.util.JsonMsgUtil;
 

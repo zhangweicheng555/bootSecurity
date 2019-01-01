@@ -5,8 +5,8 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.boot.kaizen.model.LteGcParameter;
-import com.boot.kaizen.model.LteStationCheck;
+import com.boot.kaizen.model.lte.LteGcParameter;
+import com.boot.kaizen.model.lte.LteStationCheck;
 
 @Mapper
 public interface LteStationCheckDao {

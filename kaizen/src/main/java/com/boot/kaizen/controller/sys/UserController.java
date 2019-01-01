@@ -62,7 +62,6 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping(value = "/find", method = RequestMethod.POST)
 	public TableResultUtil find(RequestParamEntity param) throws InterruptedException, ExecutionException {
-		System.out.println("-----------sasa------");
 		LoginUser user = UserUtil.getLoginUser();
 		param.getMap().put("projId", "");
 		if (Constant.SYSTEM_ID_PROJECT != user.getProjId()) {

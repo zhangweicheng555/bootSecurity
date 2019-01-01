@@ -1,4 +1,8 @@
-package com.boot.kaizen.model;
+package com.boot.kaizen.model.lte;
+
+import java.util.Date;
+
+import com.boot.kaizen.model.BaseEntity;
 
 /**
  * lte规划表设计 lte_plane
@@ -29,6 +33,7 @@ public class LtePlan extends BaseEntity<Long> {
 
 	private String dealPersonId;// 接收改计划任务的人的id
 	private Long status = 0l;// 最终是不是报告可以审核 之后最后一步的时候 才设置为1 0 未审核 1审核通过 2审核不通过
+
 
 	public Long getStatus() {
 		return status;

@@ -7,8 +7,8 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import com.boot.kaizen.controller.lte.model.BaseStationBean;
-import com.boot.kaizen.model.LtePlan;
-import com.boot.kaizen.model.LtePlanInfo;
+import com.boot.kaizen.model.lte.LtePlan;
+import com.boot.kaizen.model.lte.LtePlanInfo;
 import com.boot.kaizen.util.JsonMsgUtil;
 
 @Mapper

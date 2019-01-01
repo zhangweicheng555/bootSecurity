@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.boot.kaizen.entity.LoginUser;
 import com.boot.kaizen.entity.RequestParamEntity;
-import com.boot.kaizen.model.LteConfig;
+import com.boot.kaizen.model.lte.LteConfig;
 import com.boot.kaizen.service.lte.ILteConfigService;
 import com.boot.kaizen.util.JsonMsgUtil;
 import com.boot.kaizen.util.TableResultUtil;

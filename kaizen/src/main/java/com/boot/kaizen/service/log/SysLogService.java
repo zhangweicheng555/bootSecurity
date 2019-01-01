@@ -3,7 +3,7 @@ package com.boot.kaizen.service.log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.boot.kaizen.dao.log.SysLoginLogDao;
-import com.boot.kaizen.model.LoginLog;
+import com.boot.kaizen.model.log.LoginLog;
 
 @Service
 class SysLogService implements ISysLogService {

@@ -15,8 +15,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.boot.kaizen.dao.lte.LteStationCheckDao;
-import com.boot.kaizen.model.LteCellCheck;
-import com.boot.kaizen.model.LteStationCheck;
+import com.boot.kaizen.model.lte.LteCellCheck;
+import com.boot.kaizen.model.lte.LteStationCheck;
 import com.boot.kaizen.service.act.IActBusinessService;
 import com.boot.kaizen.util.JsonMsgUtil;
 

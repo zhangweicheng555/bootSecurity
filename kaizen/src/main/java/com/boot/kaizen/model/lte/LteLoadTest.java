@@ -1,6 +1,8 @@
-package com.boot.kaizen.model;
+package com.boot.kaizen.model.lte;
 
 import org.springframework.web.multipart.MultipartFile;
+
+import com.boot.kaizen.model.BaseEntity;
 
 /**
  * lte路测信息 lte_load_test

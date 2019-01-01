@@ -1,6 +1,8 @@
-package com.boot.kaizen.model;
+package com.boot.kaizen.model.lte;
 
 import java.util.List;
+
+import com.boot.kaizen.model.BaseEntity;
 
 /**
  * lte规划表设计 lte_plane

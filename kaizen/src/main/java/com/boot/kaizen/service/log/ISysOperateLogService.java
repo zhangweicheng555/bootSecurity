@@ -1,6 +1,6 @@
 package com.boot.kaizen.service.log;
 
-import com.boot.kaizen.model.OperateLog;
+import com.boot.kaizen.model.log.OperateLog;
 
 public interface ISysOperateLogService {
 

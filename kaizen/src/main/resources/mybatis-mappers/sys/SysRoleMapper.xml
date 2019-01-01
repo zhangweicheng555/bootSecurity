@@ -28,7 +28,7 @@
 
 	
 	<select id="queryByProId" resultMap="SysRoleMap">
-		 select sr.* from 
+		 select distinct sr.* from 
 		 sys_role sr
 		 ,proj_role_relation prr  
 		 where 1=1
@@ -69,7 +69,7 @@
 	</delete>
 	
 	<select id="findById" resultMap="roleMap">
-		 select 
+		 select distinct 
 		    sr.id,sr.name,sr.description
 		    ,sr.createTime,sr.updateTime
 		    ,sr.sort

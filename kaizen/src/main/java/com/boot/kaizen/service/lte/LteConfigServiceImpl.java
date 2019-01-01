@@ -17,7 +17,7 @@ import com.boot.kaizen._interface.LteConfigActBusiness;
 import com.boot.kaizen.activiti.service.Activitiservice;
 import com.boot.kaizen.dao.lte.LteConfigDao;
 import com.boot.kaizen.entity.LoginUser;
-import com.boot.kaizen.model.LteConfig;
+import com.boot.kaizen.model.lte.LteConfig;
 import com.boot.kaizen.util.JsonMsgUtil;
 
 @Service

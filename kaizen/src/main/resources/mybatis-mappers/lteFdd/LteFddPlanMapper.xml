@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boot.kaizen.dao.lteFdd.LteFddPlanMapper">
+  
+  <resultMap id="BaseResultMap" type="com.boot.kaizen.model.lteFddModel.LteFddPlan">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="mENodeBID" jdbcType="VARCHAR" property="mENodeBID" />
+    <result column="mBaseStationName" jdbcType="VARCHAR" property="mBaseStationName" />
+    <result column="mBaseStationType" jdbcType="VARCHAR" property="mBaseStationType" />
+    <result column="mAltitude" jdbcType="VARCHAR" property="mAltitude" />
+    <result column="mLongitude" jdbcType="VARCHAR" property="mLongitude" />
+    <result column="mLatitude" jdbcType="VARCHAR" property="mLatitude" />
+    <result column="mTac" jdbcType="VARCHAR" property="mTac" />
+    <result column="testPerson" jdbcType="VARCHAR" property="testPerson" />
+    <result column="testPersonPhone" jdbcType="VARCHAR" property="testPersonPhone" />
+    <result column="backPerson" jdbcType="VARCHAR" property="backPerson" />
+    <result column="backPersonPhone" jdbcType="VARCHAR" property="backPersonPhone" />
+    <result column="testTime" jdbcType="VARCHAR" property="testTime" />
+    <result column="dealPersonId" jdbcType="VARCHAR" property="dealPersonId" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="projId" jdbcType="INTEGER" property="projId" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="createAt" jdbcType="INTEGER" property="createAt" />
+    <result column="districtCountry" jdbcType="VARCHAR" property="districtCountry" />
+    <result column="deviceType" jdbcType="VARCHAR" property="deviceType" />
+    <result column="videoFrequency" jdbcType="VARCHAR" property="videoFrequency" />
+    <result column="broadBand" jdbcType="VARCHAR" property="broadBand" />
+    <result column="ipConfig" jdbcType="VARCHAR" property="ipConfig" />
+    
+    <result column="region" jdbcType="VARCHAR" property="region" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="commonStationName" jdbcType="VARCHAR" property="commonStationName" />
+  </resultMap>
+  
+  
+  
+  <sql id="Base_Column_List">
+    id, mENodeBID, mBaseStationName, mBaseStationType, mAltitude, mLongitude, mLatitude, 
+    mTac, testPerson, testPersonPhone, backPerson, backPersonPhone, testTime, dealPersonId, 
+    status, projId, createTime, updateTime, createAt, districtCountry, deviceType, videoFrequency, 
+    broadBand, ipConfig,region,address,commonStationName
+  </sql>
+  
+  <select id="query"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from lte_fdd_plane 
+    where 1=1
+     <if test="map.projId != null">
+           and projId = #{map.projId}
+       </if>
+	 <if test="map.mENodeBID != null and map.mENodeBID != ''">
+           and mENodeBID like '%${map.mENodeBID}%'
+     </if>
+	<if test="map.beginTime != null and map.beginTime != '' and (map.endTime == null or map.endTime == '')">
+           and testTime &gt;=  #{map.beginTime}
+       </if>
+	<if test="map.endTime != null and map.endTime != '' and (map.beginTime == null or map.beginTime == '')">
+           and testTime &lt;=  #{map.endTime}
+       </if>
+	<if test="map.endTime != null and map.endTime != '' and map.beginTime != null and map.beginTime != ''">
+           and testTime between #{map.beginTime} and #{map.endTime}
+       </if>
+  </select>
+  
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from lte_fdd_plane
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from lte_fdd_plane
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  
+  <delete id="delete">
+		 delete from lte_fdd_plane
+		 where id in
+		 <foreach collection="idsArray" index="index" item="item"
+            open="(" separator="," close=")">
+            '${item}'
+        </foreach>
+	</delete>
+  
+  <insert id="insert" parameterType="com.boot.kaizen.model.lteFddModel.LteFddPlan">
+    insert into lte_fdd_plane (id, mENodeBID, mBaseStationName, 
+      mBaseStationType, mAltitude, mLongitude, 
+      mLatitude, mTac, testPerson, 
+      testPersonPhone, backPerson, backPersonPhone, 
+      testTime, dealPersonId, status, 
+      projId, createTime, updateTime, 
+      createAt, districtCountry, deviceType, 
+      videoFrequency, broadBand, ipConfig
+      )
+    values (#{id,jdbcType=VARCHAR}, #{mENodeBID,jdbcType=VARCHAR}, #{mBaseStationName,jdbcType=VARCHAR}, 
+      #{mBaseStationType,jdbcType=VARCHAR}, #{mAltitude,jdbcType=VARCHAR}, #{mLongitude,jdbcType=VARCHAR}, 
+      #{mLatitude,jdbcType=VARCHAR}, #{mTac,jdbcType=VARCHAR}, #{testPerson,jdbcType=VARCHAR}, 
+      #{testPersonPhone,jdbcType=VARCHAR}, #{backPerson,jdbcType=VARCHAR}, #{backPersonPhone,jdbcType=VARCHAR}, 
+      #{testTime,jdbcType=VARCHAR}, #{dealPersonId,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{projId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{createAt,jdbcType=INTEGER}, #{districtCountry,jdbcType=VARCHAR}, #{deviceType,jdbcType=VARCHAR}, 
+      #{videoFrequency,jdbcType=VARCHAR}, #{broadBand,jdbcType=VARCHAR}, #{ipConfig,jdbcType=VARCHAR}
+      )
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.boot.kaizen.model.lteFddModel.LteFddPlan" >
+    insert into lte_fdd_plane
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="mENodeBID != null">
+        mENodeBID,
+      </if>
+      <if test="mBaseStationName != null">
+        mBaseStationName,
+      </if>
+      <if test="mBaseStationType != null">
+        mBaseStationType,
+      </if>
+      <if test="mAltitude != null">
+        mAltitude,
+      </if>
+      <if test="mLongitude != null">
+        mLongitude,
+      </if>
+      <if test="mLatitude != null">
+        mLatitude,
+      </if>
+      <if test="mTac != null">
+        mTac,
+      </if>
+      <if test="testPerson != null">
+        testPerson,
+      </if>
+      <if test="testPersonPhone != null">
+        testPersonPhone,
+      </if>
+      <if test="backPerson != null">
+        backPerson,
+      </if>
+      <if test="backPersonPhone != null">
+        backPersonPhone,
+      </if>
+      <if test="testTime != null">
+        testTime,
+      </if>
+      <if test="dealPersonId != null">
+        dealPersonId,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="projId != null">
+        projId,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="updateTime != null">
+        updateTime,
+      </if>
+      <if test="createAt != null">
+        createAt,
+      </if>
+      <if test="districtCountry != null">
+        districtCountry,
+      </if>
+      <if test="deviceType != null">
+        deviceType,
+      </if>
+      <if test="videoFrequency != null">
+        videoFrequency,
+      </if>
+      <if test="broadBand != null">
+        broadBand,
+      </if>
+      <if test="ipConfig != null">
+        ipConfig,
+      </if>
+      <if test="region != null">
+        region,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="commonStationName != null">
+        commonStationName,
+      </if>
+    </trim>
+    
+    
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="mENodeBID != null">
+        #{mENodeBID,jdbcType=VARCHAR},
+      </if>
+      <if test="mBaseStationName != null">
+        #{mBaseStationName,jdbcType=VARCHAR},
+      </if>
+      <if test="mBaseStationType != null">
+        #{mBaseStationType,jdbcType=VARCHAR},
+      </if>
+      <if test="mAltitude != null">
+        #{mAltitude,jdbcType=VARCHAR},
+      </if>
+      <if test="mLongitude != null">
+        #{mLongitude,jdbcType=VARCHAR},
+      </if>
+      <if test="mLatitude != null">
+        #{mLatitude,jdbcType=VARCHAR},
+      </if>
+      <if test="mTac != null">
+        #{mTac,jdbcType=VARCHAR},
+      </if>
+      <if test="testPerson != null">
+        #{testPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="testPersonPhone != null">
+        #{testPersonPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="backPerson != null">
+        #{backPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="backPersonPhone != null">
+        #{backPersonPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="testTime != null">
+        #{testTime,jdbcType=VARCHAR},
+      </if>
+      <if test="dealPersonId != null">
+        #{dealPersonId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="projId != null">
+        #{projId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createAt != null">
+        #{createAt,jdbcType=INTEGER},
+      </if>
+      <if test="districtCountry != null">
+        #{districtCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceType != null">
+        #{deviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="videoFrequency != null">
+        #{videoFrequency,jdbcType=VARCHAR},
+      </if>
+      <if test="broadBand != null">
+        #{broadBand,jdbcType=VARCHAR},
+      </if>
+      <if test="ipConfig != null">
+        #{ipConfig,jdbcType=VARCHAR},
+      </if>
+      <if test="region != null">
+        #{region,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="commonStationName != null">
+        #{commonStationName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+    
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.boot.kaizen.model.lteFddModel.LteFddPlan">
+    update lte_fdd_plane
+    <set>
+      <if test="mENodeBID != null">
+        mENodeBID = #{mENodeBID,jdbcType=VARCHAR},
+      </if>
+      <if test="mBaseStationName != null">
+        mBaseStationName = #{mBaseStationName,jdbcType=VARCHAR},
+      </if>
+      <if test="mBaseStationType != null">
+        mBaseStationType = #{mBaseStationType,jdbcType=VARCHAR},
+      </if>
+      <if test="mAltitude != null">
+        mAltitude = #{mAltitude,jdbcType=VARCHAR},
+      </if>
+      <if test="mLongitude != null">
+        mLongitude = #{mLongitude,jdbcType=VARCHAR},
+      </if>
+      <if test="mLatitude != null">
+        mLatitude = #{mLatitude,jdbcType=VARCHAR},
+      </if>
+      <if test="mTac != null">
+        mTac = #{mTac,jdbcType=VARCHAR},
+      </if>
+      <if test="testPerson != null">
+        testPerson = #{testPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="testPersonPhone != null">
+        testPersonPhone = #{testPersonPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="backPerson != null">
+        backPerson = #{backPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="backPersonPhone != null">
+        backPersonPhone = #{backPersonPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="testTime != null">
+        testTime = #{testTime,jdbcType=VARCHAR},
+      </if>
+      <if test="dealPersonId != null">
+        dealPersonId = #{dealPersonId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="projId != null">
+        projId = #{projId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        updateTime = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createAt != null">
+        createAt = #{createAt,jdbcType=INTEGER},
+      </if>
+      <if test="districtCountry != null">
+        districtCountry = #{districtCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceType != null">
+        deviceType = #{deviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="videoFrequency != null">
+        videoFrequency = #{videoFrequency,jdbcType=VARCHAR},
+      </if>
+      <if test="broadBand != null">
+        broadBand = #{broadBand,jdbcType=VARCHAR},
+      </if>
+      <if test="ipConfig != null">
+        ipConfig = #{ipConfig,jdbcType=VARCHAR},
+      </if>
+      <if test="region != null">
+        region = #{region,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="commonStationName != null">
+        commonStationName = #{commonStationName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.boot.kaizen.model.lteFddModel.LteFddPlan">
+    update lte_fdd_plane
+    set mENodeBID = #{mENodeBID,jdbcType=VARCHAR},
+      mBaseStationName = #{mBaseStationName,jdbcType=VARCHAR},
+      mBaseStationType = #{mBaseStationType,jdbcType=VARCHAR},
+      mAltitude = #{mAltitude,jdbcType=VARCHAR},
+      mLongitude = #{mLongitude,jdbcType=VARCHAR},
+      mLatitude = #{mLatitude,jdbcType=VARCHAR},
+      mTac = #{mTac,jdbcType=VARCHAR},
+      testPerson = #{testPerson,jdbcType=VARCHAR},
+      testPersonPhone = #{testPersonPhone,jdbcType=VARCHAR},
+      backPerson = #{backPerson,jdbcType=VARCHAR},
+      backPersonPhone = #{backPersonPhone,jdbcType=VARCHAR},
+      testTime = #{testTime,jdbcType=VARCHAR},
+      dealPersonId = #{dealPersonId,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      projId = #{projId,jdbcType=INTEGER},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      updateTime = #{updateTime,jdbcType=TIMESTAMP},
+      createAt = #{createAt,jdbcType=INTEGER},
+      districtCountry = #{districtCountry,jdbcType=VARCHAR},
+      deviceType = #{deviceType,jdbcType=VARCHAR},
+      videoFrequency = #{videoFrequency,jdbcType=VARCHAR},
+      broadBand = #{broadBand,jdbcType=VARCHAR},
+      ipConfig = #{ipConfig,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

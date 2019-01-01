@@ -1,6 +1,6 @@
 package com.boot.kaizen.service;
 
-import com.boot.kaizen.model.LoginService;
+import com.boot.kaizen.model.log.LoginService;
 
 public interface SysLoginServiceService {
 

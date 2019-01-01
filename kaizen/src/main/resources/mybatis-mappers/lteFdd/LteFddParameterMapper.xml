@@ -1,0 +1,776 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boot.kaizen.dao.lteFdd.LteFddParameterMapper">
+  <resultMap id="BaseResultMap" type="com.boot.kaizen.model.lteFddModel.LteFddParameter">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="mENodeBID" jdbcType="VARCHAR" property="mENodeBID" />
+    <result column="mBaseStationName" jdbcType="VARCHAR" property="mBaseStationName" />
+    <result column="cellId" jdbcType="VARCHAR" property="cellId" />
+    <result column="cellName" jdbcType="VARCHAR" property="cellName" />
+    <result column="eci" jdbcType="VARCHAR" property="eci" />
+    <result column="earfcn" jdbcType="VARCHAR" property="earfcn" />
+    <result column="pci" jdbcType="VARCHAR" property="pci" />
+    <result column="tac" jdbcType="VARCHAR" property="tac" />
+    <result column="csfbCallSuccAttempt" jdbcType="VARCHAR" property="csfbCallSuccAttempt" />
+    <result column="csfbCallSuccSucc" jdbcType="VARCHAR" property="csfbCallSuccSucc" />
+    <result column="csfbCallSuccfailure" jdbcType="VARCHAR" property="csfbCallSuccfailure" />
+    <result column="csfbPassiveCallSuccAttempt" jdbcType="VARCHAR" property="csfbPassiveCallSuccAttempt" />
+    <result column="csfbPassiveCallSuccSucc" jdbcType="VARCHAR" property="csfbPassiveCallSuccSucc" />
+    <result column="csfbPassiveCallSuccfailure" jdbcType="VARCHAR" property="csfbPassiveCallSuccfailure" />
+    <result column="volteWirelessConnFirst" jdbcType="VARCHAR" property="volteWirelessConnFirst" />
+    <result column="volteWirelessConnSecond" jdbcType="VARCHAR" property="volteWirelessConnSecond" />
+    <result column="volteWirelessConnBad" jdbcType="VARCHAR" property="volteWirelessConnBad" />
+    <result column="volteWirelessConnRandom" jdbcType="VARCHAR" property="volteWirelessConnRandom" />
+    <result column="csfbVoiceSuccAttempt" jdbcType="VARCHAR" property="csfbVoiceSuccAttempt" />
+    <result column="csfbVoiceSuccSucc" jdbcType="VARCHAR" property="csfbVoiceSuccSucc" />
+    <result column="csfbVoiceSuccfailure" jdbcType="VARCHAR" property="csfbVoiceSuccfailure" />
+    <result column="csfbCallDelay" jdbcType="VARCHAR" property="csfbCallDelay" />
+    <result column="csfbPassiveCallDelay" jdbcType="VARCHAR" property="csfbPassiveCallDelay" />
+    <result column="csfbVoiceDelay" jdbcType="VARCHAR" property="csfbVoiceDelay" />
+    <result column="ftpDownRsrpFirst" jdbcType="VARCHAR" property="ftpDownRsrpFirst" />
+    <result column="ftpDownRsrpSecond" jdbcType="VARCHAR" property="ftpDownRsrpSecond" />
+    <result column="ftpDownRsrpBad" jdbcType="VARCHAR" property="ftpDownRsrpBad" />
+    <result column="ftpDownRsrpRandom" jdbcType="VARCHAR" property="ftpDownRsrpRandom" />
+    <result column="ftpDownSinrFirst" jdbcType="VARCHAR" property="ftpDownSinrFirst" />
+    <result column="ftpDownSinrSecond" jdbcType="VARCHAR" property="ftpDownSinrSecond" />
+    <result column="ftpDownSinrBad" jdbcType="VARCHAR" property="ftpDownSinrBad" />
+    <result column="ftpDownSinrRandom" jdbcType="VARCHAR" property="ftpDownSinrRandom" />
+    <result column="ftpDownThroughputFirst" jdbcType="VARCHAR" property="ftpDownThroughputFirst" />
+    <result column="ftpDownThroughputSecond" jdbcType="VARCHAR" property="ftpDownThroughputSecond" />
+    <result column="ftpDownThroughputBad" jdbcType="VARCHAR" property="ftpDownThroughputBad" />
+    <result column="ftpDownThroughputRandom" jdbcType="VARCHAR" property="ftpDownThroughputRandom" />
+    <result column="ftpUpRsrpFirst" jdbcType="VARCHAR" property="ftpUpRsrpFirst" />
+    <result column="ftpUpRsrpSecond" jdbcType="VARCHAR" property="ftpUpRsrpSecond" />
+    <result column="ftpUpRsrpBad" jdbcType="VARCHAR" property="ftpUpRsrpBad" />
+    <result column="ftpUpRsrpRandom" jdbcType="VARCHAR" property="ftpUpRsrpRandom" />
+    <result column="ftpUpSinrFirst" jdbcType="VARCHAR" property="ftpUpSinrFirst" />
+    <result column="ftpUpSinrSecond" jdbcType="VARCHAR" property="ftpUpSinrSecond" />
+    <result column="ftpUpSinrBad" jdbcType="VARCHAR" property="ftpUpSinrBad" />
+    <result column="ftpUpSinrRandom" jdbcType="VARCHAR" property="ftpUpSinrRandom" />
+    <result column="ftpUpThroughputFirst" jdbcType="VARCHAR" property="ftpUpThroughputFirst" />
+    <result column="ftpUpThroughputSecond" jdbcType="VARCHAR" property="ftpUpThroughputSecond" />
+    <result column="ftpUpThroughputBad" jdbcType="VARCHAR" property="ftpUpThroughputBad" />
+    <result column="ftpUpThroughputRandom" jdbcType="VARCHAR" property="ftpUpThroughputRandom" />
+    <result column="rsrpPic" jdbcType="VARCHAR" property="rsrpPic" />
+    <result column="sinrPic" jdbcType="VARCHAR" property="sinrPic" />
+    <result column="downRatePic" jdbcType="VARCHAR" property="downRatePic" />
+    <result column="upRatePic" jdbcType="VARCHAR" property="upRatePic" />
+    <result column="rsrpWirePic" jdbcType="VARCHAR" property="rsrpWirePic" />
+    <result column="ftpDownPass" jdbcType="VARCHAR" property="ftpDownPass" />
+    <result column="ftpUpPass" jdbcType="VARCHAR" property="ftpUpPass" />
+    <result column="projId" jdbcType="INTEGER" property="projId" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="createAt" jdbcType="INTEGER" property="createAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, mENodeBID, mBaseStationName, cellId, cellName, eci, earfcn, pci, tac, csfbCallSuccAttempt, 
+    csfbCallSuccSucc, csfbCallSuccfailure, csfbPassiveCallSuccAttempt, csfbPassiveCallSuccSucc, 
+    csfbPassiveCallSuccfailure, volteWirelessConnFirst, volteWirelessConnSecond, volteWirelessConnBad, 
+    volteWirelessConnRandom, csfbVoiceSuccAttempt, csfbVoiceSuccSucc, csfbVoiceSuccfailure, 
+    csfbCallDelay, csfbPassiveCallDelay, csfbVoiceDelay, ftpDownRsrpFirst, ftpDownRsrpSecond, 
+    ftpDownRsrpBad, ftpDownRsrpRandom, ftpDownSinrFirst, ftpDownSinrSecond, ftpDownSinrBad, 
+    ftpDownSinrRandom, ftpDownThroughputFirst, ftpDownThroughputSecond, ftpDownThroughputBad, 
+    ftpDownThroughputRandom, ftpUpRsrpFirst, ftpUpRsrpSecond, ftpUpRsrpBad, ftpUpRsrpRandom, 
+    ftpUpSinrFirst, ftpUpSinrSecond, ftpUpSinrBad, ftpUpSinrRandom, ftpUpThroughputFirst, 
+    ftpUpThroughputSecond, ftpUpThroughputBad, ftpUpThroughputRandom, rsrpPic, sinrPic, 
+    downRatePic, upRatePic, rsrpWirePic, projId, createTime, updateTime, createAt,ftpDownPass,ftpUpPass
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from lte_fdd_parameter
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from lte_fdd_parameter
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  
+   <delete id="delete">
+		 delete from lte_fdd_parameter
+		 where id in
+		 <foreach collection="idsArray" index="index" item="item"
+            open="(" separator="," close=")">
+            '${item}'
+        </foreach>
+	</delete>
+	
+   <select id="query"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from lte_fdd_parameter 
+    where 1=1
+     <if test="map.projId != null">
+           and projId = #{map.projId}
+       </if>
+	 <if test="map.mENodeBID != null and map.mENodeBID != ''">
+           and mENodeBID = #{map.mENodeBID}
+     </if>
+	 <if test="map.cellId != null and map.cellId != ''">
+           and cellId = #{map.cellId}
+     </if>
+  </select>
+  
+  
+  <insert id="insert" parameterType="com.boot.kaizen.model.lteFddModel.LteFddParameter">
+    insert into lte_fdd_parameter (id, mENodeBID, mBaseStationName, 
+      cellId, cellName, eci, 
+      earfcn, pci, tac, csfbCallSuccAttempt, 
+      csfbCallSuccSucc, csfbCallSuccfailure, 
+      csfbPassiveCallSuccAttempt, csfbPassiveCallSuccSucc, 
+      csfbPassiveCallSuccfailure, volteWirelessConnFirst, 
+      volteWirelessConnSecond, volteWirelessConnBad, 
+      volteWirelessConnRandom, csfbVoiceSuccAttempt, 
+      csfbVoiceSuccSucc, csfbVoiceSuccfailure, 
+      csfbCallDelay, csfbPassiveCallDelay, csfbVoiceDelay, 
+      ftpDownRsrpFirst, ftpDownRsrpSecond, ftpDownRsrpBad, 
+      ftpDownRsrpRandom, ftpDownSinrFirst, ftpDownSinrSecond, 
+      ftpDownSinrBad, ftpDownSinrRandom, ftpDownThroughputFirst, 
+      ftpDownThroughputSecond, ftpDownThroughputBad, 
+      ftpDownThroughputRandom, ftpUpRsrpFirst, 
+      ftpUpRsrpSecond, ftpUpRsrpBad, ftpUpRsrpRandom, 
+      ftpUpSinrFirst, ftpUpSinrSecond, ftpUpSinrBad, 
+      ftpUpSinrRandom, ftpUpThroughputFirst, 
+      ftpUpThroughputSecond, ftpUpThroughputBad, 
+      ftpUpThroughputRandom, rsrpPic, sinrPic, 
+      downRatePic, upRatePic, rsrpWirePic, 
+      projId, createTime, updateTime, 
+      createAt)
+    values (#{id,jdbcType=VARCHAR}, #{mENodeBID,jdbcType=VARCHAR}, #{mBaseStationName,jdbcType=VARCHAR}, 
+      #{cellId,jdbcType=VARCHAR}, #{cellName,jdbcType=VARCHAR}, #{eci,jdbcType=VARCHAR}, 
+      #{earfcn,jdbcType=VARCHAR}, #{pci,jdbcType=VARCHAR}, #{tac,jdbcType=VARCHAR}, #{csfbCallSuccAttempt,jdbcType=VARCHAR}, 
+      #{csfbCallSuccSucc,jdbcType=VARCHAR}, #{csfbCallSuccfailure,jdbcType=VARCHAR}, 
+      #{csfbPassiveCallSuccAttempt,jdbcType=VARCHAR}, #{csfbPassiveCallSuccSucc,jdbcType=VARCHAR}, 
+      #{csfbPassiveCallSuccfailure,jdbcType=VARCHAR}, #{volteWirelessConnFirst,jdbcType=VARCHAR}, 
+      #{volteWirelessConnSecond,jdbcType=VARCHAR}, #{volteWirelessConnBad,jdbcType=VARCHAR}, 
+      #{volteWirelessConnRandom,jdbcType=VARCHAR}, #{csfbVoiceSuccAttempt,jdbcType=VARCHAR}, 
+      #{csfbVoiceSuccSucc,jdbcType=VARCHAR}, #{csfbVoiceSuccfailure,jdbcType=VARCHAR}, 
+      #{csfbCallDelay,jdbcType=VARCHAR}, #{csfbPassiveCallDelay,jdbcType=VARCHAR}, #{csfbVoiceDelay,jdbcType=VARCHAR}, 
+      #{ftpDownRsrpFirst,jdbcType=VARCHAR}, #{ftpDownRsrpSecond,jdbcType=VARCHAR}, #{ftpDownRsrpBad,jdbcType=VARCHAR}, 
+      #{ftpDownRsrpRandom,jdbcType=VARCHAR}, #{ftpDownSinrFirst,jdbcType=VARCHAR}, #{ftpDownSinrSecond,jdbcType=VARCHAR}, 
+      #{ftpDownSinrBad,jdbcType=VARCHAR}, #{ftpDownSinrRandom,jdbcType=VARCHAR}, #{ftpDownThroughputFirst,jdbcType=VARCHAR}, 
+      #{ftpDownThroughputSecond,jdbcType=VARCHAR}, #{ftpDownThroughputBad,jdbcType=VARCHAR}, 
+      #{ftpDownThroughputRandom,jdbcType=VARCHAR}, #{ftpUpRsrpFirst,jdbcType=VARCHAR}, 
+      #{ftpUpRsrpSecond,jdbcType=VARCHAR}, #{ftpUpRsrpBad,jdbcType=VARCHAR}, #{ftpUpRsrpRandom,jdbcType=VARCHAR}, 
+      #{ftpUpSinrFirst,jdbcType=VARCHAR}, #{ftpUpSinrSecond,jdbcType=VARCHAR}, #{ftpUpSinrBad,jdbcType=VARCHAR}, 
+      #{ftpUpSinrRandom,jdbcType=VARCHAR}, #{ftpUpThroughputFirst,jdbcType=VARCHAR}, 
+      #{ftpUpThroughputSecond,jdbcType=VARCHAR}, #{ftpUpThroughputBad,jdbcType=VARCHAR}, 
+      #{ftpUpThroughputRandom,jdbcType=VARCHAR}, #{rsrpPic,jdbcType=VARCHAR}, #{sinrPic,jdbcType=VARCHAR}, 
+      #{downRatePic,jdbcType=VARCHAR}, #{upRatePic,jdbcType=VARCHAR}, #{rsrpWirePic,jdbcType=VARCHAR}, 
+      #{projId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{createAt,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.boot.kaizen.model.lteFddModel.LteFddParameter">
+    insert into lte_fdd_parameter
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="mENodeBID != null">
+        mENodeBID,
+      </if>
+      <if test="mBaseStationName != null">
+        mBaseStationName,
+      </if>
+      <if test="cellId != null">
+        cellId,
+      </if>
+      <if test="cellName != null">
+        cellName,
+      </if>
+      <if test="eci != null">
+        eci,
+      </if>
+      <if test="earfcn != null">
+        earfcn,
+      </if>
+      <if test="pci != null">
+        pci,
+      </if>
+      <if test="tac != null">
+        tac,
+      </if>
+      <if test="csfbCallSuccAttempt != null">
+        csfbCallSuccAttempt,
+      </if>
+      <if test="csfbCallSuccSucc != null">
+        csfbCallSuccSucc,
+      </if>
+      <if test="csfbCallSuccfailure != null">
+        csfbCallSuccfailure,
+      </if>
+      <if test="csfbPassiveCallSuccAttempt != null">
+        csfbPassiveCallSuccAttempt,
+      </if>
+      <if test="csfbPassiveCallSuccSucc != null">
+        csfbPassiveCallSuccSucc,
+      </if>
+      <if test="csfbPassiveCallSuccfailure != null">
+        csfbPassiveCallSuccfailure,
+      </if>
+      <if test="volteWirelessConnFirst != null">
+        volteWirelessConnFirst,
+      </if>
+      <if test="volteWirelessConnSecond != null">
+        volteWirelessConnSecond,
+      </if>
+      <if test="volteWirelessConnBad != null">
+        volteWirelessConnBad,
+      </if>
+      <if test="volteWirelessConnRandom != null">
+        volteWirelessConnRandom,
+      </if>
+      <if test="csfbVoiceSuccAttempt != null">
+        csfbVoiceSuccAttempt,
+      </if>
+      <if test="csfbVoiceSuccSucc != null">
+        csfbVoiceSuccSucc,
+      </if>
+      <if test="csfbVoiceSuccfailure != null">
+        csfbVoiceSuccfailure,
+      </if>
+      <if test="csfbCallDelay != null">
+        csfbCallDelay,
+      </if>
+      <if test="csfbPassiveCallDelay != null">
+        csfbPassiveCallDelay,
+      </if>
+      <if test="csfbVoiceDelay != null">
+        csfbVoiceDelay,
+      </if>
+      <if test="ftpDownRsrpFirst != null">
+        ftpDownRsrpFirst,
+      </if>
+      <if test="ftpDownRsrpSecond != null">
+        ftpDownRsrpSecond,
+      </if>
+      <if test="ftpDownRsrpBad != null">
+        ftpDownRsrpBad,
+      </if>
+      <if test="ftpDownRsrpRandom != null">
+        ftpDownRsrpRandom,
+      </if>
+      <if test="ftpDownSinrFirst != null">
+        ftpDownSinrFirst,
+      </if>
+      <if test="ftpDownSinrSecond != null">
+        ftpDownSinrSecond,
+      </if>
+      <if test="ftpDownSinrBad != null">
+        ftpDownSinrBad,
+      </if>
+      <if test="ftpDownSinrRandom != null">
+        ftpDownSinrRandom,
+      </if>
+      <if test="ftpDownThroughputFirst != null">
+        ftpDownThroughputFirst,
+      </if>
+      <if test="ftpDownThroughputSecond != null">
+        ftpDownThroughputSecond,
+      </if>
+      <if test="ftpDownThroughputBad != null">
+        ftpDownThroughputBad,
+      </if>
+      <if test="ftpDownThroughputRandom != null">
+        ftpDownThroughputRandom,
+      </if>
+      <if test="ftpUpRsrpFirst != null">
+        ftpUpRsrpFirst,
+      </if>
+      <if test="ftpUpRsrpSecond != null">
+        ftpUpRsrpSecond,
+      </if>
+      <if test="ftpUpRsrpBad != null">
+        ftpUpRsrpBad,
+      </if>
+      <if test="ftpUpRsrpRandom != null">
+        ftpUpRsrpRandom,
+      </if>
+      <if test="ftpUpSinrFirst != null">
+        ftpUpSinrFirst,
+      </if>
+      <if test="ftpUpSinrSecond != null">
+        ftpUpSinrSecond,
+      </if>
+      <if test="ftpUpSinrBad != null">
+        ftpUpSinrBad,
+      </if>
+      <if test="ftpUpSinrRandom != null">
+        ftpUpSinrRandom,
+      </if>
+      <if test="ftpUpThroughputFirst != null">
+        ftpUpThroughputFirst,
+      </if>
+      <if test="ftpUpThroughputSecond != null">
+        ftpUpThroughputSecond,
+      </if>
+      <if test="ftpUpThroughputBad != null">
+        ftpUpThroughputBad,
+      </if>
+      <if test="ftpUpThroughputRandom != null">
+        ftpUpThroughputRandom,
+      </if>
+      <if test="rsrpPic != null">
+        rsrpPic,
+      </if>
+      <if test="sinrPic != null">
+        sinrPic,
+      </if>
+      <if test="downRatePic != null">
+        downRatePic,
+      </if>
+      <if test="upRatePic != null">
+        upRatePic,
+      </if>
+      <if test="rsrpWirePic != null">
+        rsrpWirePic,
+      </if>
+      <if test="projId != null">
+        projId,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="updateTime != null">
+        updateTime,
+      </if>
+      <if test="createAt != null">
+        createAt,
+      </if>
+      <if test="ftpDownPass != null">
+        ftpDownPass,
+      </if>
+      <if test="ftpUpPass != null">
+        ftpUpPass,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="mENodeBID != null">
+        #{mENodeBID,jdbcType=VARCHAR},
+      </if>
+      <if test="mBaseStationName != null">
+        #{mBaseStationName,jdbcType=VARCHAR},
+      </if>
+      <if test="cellId != null">
+        #{cellId,jdbcType=VARCHAR},
+      </if>
+      <if test="cellName != null">
+        #{cellName,jdbcType=VARCHAR},
+      </if>
+      <if test="eci != null">
+        #{eci,jdbcType=VARCHAR},
+      </if>
+      <if test="earfcn != null">
+        #{earfcn,jdbcType=VARCHAR},
+      </if>
+      <if test="pci != null">
+        #{pci,jdbcType=VARCHAR},
+      </if>
+      <if test="tac != null">
+        #{tac,jdbcType=VARCHAR},
+      </if>
+      <if test="csfbCallSuccAttempt != null">
+        #{csfbCallSuccAttempt,jdbcType=VARCHAR},
+      </if>
+      <if test="csfbCallSuccSucc != null">
+        #{csfbCallSuccSucc,jdbcType=VARCHAR},
+      </if>
+      <if test="csfbCallSuccfailure != null">
+        #{csfbCallSuccfailure,jdbcType=VARCHAR},
+      </if>
+      <if test="csfbPassiveCallSuccAttempt != null">
+        #{csfbPassiveCallSuccAttempt,jdbcType=VARCHAR},
+      </if>
+      <if test="csfbPassiveCallSuccSucc != null">
+        #{csfbPassiveCallSuccSucc,jdbcType=VARCHAR},
+      </if>
+      <if test="csfbPassiveCallSuccfailure != null">
+        #{csfbPassiveCallSuccfailure,jdbcType=VARCHAR},
+      </if>
+      <if test="volteWirelessConnFirst != null">
+        #{volteWirelessConnFirst,jdbcType=VARCHAR},
+      </if>
+      <if test="volteWirelessConnSecond != null">
+        #{volteWirelessConnSecond,jdbcType=VARCHAR},
+      </if>
+      <if test="volteWirelessConnBad != null">
+        #{volteWirelessConnBad,jdbcType=VARCHAR},
+      </if>
+      <if test="volteWirelessConnRandom != null">
+        #{volteWirelessConnRandom,jdbcType=VARCHAR},
+      </if>
+      <if test="csfbVoiceSuccAttempt != null">
+        #{csfbVoiceSuccAttempt,jdbcType=VARCHAR},
+      </if>
+      <if test="csfbVoiceSuccSucc != null">
+        #{csfbVoiceSuccSucc,jdbcType=VARCHAR},
+      </if>
+      <if test="csfbVoiceSuccfailure != null">
+        #{csfbVoiceSuccfailure,jdbcType=VARCHAR},
+      </if>
+      <if test="csfbCallDelay != null">
+        #{csfbCallDelay,jdbcType=VARCHAR},
+      </if>
+      <if test="csfbPassiveCallDelay != null">
+        #{csfbPassiveCallDelay,jdbcType=VARCHAR},
+      </if>
+      <if test="csfbVoiceDelay != null">
+        #{csfbVoiceDelay,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpDownRsrpFirst != null">
+        #{ftpDownRsrpFirst,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpDownRsrpSecond != null">
+        #{ftpDownRsrpSecond,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpDownRsrpBad != null">
+        #{ftpDownRsrpBad,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpDownRsrpRandom != null">
+        #{ftpDownRsrpRandom,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpDownSinrFirst != null">
+        #{ftpDownSinrFirst,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpDownSinrSecond != null">
+        #{ftpDownSinrSecond,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpDownSinrBad != null">
+        #{ftpDownSinrBad,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpDownSinrRandom != null">
+        #{ftpDownSinrRandom,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpDownThroughputFirst != null">
+        #{ftpDownThroughputFirst,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpDownThroughputSecond != null">
+        #{ftpDownThroughputSecond,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpDownThroughputBad != null">
+        #{ftpDownThroughputBad,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpDownThroughputRandom != null">
+        #{ftpDownThroughputRandom,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpUpRsrpFirst != null">
+        #{ftpUpRsrpFirst,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpUpRsrpSecond != null">
+        #{ftpUpRsrpSecond,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpUpRsrpBad != null">
+        #{ftpUpRsrpBad,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpUpRsrpRandom != null">
+        #{ftpUpRsrpRandom,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpUpSinrFirst != null">
+        #{ftpUpSinrFirst,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpUpSinrSecond != null">
+        #{ftpUpSinrSecond,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpUpSinrBad != null">
+        #{ftpUpSinrBad,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpUpSinrRandom != null">
+        #{ftpUpSinrRandom,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpUpThroughputFirst != null">
+        #{ftpUpThroughputFirst,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpUpThroughputSecond != null">
+        #{ftpUpThroughputSecond,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpUpThroughputBad != null">
+        #{ftpUpThroughputBad,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpUpThroughputRandom != null">
+        #{ftpUpThroughputRandom,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrpPic != null">
+        #{rsrpPic,jdbcType=VARCHAR},
+      </if>
+      <if test="sinrPic != null">
+        #{sinrPic,jdbcType=VARCHAR},
+      </if>
+      <if test="downRatePic != null">
+        #{downRatePic,jdbcType=VARCHAR},
+      </if>
+      <if test="upRatePic != null">
+        #{upRatePic,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrpWirePic != null">
+        #{rsrpWirePic,jdbcType=VARCHAR},
+      </if>
+      <if test="projId != null">
+        #{projId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createAt != null">
+        #{createAt,jdbcType=INTEGER},
+      </if>
+      <if test="ftpDownPass != null">
+        #{ftpDownPass,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpUpPass != null">
+        #{ftpDownPass,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.boot.kaizen.model.lteFddModel.LteFddParameter">
+    update lte_fdd_parameter
+    <set>
+      <if test="mENodeBID != null">
+        mENodeBID = #{mENodeBID,jdbcType=VARCHAR},
+      </if>
+      <if test="mBaseStationName != null">
+        mBaseStationName = #{mBaseStationName,jdbcType=VARCHAR},
+      </if>
+      <if test="cellId != null">
+        cellId = #{cellId,jdbcType=VARCHAR},
+      </if>
+      <if test="cellName != null">
+        cellName = #{cellName,jdbcType=VARCHAR},
+      </if>
+      <if test="eci != null">
+        eci = #{eci,jdbcType=VARCHAR},
+      </if>
+      <if test="earfcn != null">
+        earfcn = #{earfcn,jdbcType=VARCHAR},
+      </if>
+      <if test="pci != null">
+        pci = #{pci,jdbcType=VARCHAR},
+      </if>
+      <if test="tac != null">
+        tac = #{tac,jdbcType=VARCHAR},
+      </if>
+      <if test="csfbCallSuccAttempt != null">
+        csfbCallSuccAttempt = #{csfbCallSuccAttempt,jdbcType=VARCHAR},
+      </if>
+      <if test="csfbCallSuccSucc != null">
+        csfbCallSuccSucc = #{csfbCallSuccSucc,jdbcType=VARCHAR},
+      </if>
+      <if test="csfbCallSuccfailure != null">
+        csfbCallSuccfailure = #{csfbCallSuccfailure,jdbcType=VARCHAR},
+      </if>
+      <if test="csfbPassiveCallSuccAttempt != null">
+        csfbPassiveCallSuccAttempt = #{csfbPassiveCallSuccAttempt,jdbcType=VARCHAR},
+      </if>
+      <if test="csfbPassiveCallSuccSucc != null">
+        csfbPassiveCallSuccSucc = #{csfbPassiveCallSuccSucc,jdbcType=VARCHAR},
+      </if>
+      <if test="csfbPassiveCallSuccfailure != null">
+        csfbPassiveCallSuccfailure = #{csfbPassiveCallSuccfailure,jdbcType=VARCHAR},
+      </if>
+      <if test="volteWirelessConnFirst != null">
+        volteWirelessConnFirst = #{volteWirelessConnFirst,jdbcType=VARCHAR},
+      </if>
+      <if test="volteWirelessConnSecond != null">
+        volteWirelessConnSecond = #{volteWirelessConnSecond,jdbcType=VARCHAR},
+      </if>
+      <if test="volteWirelessConnBad != null">
+        volteWirelessConnBad = #{volteWirelessConnBad,jdbcType=VARCHAR},
+      </if>
+      <if test="volteWirelessConnRandom != null">
+        volteWirelessConnRandom = #{volteWirelessConnRandom,jdbcType=VARCHAR},
+      </if>
+      <if test="csfbVoiceSuccAttempt != null">
+        csfbVoiceSuccAttempt = #{csfbVoiceSuccAttempt,jdbcType=VARCHAR},
+      </if>
+      <if test="csfbVoiceSuccSucc != null">
+        csfbVoiceSuccSucc = #{csfbVoiceSuccSucc,jdbcType=VARCHAR},
+      </if>
+      <if test="csfbVoiceSuccfailure != null">
+        csfbVoiceSuccfailure = #{csfbVoiceSuccfailure,jdbcType=VARCHAR},
+      </if>
+      <if test="csfbCallDelay != null">
+        csfbCallDelay = #{csfbCallDelay,jdbcType=VARCHAR},
+      </if>
+      <if test="csfbPassiveCallDelay != null">
+        csfbPassiveCallDelay = #{csfbPassiveCallDelay,jdbcType=VARCHAR},
+      </if>
+      <if test="csfbVoiceDelay != null">
+        csfbVoiceDelay = #{csfbVoiceDelay,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpDownRsrpFirst != null">
+        ftpDownRsrpFirst = #{ftpDownRsrpFirst,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpDownRsrpSecond != null">
+        ftpDownRsrpSecond = #{ftpDownRsrpSecond,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpDownRsrpBad != null">
+        ftpDownRsrpBad = #{ftpDownRsrpBad,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpDownRsrpRandom != null">
+        ftpDownRsrpRandom = #{ftpDownRsrpRandom,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpDownSinrFirst != null">
+        ftpDownSinrFirst = #{ftpDownSinrFirst,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpDownSinrSecond != null">
+        ftpDownSinrSecond = #{ftpDownSinrSecond,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpDownSinrBad != null">
+        ftpDownSinrBad = #{ftpDownSinrBad,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpDownSinrRandom != null">
+        ftpDownSinrRandom = #{ftpDownSinrRandom,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpDownThroughputFirst != null">
+        ftpDownThroughputFirst = #{ftpDownThroughputFirst,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpDownThroughputSecond != null">
+        ftpDownThroughputSecond = #{ftpDownThroughputSecond,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpDownThroughputBad != null">
+        ftpDownThroughputBad = #{ftpDownThroughputBad,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpDownThroughputRandom != null">
+        ftpDownThroughputRandom = #{ftpDownThroughputRandom,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpUpRsrpFirst != null">
+        ftpUpRsrpFirst = #{ftpUpRsrpFirst,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpUpRsrpSecond != null">
+        ftpUpRsrpSecond = #{ftpUpRsrpSecond,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpUpRsrpBad != null">
+        ftpUpRsrpBad = #{ftpUpRsrpBad,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpUpRsrpRandom != null">
+        ftpUpRsrpRandom = #{ftpUpRsrpRandom,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpUpSinrFirst != null">
+        ftpUpSinrFirst = #{ftpUpSinrFirst,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpUpSinrSecond != null">
+        ftpUpSinrSecond = #{ftpUpSinrSecond,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpUpSinrBad != null">
+        ftpUpSinrBad = #{ftpUpSinrBad,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpUpSinrRandom != null">
+        ftpUpSinrRandom = #{ftpUpSinrRandom,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpUpThroughputFirst != null">
+        ftpUpThroughputFirst = #{ftpUpThroughputFirst,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpUpThroughputSecond != null">
+        ftpUpThroughputSecond = #{ftpUpThroughputSecond,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpUpThroughputBad != null">
+        ftpUpThroughputBad = #{ftpUpThroughputBad,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpUpThroughputRandom != null">
+        ftpUpThroughputRandom = #{ftpUpThroughputRandom,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrpPic != null">
+        rsrpPic = #{rsrpPic,jdbcType=VARCHAR},
+      </if>
+      <if test="sinrPic != null">
+        sinrPic = #{sinrPic,jdbcType=VARCHAR},
+      </if>
+      <if test="downRatePic != null">
+        downRatePic = #{downRatePic,jdbcType=VARCHAR},
+      </if>
+      <if test="upRatePic != null">
+        upRatePic = #{upRatePic,jdbcType=VARCHAR},
+      </if>
+      <if test="rsrpWirePic != null">
+        rsrpWirePic = #{rsrpWirePic,jdbcType=VARCHAR},
+      </if>
+      <if test="projId != null">
+        projId = #{projId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        updateTime = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createAt != null">
+        createAt = #{createAt,jdbcType=INTEGER},
+      </if>
+      
+      <if test="ftpDownPass != null">
+        ftpDownPass = #{ftpDownPass,jdbcType=VARCHAR},
+      </if>
+      <if test="ftpUpPass != null">
+        ftpUpPass = #{ftpUpPass,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.boot.kaizen.model.lteFddModel.LteFddParameter">
+    update lte_fdd_parameter
+    set mENodeBID = #{mENodeBID,jdbcType=VARCHAR},
+      mBaseStationName = #{mBaseStationName,jdbcType=VARCHAR},
+      cellId = #{cellId,jdbcType=VARCHAR},
+      cellName = #{cellName,jdbcType=VARCHAR},
+      eci = #{eci,jdbcType=VARCHAR},
+      earfcn = #{earfcn,jdbcType=VARCHAR},
+      pci = #{pci,jdbcType=VARCHAR},
+      tac = #{tac,jdbcType=VARCHAR},
+      csfbCallSuccAttempt = #{csfbCallSuccAttempt,jdbcType=VARCHAR},
+      csfbCallSuccSucc = #{csfbCallSuccSucc,jdbcType=VARCHAR},
+      csfbCallSuccfailure = #{csfbCallSuccfailure,jdbcType=VARCHAR},
+      csfbPassiveCallSuccAttempt = #{csfbPassiveCallSuccAttempt,jdbcType=VARCHAR},
+      csfbPassiveCallSuccSucc = #{csfbPassiveCallSuccSucc,jdbcType=VARCHAR},
+      csfbPassiveCallSuccfailure = #{csfbPassiveCallSuccfailure,jdbcType=VARCHAR},
+      volteWirelessConnFirst = #{volteWirelessConnFirst,jdbcType=VARCHAR},
+      volteWirelessConnSecond = #{volteWirelessConnSecond,jdbcType=VARCHAR},
+      volteWirelessConnBad = #{volteWirelessConnBad,jdbcType=VARCHAR},
+      volteWirelessConnRandom = #{volteWirelessConnRandom,jdbcType=VARCHAR},
+      csfbVoiceSuccAttempt = #{csfbVoiceSuccAttempt,jdbcType=VARCHAR},
+      csfbVoiceSuccSucc = #{csfbVoiceSuccSucc,jdbcType=VARCHAR},
+      csfbVoiceSuccfailure = #{csfbVoiceSuccfailure,jdbcType=VARCHAR},
+      csfbCallDelay = #{csfbCallDelay,jdbcType=VARCHAR},
+      csfbPassiveCallDelay = #{csfbPassiveCallDelay,jdbcType=VARCHAR},
+      csfbVoiceDelay = #{csfbVoiceDelay,jdbcType=VARCHAR},
+      ftpDownRsrpFirst = #{ftpDownRsrpFirst,jdbcType=VARCHAR},
+      ftpDownRsrpSecond = #{ftpDownRsrpSecond,jdbcType=VARCHAR},
+      ftpDownRsrpBad = #{ftpDownRsrpBad,jdbcType=VARCHAR},
+      ftpDownRsrpRandom = #{ftpDownRsrpRandom,jdbcType=VARCHAR},
+      ftpDownSinrFirst = #{ftpDownSinrFirst,jdbcType=VARCHAR},
+      ftpDownSinrSecond = #{ftpDownSinrSecond,jdbcType=VARCHAR},
+      ftpDownSinrBad = #{ftpDownSinrBad,jdbcType=VARCHAR},
+      ftpDownSinrRandom = #{ftpDownSinrRandom,jdbcType=VARCHAR},
+      ftpDownThroughputFirst = #{ftpDownThroughputFirst,jdbcType=VARCHAR},
+      ftpDownThroughputSecond = #{ftpDownThroughputSecond,jdbcType=VARCHAR},
+      ftpDownThroughputBad = #{ftpDownThroughputBad,jdbcType=VARCHAR},
+      ftpDownThroughputRandom = #{ftpDownThroughputRandom,jdbcType=VARCHAR},
+      ftpUpRsrpFirst = #{ftpUpRsrpFirst,jdbcType=VARCHAR},
+      ftpUpRsrpSecond = #{ftpUpRsrpSecond,jdbcType=VARCHAR},
+      ftpUpRsrpBad = #{ftpUpRsrpBad,jdbcType=VARCHAR},
+      ftpUpRsrpRandom = #{ftpUpRsrpRandom,jdbcType=VARCHAR},
+      ftpUpSinrFirst = #{ftpUpSinrFirst,jdbcType=VARCHAR},
+      ftpUpSinrSecond = #{ftpUpSinrSecond,jdbcType=VARCHAR},
+      ftpUpSinrBad = #{ftpUpSinrBad,jdbcType=VARCHAR},
+      ftpUpSinrRandom = #{ftpUpSinrRandom,jdbcType=VARCHAR},
+      ftpUpThroughputFirst = #{ftpUpThroughputFirst,jdbcType=VARCHAR},
+      ftpUpThroughputSecond = #{ftpUpThroughputSecond,jdbcType=VARCHAR},
+      ftpUpThroughputBad = #{ftpUpThroughputBad,jdbcType=VARCHAR},
+      ftpUpThroughputRandom = #{ftpUpThroughputRandom,jdbcType=VARCHAR},
+      rsrpPic = #{rsrpPic,jdbcType=VARCHAR},
+      sinrPic = #{sinrPic,jdbcType=VARCHAR},
+      downRatePic = #{downRatePic,jdbcType=VARCHAR},
+      upRatePic = #{upRatePic,jdbcType=VARCHAR},
+      rsrpWirePic = #{rsrpWirePic,jdbcType=VARCHAR},
+      projId = #{projId,jdbcType=INTEGER},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      updateTime = #{updateTime,jdbcType=TIMESTAMP},
+      createAt = #{createAt,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

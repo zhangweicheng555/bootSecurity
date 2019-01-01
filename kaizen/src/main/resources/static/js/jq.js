@@ -105,7 +105,12 @@ function checkPermission() {
 	
 	return pers;
 }
-
+/**
+ * 查询该项目下的用户的列表信息    selectName  是当前用户的id  用于下拉框初始化选中当前id
+ * @param item
+ * @param selectName
+ * @returns
+ */
 function queryUserByProjId(item,selectName) {
 	$.ajax({
 		type : 'get',

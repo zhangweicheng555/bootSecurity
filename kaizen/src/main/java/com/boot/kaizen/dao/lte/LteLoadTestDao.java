@@ -2,7 +2,8 @@ package com.boot.kaizen.dao.lte;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import com.boot.kaizen.model.LteLoadTest;
+
+import com.boot.kaizen.model.lte.LteLoadTest;
 
 @Mapper
 public interface LteLoadTestDao {

@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import com.boot.kaizen.controller.lte.model.BaseStationBean;
 import com.boot.kaizen.entity.LoginUser;
-import com.boot.kaizen.model.LtePlan;
-import com.boot.kaizen.model.LtePlanInfo;
+import com.boot.kaizen.model.lte.LtePlan;
+import com.boot.kaizen.model.lte.LtePlanInfo;
 import com.boot.kaizen.util.JsonMsgUtil;
 
 public interface ILtePlanService {

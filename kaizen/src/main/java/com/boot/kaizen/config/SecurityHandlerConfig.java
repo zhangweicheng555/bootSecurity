@@ -22,7 +22,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.boot.kaizen.entity.LoginUser;
 import com.boot.kaizen.entity.Token;
 import com.boot.kaizen.filter.TokenFilter;
-import com.boot.kaizen.model.LoginLog;
+import com.boot.kaizen.model.log.LoginLog;
 import com.boot.kaizen.service.TokenService;
 import com.boot.kaizen.service.log.ISysLogService;
 import com.boot.kaizen.util.HttpUtil;

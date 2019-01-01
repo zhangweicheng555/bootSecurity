@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.boot.kaizen.dao.lte.LteLoadTestDao;
-import com.boot.kaizen.model.LteLoadTest;
+import com.boot.kaizen.model.lte.LteLoadTest;
 import com.boot.kaizen.service.act.IActBusinessService;
 
 @Service

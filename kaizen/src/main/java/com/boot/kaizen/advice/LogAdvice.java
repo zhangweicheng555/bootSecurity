@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import com.alibaba.fastjson.JSONObject;
 import com.boot.kaizen.annotation.LogAnnotation;
 import com.boot.kaizen.entity.LoginUser;
-import com.boot.kaizen.model.OperateLog;
+import com.boot.kaizen.model.log.OperateLog;
 import com.boot.kaizen.service.log.ISysOperateLogService;
 import com.boot.kaizen.util.UserUtil;
 

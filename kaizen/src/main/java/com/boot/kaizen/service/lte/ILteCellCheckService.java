@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.boot.kaizen.model.LteCellCheck;
+import com.boot.kaizen.model.lte.LteCellCheck;
 import com.boot.kaizen.util.JsonMsgUtil;
 
 public interface ILteCellCheckService {

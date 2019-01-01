@@ -2,7 +2,7 @@ package com.boot.kaizen.dao.log;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.boot.kaizen.model.LoginLog;
+import com.boot.kaizen.model.log.LoginLog;
 
 @Mapper
 public interface SysLoginLogDao {

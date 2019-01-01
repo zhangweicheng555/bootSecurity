@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.boot.kaizen.entity.LoginUser;
 import com.boot.kaizen.entity.RequestParamEntity;
-import com.boot.kaizen.model.LteCellCheck;
+import com.boot.kaizen.model.lte.LteCellCheck;
 import com.boot.kaizen.service.lte.ILteCellCheckService;
 import com.boot.kaizen.util.JsonMsgUtil;
 import com.boot.kaizen.util.TableResultUtil;

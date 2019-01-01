@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.boot.kaizen.dao.SysLoginServiceDao;
-import com.boot.kaizen.model.LoginService;
+import com.boot.kaizen.model.log.LoginService;
 import com.boot.kaizen.service.SysLoginServiceService;
 
 @Service

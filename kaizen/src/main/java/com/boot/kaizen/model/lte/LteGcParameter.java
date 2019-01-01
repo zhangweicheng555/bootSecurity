@@ -1,4 +1,6 @@
-package com.boot.kaizen.model;
+package com.boot.kaizen.model.lte;
+
+import com.boot.kaizen.model.BaseEntity;
 
 /**
  * lte工参表设计  lte_gc

@@ -1,4 +1,4 @@
-package com.boot.kaizen.model;
+package com.boot.kaizen.model.log;
 import java.io.Serializable;
 import java.util.Date;
 

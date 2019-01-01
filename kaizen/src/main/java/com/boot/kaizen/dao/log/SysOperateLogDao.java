@@ -1,7 +1,8 @@
 package com.boot.kaizen.dao.log;
 
 import org.apache.ibatis.annotations.Mapper;
-import com.boot.kaizen.model.OperateLog;
+
+import com.boot.kaizen.model.log.OperateLog;
 
 @Mapper
 public interface SysOperateLogDao {

@@ -5,7 +5,8 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
-import com.boot.kaizen.model.LteGcParameter;
+
+import com.boot.kaizen.model.lte.LteGcParameter;
 
 @Mapper
 public interface LteGcParameterDao {

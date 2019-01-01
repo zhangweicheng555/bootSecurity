@@ -7,8 +7,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
-import com.boot.kaizen.model.LteConfig;
-import com.boot.kaizen.model.LteLoadTest;
+import com.boot.kaizen.model.lte.LteConfig;
+import com.boot.kaizen.model.lte.LteLoadTest;
 
 @Mapper
 public interface LteConfigDao {

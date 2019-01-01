@@ -2,7 +2,7 @@ package com.boot.kaizen.service.lte;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.boot.kaizen.model.LteLoadTest;
+import com.boot.kaizen.model.lte.LteLoadTest;
 
 public interface ILteLoadTestService {
 

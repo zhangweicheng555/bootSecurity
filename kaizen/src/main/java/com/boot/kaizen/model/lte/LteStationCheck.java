@@ -1,4 +1,6 @@
-package com.boot.kaizen.model;
+package com.boot.kaizen.model.lte;
+
+import com.boot.kaizen.model.BaseEntity;
 
 /**
  * lte基站核查结果 lte_station_check
