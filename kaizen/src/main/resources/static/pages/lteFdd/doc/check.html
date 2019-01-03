@@ -19,7 +19,7 @@
 	  <div class="layui-tab-content">
 	  	<!-- 规划信息 -->
 	    <div class="layui-tab-item layui-show">
-	    	<form class="layui-form" lay-filter="formDemo"  id="formDemo" style="margin-top: 20px;">
+	    	<form class="layui-form" lay-filter="formDemo1"  id="formDemo1" style="margin-top: 20px;">
 	
 				 <div class="layui-form-item">
 				    <label class="layui-form-label" style="width: 150px;">基站号</label>
@@ -147,23 +147,23 @@
 	    </div>
 	    
 	    <!-- 小区信息 -->
-	    <div class="layui-tab-item">
-	    	<form class="layui-form" lay-filter="formDemo"  id="formDemo" style="margin-top: 20px;">
+	    <div class="layui-tab-item" id="cellCheckTab">
+	    	<!-- <form class="layui-form" lay-filter="formDemo2"  id="formDemo2" style="margin-top: 20px;">
 				 <div class="layui-form-item">
 				    <label class="layui-form-label" style="width: 150px;">基站号</label>
 				    <div class="layui-input-inline">
 				     <input type="hidden" name="id" id="id" >
-				      <input type="text" name="mENodeBID" id="mENodeBID"   required  lay-verify="required"  autocomplete="off" class="layui-input">
+				      <input type="text" name="mENodeBID" id="mENodeBID"  value="'+obj.mENodeBID+'"    autocomplete="off" class="layui-input">
 				    </div>
 				    
 				    <label class="layui-form-label" style="width: 150px;">基站名称</label>
 				    <div class="layui-input-inline" >
-				      <input type="text" name="mBaseStationName" id="mBaseStationName"   required  lay-verify="required"  autocomplete="off" class="layui-input">
+				      <input type="text" name="mBaseStationName" id="mBaseStationName"  value="'+obj.mBaseStationName+'"    autocomplete="off" class="layui-input">
 				    </div>
 				    
 				    <label class="layui-form-label" style="width: 150px;">小区ID</label>
 				    <div class="layui-input-inline">
-				      <input type="text" name="cellId" id="cellId"   required  lay-verify="required" autocomplete="off" class="layui-input">
+				      <input type="text" name="cellId" id="cellId"   value="'+obj.cellId+'"   autocomplete="off" class="layui-input">
 				    </div>
 				  </div>
 				
@@ -172,17 +172,17 @@
 				  <div class="layui-form-item">
 				    <label class="layui-form-label" style="width: 150px;">小区名字</label>
 				    <div class="layui-input-inline">
-				      <input type="text" name="cellName" id="cellName"    required  lay-verify="required"   autocomplete="off" class="layui-input">
+				      <input type="text" name="cellName" id="cellName"     value="'+obj.cellName+'"  autocomplete="off" class="layui-input">
 				    </div>
 				    
 				    <label class="layui-form-label" style="width: 150px;">上下行子帧配比</label>
 				    <div class="layui-input-inline" >
-				      <input type="text" name="upDownRatio" id="upDownRatio"   autocomplete="off" class="layui-input">
+				      <input type="text" name="upDownRatio" id="upDownRatio"     value="'+obj.upDownRatio+'"  autocomplete="off" class="layui-input">
 				    </div>
 				    
 				    <label class="layui-form-label" style="width: 150px;">特殊子帧配比</label>
 				    <div class="layui-input-inline">
-				      <input type="text" name="specialRatio" id="specialRatio"   autocomplete="off" class="layui-input">
+				      <input type="text" name="specialRatio" id="specialRatio"    value="'+obj.specialRatio+'"   autocomplete="off" class="layui-input">
 				    </div>
 				  </div>
 				 
@@ -190,31 +190,31 @@
 				  <div class="layui-form-item">
 				    <label class="layui-form-label" style="width: 150px;">PCI</label>
 				    <div class="layui-input-inline">
-				      <input type="text" name="pci" id="pci"   autocomplete="off" class="layui-input">
+				      <input type="text" name="pci" id="pci"   autocomplete="off"  value="'+obj.pci+'"  class="layui-input">
 				    </div>
 				    <label class="layui-form-label" style="width: 150px;">ECI</label>
 				    <div class="layui-input-inline">
-				      <input type="text" name="eci" id="eci"   autocomplete="off" class="layui-input">
+				      <input type="text" name="eci" id="eci"   autocomplete="off"  value="'+obj.eci+'"  class="layui-input">
 				    </div>
 				    <label class="layui-form-label" style="width: 150px;">TAC</label>
 				    <div class="layui-input-inline">
-				      <input type="text" name="tac" id="tac"   autocomplete="off" class="layui-input">
+				      <input type="text" name="tac" id="tac"   autocomplete="off"  value="'+obj.tac+'"  class="layui-input">
 				    </div>
 				  </div>
 				  
 				  <div class="layui-form-item">
 				    <label class="layui-form-label" style="width: 150px;">EARFCN</label>
 				    <div class="layui-input-inline">
-				      <input type="text" name="earfcn" id="earfcn"   autocomplete="off" class="layui-input">
+				      <input type="text" name="earfcn" id="earfcn" value="'+obj.earfcn+'"    autocomplete="off" class="layui-input">
 				    </div>
 			
 				    <label class="layui-form-label" style="width: 150px;">RsPower</label>
 				    <div class="layui-input-inline">
-				      <input type="text" name="rsPower" id="rsPower"   autocomplete="off" class="layui-input">
+				      <input type="text" name="rsPower" id="rsPower" value="'+obj.rsPower+'"   autocomplete="off" class="layui-input">
 				    </div>
 				    <label class="layui-form-label" style="width: 150px;">PA</label>
 				    <div class="layui-input-inline">
-				      <input type="text" name="pa" id="pa"   autocomplete="off" class="layui-input">
+				      <input type="text" name="pa" id="pa" value="'+obj.pa+'"    autocomplete="off" class="layui-input">
 				    </div>
 				  </div>
 				  
@@ -223,15 +223,15 @@
 				  <div class="layui-form-item">
 				    <label class="layui-form-label" style="width: 150px;">PB</label>
 				    <div class="layui-input-inline">
-				      <input type="text" name="pb" id="pb"   autocomplete="off" class="layui-input">
+				      <input type="text" name="pb" id="pb"  value="'+obj.pb+'"   autocomplete="off" class="layui-input">
 				    </div>
 				    <label class="layui-form-label" style="width: 150px;">天线挂高</label>
 				    <div class="layui-input-inline">
-				      <input type="text" name="antennaHangUp" id="antennaHangUp"   autocomplete="off" class="layui-input">
+				      <input type="text" name="antennaHangUp"  value="'+obj.antennaHangUp+'"  id="antennaHangUp"   autocomplete="off" class="layui-input">
 				    </div>
 				    <label class="layui-form-label" style="width: 150px;">方位角</label>
 				    <div class="layui-input-inline">
-				      <input type="text" name="azimuth" id="azimuth"   autocomplete="off" class="layui-input">
+				      <input type="text" name="azimuth" id="azimuth"   value="'+obj.azimuth+'"   autocomplete="off" class="layui-input">
 				    </div>
 			
 				  </div>
@@ -241,15 +241,15 @@
 				  <div class="layui-form-item">
 				    <label class="layui-form-label" style="width: 150px;">机械下倾角</label>
 				    <div class="layui-input-inline">
-				      <input type="text" name="mechanicalLowerInclination" id="mechanicalLowerInclination"   autocomplete="off" class="layui-input">
+				      <input type="text" name="mechanicalLowerInclination" id="mechanicalLowerInclination"   value="'+obj.mechanicalLowerInclination+'"    autocomplete="off" class="layui-input">
 				    </div>
 				    <label class="layui-form-label" style="width: 150px;">预置电下倾</label>
 				    <div class="layui-input-inline">
-				      <input type="text" name="presetElectricDip" id="presetElectricDip"   autocomplete="off" class="layui-input">
+				      <input type="text" name="presetElectricDip" id="presetElectricDip"    value="'+obj.presetElectricDip+'"  autocomplete="off" class="layui-input">
 				    </div>
 				    <label class="layui-form-label" style="width: 150px;">总下倾角</label>
 				    <div class="layui-input-inline">
-				      <input type="text" name="mtotalLowerInclination" id="mtotalLowerInclination"   autocomplete="off" class="layui-input">
+				      <input type="text" name="mtotalLowerInclination" id="mtotalLowerInclination"    value="'+obj.mtotalLowerInclination+'"  autocomplete="off" class="layui-input">
 				    </div>
 			
 				  </div>
@@ -257,15 +257,15 @@
 				  <div class="layui-form-item">
 				    <label class="layui-form-label" style="width: 150px;">FTP下载速率</label>
 				    <div class="layui-input-inline">
-				      <input type="text" name="ftpDown" id="ftpDown"   autocomplete="off" class="layui-input">
+				      <input type="text" name="ftpDown" id="ftpDown"    value="'+obj.ftpDown+'"    autocomplete="off" class="layui-input">
 				    </div>
 				    <label class="layui-form-label" style="width: 150px;">FTP上传速率</label>
 				    <div class="layui-input-inline">
-				      <input type="text" name="ftpUp" id="ftpUp"   autocomplete="off" class="layui-input">
+				      <input type="text" name="ftpUp" id="ftpUp"    value="'+obj.ftpUp+'"   autocomplete="off" class="layui-input">
 				    </div>
 				    <label class="layui-form-label" style="width: 150px;">频点</label>
 				    <div class="layui-input-inline">
-				      <input type="text" name="frequency" id="frequency"   autocomplete="off" class="layui-input">
+				      <input type="text" name="frequency" id="frequency"     value="'+obj.frequency+'"   autocomplete="off" class="layui-input">
 				    </div>
 				  </div>
 				  
@@ -273,15 +273,15 @@
 				    <div class="layui-form-item">
 				    <label class="layui-form-label" style="width: 150px;">尝试次数</label>
 				    <div class="layui-input-inline">
-				      <input type="text" name="rrcSuccRateAttempt" id="rrcSuccRateAttempt"   autocomplete="off" class="layui-input">
+				      <input type="text" name="rrcSuccRateAttempt" id="rrcSuccRateAttempt"  value="'+obj.rrcSuccRateAttempt+'"    autocomplete="off" class="layui-input">
 				    </div>
 				    <label class="layui-form-label" style="width: 150px;">成功次数</label>
 				    <div class="layui-input-inline">
-				      <input type="text" name="rrcSuccRateSucc" id="rrcSuccRateSucc"   autocomplete="off" class="layui-input">
+				      <input type="text" name="rrcSuccRateSucc" id="rrcSuccRateSucc"   value="'+obj.rrcSuccRateSucc+'"  autocomplete="off" class="layui-input">
 				    </div>
 				    <label class="layui-form-label" style="width: 150px;">失败次数</label>
 				    <div class="layui-input-inline">
-				      <input type="text" name="rrcSuccRateFailure" id="rrcSuccRateFailure"   autocomplete="off" class="layui-input">
+				      <input type="text" name="rrcSuccRateFailure" id="rrcSuccRateFailure"   value="'+obj.rrcSuccRateFailure+'"  autocomplete="off" class="layui-input">
 				    </div>
 				  </div>
 				  
@@ -290,15 +290,15 @@
 				    <div class="layui-form-item">
 				    <label class="layui-form-label" style="width: 150px;">尝试次数</label>
 				    <div class="layui-input-inline">
-				      <input type="text" name="erabSuccRateAttempt" id="erabSuccRateAttempt"   autocomplete="off" class="layui-input">
+				      <input type="text" name="erabSuccRateAttempt" id="erabSuccRateAttempt"   value="'+obj.erabSuccRateAttempt+'"   autocomplete="off" class="layui-input">
 				    </div>
 				    <label class="layui-form-label" style="width: 150px;">成功次数</label>
 				    <div class="layui-input-inline">
-				      <input type="text" name="erabSuccRateSucc" id="erabSuccRateSucc"   autocomplete="off" class="layui-input">
+				      <input type="text" name="erabSuccRateSucc" id="erabSuccRateSucc"    value="'+obj.erabSuccRateSucc+'"   autocomplete="off" class="layui-input">
 				    </div>
 				    <label class="layui-form-label" style="width: 150px;">失败次数</label>
 				    <div class="layui-input-inline">
-				      <input type="text" name="erabSuccRateFailure" id="erabSuccRateFailure"   autocomplete="off" class="layui-input">
+				      <input type="text" name="erabSuccRateFailure" id="erabSuccRateFailure"  value="'+obj.erabSuccRateFailure+'"   autocomplete="off" class="layui-input">
 				    </div>
 				  </div>
 				  
@@ -306,15 +306,15 @@
 				    <div class="layui-form-item">
 				    <label class="layui-form-label" style="width: 150px;">尝试次数</label>
 				    <div class="layui-input-inline">
-				      <input type="text" name="accessSuccRateAttempt" id="accessSuccRateAttempt"   autocomplete="off" class="layui-input">
+				      <input type="text" name="accessSuccRateAttempt" id="accessSuccRateAttempt"   value="'+obj.accessSuccRateAttempt+'"   autocomplete="off" class="layui-input">
 				    </div>
 				    <label class="layui-form-label" style="width: 150px;">成功次数</label>
 				    <div class="layui-input-inline">
-				      <input type="text" name="accessSuccRateSucc" id="accessSuccRateSucc"   autocomplete="off" class="layui-input">
+				      <input type="text" name="accessSuccRateSucc" id="accessSuccRateSucc"   value="'+obj.accessSuccRateSucc+'"  autocomplete="off" class="layui-input">
 				    </div>
 				    <label class="layui-form-label" style="width: 150px;">失败次数</label>
 				    <div class="layui-input-inline">
-				      <input type="text" name="accessSuccRateFailure" id="accessSuccRateFailure"   autocomplete="off" class="layui-input">
+				      <input type="text" name="accessSuccRateFailure" id="accessSuccRateFailure"   value="'+obj.accessSuccRateFailure+'"  autocomplete="off" class="layui-input">
 				    </div>
 				  </div>
 				  
@@ -322,114 +322,115 @@
 				    <div class="layui-form-item">
 				    <label class="layui-form-label" style="width: 150px;">尝试次数</label>
 				    <div class="layui-input-inline">
-				      <input type="text" name="volteFailureAttempt" id="volteFailureAttempt"   autocomplete="off" class="layui-input">
+				      <input type="text" name="volteFailureAttempt" id="volteFailureAttempt"  value="'+obj.volteFailureAttempt+'"   autocomplete="off" class="layui-input">
 				    </div>
 				    <label class="layui-form-label" style="width: 150px;">成功次数</label>
 				    <div class="layui-input-inline">
-				      <input type="text" name="volteFailureSucc" id="volteFailureSucc"   autocomplete="off" class="layui-input">
+				      <input type="text" name="volteFailureSucc" id="volteFailureSucc"  value="'+obj.volteFailureSucc+'"    autocomplete="off" class="layui-input">
 				    </div>
 				    <label class="layui-form-label" style="width: 150px;">失败次数</label>
 				    <div class="layui-input-inline">
-				      <input type="text" name="volteFailureFailure" id="volteFailureFailure"   autocomplete="off" class="layui-input">
+				      <input type="text" name="volteFailureFailure" id="volteFailureFailure"  value="'+obj.volteFailureFailure+'"   autocomplete="off" class="layui-input">
 				    </div>
 				  </div>
 				 <blockquote class="layui-elem-quote">TD-LTE网络重选至LTE-FDD网络成功率</blockquote>
 				    <div class="layui-form-item">
 				    <label class="layui-form-label" style="width: 150px;">尝试次数</label>
 				    <div class="layui-input-inline">
-				      <input type="text" name="tdLteCxAttempt" id="tdLteCxAttempt"   autocomplete="off" class="layui-input">
+				      <input type="text" name="tdLteCxAttempt" id="tdLteCxAttempt" value="'+obj.tdLteCxAttempt+'"     autocomplete="off" class="layui-input">
 				    </div>
 				    <label class="layui-form-label" style="width: 150px;">成功次数</label>
 				    <div class="layui-input-inline">
-				      <input type="text" name="tdLteCxSucc" id="tdLteCxSucc"   autocomplete="off" class="layui-input">
+				      <input type="text" name="tdLteCxSucc" id="tdLteCxSucc"  value="'+obj.tdLteCxSucc+'"    autocomplete="off" class="layui-input">
 				    </div>
 				    <label class="layui-form-label" style="width: 150px;">失败次数</label>
 				    <div class="layui-input-inline">
-				      <input type="text" name="tdLteCxFailure" id="tdLteCxFailure"   autocomplete="off" class="layui-input">
+				      <input type="text" name="tdLteCxFailure" id="tdLteCxFailure"  value="'+obj.tdLteCxFailure+'"    autocomplete="off" class="layui-input">
 				    </div>
 				  </div>
 				 <blockquote class="layui-elem-quote">LTE-FDD网络重选至TD-LTE网络成功率</blockquote>
 				    <div class="layui-form-item">
 				    <label class="layui-form-label" style="width: 150px;">尝试次数</label>
 				    <div class="layui-input-inline">
-				      <input type="text" name="lteFddCxAttempt" id="lteFddCxAttempt"   autocomplete="off" class="layui-input">
+				      <input type="text" name="lteFddCxAttempt" id="lteFddCxAttempt"  value="'+obj.lteFddCxAttempt+'"     autocomplete="off" class="layui-input">
 				    </div>
 				    <label class="layui-form-label" style="width: 150px;">成功次数</label>
 				    <div class="layui-input-inline">
-				      <input type="text" name="lteFddCxSucc" id="lteFddCxSucc"   autocomplete="off" class="layui-input">
+				      <input type="text" name="lteFddCxSucc" id="lteFddCxSucc"  value="'+obj.lteFddCxSucc+'"    autocomplete="off" class="layui-input">
 				    </div>
 				    <label class="layui-form-label" style="width: 150px;">失败次数</label>
 				    <div class="layui-input-inline">
-				      <input type="text" name="lteFddCxFailure" id="lteFddCxFailure"   autocomplete="off" class="layui-input">
+				      <input type="text" name="lteFddCxFailure" id="lteFddCxFailure"  value="'+obj.lteFddCxFailure+'"     autocomplete="off" class="layui-input">
 				    </div>
 				  </div>
 				 <blockquote class="layui-elem-quote">TD-LTE网络切换至LTE-FDD网络成功率</blockquote>
 				    <div class="layui-form-item">
 				    <label class="layui-form-label" style="width: 150px;">尝试次数</label>
 				    <div class="layui-input-inline">
-				      <input type="text" name="tdLteChangeAttempt" id="tdLteChangeAttempt"   autocomplete="off" class="layui-input">
+				      <input type="text" name="tdLteChangeAttempt" id="tdLteChangeAttempt"   value="'+obj.tdLteChangeAttempt+'"   autocomplete="off" class="layui-input">
 				    </div>
 				    <label class="layui-form-label" style="width: 150px;">成功次数</label>
 				    <div class="layui-input-inline">
-				      <input type="text" name="tdLteChangeSucc" id="tdLteChangeSucc"   autocomplete="off" class="layui-input">
+				      <input type="text" name="tdLteChangeSucc" id="tdLteChangeSucc"   value="'+obj.tdLteChangeSucc+'"   autocomplete="off" class="layui-input">
 				    </div>
 				    <label class="layui-form-label" style="width: 150px;">失败次数</label>
 				    <div class="layui-input-inline">
-				      <input type="text" name="tdLteChangeFailure" id="tdLteChangeFailure"   autocomplete="off" class="layui-input">
+				      <input type="text" name="tdLteChangeFailure" id="tdLteChangeFailure"  value="'+obj.tdLteChangeFailure+'"    autocomplete="off" class="layui-input">
 				    </div>
 				  </div>
 				 <blockquote class="layui-elem-quote">LTE-FDD网络切换至TD-LTE网络成功率</blockquote>
 				    <div class="layui-form-item">
 				    <label class="layui-form-label" style="width: 150px;">尝试次数</label>
 				    <div class="layui-input-inline">
-				      <input type="text" name="lteFddChangeAttempt" id="lteFddChangeAttempt"   autocomplete="off" class="layui-input">
+				      <input type="text" name="lteFddChangeAttempt" id="lteFddChangeAttempt"   value="'+obj.lteFddChangeAttempt+'"     autocomplete="off" class="layui-input">
 				    </div>
 				    <label class="layui-form-label" style="width: 150px;">成功次数</label>
 				    <div class="layui-input-inline">
-				      <input type="text" name="lteFddChangeSucc" id="lteFddChangeSucc"   autocomplete="off" class="layui-input">
+				      <input type="text" name="lteFddChangeSucc" id="lteFddChangeSucc"   value="'+obj.lteFddChangeSucc+'"     autocomplete="off" class="layui-input">
 				    </div>
 				    <label class="layui-form-label" style="width: 150px;">失败次数</label>
 				    <div class="layui-input-inline">
-				      <input type="text" name="lteFddChangeFailure" id="lteFddChangeFailure"   autocomplete="off" class="layui-input">
+				      <input type="text" name="lteFddChangeFailure" id="lteFddChangeFailure"   value="'+obj.lteFddChangeFailure+'"     autocomplete="off" class="layui-input">
 				    </div>
 				  </div>
 				 <blockquote class="layui-elem-quote">系统内切换</blockquote>
 				    <div class="layui-form-item">
 				    <label class="layui-form-label" style="width: 150px;">尝试次数</label>
 				    <div class="layui-input-inline">
-				      <input type="text" name="systemChangeAttempt" id="systemChangeAttempt"   autocomplete="off" class="layui-input">
+				      <input type="text" name="systemChangeAttempt" id="systemChangeAttempt"  value="'+obj.systemChangeAttempt+'"   autocomplete="off" class="layui-input">
 				    </div>
 				    <label class="layui-form-label" style="width: 150px;">成功次数</label>
 				    <div class="layui-input-inline">
-				      <input type="text" name="systemChangeSucc" id="systemChangeSucc"   autocomplete="off" class="layui-input">
+				      <input type="text" name="systemChangeSucc" id="systemChangeSucc"  value="'+obj.systemChangeSucc+'"   autocomplete="off" class="layui-input">
 				    </div>
 				    <label class="layui-form-label" style="width: 150px;">失败次数</label>
 				    <div class="layui-input-inline">
-				      <input type="text" name="systemChangeFailure" id="systemChangeFailure"   autocomplete="off" class="layui-input">
+				      <input type="text" name="systemChangeFailure" id="systemChangeFailure"  value="'+obj.systemChangeFailure+'"   autocomplete="off" class="layui-input">
 				    </div>
 				  </div>
 				 <blockquote class="layui-elem-quote">CSFB语音通话后返回成功率</blockquote>
 				    <div class="layui-form-item">
 				    <label class="layui-form-label" style="width: 150px;">尝试次数</label>
 				    <div class="layui-input-inline">
-				      <input type="text" name="csfbReturnAttempt" id="csfbReturnAttempt"   autocomplete="off" class="layui-input">
+				      <input type="text" name="csfbReturnAttempt" id="csfbReturnAttempt"  value="'+obj.csfbReturnAttempt+'"  autocomplete="off" class="layui-input">
 				    </div>
 				    <label class="layui-form-label" style="width: 150px;">成功次数</label>
 				    <div class="layui-input-inline">
-				      <input type="text" name="csfbReturnSucc" id="csfbReturnSucc"   autocomplete="off" class="layui-input">
+				      <input type="text" name="csfbReturnSucc" id="csfbReturnSucc"   value="'+obj.csfbReturnSucc+'" autocomplete="off" class="layui-input">
 				    </div>
 				    <label class="layui-form-label" style="width: 150px;">失败次数</label>
 				    <div class="layui-input-inline">
-				      <input type="text" name="csfbReturnFailure" id="csfbReturnFailure"   autocomplete="off" class="layui-input">
+				      <input type="text" name="csfbReturnFailure" id="csfbReturnFailure"   value="'+obj.csfbReturnFailure+'" autocomplete="off" class="layui-input">
 				    </div>
 				  </div>
-				</form>
+				</form> 
+				<hr class="layui-bg-orange">
+				-->
 	    </div>
 	    
 	    <!-- 基站测试信息 -->
 	    <div class="layui-tab-item">
-	    		
-	   <form class="layui-form" lay-filter="formDemo"  id="formDemo" style="margin-top: 20px;">
+	   <form class="layui-form" lay-filter="formDemo3"  id="formDemo3" style="margin-top: 20px;">
 		 <div class="layui-form-item">
 		    <label class="layui-form-label" style="width: 150px;">基站号</label>
 		    <div class="layui-input-inline">
@@ -527,7 +528,7 @@
 	    
 	    <!--小区测试信息 -->
 	    <div class="layui-tab-item">
-	    		<form class="layui-form" lay-filter="formDemo"  id="formDemo" style="margin-top: 20px;">
+	    		<form class="layui-form" lay-filter="formDemo4"  id="formDemo4" style="margin-top: 20px;">
 	
 				 <div class="layui-form-item">
 				    <label class="layui-form-label" style="width: 150px;">基站号</label>
@@ -875,11 +876,17 @@
 				    	$("#dealPersonIdModel").val(obj.dealPersonId);
 				    	//加载项目下的所有的用户
 						queryUserByProjId("dealPersonId",$("#dealPersonIdModel").val());
-				 		form.val("formDemo", obj);
+				 		form.val("formDemo1", obj);
 				 		form.render('select');
 				 		
 				 		
 				 		var lteFddCellChecks=obj.lteFddCellChecks;
+				 		if(lteFddCellChecks && lteFddCellChecks.length>0){
+				 			for(var i=0;i<lteFddCellChecks.length;i++){
+				 				var obj=lteFddCellChecks[i];
+				 				$("#cellCheckTab").append('<form class="layui-form" lay-filter="formDemo2"  id="formDemo2" style="margin-top: 20px;">				 <div class="layui-form-item">				    <label class="layui-form-label" style="width: 150px;">基站号</label>				    <div class="layui-input-inline">				     <input type="hidden" name="id" id="id" >				      <input type="text" name="mENodeBID" id="mENodeBID"  value="'+obj.mENodeBID+'"    autocomplete="off" class="layui-input">				    </div>				    				    <label class="layui-form-label" style="width: 150px;">基站名称</label>				    <div class="layui-input-inline" >				      <input type="text" name="mBaseStationName" id="mBaseStationName"  value="'+obj.mBaseStationName+'"    autocomplete="off" class="layui-input">				    </div>				    				    <label class="layui-form-label" style="width: 150px;">小区ID</label>				    <div class="layui-input-inline">				      <input type="text" name="cellId" id="cellId"   value="'+obj.cellId+'"   autocomplete="off" class="layui-input">				    </div>				  </div>																  <div class="layui-form-item">				    <label class="layui-form-label" style="width: 150px;">小区名字</label>				    <div class="layui-input-inline">				      <input type="text" name="cellName" id="cellName"     value="'+obj.cellName+'"  autocomplete="off" class="layui-input">				    </div>				    				    <label class="layui-form-label" style="width: 150px;">上下行子帧配比</label>				    <div class="layui-input-inline" >				      <input type="text" name="upDownRatio" id="upDownRatio"     value="'+obj.upDownRatio+'"  autocomplete="off" class="layui-input">				    </div>				    				    <label class="layui-form-label" style="width: 150px;">特殊子帧配比</label>				    <div class="layui-input-inline">				      <input type="text" name="specialRatio" id="specialRatio"    value="'+obj.specialRatio+'"   autocomplete="off" class="layui-input">				    </div>				  </div>				 				  				  <div class="layui-form-item">				    <label class="layui-form-label" style="width: 150px;">PCI</label>				    <div class="layui-input-inline">				      <input type="text" name="pci" id="pci"   autocomplete="off"  value="'+obj.pci+'"  class="layui-input">				    </div>				    <label class="layui-form-label" style="width: 150px;">ECI</label>				    <div class="layui-input-inline">				      <input type="text" name="eci" id="eci"   autocomplete="off"  value="'+obj.eci+'"  class="layui-input">				    </div>				    <label class="layui-form-label" style="width: 150px;">TAC</label>				    <div class="layui-input-inline">				      <input type="text" name="tac" id="tac"   autocomplete="off"  value="'+obj.tac+'"  class="layui-input">				    </div>				  </div>				  				  <div class="layui-form-item">				    <label class="layui-form-label" style="width: 150px;">EARFCN</label>				    <div class="layui-input-inline">				      <input type="text" name="earfcn" id="earfcn" value="'+obj.earfcn+'"    autocomplete="off" class="layui-input">				    </div>							    <label class="layui-form-label" style="width: 150px;">RsPower</label>				    <div class="layui-input-inline">				      <input type="text" name="rsPower" id="rsPower" value="'+obj.rsPower+'"   autocomplete="off" class="layui-input">				    </div>				    <label class="layui-form-label" style="width: 150px;">PA</label>				    <div class="layui-input-inline">				      <input type="text" name="pa" id="pa" value="'+obj.pa+'"    autocomplete="off" class="layui-input">				    </div>				  </div>				  				 				  				  <div class="layui-form-item">				    <label class="layui-form-label" style="width: 150px;">PB</label>				    <div class="layui-input-inline">				      <input type="text" name="pb" id="pb"  value="'+obj.pb+'"   autocomplete="off" class="layui-input">				    </div>				    <label class="layui-form-label" style="width: 150px;">天线挂高</label>				    <div class="layui-input-inline">				      <input type="text" name="antennaHangUp"  value="'+obj.antennaHangUp+'"  id="antennaHangUp"   autocomplete="off" class="layui-input">				    </div>				    <label class="layui-form-label" style="width: 150px;">方位角</label>				    <div class="layui-input-inline">				      <input type="text" name="azimuth" id="azimuth"   value="'+obj.azimuth+'"   autocomplete="off" class="layui-input">				    </div>							  </div>				  				  				  				  <div class="layui-form-item">				    <label class="layui-form-label" style="width: 150px;">机械下倾角</label>				    <div class="layui-input-inline">				      <input type="text" name="mechanicalLowerInclination" id="mechanicalLowerInclination"   value="'+obj.mechanicalLowerInclination+'"    autocomplete="off" class="layui-input">				    </div>				    <label class="layui-form-label" style="width: 150px;">预置电下倾</label>				    <div class="layui-input-inline">				      <input type="text" name="presetElectricDip" id="presetElectricDip"    value="'+obj.presetElectricDip+'"  autocomplete="off" class="layui-input">				    </div>				    <label class="layui-form-label" style="width: 150px;">总下倾角</label>				    <div class="layui-input-inline">				      <input type="text" name="mtotalLowerInclination" id="mtotalLowerInclination"    value="'+obj.mtotalLowerInclination+'"  autocomplete="off" class="layui-input">				    </div>							  </div>				  				  <div class="layui-form-item">				    <label class="layui-form-label" style="width: 150px;">FTP下载速率</label>				    <div class="layui-input-inline">				      <input type="text" name="ftpDown" id="ftpDown"    value="'+obj.ftpDown+'"    autocomplete="off" class="layui-input">				    </div>				    <label class="layui-form-label" style="width: 150px;">FTP上传速率</label>				    <div class="layui-input-inline">				      <input type="text" name="ftpUp" id="ftpUp"    value="'+obj.ftpUp+'"   autocomplete="off" class="layui-input">				    </div>				    <label class="layui-form-label" style="width: 150px;">频点</label>				    <div class="layui-input-inline">				      <input type="text" name="frequency" id="frequency"     value="'+obj.frequency+'"   autocomplete="off" class="layui-input">				    </div>				  </div>				  				 <blockquote class="layui-elem-quote">RRC Setup Success Rate</blockquote>				    <div class="layui-form-item">				    <label class="layui-form-label" style="width: 150px;">尝试次数</label>				    <div class="layui-input-inline">				      <input type="text" name="rrcSuccRateAttempt" id="rrcSuccRateAttempt"  value="'+obj.rrcSuccRateAttempt+'"    autocomplete="off" class="layui-input">				    </div>				    <label class="layui-form-label" style="width: 150px;">成功次数</label>				    <div class="layui-input-inline">				      <input type="text" name="rrcSuccRateSucc" id="rrcSuccRateSucc"   value="'+obj.rrcSuccRateSucc+'"  autocomplete="off" class="layui-input">				    </div>				    <label class="layui-form-label" style="width: 150px;">失败次数</label>				    <div class="layui-input-inline">				      <input type="text" name="rrcSuccRateFailure" id="rrcSuccRateFailure"   value="'+obj.rrcSuccRateFailure+'"  autocomplete="off" class="layui-input">				    </div>				  </div>				  				  				 <blockquote class="layui-elem-quote">ERAB Setup Success Rate</blockquote>				    <div class="layui-form-item">				    <label class="layui-form-label" style="width: 150px;">尝试次数</label>				    <div class="layui-input-inline">				      <input type="text" name="erabSuccRateAttempt" id="erabSuccRateAttempt"   value="'+obj.erabSuccRateAttempt+'"   autocomplete="off" class="layui-input">				    </div>				    <label class="layui-form-label" style="width: 150px;">成功次数</label>				    <div class="layui-input-inline">				      <input type="text" name="erabSuccRateSucc" id="erabSuccRateSucc"    value="'+obj.erabSuccRateSucc+'"   autocomplete="off" class="layui-input">				    </div>				    <label class="layui-form-label" style="width: 150px;">失败次数</label>				    <div class="layui-input-inline">				      <input type="text" name="erabSuccRateFailure" id="erabSuccRateFailure"  value="'+obj.erabSuccRateFailure+'"   autocomplete="off" class="layui-input">				    </div>				  </div>				  				 <blockquote class="layui-elem-quote">Access Success Rate</blockquote>				    <div class="layui-form-item">				    <label class="layui-form-label" style="width: 150px;">尝试次数</label>				    <div class="layui-input-inline">				      <input type="text" name="accessSuccRateAttempt" id="accessSuccRateAttempt"   value="'+obj.accessSuccRateAttempt+'"   autocomplete="off" class="layui-input">				    </div>				    <label class="layui-form-label" style="width: 150px;">成功次数</label>				    <div class="layui-input-inline">				      <input type="text" name="accessSuccRateSucc" id="accessSuccRateSucc"   value="'+obj.accessSuccRateSucc+'"  autocomplete="off" class="layui-input">				    </div>				    <label class="layui-form-label" style="width: 150px;">失败次数</label>				    <div class="layui-input-inline">				      <input type="text" name="accessSuccRateFailure" id="accessSuccRateFailure"   value="'+obj.accessSuccRateFailure+'"  autocomplete="off" class="layui-input">				    </div>				  </div>				  				 <blockquote class="layui-elem-quote">VOLTE掉话率</blockquote>				    <div class="layui-form-item">				    <label class="layui-form-label" style="width: 150px;">尝试次数</label>				    <div class="layui-input-inline">				      <input type="text" name="volteFailureAttempt" id="volteFailureAttempt"  value="'+obj.volteFailureAttempt+'"   autocomplete="off" class="layui-input">				    </div>				    <label class="layui-form-label" style="width: 150px;">成功次数</label>				    <div class="layui-input-inline">				      <input type="text" name="volteFailureSucc" id="volteFailureSucc"  value="'+obj.volteFailureSucc+'"    autocomplete="off" class="layui-input">				    </div>				    <label class="layui-form-label" style="width: 150px;">失败次数</label>				    <div class="layui-input-inline">				      <input type="text" name="volteFailureFailure" id="volteFailureFailure"  value="'+obj.volteFailureFailure+'"   autocomplete="off" class="layui-input">				    </div>				  </div>				 <blockquote class="layui-elem-quote">TD-LTE网络重选至LTE-FDD网络成功率</blockquote>				    <div class="layui-form-item">				    <label class="layui-form-label" style="width: 150px;">尝试次数</label>				    <div class="layui-input-inline">				      <input type="text" name="tdLteCxAttempt" id="tdLteCxAttempt" value="'+obj.tdLteCxAttempt+'"     autocomplete="off" class="layui-input">				    </div>				    <label class="layui-form-label" style="width: 150px;">成功次数</label>				    <div class="layui-input-inline">				      <input type="text" name="tdLteCxSucc" id="tdLteCxSucc"  value="'+obj.tdLteCxSucc+'"    autocomplete="off" class="layui-input">				    </div>				    <label class="layui-form-label" style="width: 150px;">失败次数</label>				    <div class="layui-input-inline">				      <input type="text" name="tdLteCxFailure" id="tdLteCxFailure"  value="'+obj.tdLteCxFailure+'"    autocomplete="off" class="layui-input">				    </div>				  </div>				 <blockquote class="layui-elem-quote">LTE-FDD网络重选至TD-LTE网络成功率</blockquote>				    <div class="layui-form-item">				    <label class="layui-form-label" style="width: 150px;">尝试次数</label>				    <div class="layui-input-inline">				      <input type="text" name="lteFddCxAttempt" id="lteFddCxAttempt"  value="'+obj.lteFddCxAttempt+'"     autocomplete="off" class="layui-input">				    </div>				    <label class="layui-form-label" style="width: 150px;">成功次数</label>				    <div class="layui-input-inline">				      <input type="text" name="lteFddCxSucc" id="lteFddCxSucc"  value="'+obj.lteFddCxSucc+'"    autocomplete="off" class="layui-input">				    </div>				    <label class="layui-form-label" style="width: 150px;">失败次数</label>				    <div class="layui-input-inline">				      <input type="text" name="lteFddCxFailure" id="lteFddCxFailure"  value="'+obj.lteFddCxFailure+'"     autocomplete="off" class="layui-input">				    </div>				  </div>				 <blockquote class="layui-elem-quote">TD-LTE网络切换至LTE-FDD网络成功率</blockquote>				    <div class="layui-form-item">				    <label class="layui-form-label" style="width: 150px;">尝试次数</label>				    <div class="layui-input-inline">				      <input type="text" name="tdLteChangeAttempt" id="tdLteChangeAttempt"   value="'+obj.tdLteChangeAttempt+'"   autocomplete="off" class="layui-input">				    </div>				    <label class="layui-form-label" style="width: 150px;">成功次数</label>				    <div class="layui-input-inline">				      <input type="text" name="tdLteChangeSucc" id="tdLteChangeSucc"   value="'+obj.tdLteChangeSucc+'"   autocomplete="off" class="layui-input">				    </div>				    <label class="layui-form-label" style="width: 150px;">失败次数</label>				    <div class="layui-input-inline">				      <input type="text" name="tdLteChangeFailure" id="tdLteChangeFailure"  value="'+obj.tdLteChangeFailure+'"    autocomplete="off" class="layui-input">				    </div>				  </div>				 <blockquote class="layui-elem-quote">LTE-FDD网络切换至TD-LTE网络成功率</blockquote>				    <div class="layui-form-item">				    <label class="layui-form-label" style="width: 150px;">尝试次数</label>				    <div class="layui-input-inline">				      <input type="text" name="lteFddChangeAttempt" id="lteFddChangeAttempt"   value="'+obj.lteFddChangeAttempt+'"     autocomplete="off" class="layui-input">				    </div>				    <label class="layui-form-label" style="width: 150px;">成功次数</label>				    <div class="layui-input-inline">				      <input type="text" name="lteFddChangeSucc" id="lteFddChangeSucc"   value="'+obj.lteFddChangeSucc+'"     autocomplete="off" class="layui-input">				    </div>				    <label class="layui-form-label" style="width: 150px;">失败次数</label>				    <div class="layui-input-inline">				      <input type="text" name="lteFddChangeFailure" id="lteFddChangeFailure"   value="'+obj.lteFddChangeFailure+'"     autocomplete="off" class="layui-input">				    </div>				  </div>				 <blockquote class="layui-elem-quote">系统内切换</blockquote>				    <div class="layui-form-item">				    <label class="layui-form-label" style="width: 150px;">尝试次数</label>				    <div class="layui-input-inline">				      <input type="text" name="systemChangeAttempt" id="systemChangeAttempt"  value="'+obj.systemChangeAttempt+'"   autocomplete="off" class="layui-input">				    </div>				    <label class="layui-form-label" style="width: 150px;">成功次数</label>				    <div class="layui-input-inline">				      <input type="text" name="systemChangeSucc" id="systemChangeSucc"  value="'+obj.systemChangeSucc+'"   autocomplete="off" class="layui-input">				    </div>				    <label class="layui-form-label" style="width: 150px;">失败次数</label>				    <div class="layui-input-inline">				      <input type="text" name="systemChangeFailure" id="systemChangeFailure"  value="'+obj.systemChangeFailure+'"   autocomplete="off" class="layui-input">				    </div>				  </div>				 <blockquote class="layui-elem-quote">CSFB语音通话后返回成功率</blockquote>				    <div class="layui-form-item">				    <label class="layui-form-label" style="width: 150px;">尝试次数</label>				    <div class="layui-input-inline">				      <input type="text" name="csfbReturnAttempt" id="csfbReturnAttempt"  value="'+obj.csfbReturnAttempt+'"  autocomplete="off" class="layui-input">				    </div>				    <label class="layui-form-label" style="width: 150px;">成功次数</label>				    <div class="layui-input-inline">				      <input type="text" name="csfbReturnSucc" id="csfbReturnSucc"   value="'+obj.csfbReturnSucc+'" autocomplete="off" class="layui-input">				    </div>				    <label class="layui-form-label" style="width: 150px;">失败次数</label>				    <div class="layui-input-inline">				      <input type="text" name="csfbReturnFailure" id="csfbReturnFailure"   value="'+obj.csfbReturnFailure+'" autocomplete="off" class="layui-input">				    </div>				  </div>				</form> 				<hr class="layui-bg-orange">');
+				 			}
+				 		}
 				    	var lteFddParameters=obj.lteFddParameters;
 				    	var lteFddStations=obj.lteFddStations;
 				    	console.info(lteFddCellChecks);
