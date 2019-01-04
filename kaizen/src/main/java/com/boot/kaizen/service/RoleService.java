@@ -10,7 +10,7 @@ import com.boot.kaizen.util.JsonMsgUtil;
 
 public interface RoleService {
 
-	public List<TreeTable> list(LoginUser user);
+	public List<TreeTable> list(LoginUser user,String projName);
 
 	public JsonMsgUtil edit(SysRole sysRole, String permissionIds,String projId);
 

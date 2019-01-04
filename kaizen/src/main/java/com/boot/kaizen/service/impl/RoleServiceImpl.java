@@ -48,14 +48,14 @@ public class RoleServiceImpl implements RoleService {
 	private SysRoleUserService roleUserService;
 
 	@Override
-	public List<TreeTable> list(LoginUser user) {
+	public List<TreeTable> list(LoginUser user,String projName) {
 
 		Long projId = null;
 		if (Constant.SYSTEM_ID_PROJECT != user.getProjId()) {
 			projId = user.getProjId();
 		}
 		List<TreeTable> treeTables = new ArrayList<TreeTable>();
-		List<SysProject> projects = projectService.findWithRoleRealtion(projId);
+		List<SysProject> projects = projectService.findWithRoleRealtion(projId,projName);
 		if (projects != null && projects.size() > 0) {
 			for (SysProject project : projects) {
 				TreeTable table = new TreeTable(project.getId(), project.getProjName(), "", project.getCreateTime(),

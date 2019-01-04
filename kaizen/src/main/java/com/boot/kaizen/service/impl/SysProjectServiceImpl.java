@@ -114,8 +114,8 @@ public class SysProjectServiceImpl implements SysProjectService {
 	}
 
 	@Override
-	public List<SysProject> findWithRoleRealtion(Long projId) {
-		return projectDao.findWithRoleRealtion(projId);
+	public List<SysProject> findWithRoleRealtion(Long projId,String projName) {
+		return projectDao.findWithRoleRealtion(projId,projName);
 	}
 
 	@Override

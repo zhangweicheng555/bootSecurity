@@ -30,13 +30,13 @@ public class DistributeController {
 	
 	@PreAuthorize("hasAuthority('sys:distribute:list')")
 	@RequestMapping(value = "/list")
-	public List<DistributeTreeTable> list() {
+	public List<DistributeTreeTable> list(@RequestParam(value="projName",required=false) String projName) {
 		LoginUser user = UserUtil.getLoginUser();
 		Long projId=null;
 		if (Constant.SYSTEM_ID_PROJECT !=user.getProjId()) {
 			projId=user.getProjId();
 		}
-		return distributeService.list(projId);
+		return distributeService.list(projId,projName);
 	}
 
 	@RequestMapping(value = "/findUserIds")

@@ -58,7 +58,7 @@ public interface SysProjectService {
 	 * @author weichengz
 	 * @date 2018年10月4日 上午1:54:49
 	 */
-	public List<SysProject> findWithRoleRealtion(@Param("projId") Long projId);
+	public List<SysProject> findWithRoleRealtion(@Param("projId") Long projId,@Param("projName") String projName);
 
 	/**
 	 * @Description: 通过用户名字随机查询所在项目中的一个项目

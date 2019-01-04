@@ -18,6 +18,9 @@
 		 <if test="projId != null and projId != ''">
             and p.id=#{projId}
         </if>
+		 <if test="projName != null and projName != ''">
+            and p.projName like '%${projName}%'
+        </if>
 		 order by p.sort asc
 	</select>
 	

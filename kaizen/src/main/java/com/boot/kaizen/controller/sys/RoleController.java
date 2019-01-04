@@ -44,9 +44,9 @@ public class RoleController {
 	 * @date 2018年10月5日 下午2:42:05
 	 */
 	@RequestMapping(value = "/list")
-	public List<TreeTable> list() {
+	public List<TreeTable> list(@RequestParam(value="projName",required=false) String projName) {
 		LoginUser user = UserUtil.getLoginUser();
-		return roleService.list(user);
+		return roleService.list(user,projName);
 	}
 
 	/**
