@@ -28,7 +28,7 @@ import com.boot.kaizen.service.log.ISysLogService;
 import com.boot.kaizen.util.HttpUtil;
 
 /**
- * token过滤器
+ * token过滤器  所有的请求都会拦截
  * 
  * @author weichengz
  * @date 2018年9月2日 上午2:11:55
