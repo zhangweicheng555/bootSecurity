@@ -27,6 +27,7 @@ public class LteFddPlan implements Serializable {
 	private String dealPersonId;// 接收改计划任务的人的id
 
 	private Integer status;// 最终是不是报告可以审核 之后最后一步的时候 才设置为1 0 未审核 1审核通过 2审核不通过
+	private String remark;// 审核描述
 
 	// common
 	private Integer projId;
@@ -50,6 +51,19 @@ public class LteFddPlan implements Serializable {
 
 	public void setRegion(String region) {
 		this.region = region;
+	}
+
+	
+	
+
+	
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
 	public String getAddress() {

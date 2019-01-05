@@ -78,6 +78,7 @@ public class LteFddPlanController {
 		LoginUser loginUser = UserUtil.getLoginUser();
 		return lteFddPlanService.edit(lteFddPlan, loginUser);
 	}
+	
 
 	/**
 	 * 
@@ -114,5 +115,16 @@ public class LteFddPlanController {
 	@RequestMapping(value = "/queryCheckInfoById", method = RequestMethod.POST)
 	public JsonMsgUtil queryCheckInfoById(@RequestParam("id") String id) {
 		return lteFddPlanService.queryCheckInfoById(id);
+	}
+	/**
+	 * 导出报告
+	* @Description: TODO
+	* @author weichengz
+	* @date 2019年1月5日 上午11:17:50
+	 */
+	@RequestMapping(value = "/exportPlanDoc", method = RequestMethod.POST)
+	public void exportPlanDoc(@RequestParam("id") String id, HttpServletResponse response, HttpSession session) {
+		System.out.println(id);
+		System.out.println("-----------------------------------------------------------");
 	}
 }

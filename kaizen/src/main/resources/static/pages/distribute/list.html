@@ -38,11 +38,11 @@
                 <div>
                     <div class="widget-body no-padding">
                         <table id="dt-table" class="table table-striped table-bordered table-hover" style="width:100%">
-                          <!--    <tr>
+                             <tr>
                                  <th style="text-align: center;" width="20%">系统角色名称</th>
 								 <th style="text-align: center;">人员</th>     
 								 <th style="text-align: center;" width="5%">操作</th>
-                             </tr> -->
+                             </tr> 
                         </table>
                     </div>
                 </div> 
@@ -64,7 +64,21 @@
 <script type="text/javascript">
 
 var pers = checkPermission();
-initRoleList("");
+
+//查询过滤条件
+queryFilterCondition();
+function queryFilterCondition(){
+	$.ajax({
+		type : 'get',
+		url : '/role/getProjectFilter',
+		contentType: "application/json; charset=utf-8",  
+		async:false,
+		success : function(data) {
+			$("#projName").val(data.name);
+			initRoleList(data.name);
+		}
+	})
+}
 
 function initRoleList(projName){
 	$.ajax({
@@ -74,8 +88,6 @@ function initRoleList(projName){
 		async:false,
 		data:{"projName":projName},
 		success : function(data) {
-			$("#dt-table").empty();
-			$("#dt-table").append(' <tr>     <th style="text-align: center;" width="20%">系统角色名称</th>	 <th style="text-align: center;">人员</th>     	 <th style="text-align: center;" width="5%">操作</th>       </tr> ');
 			var length = data.length;
 			for(var i=0; i<length; i++){
 				var d = data[i];
@@ -134,15 +146,20 @@ function fresh(){
 	 location.href = "/pages/distribute/list.html";
 };
 
+
 $(function(){
 	$("#searchBt").click(function(){
 		var projName=$("#projName").val();
-		if(projName){
-			initRoleList(projName);
-		}else{
-			parent.layer.msg('输入要搜索的项目名称');
-		}
-		
+		$.ajax({
+			type : 'get',
+			url : '/role/setProjectFilter',
+			contentType: "application/json; charset=utf-8",  
+			data:{"projName":projName},
+			async:false,
+			success : function(data) {
+				fresh();
+			}
+		})
 	});
 });
 </script>

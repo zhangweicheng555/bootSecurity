@@ -31,6 +31,7 @@
     <result column="region" jdbcType="VARCHAR" property="region" />
     <result column="address" jdbcType="VARCHAR" property="address" />
     <result column="commonStationName" jdbcType="VARCHAR" property="commonStationName" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
   </resultMap>
   
   
@@ -39,7 +40,7 @@
     id, mENodeBID, mBaseStationName, mBaseStationType, mAltitude, mLongitude, mLatitude, 
     mTac, testPerson, testPersonPhone, backPerson, backPersonPhone, testTime, dealPersonId, 
     status, projId, createTime, updateTime, createAt, districtCountry, deviceType, videoFrequency, 
-    broadBand, ipConfig,region,address,commonStationName
+    broadBand, ipConfig,region,address,commonStationName,remark
   </sql>
   
   <select id="query"  resultMap="BaseResultMap">
@@ -196,6 +197,9 @@
       <if test="commonStationName != null">
         commonStationName,
       </if>
+      <if test="remark != null">
+        remark,
+      </if>
     </trim>
     
     
@@ -281,6 +285,9 @@
       <if test="commonStationName != null">
         #{commonStationName,jdbcType=VARCHAR},
       </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
     </trim>
     
   </insert>
@@ -365,6 +372,9 @@
       </if>
       <if test="commonStationName != null">
         commonStationName = #{commonStationName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}

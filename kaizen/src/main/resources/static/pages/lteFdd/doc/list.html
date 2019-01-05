@@ -52,6 +52,14 @@
 	</div>
 </div>
 
+
+
+	
+	<iframe src="about:blank" name="blankFrame" id="blankFrame" style="display: none;"></iframe>
+	<form id="myform" target="blankFrame" action="/fdd/plan/exportPlanDoc" method="post">
+		<input id="id"  name="id" type="hidden"/>
+		<input id="token"  name="token" type="hidden"/>
+	</form> 
 </body>
 </html>
 
@@ -85,7 +93,7 @@
 	      ,{title: '序号',width:'5%',templet: '#indexTpl',align:'center'}
 	      ,{field:'mENodeBID',   width:'19%', title: '基站号',align:'center'}
 	      ,{field:'mBaseStationName',  width:'19%', title: '基站名称',align:'center'}
-	      ,{field:'status',   width:'17%', title: '审核状态',align:'center', templet: '#statusTpl'}
+	      ,{field:'status',   width:'16%', title: '审核状态',align:'center', templet: '#statusTpl'}
 	      ,{field:'testTime', width:'19%', title: '测试时间',align:'center'}
 	      ,{title:'操作', toolbar: '#editBtnBar', width:'19%',align:'center', fixed: 'right'}
 	    ]]
@@ -128,7 +136,22 @@
 	  table.on('tool(infolist)', function(obj){
 	    var row = obj.data;
 	    if(obj.event === 'check'){//审核
-		    common.openEditDialog(fresh,"审核","pages/lteFdd/doc/check.html?id="+row.id,"1200px","620px",false,"确定","取消","/fdd/plan/check");
+		    common.openEditDialog(fresh,"审核","pages/lteFdd/doc/check.html?id="+row.id,"1200px","620px",false,"确定","取消","/fdd/plan/edit");
+	    }else if(obj.event === 'export'){
+	    	 var token = localStorage.getItem("token");
+			  if (token != null && token.trim().length != 0) {
+				  common.showLoadingTimeDialog(5000);
+			  	  var id =row.id;
+			  	  if(id){
+				  	  $("#token").val(token);
+				  	  $("#id").val(id);
+				  	  $("#myform").submit();
+			  	  }else{
+			  		 parent.layer.msg('获取项目ID失败');
+			  	  }
+			  }else{
+				  parent.layer.msg('请重新登录');
+			  }
 	    }
 	  });
 	

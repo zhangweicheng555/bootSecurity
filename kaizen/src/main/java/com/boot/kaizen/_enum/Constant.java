@@ -8,4 +8,8 @@ public class Constant {
 
 	/** 系统项目 */
 	public static final Long SYSTEM_ID_PROJECT = 9L;
+	
+	
+	/** 角色项目过滤条件使用 */
+	public static  String SYSTEM_ROLE_PROJECT_FILTER = "";
 }

@@ -1,7 +1,11 @@
 package com.boot.kaizen.controller.sys;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -133,5 +137,34 @@ public class RoleController {
 	public JsonMsgUtil chechUnique(@RequestParam(value = "name", required = true) String name) {
 		LoginUser loginUser = UserUtil.getLoginUser();
 		return roleService.chechUnique(name,loginUser.getProjId());
+	}
+	/**
+	 * 角色项目过滤
+	* @Description: TODO
+	* @author weichengz
+	* @date 2019年1月5日 下午1:09:35
+	 */
+	@RequestMapping(value = "/getProjectFilter")
+	public Map<String, Object> getProjectFilter() {
+		Map<String, Object> map=new HashMap<>();
+		map.put("name", Constant.SYSTEM_ROLE_PROJECT_FILTER);
+		return map;
+	}
+	/**
+	 * 角色项目过滤
+	 * @Description: TODO
+	 * @author weichengz
+	 * @date 2019年1月5日 下午1:09:35
+	 */
+	@RequestMapping(value = "/setProjectFilter")
+	public Map<String, Object> setProjectFilter(@RequestParam(value = "projName", required = false) String projName) {
+		Map<String, Object> map=new HashMap<>();
+		if (StringUtils.isNoneBlank(projName)) {
+			Constant.SYSTEM_ROLE_PROJECT_FILTER=projName;
+		}else {
+			Constant.SYSTEM_ROLE_PROJECT_FILTER="";
+		}
+		map.put("name", Constant.SYSTEM_ROLE_PROJECT_FILTER);
+		return map;
 	}
 }
