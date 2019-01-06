@@ -64,6 +64,10 @@ class LtePlanServiceImpl implements ILtePlanService {
 	@Autowired
 	private ILteStationCheckService lteStationCheckService;
 	@Autowired
+	private ILteCellStructuralValidationService lteCellStructuralValidationService;
+	@Autowired
+	private ILteCellParamtersService lteCellParamtersService;
+	@Autowired
 	private UserService userService;
 	@Value("${files.lteImage}")
 	private String lteImage;
@@ -214,7 +218,16 @@ class LtePlanServiceImpl implements ILtePlanService {
 
 	@Override
 	public LtePlanInfo queryLtePlanInfoByEnobId(Long id) {
-		return planDao.queryLtePlanInfo(id);
+		LtePlanInfo ltePlanInfo = planDao.queryLtePlanInfo(id);
+		Map<String, Object> map=new HashMap<>();
+		map.put("testDate", ltePlanInfo.getTestTime());
+		map.put("projId", ltePlanInfo.getProjId());
+		map.put("eNodeBID", ltePlanInfo.getmENodeBID());
+		if (ltePlanInfo != null) {
+			ltePlanInfo.setLteCellStructuralValidations(lteCellStructuralValidationService.query(map));
+			ltePlanInfo.setLteCellParamtersList(lteCellParamtersService.query(map));
+		}
+		return ltePlanInfo;
 	}
 
 	@Override
@@ -304,159 +317,42 @@ class LtePlanServiceImpl implements ILtePlanService {
 				HSSFSheet sheetPic = workbook.getSheetAt(2);
 				HSSFPatriarch patriarch = sheetPic.createDrawingPatriarch();
 
-				String rsrpFtpUpImage1 = map.get("rsrpFtpUpImage1");
-				if (StringUtils.isNoneBlank(rsrpFtpUpImage1)) {
-					rsrpFtpUpImage1 = lteImage + rsrpFtpUpImage1;
+				String rsrpFtpUpImage = map.get("rsrpFtpUpImage");
+				if (StringUtils.isNoneBlank(rsrpFtpUpImage)) {
+					//这个是小区打点集合
+					String[] images=rsrpFtpUpImage.split(",");
+					for (int i = 0; i < images.length; i++) {
+						String image=images[i];
+						if (StringUtils.isNoneBlank(image)) {
+							createExcelPic(workbook, patriarch, image, (short) (i*6), 4, (short) ((i+1)*6), 5);
+						}
+					}
 				}
-				String sinrFtpUpImage1 = map.get("sinrFtpUpImage1");
-				if (StringUtils.isNoneBlank(sinrFtpUpImage1)) {
-					sinrFtpUpImage1 = lteImage + sinrFtpUpImage1;
+				
+				String sinrThresholdImage = map.get("sinrThresholdImage");
+				if (StringUtils.isNoneBlank(sinrThresholdImage)) {
+					sinrThresholdImage = lteImage + sinrThresholdImage;
 				}
-				String upFtpRateImage1 = map.get("upFtpRateImage1");
-				if (StringUtils.isNoneBlank(upFtpRateImage1)) {
-					upFtpRateImage1 = lteImage + upFtpRateImage1;
+				String rsrpThresholdImage = map.get("rsrpThresholdImage");
+				if (StringUtils.isNoneBlank(rsrpThresholdImage)) {
+					rsrpThresholdImage = lteImage + rsrpThresholdImage;
 				}
-				String rsrpFtpDownImage1 = map.get("rsrpFtpDownImage1");
-				if (StringUtils.isNoneBlank(rsrpFtpDownImage1)) {
-					rsrpFtpDownImage1 = lteImage + rsrpFtpDownImage1;
+				String upFtpRateThresholdImage = map.get("upFtpRateThresholdImage");
+				if (StringUtils.isNoneBlank(upFtpRateThresholdImage)) {
+					upFtpRateThresholdImage = lteImage + upFtpRateThresholdImage;
 				}
-				String sinrFtpDownImage1 = map.get("sinrFtpDownImage1");
-				if (StringUtils.isNoneBlank(sinrFtpDownImage1)) {
-					sinrFtpDownImage1 = lteImage + sinrFtpDownImage1;
+				String downFtpRateThresholdImage = map.get("downFtpRateThresholdImage");
+				if (StringUtils.isNoneBlank(downFtpRateThresholdImage)) {
+					downFtpRateThresholdImage = lteImage + downFtpRateThresholdImage;
 				}
-				String downFtpRateImage1 = map.get("downFtpRateImage1");
-				if (StringUtils.isNoneBlank(downFtpRateImage1)) {
-					downFtpRateImage1 = lteImage + downFtpRateImage1;
-				}
-				String sinrThresholdImage1 = map.get("sinrThresholdImage1");
-				if (StringUtils.isNoneBlank(sinrThresholdImage1)) {
-					sinrThresholdImage1 = lteImage + sinrThresholdImage1;
-				}
-				String rsrpThresholdImage1 = map.get("rsrpThresholdImage1");
-				if (StringUtils.isNoneBlank(rsrpThresholdImage1)) {
-					rsrpThresholdImage1 = lteImage + rsrpThresholdImage1;
-				}
-				String ftpRateThresholdImage1 = map.get("ftpRateThresholdImage1");
-				if (StringUtils.isNoneBlank(ftpRateThresholdImage1)) {
-					ftpRateThresholdImage1 = lteImage + ftpRateThresholdImage1;
-				}
-				String roadLogFile1 = map.get("roadLogFile1");
-				if (StringUtils.isNoneBlank(roadLogFile1)) {
-					roadLogFile1 = lteImage + roadLogFile1;
-				}
+				
 
-				String rsrpFtpUpImage2 = map.get("rsrpFtpUpImage2");
-				if (StringUtils.isNoneBlank(rsrpFtpUpImage2)) {
-					rsrpFtpUpImage2 = lteImage + rsrpFtpUpImage2;
-				}
-				String sinrFtpUpImage2 = map.get("sinrFtpUpImage2");
-				if (StringUtils.isNoneBlank(sinrFtpUpImage2)) {
-					sinrFtpUpImage2 = lteImage + sinrFtpUpImage2;
-				}
-				String upFtpRateImage2 = map.get("upFtpRateImage2");
-				if (StringUtils.isNoneBlank(upFtpRateImage2)) {
-					upFtpRateImage2 = lteImage + upFtpRateImage2;
-				}
-				String rsrpFtpDownImage2 = map.get("rsrpFtpDownImage2");
-				if (StringUtils.isNoneBlank(rsrpFtpDownImage2)) {
-					rsrpFtpDownImage2 = lteImage + rsrpFtpDownImage2;
-				}
-				String sinrFtpDownImage2 = map.get("sinrFtpDownImage2");
-				if (StringUtils.isNoneBlank(sinrFtpDownImage2)) {
-					sinrFtpDownImage2 = lteImage + sinrFtpDownImage2;
-				}
-				String downFtpRateImage2 = map.get("downFtpRateImage2");
-				if (StringUtils.isNoneBlank(downFtpRateImage2)) {
-					downFtpRateImage2 = lteImage + downFtpRateImage2;
-				}
-				String sinrThresholdImage2 = map.get("sinrThresholdImage2");
-				if (StringUtils.isNoneBlank(sinrThresholdImage2)) {
-					sinrThresholdImage2 = lteImage + sinrThresholdImage2;
-				}
-				String rsrpThresholdImage2 = map.get("rsrpThresholdImage2");
-				if (StringUtils.isNoneBlank(rsrpThresholdImage2)) {
-					rsrpThresholdImage2 = lteImage + rsrpThresholdImage2;
-				}
-				String ftpRateThresholdImage2 = map.get("ftpRateThresholdImage2");
-				if (StringUtils.isNoneBlank(ftpRateThresholdImage2)) {
-					ftpRateThresholdImage2 = lteImage + ftpRateThresholdImage2;
-				}
-				String roadLogFile2 = map.get("roadLogFile2");
-				if (StringUtils.isNoneBlank(roadLogFile2)) {
-					roadLogFile2 = lteImage + roadLogFile2;
-				}
-
-				String rsrpFtpUpImage3 = map.get("rsrpFtpUpImage3");
-				if (StringUtils.isNoneBlank(rsrpFtpUpImage3)) {
-					rsrpFtpUpImage3 = lteImage + rsrpFtpUpImage3;
-				}
-				String sinrFtpUpImage3 = map.get("sinrFtpUpImage3");
-				if (StringUtils.isNoneBlank(sinrFtpUpImage3)) {
-					sinrFtpUpImage3 = lteImage + sinrFtpUpImage3;
-				}
-				String upFtpRateImage3 = map.get("upFtpRateImage3");
-				if (StringUtils.isNoneBlank(upFtpRateImage3)) {
-					upFtpRateImage3 = lteImage + upFtpRateImage3;
-				}
-				String rsrpFtpDownImage3 = map.get("rsrpFtpDownImage3");
-				if (StringUtils.isNoneBlank(rsrpFtpDownImage3)) {
-					rsrpFtpDownImage3 = lteImage + rsrpFtpDownImage3;
-				}
-				String sinrFtpDownImage3 = map.get("sinrFtpDownImage3");
-				if (StringUtils.isNoneBlank(sinrFtpDownImage3)) {
-					sinrFtpDownImage3 = lteImage + sinrFtpDownImage3;
-				}
-				String downFtpRateImage3 = map.get("downFtpRateImage3");
-				if (StringUtils.isNoneBlank(downFtpRateImage3)) {
-					downFtpRateImage3 = lteImage + downFtpRateImage3;
-				}
-				String sinrThresholdImage3 = map.get("sinrThresholdImage3");
-				if (StringUtils.isNoneBlank(sinrThresholdImage3)) {
-					sinrThresholdImage3 = lteImage + sinrThresholdImage3;
-				}
-				String rsrpThresholdImage3 = map.get("rsrpThresholdImage3");
-				if (StringUtils.isNoneBlank(rsrpThresholdImage3)) {
-					rsrpThresholdImage3 = lteImage + rsrpThresholdImage3;
-				}
-				String ftpRateThresholdImage3 = map.get("ftpRateThresholdImage3");
-				if (StringUtils.isNoneBlank(ftpRateThresholdImage3)) {
-					ftpRateThresholdImage3 = lteImage + ftpRateThresholdImage3;
-				}
-				String roadLogFile3 = map.get("roadLogFile3");
-				if (StringUtils.isNoneBlank(roadLogFile3)) {
-					roadLogFile3 = lteImage + roadLogFile3;
-				}
-
-				createExcelPic(workbook, patriarch, rsrpFtpUpImage1, (short) 0, 3, (short) 6, 4);
-				createExcelPic(workbook, patriarch, sinrFtpUpImage1, (short) 6, 3, (short) 13, 4);
-				createExcelPic(workbook, patriarch, upFtpRateImage1, (short) 0, 5, (short) 6, 6);
-				createExcelPic(workbook, patriarch, rsrpFtpDownImage1, (short) 6, 5, (short) 13, 6);
-				createExcelPic(workbook, patriarch, sinrFtpDownImage1, (short) 0, 7, (short) 6, 8);
-				createExcelPic(workbook, patriarch, downFtpRateImage1, (short) 6, 7, (short) 13, 8);
-				createExcelPic(workbook, patriarch, sinrThresholdImage1, (short) 0, 9, (short) 6, 10);
-				createExcelPic(workbook, patriarch, rsrpThresholdImage1, (short) 6, 9, (short) 13, 10);
-				createExcelPic(workbook, patriarch, ftpRateThresholdImage1, (short) 0, 11, (short) 6, 12);
-
-				createExcelPic(workbook, patriarch, rsrpFtpUpImage2, (short) 13, 3, (short) 19, 4);
-				createExcelPic(workbook, patriarch, sinrFtpUpImage2, (short) 19, 3, (short) 26, 4);
-				createExcelPic(workbook, patriarch, upFtpRateImage2, (short) 13, 5, (short) 19, 6);
-				createExcelPic(workbook, patriarch, rsrpFtpDownImage2, (short) 19, 5, (short) 26, 6);
-				createExcelPic(workbook, patriarch, sinrFtpDownImage2, (short) 13, 7, (short) 19, 8);
-				createExcelPic(workbook, patriarch, downFtpRateImage2, (short) 19, 7, (short) 26, 8);
-				createExcelPic(workbook, patriarch, sinrThresholdImage2, (short) 13, 9, (short) 19, 10);
-				createExcelPic(workbook, patriarch, rsrpThresholdImage2, (short) 19, 9, (short) 26, 10);
-				createExcelPic(workbook, patriarch, ftpRateThresholdImage2, (short) 13, 11, (short) 19, 12);
-
-				createExcelPic(workbook, patriarch, rsrpFtpUpImage3, (short) 26, 3, (short) 32, 4);
-				createExcelPic(workbook, patriarch, sinrFtpUpImage3, (short) 32, 3, (short) 39, 4);
-				createExcelPic(workbook, patriarch, upFtpRateImage3, (short) 26, 5, (short) 32, 6);
-				createExcelPic(workbook, patriarch, rsrpFtpDownImage3, (short) 32, 5, (short) 39, 6);
-				createExcelPic(workbook, patriarch, sinrFtpDownImage3, (short) 26, 7, (short) 32, 8);
-				createExcelPic(workbook, patriarch, downFtpRateImage3, (short) 32, 7, (short) 39, 8);
-				createExcelPic(workbook, patriarch, sinrThresholdImage3, (short) 26, 9, (short) 32, 10);
-				createExcelPic(workbook, patriarch, rsrpThresholdImage3, (short) 32, 9, (short) 39, 10);
-				createExcelPic(workbook, patriarch, ftpRateThresholdImage3, (short) 26, 11, (short) 32, 12);
-
+				createExcelPic(workbook, patriarch, sinrThresholdImage, (short) 0, 2, (short) 6, 3);
+				createExcelPic(workbook, patriarch, rsrpThresholdImage, (short) 6, 2, (short) 13, 3);
+				createExcelPic(workbook, patriarch, upFtpRateThresholdImage, (short) 13, 2, (short) 20, 3);
+				createExcelPic(workbook, patriarch, downFtpRateThresholdImage, (short) 20, 2, (short) 27, 3);
+				
+				
 				HSSFCell cell;
 				HSSFRow row;
 
@@ -509,114 +405,140 @@ class LtePlanServiceImpl implements ILtePlanService {
 				cell = row.getCell(2);
 				cell.setCellValue(map.get("mAntennaHangUp1"));
 				cell = row.getCell(3);
-				cell.setCellValue(map.get("mAntennaHangUp1"));
+				cell.setCellValue(map.get("mAntennaHangUpcs1"));
 				cell = row.getCell(5);
 				cell.setCellValue(map.get("mAntennaHangUp2"));
 				cell = row.getCell(6);
-				cell.setCellValue(map.get("mAntennaHangUp2"));
+				cell.setCellValue(map.get("mAntennaHangUpcs2"));
 				cell = row.getCell(8);
 				cell.setCellValue(map.get("mAntennaHangUp3"));
 				cell = row.getCell(9);
-				cell.setCellValue(map.get("mAntennaHangUp3"));
+				cell.setCellValue(map.get("mAntennaHangUpcs3"));
 
 				row = sheetOne.getRow(14);
 				cell = row.getCell(2);
 				cell.setCellValue(map.get("mAzimuth1"));
 				cell = row.getCell(3);
-				cell.setCellValue(map.get("mAzimuth1"));
+				cell.setCellValue(map.get("mAzimuthcs1"));
 				cell = row.getCell(5);
 				cell.setCellValue(map.get("mAzimuth2"));
 				cell = row.getCell(6);
-				cell.setCellValue(map.get("mAzimuth2"));
+				cell.setCellValue(map.get("mAzimuthcs2"));
 				cell = row.getCell(8);
 				cell.setCellValue(map.get("mAzimuth3"));
 				cell = row.getCell(9);
-				cell.setCellValue(map.get("mAzimuth3"));
+				cell.setCellValue(map.get("mAzimuthcs3"));
 
 				row = sheetOne.getRow(15);
 				cell = row.getCell(2);
 				cell.setCellValue(map.get("mMechanicalLowerInclination1"));
 				cell = row.getCell(3);
-				cell.setCellValue(map.get("mMechanicalLowerInclination1"));
+				cell.setCellValue(map.get("mMechanicalLowerInclinationcs1"));
 				cell = row.getCell(5);
 				cell.setCellValue(map.get("mMechanicalLowerInclination2"));
 				cell = row.getCell(6);
-				cell.setCellValue(map.get("mMechanicalLowerInclination2"));
+				cell.setCellValue(map.get("mMechanicalLowerInclinationcs2"));
 				cell = row.getCell(8);
 				cell.setCellValue(map.get("mMechanicalLowerInclination3"));
 				cell = row.getCell(9);
-				cell.setCellValue(map.get("mMechanicalLowerInclination3"));
+				cell.setCellValue(map.get("mMechanicalLowerInclinationcs3"));
 
 				row = sheetOne.getRow(16);
 				cell = row.getCell(2);
 				cell.setCellValue(map.get("mPresetElectricDip1"));
 				cell = row.getCell(3);
-				cell.setCellValue(map.get("mPresetElectricDip1"));
+				cell.setCellValue(map.get("mPresetElectricDipcs1"));
 				cell = row.getCell(5);
 				cell.setCellValue(map.get("mPresetElectricDip2"));
 				cell = row.getCell(6);
-				cell.setCellValue(map.get("mPresetElectricDip2"));
+				cell.setCellValue(map.get("mPresetElectricDipcs2"));
 				cell = row.getCell(8);
 				cell.setCellValue(map.get("mPresetElectricDip3"));
 				cell = row.getCell(9);
-				cell.setCellValue(map.get("mPresetElectricDip3"));
+				cell.setCellValue(map.get("mPresetElectricDipcs3"));
 
 				row = sheetOne.getRow(17);
 				cell = row.getCell(2);
 				cell.setCellValue(map.get("mtotalLowerInclination1"));
 				cell = row.getCell(3);
-				cell.setCellValue(map.get("mtotalLowerInclination1"));
+				cell.setCellValue(map.get("mtotalLowerInclinationcs1"));
 				cell = row.getCell(5);
 				cell.setCellValue(map.get("mtotalLowerInclination2"));
 				cell = row.getCell(6);
-				cell.setCellValue(map.get("mtotalLowerInclination2"));
+				cell.setCellValue(map.get("mtotalLowerInclinationcs2"));
 				cell = row.getCell(8);
 				cell.setCellValue(map.get("mtotalLowerInclination3"));
 				cell = row.getCell(9);
-				cell.setCellValue(map.get("mtotalLowerInclination3"));
+				cell.setCellValue(map.get("mtotalLowerInclinationcs3"));
 
 				row = sheetOne.getRow(18);
 				cell = row.getCell(2);
 				cell.setCellValue(map.get("mFrequency1"));
 				cell = row.getCell(3);
-				cell.setCellValue(map.get("mFrequency1"));
+				cell.setCellValue(map.get("mFrequencycs1"));
 				cell = row.getCell(5);
 				cell.setCellValue(map.get("mFrequency2"));
 				cell = row.getCell(6);
-				cell.setCellValue(map.get("mFrequency2"));
+				cell.setCellValue(map.get("mFrequencycs2"));
 				cell = row.getCell(8);
 				cell.setCellValue(map.get("mFrequency3"));
 				cell = row.getCell(9);
-				cell.setCellValue(map.get("mFrequency3"));
-
-				row = sheetOne.getRow(19);
-				cell = row.getCell(2);
-				cell.setCellValue(map.get("mPCI1"));
-				cell = row.getCell(3);
-				cell.setCellValue(map.get("mPCI1"));
-				cell = row.getCell(5);
-				cell.setCellValue(map.get("mPCI2"));
-				cell = row.getCell(6);
-				cell.setCellValue(map.get("mPCI2"));
-				cell = row.getCell(8);
-				cell.setCellValue(map.get("mPCI3"));
-				cell = row.getCell(9);
-				cell.setCellValue(map.get("mPCI3"));
+				cell.setCellValue(map.get("mFrequencycs3"));
 
 				row = sheetOne.getRow(20);
 				cell = row.getCell(2);
+				cell.setCellValue(map.get("mPCI1"));
+				cell = row.getCell(3);
+				cell.setCellValue(map.get("mPCIcs1"));
+				cell = row.getCell(5);
+				cell.setCellValue(map.get("mPCI2"));
+				cell = row.getCell(6);
+				cell.setCellValue(map.get("mPCIcs2"));
+				cell = row.getCell(8);
+				cell.setCellValue(map.get("mPCI3"));
+				cell = row.getCell(9);
+				cell.setCellValue(map.get("mPCIcs3"));
+
+				row = sheetOne.getRow(19);
+				cell = row.getCell(2);
 				cell.setCellValue(map.get("mCellID1"));
 				cell = row.getCell(3);
-				cell.setCellValue(map.get("mCellID1"));
+				cell.setCellValue(map.get("mCellIDcs1"));
 				cell = row.getCell(5);
 				cell.setCellValue(map.get("mCellID2"));
 				cell = row.getCell(6);
-				cell.setCellValue(map.get("mCellID2"));
+				cell.setCellValue(map.get("mCellIDcs2"));
 				cell = row.getCell(8);
 				cell.setCellValue(map.get("mCellID3"));
 				cell = row.getCell(9);
-				cell.setCellValue(map.get("mCellID3"));
+				cell.setCellValue(map.get("mCellIDcs3"));
+				
+				row = sheetOne.getRow(28);
+				cell = row.getCell(2);
+				cell.setCellValue(map.get("veryClose"));
+				row = sheetOne.getRow(29);
+				cell = row.getCell(2);
+				cell.setCellValue(map.get("vastDistances"));
+				row = sheetOne.getRow(30);
+				cell = row.getCell(2);
+				cell.setCellValue(map.get("ultraHigh"));
+				row = sheetOne.getRow(31);
+				cell = row.getCell(2);
+				cell.setCellValue(map.get("azimuthSuperoverlap"));
+				row = sheetOne.getRow(32);
+				cell = row.getCell(2);
+				cell.setCellValue(map.get("skyBlockCondition"));
+				row = sheetOne.getRow(33);
+				cell = row.getCell(2);
+				cell.setCellValue(map.get("declinationOverlap"));
+				row = sheetOne.getRow(34);
+				cell = row.getCell(2);
+				cell.setCellValue(map.get("canBeAdjusted"));
 
+				
+				
+				
+				
 				row = sheetOne.getRow(41);
 				cell = row.getCell(1);
 				cell.setCellValue(map.get("testPerson1"));

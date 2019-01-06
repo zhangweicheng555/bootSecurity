@@ -2,6 +2,7 @@ package com.boot.kaizen.controller.app;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +20,8 @@ import com.boot.kaizen.controller.lte.model.MCommunityNetworkOptimizationBean;
 import com.boot.kaizen.controller.lte.model.MCommunityProjectBean;
 import com.boot.kaizen.model.SysUser;
 import com.boot.kaizen.model.lte.LteCellCheck;
+import com.boot.kaizen.model.lte.LteCellParamters;
+import com.boot.kaizen.model.lte.LteCellStructuralValidation;
 import com.boot.kaizen.model.lte.LteConfig;
 import com.boot.kaizen.model.lte.LteGcParameter;
 import com.boot.kaizen.model.lte.LteLoadTest;
@@ -27,6 +30,8 @@ import com.boot.kaizen.service.SysProjectService;
 import com.boot.kaizen.service.UserService;
 import com.boot.kaizen.service.act.IActBusinessService;
 import com.boot.kaizen.service.lte.ILteCellCheckService;
+import com.boot.kaizen.service.lte.ILteCellParamtersService;
+import com.boot.kaizen.service.lte.ILteCellStructuralValidationService;
 import com.boot.kaizen.service.lte.ILteConfigService;
 import com.boot.kaizen.service.lte.ILteGcParameterService;
 import com.boot.kaizen.service.lte.ILteLoadTestService;
@@ -42,7 +47,7 @@ import com.boot.kaizen.util.FileUtil;
  *
  */
 @RestController
-@RequestMapping("/lte/discard//app")
+@RequestMapping("/lte/app")
 public class LteAppController {
 
 	@Value("${files.path}")
@@ -66,6 +71,10 @@ public class LteAppController {
 	private ILteLoadTestService lteLoadTestService;
 	@Autowired
 	private IActBusinessService actBusinessService;
+	@Autowired
+	private ILteCellParamtersService lteCellParamtersService;
+	@Autowired
+	private ILteCellStructuralValidationService lteCellStructuralValidationService;
 	// 0:失败;1:成功; 2:服务器异常
 
 	/**
@@ -254,6 +263,40 @@ public class LteAppController {
 			return appUtil;
 		}
 	}
+	/**
+	 * 上传小区参数验收接口
+	 */
+	@RequestMapping(value = "/uploadCellParameters", method = RequestMethod.POST)
+	public AppUtil uploadCellParameters(LteCellParamters lteCellParamters) {
+		AppUtil appUtil = new AppUtil(1, "上传成功", null);
+		
+		try {
+			// 批量添加
+			lteCellParamtersService.upSert(lteCellParamters);
+			appUtil.setDataSource(null);
+			return appUtil;
+		} catch (Exception e) {
+			appUtil = new AppUtil(2, "系统异常：" + e.getMessage(), "");
+			return appUtil;
+		}
+	}
+	/**
+	 * 上传结构验收接口
+	 */
+	@RequestMapping(value = "/structuralValidation", method = RequestMethod.POST)
+	public AppUtil structuralValidation(LteCellStructuralValidation lteCellStructuralValidation) {
+		AppUtil appUtil = new AppUtil(1, "上传成功", null);
+		
+		try {
+			// 批量添加
+			lteCellStructuralValidationService.upSert(lteCellStructuralValidation);
+			appUtil.setDataSource(null);
+			return appUtil;
+		} catch (Exception e) {
+			appUtil = new AppUtil(2, "系统异常：" + e.getMessage(), "");
+			return appUtil;
+		}
+	}
 
 	/**
 	 * 获取测试项默认配置
@@ -308,18 +351,15 @@ public class LteAppController {
 	 */
 	@RequestMapping(value = "/uploadRoadTest", method = RequestMethod.POST)
 	public AppUtil uploadRoadTest(@RequestParam("projId") Long projId, @RequestParam("userId") Long userId,
-			@RequestParam("eNodeBID") String eNodeBID, @RequestParam("communityName") String communityName,
-			@RequestParam("testDate") String testDate, @RequestParam("rsrpFtpUpImage") MultipartFile rsrpFtpUpImage,
-			@RequestParam("sinrFtpUpImage") MultipartFile sinrFtpUpImage,
-			@RequestParam("upFtpRateImage") MultipartFile upFtpRateImage,
-			@RequestParam("rsrpFtpDownImage") MultipartFile rsrpFtpDownImage,
-			@RequestParam("sinrFtpDownImage") MultipartFile sinrFtpDownImage,
-			@RequestParam("downFtpRateImage") MultipartFile downFtpRateImage,
-			@RequestParam("sinrThresholdImage") MultipartFile sinrThresholdImage,
-			@RequestParam("rsrpThresholdImage") MultipartFile rsrpThresholdImage,
-			@RequestParam("upFtpRateThresholdImage") MultipartFile upFtpRateThresholdImage,
-			@RequestParam("downFtpRateThresholdImage") MultipartFile downFtpRateThresholdImage,
-			@RequestParam("roadLogFile") MultipartFile roadLogFile) {
+			@RequestParam("eNodeBID") String eNodeBID, @RequestParam("testDate") String testDate,
+
+			@RequestParam(value = "cellFiles", required = false) MultipartFile[] cellFiles,
+
+			@RequestParam(value = "sinrThresholdImage", required = false) MultipartFile sinrThresholdImage,
+			@RequestParam(value = "rsrpThresholdImage", required = false) MultipartFile rsrpThresholdImage,
+			@RequestParam(value = "upFtpRateThresholdImage", required = false) MultipartFile upFtpRateThresholdImage,
+			@RequestParam(value = "downFtpRateThresholdImage", required = false) MultipartFile downFtpRateThresholdImage,
+			@RequestParam(value = "roadLogFile", required = false) MultipartFile roadLogFile) {
 		AppUtil appUtil = new AppUtil(1, "上传成功", null);
 		try {
 			if (projId == null || StringUtils.isBlank(eNodeBID) || userId == null) {
@@ -327,21 +367,28 @@ public class LteAppController {
 				return appUtil;
 			}
 
-			String rsrpFtpUpImageName = upFile(rsrpFtpUpImage, "lte");
-			String sinrFtpUpImageName = upFile(sinrFtpUpImage, "lte");
-			String upFtpRateImageName = upFile(upFtpRateImage, "lte");
-			String rsrpFtpDownImageName = upFile(rsrpFtpDownImage, "lte");
-			String sinrFtpDownImageName = upFile(sinrFtpDownImage, "lte");
-			String downFtpRateImageName = upFile(downFtpRateImage, "lte");
 			String sinrThresholdImageName = upFile(sinrThresholdImage, "lte");
 			String rsrpThresholdImageName = upFile(rsrpThresholdImage, "lte");
 			String upFtpRateThresholdImageName = upFile(upFtpRateThresholdImage, "lte");
 			String downFtpRateThresholdImageName = upFile(downFtpRateThresholdImage, "lte");
 			String roadLogFileName = upFile(roadLogFile, "lte");
 
-			LteLoadTest loadTest = new LteLoadTest(userId, eNodeBID, communityName, testDate, rsrpFtpUpImageName,
-					sinrFtpUpImageName, upFtpRateImageName, rsrpFtpDownImageName, sinrFtpDownImageName,
-					downFtpRateImageName, sinrThresholdImageName, rsrpThresholdImageName,upFtpRateThresholdImageName ,downFtpRateThresholdImageName,
+			String rsrpFtpUpImage = "";
+			if (cellFiles != null && cellFiles.length > 0) {
+				for (int i = 0; i < cellFiles.length; i++) {
+					String name = upFile(cellFiles[i], "lte");
+					if (StringUtils.isNoneBlank(name)) {
+						if (StringUtils.isNoneBlank(rsrpFtpUpImage)) {
+							rsrpFtpUpImage =  rsrpFtpUpImage+","+name;
+						}else {
+							rsrpFtpUpImage =   name;
+						}
+					}
+				}
+			}
+
+			LteLoadTest loadTest = new LteLoadTest(userId, eNodeBID, testDate, rsrpFtpUpImage, sinrThresholdImageName,
+					rsrpThresholdImageName, upFtpRateThresholdImageName, downFtpRateThresholdImageName,
 					roadLogFileName);
 			loadTest.setProjId(projId);
 			lteLoadTestService.save(loadTest);
@@ -353,6 +400,72 @@ public class LteAppController {
 		}
 	}
 
+	/**
+	 * 上传路测信息 废弃
+	 * 
+	 * @RequestMapping(value = "/uploadRoadTest", method = RequestMethod.POST)
+	 *                       public AppUtil uploadRoadTest(@RequestParam("projId")
+	 *                       Long projId, @RequestParam("userId") Long
+	 *                       userId, @RequestParam("eNodeBID") String
+	 *                       eNodeBID, @RequestParam("communityName") String
+	 *                       communityName, @RequestParam("testDate") String
+	 *                       testDate, @RequestParam("rsrpFtpUpImage") MultipartFile
+	 *                       rsrpFtpUpImage, @RequestParam("sinrFtpUpImage")
+	 *                       MultipartFile
+	 *                       sinrFtpUpImage, @RequestParam("upFtpRateImage")
+	 *                       MultipartFile
+	 *                       upFtpRateImage, @RequestParam("rsrpFtpDownImage")
+	 *                       MultipartFile
+	 *                       rsrpFtpDownImage, @RequestParam("sinrFtpDownImage")
+	 *                       MultipartFile
+	 *                       sinrFtpDownImage, @RequestParam("downFtpRateImage")
+	 *                       MultipartFile
+	 *                       downFtpRateImage, @RequestParam("sinrThresholdImage")
+	 *                       MultipartFile
+	 *                       sinrThresholdImage, @RequestParam("rsrpThresholdImage")
+	 *                       MultipartFile
+	 *                       rsrpThresholdImage, @RequestParam("upFtpRateThresholdImage")
+	 *                       MultipartFile
+	 *                       upFtpRateThresholdImage, @RequestParam("downFtpRateThresholdImage")
+	 *                       MultipartFile
+	 *                       downFtpRateThresholdImage, @RequestParam("roadLogFile")
+	 *                       MultipartFile roadLogFile) { AppUtil appUtil = new
+	 *                       AppUtil(1, "上传成功", null); try { if (projId == null ||
+	 *                       StringUtils.isBlank(eNodeBID) || userId == null) {
+	 *                       appUtil = new AppUtil(0,
+	 *                       "项目projId、用户userId、基站号eNodeBID不能为空", ""); return
+	 *                       appUtil; }
+	 * 
+	 *                       String rsrpFtpUpImageName = upFile(rsrpFtpUpImage,
+	 *                       "lte"); String sinrFtpUpImageName =
+	 *                       upFile(sinrFtpUpImage, "lte"); String
+	 *                       upFtpRateImageName = upFile(upFtpRateImage, "lte");
+	 *                       String rsrpFtpDownImageName = upFile(rsrpFtpDownImage,
+	 *                       "lte"); String sinrFtpDownImageName =
+	 *                       upFile(sinrFtpDownImage, "lte"); String
+	 *                       downFtpRateImageName = upFile(downFtpRateImage, "lte");
+	 *                       String sinrThresholdImageName =
+	 *                       upFile(sinrThresholdImage, "lte"); String
+	 *                       rsrpThresholdImageName = upFile(rsrpThresholdImage,
+	 *                       "lte"); String upFtpRateThresholdImageName =
+	 *                       upFile(upFtpRateThresholdImage, "lte"); String
+	 *                       downFtpRateThresholdImageName =
+	 *                       upFile(downFtpRateThresholdImage, "lte"); String
+	 *                       roadLogFileName = upFile(roadLogFile, "lte");
+	 * 
+	 *                       LteLoadTest loadTest = new LteLoadTest(userId,
+	 *                       eNodeBID, communityName, testDate, rsrpFtpUpImageName,
+	 *                       sinrFtpUpImageName, upFtpRateImageName,
+	 *                       rsrpFtpDownImageName, sinrFtpDownImageName,
+	 *                       downFtpRateImageName, sinrThresholdImageName,
+	 *                       rsrpThresholdImageName,upFtpRateThresholdImageName
+	 *                       ,downFtpRateThresholdImageName, roadLogFileName);
+	 *                       loadTest.setProjId(projId);
+	 *                       lteLoadTestService.save(loadTest);
+	 *                       appUtil.setDataSource("上传成功"); return appUtil; } catch
+	 *                       (Exception e) { appUtil = new AppUtil(2, "系统异常：" +
+	 *                       e.getMessage(), ""); return appUtil; } }
+	 */
 	private String upFile(MultipartFile file, String modelName) {
 		return FileUtil.UpFile(file, filesPath, modelName);
 	}

@@ -40,7 +40,7 @@ import com.boot.kaizen.util.FileUtil;
 import com.google.gson.Gson;
 
 @RestController
-@RequestMapping("/lte/app")
+@RequestMapping("/lte/fdd/app")
 public class LteFddAppController {
 
 	@Value("${files.path}")

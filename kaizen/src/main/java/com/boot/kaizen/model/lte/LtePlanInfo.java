@@ -39,6 +39,24 @@ public class LtePlanInfo extends BaseEntity<Long> {
 	private List<LteStationCheck> stationChecks;// 基站核查结果列表
 	private List<LteLoadTest> loadTests;// 路测信息列表
 	private List<LteCellCheck> cellChecks;// 小区核查信息列表
+	private List<LteCellStructuralValidation> lteCellStructuralValidations;
+	private List<LteCellParamters> lteCellParamtersList;
+
+	public List<LteCellParamters> getLteCellParamtersList() {
+		return lteCellParamtersList;
+	}
+
+	public void setLteCellParamtersList(List<LteCellParamters> lteCellParamtersList) {
+		this.lteCellParamtersList = lteCellParamtersList;
+	}
+
+	public List<LteCellStructuralValidation> getLteCellStructuralValidations() {
+		return lteCellStructuralValidations;
+	}
+
+	public void setLteCellStructuralValidations(List<LteCellStructuralValidation> lteCellStructuralValidations) {
+		this.lteCellStructuralValidations = lteCellStructuralValidations;
+	}
 
 	public List<LteConfig> getConfigs() {
 		return configs;

@@ -16,45 +16,43 @@ public class LteLoadTest extends BaseEntity<Long> {
 
 	private Long userId;// 用户ID
 	private String eNodeBID;// 基站编号
-	private String communityName;// 小区名
 	private String testDate;// 测试时间
-	private String rsrpFtpUpImage; // FTP上传测试-Rsrp打点截图 //一下全是文件的部分路径名字
-	private String sinrFtpUpImage;// FTP上传测试-Sinr打点截图
-	private String upFtpRateImage;// FTP上传测试-速率打点截图
-	private String rsrpFtpDownImage;// FTP下载测试-Rsrp打点截图
-	private String sinrFtpDownImage;// FTP下载测试-Sinr打点截图
-	private String downFtpRateImage;// FTP下载测试-速率打点截图
+
 	private String sinrThresholdImage;// SINR阈值图
 	private String rsrpThresholdImage;// RSRP阈值图
-	//private String ftpRateThresholdImage;// FTP上行速率阈值图
 	private String upFtpRateThresholdImage;// FTP上行速率阈值图
 	private String downFtpRateThresholdImage;// FTP上行速率阈值图
+	
 	private String roadLogFile;// 路测Log文件
+
+	private String rsrpFtpUpImage;// 这个是小区的路测信息图的 图片的名字的字符串 逗号分隔
+
+	private String communityName;// 小区名 废弃
+	private String sinrFtpUpImage;// FTP上传测试-Sinr打点截图 废弃
+	private String upFtpRateImage;// FTP上传测试-速率打点截图 废弃
+	private String rsrpFtpDownImage;// FTP下载测试-Rsrp打点截图 废弃
+	private String sinrFtpDownImage;// FTP下载测试-Sinr打点截图 废弃
+	private String downFtpRateImage;// FTP下载测试-速率打点截图 废弃
 
 	public Long getUserId() {
 		return userId;
 	}
 
-	
 	public String getUpFtpRateThresholdImage() {
 		return upFtpRateThresholdImage;
 	}
-
 
 	public void setUpFtpRateThresholdImage(String upFtpRateThresholdImage) {
 		this.upFtpRateThresholdImage = upFtpRateThresholdImage;
 	}
 
-
 	public String getDownFtpRateThresholdImage() {
 		return downFtpRateThresholdImage;
 	}
 
-
 	public void setDownFtpRateThresholdImage(String downFtpRateThresholdImage) {
 		this.downFtpRateThresholdImage = downFtpRateThresholdImage;
 	}
-
 
 	public void setUserId(Long userId) {
 		this.userId = userId;
@@ -148,8 +146,6 @@ public class LteLoadTest extends BaseEntity<Long> {
 		this.rsrpThresholdImage = rsrpThresholdImage;
 	}
 
-	
-
 	public String getRoadLogFile() {
 		return roadLogFile;
 	}
@@ -158,9 +154,22 @@ public class LteLoadTest extends BaseEntity<Long> {
 		this.roadLogFile = roadLogFile;
 	}
 
+	public LteLoadTest(Long userId, String eNodeBID, String testDate, String rsrpFtpUpImage, 
+			String sinrThresholdImage,
+			String rsrpThresholdImage, String upFtpRateThresholdImage, String downFtpRateThresholdImage,
+			String roadLogFile) {
+		super();
+		this.userId = userId;
+		this.eNodeBID = eNodeBID;
+		this.testDate = testDate;
+		this.rsrpFtpUpImage=rsrpFtpUpImage;
+		this.sinrThresholdImage = sinrThresholdImage;
+		this.rsrpThresholdImage = rsrpThresholdImage;
+		this.upFtpRateThresholdImage = upFtpRateThresholdImage;
+		this.downFtpRateThresholdImage = downFtpRateThresholdImage;
+		this.roadLogFile = roadLogFile;
+	}
 
-	
-	
 	public LteLoadTest(Long userId, String eNodeBID, String communityName, String testDate, String rsrpFtpUpImage,
 			String sinrFtpUpImage, String upFtpRateImage, String rsrpFtpDownImage, String sinrFtpDownImage,
 			String downFtpRateImage, String sinrThresholdImage, String rsrpThresholdImage,
@@ -183,12 +192,8 @@ public class LteLoadTest extends BaseEntity<Long> {
 		this.roadLogFile = roadLogFile;
 	}
 
-
 	public LteLoadTest() {
 		super();
 	}
-
-
-	
 
 }

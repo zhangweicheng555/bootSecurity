@@ -52,7 +52,8 @@ public class FileUtil {
 		try {
 			File targetFile = new File(fullname);
 			if (targetFile.exists()) {
-				return pathname;
+				targetFile.delete();
+				//return pathname;
 			}
 
 			if (!targetFile.getParentFile().exists()) {
