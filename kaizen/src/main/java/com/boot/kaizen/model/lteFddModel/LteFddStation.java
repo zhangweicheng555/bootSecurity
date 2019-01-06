@@ -29,7 +29,7 @@ public class LteFddStation implements Serializable {
 	private Integer projId;
 	private Date createTime;
 	private Date updateTime;
-	private Integer createAt;// 登陆人的id  
+	private Integer createAt;// 登陆人的id
 
 	private String testDate;// 测试时间
 	private String latitude;// 经度
@@ -64,7 +64,142 @@ public class LteFddStation implements Serializable {
 	private String stationDownRatePic;// 下载速率
 	private String stationPciPic;// PCI
 
-	
+	private String stationType;// 站点类型
+	private String buildingFunction;// 建筑物功能
+	private String floorsNum;// 楼层数楼高
+	private String yuanTaWeizhi;// 原塔桅位置
+	private String yuanTiMianFs;// 原天面方式
+	private String yuanTiMianGg;// 原天面挂高
+	private String xinZengTiMianType;// 新增天面类型
+	private String reasonDescrib;// 原因说明
+	private String xinZengTiMianFs;// 新增天面方式
+	private String reasonDescribNew;// 原因说明
+	private String xinZengFwj;// 新增天线方位角
+	private String xinTiMianGg;// 新天面挂高
+	private String tianMianZd;// 天面是否有阻挡
+	private String stationDistance;// 站间距
+	private String remark;// 备注
+
+	public String getStationType() {
+		return stationType;
+	}
+
+	public void setStationType(String stationType) {
+		this.stationType = stationType;
+	}
+
+	public String getBuildingFunction() {
+		return buildingFunction;
+	}
+
+	public void setBuildingFunction(String buildingFunction) {
+		this.buildingFunction = buildingFunction;
+	}
+
+	public String getFloorsNum() {
+		return floorsNum;
+	}
+
+	public void setFloorsNum(String floorsNum) {
+		this.floorsNum = floorsNum;
+	}
+
+	public String getYuanTaWeizhi() {
+		return yuanTaWeizhi;
+	}
+
+	public void setYuanTaWeizhi(String yuanTaWeizhi) {
+		this.yuanTaWeizhi = yuanTaWeizhi;
+	}
+
+	public String getYuanTiMianFs() {
+		return yuanTiMianFs;
+	}
+
+	public void setYuanTiMianFs(String yuanTiMianFs) {
+		this.yuanTiMianFs = yuanTiMianFs;
+	}
+
+	public String getYuanTiMianGg() {
+		return yuanTiMianGg;
+	}
+
+	public void setYuanTiMianGg(String yuanTiMianGg) {
+		this.yuanTiMianGg = yuanTiMianGg;
+	}
+
+	public String getXinZengTiMianType() {
+		return xinZengTiMianType;
+	}
+
+	public void setXinZengTiMianType(String xinZengTiMianType) {
+		this.xinZengTiMianType = xinZengTiMianType;
+	}
+
+	public String getReasonDescrib() {
+		return reasonDescrib;
+	}
+
+	public void setReasonDescrib(String reasonDescrib) {
+		this.reasonDescrib = reasonDescrib;
+	}
+
+	public String getXinZengTiMianFs() {
+		return xinZengTiMianFs;
+	}
+
+	public void setXinZengTiMianFs(String xinZengTiMianFs) {
+		this.xinZengTiMianFs = xinZengTiMianFs;
+	}
+
+	public String getReasonDescribNew() {
+		return reasonDescribNew;
+	}
+
+	public void setReasonDescribNew(String reasonDescribNew) {
+		this.reasonDescribNew = reasonDescribNew;
+	}
+
+	public String getXinZengFwj() {
+		return xinZengFwj;
+	}
+
+	public void setXinZengFwj(String xinZengFwj) {
+		this.xinZengFwj = xinZengFwj;
+	}
+
+	public String getXinTiMianGg() {
+		return xinTiMianGg;
+	}
+
+	public void setXinTiMianGg(String xinTiMianGg) {
+		this.xinTiMianGg = xinTiMianGg;
+	}
+
+	public String getTianMianZd() {
+		return tianMianZd;
+	}
+
+	public void setTianMianZd(String tianMianZd) {
+		this.tianMianZd = tianMianZd;
+	}
+
+	public String getStationDistance() {
+		return stationDistance;
+	}
+
+	public void setStationDistance(String stationDistance) {
+		this.stationDistance = stationDistance;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
 	public String getId() {
 		return id;
 	}

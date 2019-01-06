@@ -63,6 +63,9 @@
     <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="createAt" jdbcType="INTEGER" property="createAt" />
     <result column="testDate" jdbcType="VARCHAR" property="testDate" />
+     <result column="volteWirelessAttempt" jdbcType="VARCHAR" property="volteWirelessAttempt" />
+     <result column="volteWirelessConnSucc" jdbcType="VARCHAR" property="volteWirelessConnSucc" />
+     <result column="volteWirelessConnFailure" jdbcType="VARCHAR" property="volteWirelessConnFailure" />
   </resultMap>
   <sql id="Base_Column_List">
     id, eNodeBID, mBaseStationName, cellId, cellName, eci, earfcn, pci, tac, csfbCallSuccAttempt, 
@@ -76,6 +79,7 @@
     ftpUpSinrFirst, ftpUpSinrSecond, ftpUpSinrBad, ftpUpSinrRandom, ftpUpThroughputFirst, 
     ftpUpThroughputSecond, ftpUpThroughputBad, ftpUpThroughputRandom, rsrpPic, sinrPic, 
     downRatePic, upRatePic, rsrpWirePic, projId, createTime, updateTime, createAt,ftpDownPass,ftpUpPass,testDate
+    ,volteWirelessAttempt,volteWirelessConnSucc,volteWirelessConnFailure
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -351,6 +355,15 @@
       <if test="testDate != null">
         testDate,
       </if>
+      <if test="volteWirelessAttempt != null">
+        volteWirelessAttempt,
+      </if>
+      <if test="volteWirelessConnSucc != null">
+        volteWirelessConnSucc,
+      </if>
+      <if test="volteWirelessConnFailure != null">
+        volteWirelessConnFailure,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -535,6 +548,15 @@
       </if>
       <if test="testDate != null">
         #{testDate,jdbcType=VARCHAR},
+      </if>
+        <if test="volteWirelessAttempt != null">
+        #{volteWirelessAttempt,jdbcType=VARCHAR},
+      </if>
+        <if test="volteWirelessConnSucc != null">
+        #{volteWirelessConnSucc,jdbcType=VARCHAR},
+      </if>
+        <if test="volteWirelessConnFailure != null">
+        #{volteWirelessConnFailure,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -721,6 +743,15 @@
       </if>
       <if test="testDate != null">
         testDate = #{testDate,jdbcType=VARCHAR},
+      </if>
+      <if test="volteWirelessAttempt != null">
+        testDate = #{volteWirelessAttempt,jdbcType=VARCHAR},
+      </if>
+      <if test="volteWirelessConnSucc != null">
+        testDate = #{volteWirelessConnSucc,jdbcType=VARCHAR},
+      </if>
+      <if test="volteWirelessConnFailure != null">
+        testDate = #{volteWirelessConnFailure,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}

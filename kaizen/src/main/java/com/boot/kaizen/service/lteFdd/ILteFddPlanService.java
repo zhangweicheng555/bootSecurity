@@ -3,11 +3,15 @@ package com.boot.kaizen.service.lteFdd;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.boot.kaizen.controller.lte.model.BaseStationBean;
 import com.boot.kaizen.entity.LoginUser;
 import com.boot.kaizen.model.lteFddModel.LteFddPlan;
+import com.boot.kaizen.model.lteFddModel.LteFddPlanInfo;
 import com.boot.kaizen.util.JsonMsgUtil;
 
 public interface ILteFddPlanService {
@@ -27,7 +31,15 @@ public interface ILteFddPlanService {
 	 * @date 2018年12月31日 上午10:10:48
 	 */
 	LteFddPlan selectByPrimaryKey(String id);
-
+	
+	/**
+	 * 根据规划表的任务id获取详细信息
+	* @Description: TODO
+	* @author weichengz
+	* @date 2019年1月5日 下午5:27:57
+	 */
+	LteFddPlanInfo findLteFddPlanInfo(String id);
+	
 	/**
 	 * 
 	 * @Description: 列表查询
@@ -85,4 +97,13 @@ public interface ILteFddPlanService {
 	* @date 2019年1月1日 下午6:33:10
 	 */
 	JsonMsgUtil queryCheckInfoById(String id);
+
+	/**
+	 * 报告导出
+	* @Description: TODO
+	* @author weichengz
+	* @date 2019年1月6日 上午6:03:11
+	 */
+	void exportPlanDoc(String absolutePath, LteFddPlanInfo lteFddPlanInfo, Map<String, String> map,
+			HttpServletResponse response, HttpSession session);
 }

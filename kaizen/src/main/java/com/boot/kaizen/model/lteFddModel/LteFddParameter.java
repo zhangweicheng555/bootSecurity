@@ -39,6 +39,10 @@ public class LteFddParameter implements Serializable {
 	private String csfbPassiveCallSuccSucc;
 	private String csfbPassiveCallSuccfailure;
 
+	private String volteWirelessAttempt;// VOLTE无线接通率 尝试次数
+	private String volteWirelessConnSucc;// VOLTE无线接通率 成功次数
+	private String volteWirelessConnFailure;// VOLTE无线接通率 失败次数
+
 	private String volteWirelessConnFirst;// VOLTE无线接通率 第一次
 	private String volteWirelessConnSecond;// VOLTE无线接通率 第二次
 	private String volteWirelessConnBad;// VOLTE无线接通率 差点
@@ -106,8 +110,29 @@ public class LteFddParameter implements Serializable {
 	private Date updateTime;
 	private Integer createAt;
 
+	// 上下行子帧配比
+	private String updownMatching;
+	// 特殊子帧配比
+	private String specialMatching;
+
 	public String getTestDate() {
 		return testDate;
+	}
+
+	public String getUpdownMatching() {
+		return updownMatching;
+	}
+
+	public void setUpdownMatching(String updownMatching) {
+		this.updownMatching = updownMatching;
+	}
+
+	public String getSpecialMatching() {
+		return specialMatching;
+	}
+
+	public void setSpecialMatching(String specialMatching) {
+		this.specialMatching = specialMatching;
 	}
 
 	public void setTestDate(String testDate) {
@@ -673,6 +698,30 @@ public class LteFddParameter implements Serializable {
 		this.createTime = createTime;
 		this.updateTime = updateTime;
 		this.createAt = createAt;
+	}
+
+	public String getVolteWirelessAttempt() {
+		return volteWirelessAttempt;
+	}
+
+	public void setVolteWirelessAttempt(String volteWirelessAttempt) {
+		this.volteWirelessAttempt = volteWirelessAttempt;
+	}
+
+	public String getVolteWirelessConnSucc() {
+		return volteWirelessConnSucc;
+	}
+
+	public void setVolteWirelessConnSucc(String volteWirelessConnSucc) {
+		this.volteWirelessConnSucc = volteWirelessConnSucc;
+	}
+
+	public String getVolteWirelessConnFailure() {
+		return volteWirelessConnFailure;
+	}
+
+	public void setVolteWirelessConnFailure(String volteWirelessConnFailure) {
+		this.volteWirelessConnFailure = volteWirelessConnFailure;
 	}
 
 	public LteFddParameter() {

@@ -52,6 +52,7 @@ pagehelper:
 files:
   path: ${file-path:d:/kaizen/doc}
   lteExcel: d:/kaizen/doc/excelModel/lteExcelModel.xls
+  lteFddExcel: d:/kaizen/doc/excelModel/lteFddModel.xls
   lteImage: d:/kaizen/doc
   
   

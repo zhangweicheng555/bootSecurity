@@ -138,20 +138,25 @@
 	    if(obj.event === 'check'){//审核
 		    common.openEditDialog(fresh,"审核","pages/lteFdd/doc/check.html?id="+row.id,"1200px","620px",false,"确定","取消","/fdd/plan/edit");
 	    }else if(obj.event === 'export'){
-	    	 var token = localStorage.getItem("token");
-			  if (token != null && token.trim().length != 0) {
-				  common.showLoadingTimeDialog(5000);
-			  	  var id =row.id;
-			  	  if(id){
-				  	  $("#token").val(token);
-				  	  $("#id").val(id);
-				  	  $("#myform").submit();
-			  	  }else{
-			  		 parent.layer.msg('获取项目ID失败');
-			  	  }
-			  }else{
-				  parent.layer.msg('请重新登录');
-			  }
+	    	if(1==row.status){
+	    		 var token = localStorage.getItem("token");
+				  if (token != null && token.trim().length != 0) {
+					  common.showLoadingTimeDialog(5000);
+				  	  var id =row.id;
+				  	  if(id){
+					  	  $("#token").val(token);
+					  	  $("#id").val(id);
+					  	  $("#myform").submit();
+				  	  }else{
+				  		 parent.layer.msg('获取项目ID失败');
+				  	  }
+				  }else{
+					  parent.layer.msg('请重新登录');
+				  }
+	    	}else{
+	    		parent.layer.msg('只能导出审核通过的报告')
+	    	}
+	    	
 	    }
 	  });
 	

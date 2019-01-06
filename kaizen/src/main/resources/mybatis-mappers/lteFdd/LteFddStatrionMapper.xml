@@ -37,6 +37,22 @@
     <result column="latitude" jdbcType="VARCHAR" property="latitude" />
     <result column="longitude" jdbcType="VARCHAR" property="longitude" />
     <result column="tac" jdbcType="VARCHAR" property="tac" />
+    
+    <result column="stationType" jdbcType="VARCHAR" property="stationType" />
+    <result column="buildingFunction" jdbcType="VARCHAR" property="buildingFunction" />
+    <result column="floorsNum" jdbcType="VARCHAR" property="floorsNum" />
+    <result column="yuanTaWeizhi" jdbcType="VARCHAR" property="yuanTaWeizhi" />
+    <result column="yuanTiMianFs" jdbcType="VARCHAR" property="yuanTiMianFs" />
+    <result column="yuanTiMianGg" jdbcType="VARCHAR" property="yuanTiMianGg" />
+    <result column="xinZengTiMianType" jdbcType="VARCHAR" property="xinZengTiMianType" />
+    <result column="reasonDescrib" jdbcType="VARCHAR" property="reasonDescrib" />
+    <result column="xinZengTiMianFs" jdbcType="VARCHAR" property="xinZengTiMianFs" />
+    <result column="reasonDescribNew" jdbcType="VARCHAR" property="reasonDescribNew" />
+    <result column="xinZengFwj" jdbcType="VARCHAR" property="xinZengFwj" />
+    <result column="xinTiMianGg" jdbcType="VARCHAR" property="xinTiMianGg" />
+    <result column="tianMianZd" jdbcType="VARCHAR" property="tianMianZd" />
+    <result column="stationDistance" jdbcType="VARCHAR" property="stationDistance" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
   </resultMap>
   <sql id="Base_Column_List">
     id, eNodeBID, mBaseStationName, csfbFunctionTest, volteFunctionTest, fourCoverCheck, 
@@ -45,6 +61,8 @@
     stationDirection90, stationDirection135, stationDirection180, stationDirection225, 
     stationDirection270, stationDirection315, stationRsrpPic, stationSinrPic, stationDownRatePic, 
     stationPciPic, projId, createTime, updateTime, createAt,testDate,latitude,longitude,tac
+    ,stationType,buildingFunction,floorsNum,yuanTaWeizhi,yuanTiMianFs,yuanTiMianGg,xinZengTiMianType,reasonDescrib,xinZengTiMianFs,reasonDescribNew,xinZengFwj,xinTiMianGg,tianMianZd,stationDistance,remark
+  
   </sql>
   
   
@@ -224,6 +242,52 @@
       <if test="tac != null">
         tac,
       </if>
+      <if test="stationType != null">
+        stationType,
+      </if>
+      <if test="buildingFunction != null">
+        buildingFunction,
+      </if>
+      <if test="floorsNum != null">
+        floorsNum,
+      </if>
+      <if test="yuanTaWeizhi != null">
+        yuanTaWeizhi,
+      </if>
+      <if test="yuanTiMianFs != null">
+        yuanTiMianFs,
+      </if>
+      <if test="yuanTiMianGg != null">
+        yuanTiMianGg,
+      </if>
+      <if test="xinZengTiMianType != null">
+        xinZengTiMianType,
+      </if>
+      <if test="reasonDescrib != null">
+        reasonDescrib,
+      </if>
+      <if test="xinZengTiMianFs != null">
+        xinZengTiMianFs,
+      </if>
+      <if test="reasonDescribNew != null">
+        reasonDescribNew,
+      </if>
+      <if test="xinZengFwj != null">
+        xinZengFwj,
+      </if>
+      <if test="xinTiMianGg != null">
+        xinTiMianGg,
+      </if>
+      <if test="tianMianZd != null">
+        tianMianZd,
+      </if>
+      <if test="stationDistance != null">
+        stationDistance,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -331,6 +395,51 @@
       </if>
       <if test="tac != null">
         #{tac,jdbcType=VARCHAR},
+      </if>
+      <if test="stationType != null">
+        #{stationType,jdbcType=VARCHAR},
+      </if>
+      <if test="buildingFunction != null">
+        #{buildingFunction,jdbcType=VARCHAR},
+      </if>
+      <if test="floorsNum != null">
+        #{floorsNum,jdbcType=VARCHAR},
+      </if>
+      <if test="yuanTaWeizhi != null">
+        #{yuanTaWeizhi,jdbcType=VARCHAR},
+      </if>
+      <if test="yuanTiMianFs != null">
+        #{yuanTiMianFs,jdbcType=VARCHAR},
+      </if>
+      <if test="yuanTiMianGg != null">
+        #{yuanTiMianGg,jdbcType=VARCHAR},
+      </if>
+      <if test="xinZengTiMianType != null">
+        #{xinZengTiMianType,jdbcType=VARCHAR},
+      </if>
+      <if test="reasonDescrib != null">
+        #{reasonDescrib,jdbcType=VARCHAR},
+      </if>
+      <if test="xinZengTiMianFs != null">
+        #{xinZengTiMianFs,jdbcType=VARCHAR},
+      </if>
+      <if test="reasonDescribNew != null">
+        #{reasonDescribNew,jdbcType=VARCHAR},
+      </if>
+      <if test="xinZengFwj != null">
+        #{xinZengFwj,jdbcType=VARCHAR},
+      </if>
+      <if test="xinTiMianGg != null">
+        #{xinTiMianGg,jdbcType=VARCHAR},
+      </if>
+      <if test="tianMianZd != null">
+        #{tianMianZd,jdbcType=VARCHAR},
+      </if>
+      <if test="stationDistance != null">
+        #{stationDistance,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -441,7 +550,52 @@
       <if test="tac != null">
         tac = #{tac,jdbcType=VARCHAR},
       </if>
-      
+      <if test="stationType != null">
+        stationType = #{stationType,jdbcType=VARCHAR},
+      </if>
+      <if test="buildingFunction != null">
+        buildingFunction = #{buildingFunction,jdbcType=VARCHAR},
+      </if>
+      <if test="floorsNum != null">
+        floorsNum = #{floorsNum,jdbcType=VARCHAR},
+      </if>
+      <if test="yuanTaWeizhi != null">
+        yuanTaWeizhi = #{yuanTaWeizhi,jdbcType=VARCHAR},
+      </if>
+      <if test="yuanTiMianFs != null">
+        yuanTiMianFs = #{yuanTiMianFs,jdbcType=VARCHAR},
+      </if>
+      <if test="yuanTiMianGg != null">
+        yuanTiMianGg = #{yuanTiMianGg,jdbcType=VARCHAR},
+      </if>
+      <if test="xinZengTiMianType != null">
+        xinZengTiMianType = #{xinZengTiMianType,jdbcType=VARCHAR},
+      </if>
+      <if test="reasonDescrib != null">
+        reasonDescrib = #{reasonDescrib,jdbcType=VARCHAR},
+      </if>
+      <if test="xinZengTiMianFs != null">
+        xinZengTiMianFs = #{xinZengTiMianFs,jdbcType=VARCHAR},
+      </if>
+      <if test="reasonDescribNew != null">
+        reasonDescribNew = #{reasonDescribNew,jdbcType=VARCHAR},
+      </if>
+      <if test="xinZengFwj != null">
+        xinZengFwj = #{xinZengFwj,jdbcType=VARCHAR},
+      </if>
+      <if test="xinTiMianGg != null">
+        xinTiMianGg = #{xinTiMianGg,jdbcType=VARCHAR},
+      </if>
+      <if test="tianMianZd != null">
+        tianMianZd = #{tianMianZd,jdbcType=VARCHAR},
+      </if>
+      <if test="stationDistance != null">
+        stationDistance = #{stationDistance,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+  
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
