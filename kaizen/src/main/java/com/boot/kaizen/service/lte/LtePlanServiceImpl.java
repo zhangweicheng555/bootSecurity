@@ -324,7 +324,7 @@ class LtePlanServiceImpl implements ILtePlanService {
 					for (int i = 0; i < images.length; i++) {
 						String image=images[i];
 						if (StringUtils.isNoneBlank(image)) {
-							createExcelPic(workbook, patriarch, image, (short) (i*6), 4, (short) ((i+1)*6), 5);
+							createExcelPic(workbook, patriarch, lteImage+image, (short) (i*6), 4, (short) ((i+1)*6), 5);
 						}
 					}
 				}
