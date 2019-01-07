@@ -19,13 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
  */
 import org.springframework.web.multipart.MultipartFile;
 
-import com.alibaba.fastjson.JSONObject;
 import com.boot.kaizen.controller.lte.model.BaseStationBean;
 import com.boot.kaizen.controller.lte.model.CommunityBean;
 import com.boot.kaizen.controller.lte.model.MCommunityNetworkOptimizationBean;
 import com.boot.kaizen.controller.lte.model.MCommunityProjectBean;
 import com.boot.kaizen.model.SysUser;
-import com.boot.kaizen.model.lte.LteGcParameter;
 import com.boot.kaizen.model.lteFddModel.LteFddCellCheck;
 import com.boot.kaizen.model.lteFddModel.LteFddParameter;
 import com.boot.kaizen.model.lteFddModel.LteFddStation;
@@ -170,6 +168,9 @@ public class LteFddAppController {
 		}
 	}
 
+	
+	
+	
 	/**
 	 * 上传基站的信息接口 项目/测试时间/站号/createAt 这三个是必须传递的
 	 */
