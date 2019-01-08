@@ -5,6 +5,9 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import com.boot.kaizen.controller.lte.model.BaseStationBean;
 import com.boot.kaizen.entity.LoginUser;
 import com.boot.kaizen.model.lte.LtePlan;
@@ -114,5 +117,15 @@ public interface ILtePlanService {
 	 * @date 2018年11月18日 上午8:18:24
 	 */
 	public JsonMsgUtil queryUserByProjId(Long projId);
+
+	/**
+	 * 上传
+	* @Description: TODO
+	* @author weichengz
+	* @date 2019年1月9日 上午12:57:32
+	 */
+	public JsonMsgUtil upload(MultipartFile file,LoginUser loginUser);
+
+	
 
 }

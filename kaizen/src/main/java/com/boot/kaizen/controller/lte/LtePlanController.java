@@ -1,12 +1,24 @@
 package com.boot.kaizen.controller.lte;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
+
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -14,6 +26,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.boot.kaizen._enum.Constant;
 import com.boot.kaizen.entity.LoginUser;
 import com.boot.kaizen.entity.RequestParamEntity;
@@ -341,47 +355,41 @@ public class LtePlanController {
 				map.put("ftpRateThresholdImage3", "");
 				map.put("roadLogFile3", "");
 
-				
 				map.put("veryClose", "不通过");
 				map.put("vastDistances", "不通过");
 				map.put("ultraHigh", "不通过");
 				map.put("azimuthSuperoverlap", "不通过");
-				map.put("skyBlockCondition","不通过");
+				map.put("skyBlockCondition", "不通过");
 				map.put("declinationOverlap", "不通过");
 				map.put("canBeAdjusted", "不通过");
-				
-				
-				
-				
-				
+
 				map.put("mAntennaHangUpcs1", "");
-				map.put("mAzimuthcs1" , "");
-				map.put("mMechanicalLowerInclinationcs1" , "");
-				map.put("mPresetElectricDipcs1" , "");
-				map.put("mtotalLowerInclinationcs1" , "");
-				map.put("mFrequencycs1","");
-				map.put("mPCIcs1" ,"");
-				map.put("mCellIDcs1" , "");
-				
+				map.put("mAzimuthcs1", "");
+				map.put("mMechanicalLowerInclinationcs1", "");
+				map.put("mPresetElectricDipcs1", "");
+				map.put("mtotalLowerInclinationcs1", "");
+				map.put("mFrequencycs1", "");
+				map.put("mPCIcs1", "");
+				map.put("mCellIDcs1", "");
+
 				map.put("mAntennaHangUpcs2", "");
-				map.put("mAzimuthcs2" , "");
-				map.put("mMechanicalLowerInclinationcs2" , "");
-				map.put("mPresetElectricDipcs2" , "");
-				map.put("mtotalLowerInclinationcs2" , "");
-				map.put("mFrequencycs2","");
-				map.put("mPCIcs2" ,"");
-				map.put("mCellIDcs2" , "");
-				
+				map.put("mAzimuthcs2", "");
+				map.put("mMechanicalLowerInclinationcs2", "");
+				map.put("mPresetElectricDipcs2", "");
+				map.put("mtotalLowerInclinationcs2", "");
+				map.put("mFrequencycs2", "");
+				map.put("mPCIcs2", "");
+				map.put("mCellIDcs2", "");
+
 				map.put("mAntennaHangUpcs3", "");
-				map.put("mAzimuthcs3" , "");
-				map.put("mMechanicalLowerInclinationcs3" , "");
-				map.put("mPresetElectricDipcs3" , "");
-				map.put("mtotalLowerInclinationcs3" , "");
-				map.put("mFrequencycs3","");
-				map.put("mPCIcs3" ,"");
-				map.put("mCellIDcs3" , "");
-				
-				
+				map.put("mAzimuthcs3", "");
+				map.put("mMechanicalLowerInclinationcs3", "");
+				map.put("mPresetElectricDipcs3", "");
+				map.put("mtotalLowerInclinationcs3", "");
+				map.put("mFrequencycs3", "");
+				map.put("mPCIcs3", "");
+				map.put("mCellIDcs3", "");
+
 				ltePlanInfo = ltePlanService.queryLtePlanInfoByEnobId(id);
 				if (ltePlanInfo != null) {
 					map.put("mENodeBID", ltePlanInfo.getmENodeBID());
@@ -396,21 +404,23 @@ public class LtePlanController {
 					map.put("testPerson2", ltePlanInfo.getTestPerson());
 					map.put("testPersonPhone2", ltePlanInfo.getTestPersonPhone());
 
-					
-					//结构验收
-					List<LteCellStructuralValidation> cellStructuralValidations = ltePlanInfo.getLteCellStructuralValidations();
-					if (cellStructuralValidations != null && cellStructuralValidations.size()>0) {
-						LteCellStructuralValidation lteCellStructuralValidation=cellStructuralValidations.get(0);
+					// 结构验收
+					List<LteCellStructuralValidation> cellStructuralValidations = ltePlanInfo
+							.getLteCellStructuralValidations();
+					if (cellStructuralValidations != null && cellStructuralValidations.size() > 0) {
+						LteCellStructuralValidation lteCellStructuralValidation = cellStructuralValidations.get(0);
 						map.put("veryClose", dealTrueOrFalse(lteCellStructuralValidation.getVeryClose()));
 						map.put("vastDistances", dealTrueOrFalse(lteCellStructuralValidation.getVastDistances()));
 						map.put("ultraHigh", dealTrueOrFalse(lteCellStructuralValidation.getUltraHigh()));
-						map.put("azimuthSuperoverlap", dealTrueOrFalse(lteCellStructuralValidation.getAzimuthSuperoverlap()));
-						map.put("skyBlockCondition", dealTrueOrFalse(lteCellStructuralValidation.getSkyBlockCondition()));
-						map.put("declinationOverlap", dealTrueOrFalse(lteCellStructuralValidation.getDeclinationOverlap()));
+						map.put("azimuthSuperoverlap",
+								dealTrueOrFalse(lteCellStructuralValidation.getAzimuthSuperoverlap()));
+						map.put("skyBlockCondition",
+								dealTrueOrFalse(lteCellStructuralValidation.getSkyBlockCondition()));
+						map.put("declinationOverlap",
+								dealTrueOrFalse(lteCellStructuralValidation.getDeclinationOverlap()));
 						map.put("canBeAdjusted", dealTrueOrFalse(lteCellStructuralValidation.getCanBeAdjusted()));
 					}
-					
-					
+
 					List<LteCellParamters> paramtersLists = ltePlanInfo.getLteCellParamtersList();
 					// 宏站验收记录单
 					List<LteGcParameter> gcParameters = ltePlanInfo.getGcParameters();
@@ -425,22 +435,24 @@ public class LtePlanController {
 							map.put("mFrequency" + i, lteGcParameter.getmFrequency());
 							map.put("mPCI" + i, lteGcParameter.getmPCI());
 							map.put("mCellID" + i, lteGcParameter.getmCellID());
-							if (paramtersLists !=null && paramtersLists.size()>0) {
+							if (paramtersLists != null && paramtersLists.size() > 0) {
 								for (LteCellParamters model : paramtersLists) {
-									if (StringUtils.isNoneBlank(lteGcParameter.getmCellID()) && lteGcParameter.getmCellID().equals(model.getCellId())) {
-										map.put("mAntennaHangUpcs"+i, model.getmAntennaHangUp());
-										map.put("mAzimuthcs"+i , model.getmAzimuth());
-										map.put("mMechanicalLowerInclinationcs"+i , model.getmMechanicalLowerInclination());
-										map.put("mPresetElectricDipcs"+i , model.getmPresetElectricDip());
-										map.put("mtotalLowerInclinationcs"+i , model.getMtotalLowerInclination());
-										map.put("mFrequencycs"+i,model.getFrequency());
-										map.put("mPCIcs"+i ,model.getPci());
-										map.put("mCellIDcs"+i , model.getCellId());
+									if (StringUtils.isNoneBlank(lteGcParameter.getmCellID())
+											&& lteGcParameter.getmCellID().equals(model.getCellId())) {
+										map.put("mAntennaHangUpcs" + i, model.getmAntennaHangUp());
+										map.put("mAzimuthcs" + i, model.getmAzimuth());
+										map.put("mMechanicalLowerInclinationcs" + i,
+												model.getmMechanicalLowerInclination());
+										map.put("mPresetElectricDipcs" + i, model.getmPresetElectricDip());
+										map.put("mtotalLowerInclinationcs" + i, model.getMtotalLowerInclination());
+										map.put("mFrequencycs" + i, model.getFrequency());
+										map.put("mPCIcs" + i, model.getPci());
+										map.put("mCellIDcs" + i, model.getCellId());
 										break;
 									}
 								}
 							}
-							
+
 							i++;
 						}
 					}
@@ -528,14 +540,22 @@ public class LtePlanController {
 	}
 
 	private String dealTrueOrFalse(String str) {
-		String model="不通过";
+		String model = "不通过";
 		if (StringUtils.isNoneBlank(str)) {
 			if (("true").equals(str)) {
-				model="通过";
+				model = "通过";
 			}
 		}
 		return model;
 	}
 
-	
+	/**
+	 * 文件的批量上传
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/upload", method = RequestMethod.POST)
+	public JsonMsgUtil uploadRoadTest(@RequestParam(value = "files") MultipartFile file) {
+		LoginUser loginUser = UserUtil.getLoginUser();
+		return ltePlanService.upload(file,loginUser);
+	}
 }

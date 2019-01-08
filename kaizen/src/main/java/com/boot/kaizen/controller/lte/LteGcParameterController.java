@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.boot.kaizen.entity.LoginUser;
 import com.boot.kaizen.entity.RequestParamEntity;
@@ -82,5 +83,15 @@ public class LteGcParameterController {
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	public JsonMsgUtil delete(@RequestParam("ids") String ids) {
 		return lteGcParameterService.delete(ids);
+	}
+	
+	/**
+	 * 文件的批量上传
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/upload", method = RequestMethod.POST)
+	public JsonMsgUtil uploadRoadTest(@RequestParam(value = "files") MultipartFile file) {
+		LoginUser loginUser = UserUtil.getLoginUser();
+		return lteGcParameterService.upload(file,loginUser);
 	}
 }

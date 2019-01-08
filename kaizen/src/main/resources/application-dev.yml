@@ -54,6 +54,7 @@ files:
   lteExcel: d:/kaizen/doc/excelModel/lteExcelModel.xls
   lteFddExcel: d:/kaizen/doc/excelModel/lteFddModel.xls
   lteImage: d:/kaizen/doc
+  importExcel: d:/kaizen/doc/excelModel
   
   
 logging:

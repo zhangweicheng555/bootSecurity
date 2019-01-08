@@ -4,12 +4,17 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
@@ -21,20 +26,25 @@ import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFClientAnchor;
 import org.apache.poi.hssf.usermodel.HSSFPatriarch;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.boot.kaizen.activiti.service.Activitiservice;
 import com.boot.kaizen.controller.lte.model.BaseStationBean;
 import com.boot.kaizen.dao.lte.LtePlanDao;
 import com.boot.kaizen.entity.LoginUser;
+import com.boot.kaizen.model.SysUser;
 import com.boot.kaizen.model.lte.LtePlan;
 import com.boot.kaizen.model.lte.LtePlanInfo;
 import com.boot.kaizen.service.UserService;
@@ -71,7 +81,9 @@ class LtePlanServiceImpl implements ILtePlanService {
 	private UserService userService;
 	@Value("${files.lteImage}")
 	private String lteImage;
-	
+	@Value("${files.importExcel}")
+	private String importExcel;
+
 	@Override
 	public List<LtePlan> find(Map<String, Object> map) {
 		return planDao.find(map);
@@ -219,7 +231,7 @@ class LtePlanServiceImpl implements ILtePlanService {
 	@Override
 	public LtePlanInfo queryLtePlanInfoByEnobId(Long id) {
 		LtePlanInfo ltePlanInfo = planDao.queryLtePlanInfo(id);
-		Map<String, Object> map=new HashMap<>();
+		Map<String, Object> map = new HashMap<>();
 		map.put("testDate", ltePlanInfo.getTestTime());
 		map.put("projId", ltePlanInfo.getProjId());
 		map.put("eNodeBID", ltePlanInfo.getmENodeBID());
@@ -319,16 +331,17 @@ class LtePlanServiceImpl implements ILtePlanService {
 
 				String rsrpFtpUpImage = map.get("rsrpFtpUpImage");
 				if (StringUtils.isNoneBlank(rsrpFtpUpImage)) {
-					//这个是小区打点集合
-					String[] images=rsrpFtpUpImage.split(",");
+					// 这个是小区打点集合
+					String[] images = rsrpFtpUpImage.split(",");
 					for (int i = 0; i < images.length; i++) {
-						String image=images[i];
+						String image = images[i];
 						if (StringUtils.isNoneBlank(image)) {
-							createExcelPic(workbook, patriarch, lteImage+image, (short) (i*6), 4, (short) ((i+1)*6), 5);
+							createExcelPic(workbook, patriarch, lteImage + image, (short) (i * 6), 4,
+									(short) ((i + 1) * 6), 5);
 						}
 					}
 				}
-				
+
 				String sinrThresholdImage = map.get("sinrThresholdImage");
 				if (StringUtils.isNoneBlank(sinrThresholdImage)) {
 					sinrThresholdImage = lteImage + sinrThresholdImage;
@@ -345,14 +358,12 @@ class LtePlanServiceImpl implements ILtePlanService {
 				if (StringUtils.isNoneBlank(downFtpRateThresholdImage)) {
 					downFtpRateThresholdImage = lteImage + downFtpRateThresholdImage;
 				}
-				
 
 				createExcelPic(workbook, patriarch, sinrThresholdImage, (short) 0, 2, (short) 6, 3);
 				createExcelPic(workbook, patriarch, rsrpThresholdImage, (short) 6, 2, (short) 13, 3);
 				createExcelPic(workbook, patriarch, upFtpRateThresholdImage, (short) 13, 2, (short) 20, 3);
 				createExcelPic(workbook, patriarch, downFtpRateThresholdImage, (short) 20, 2, (short) 27, 3);
-				
-				
+
 				HSSFCell cell;
 				HSSFRow row;
 
@@ -379,7 +390,6 @@ class LtePlanServiceImpl implements ILtePlanService {
 				cell = row.getCell(7);
 				cell.setCellValue(map.get("mBaseStationType"));
 
-				
 				row = sheetOne.getRow(7);
 				cell = row.getCell(2);
 				cell.setCellValue(map.get("mLongitude"));
@@ -512,7 +522,7 @@ class LtePlanServiceImpl implements ILtePlanService {
 				cell.setCellValue(map.get("mCellID3"));
 				cell = row.getCell(9);
 				cell.setCellValue(map.get("mCellIDcs3"));
-				
+
 				row = sheetOne.getRow(28);
 				cell = row.getCell(2);
 				cell.setCellValue(map.get("veryClose"));
@@ -535,10 +545,6 @@ class LtePlanServiceImpl implements ILtePlanService {
 				cell = row.getCell(2);
 				cell.setCellValue(map.get("canBeAdjusted"));
 
-				
-				
-				
-				
 				row = sheetOne.getRow(41);
 				cell = row.getCell(1);
 				cell.setCellValue(map.get("testPerson1"));
@@ -772,5 +778,136 @@ class LtePlanServiceImpl implements ILtePlanService {
 			j = new JsonMsgUtil(true, "查询成功", listMaps);
 		}
 		return j;
+	}
+
+	@Transactional
+	@Override
+	public JsonMsgUtil upload(MultipartFile file, LoginUser loginUser) {
+		JsonMsgUtil msg = new JsonMsgUtil(false);
+		try {
+			// 导入
+			HSSFWorkbook wbs = new HSSFWorkbook(file.getInputStream());
+			HSSFSheet sheet1 = wbs.getSheetAt(0);
+			HSSFRow row = null;
+			if (sheet1.getRow(0).getLastCellNum() != 13) {
+				msg = new JsonMsgUtil(false, "导入excel的列数要求为13列", null);
+				return msg;
+			}
+			List<LtePlan> list = new ArrayList<LtePlan>();
+			LtePlan ltePlan = null;
+			for (int j = 1; j <= sheet1.getLastRowNum(); j++) {
+				row = sheet1.getRow(j);
+				if (row == null) {
+					continue;
+				}
+				// 导入excel总行数记录
+				int cell_index = 0;
+				ltePlan = new LtePlan();
+				// 基站号
+				String mENodeBID = cell_string(row.getCell(cell_index++));
+				if (StringUtils.isNoneBlank(mENodeBID)) {
+					ltePlan.setmENodeBID(mENodeBID);
+				} else {
+					msg = new JsonMsgUtil(false, "站号不能为空", null);
+					return msg;
+				}
+				// 基站名称
+				String mBaseStationName = cell_string(row.getCell(cell_index++));
+				if (StringUtils.isNoneBlank(mBaseStationName)) {
+					ltePlan.setmBaseStationName(mBaseStationName);
+				} else {
+					msg = new JsonMsgUtil(false, "站号不能为空", null);
+					return msg;
+				}
+				// 基站类型
+				String mBaseStationType = cell_string(row.getCell(cell_index++));
+				ltePlan.setmBaseStationType(mBaseStationType);
+				// 海拔
+				String mAltitude = cell_string(row.getCell(cell_index++));
+				ltePlan.setmAltitude(mAltitude);
+				// 经度
+				String mLongitude = cell_string(row.getCell(cell_index++));
+				ltePlan.setmLongitude(mLongitude);
+				// 纬度
+				String mLatitude = cell_string(row.getCell(cell_index++));
+				ltePlan.setmLatitude(mLatitude);
+				// TAC
+				String mTac = cell_string(row.getCell(cell_index++));
+				ltePlan.setmTac(mTac);
+				// 测试工程师
+				String testPerson = cell_string(row.getCell(cell_index++));
+				ltePlan.setTestPerson(testPerson);
+				// 测试工程师电话
+				String testPersonPhone = cell_string(row.getCell(cell_index++));
+				ltePlan.setTestPersonPhone(testPersonPhone);
+				// 后台工程师
+				String backPerson = cell_string(row.getCell(cell_index++));
+				ltePlan.setBackPerson(backPerson);
+				// 后台工程师电话
+				String backPersonPhone = cell_string(row.getCell(cell_index++));
+				ltePlan.setBackPersonPhone(backPersonPhone);
+
+				// 测试时间
+				// 日期
+				try {
+					// 43352 42006
+					String testDate = cell_string(row.getCell(cell_index++));
+					if (StringUtils.isNoneBlank(testDate)) {
+						try {
+							Integer.valueOf(testDate);// 验证日期是不是正确
+							ltePlan.setTestTime(dealDateToString(testDate));
+						} catch (Exception e) {
+							msg = new JsonMsgUtil(false, "测试日期格式不正确", null);
+							return msg;
+						}
+					} else {
+						msg = new JsonMsgUtil(false, "测试日期不能为空", null);
+						return msg;
+					}
+				} catch (Exception e) {
+					msg = new JsonMsgUtil(false, "测试日期格式不正确", null);
+					return msg;
+				}
+				// 处理人
+				String loginName = cell_string(row.getCell(cell_index++));
+				SysUser user = userService.getUser(loginName);
+				if (user != null) {
+					ltePlan.setDealPersonId(String.valueOf(user.getId()));
+				}
+				// 添加进list里面
+				list.add(ltePlan);
+			}
+
+			for (LtePlan nobPlan2 : list) {
+				edit(nobPlan2, loginUser);
+			}
+			msg = new JsonMsgUtil(true, "上传成功", null);
+		} catch (Exception e) {
+			msg = new JsonMsgUtil(false, e.getMessage(), null);
+		}
+		return msg;
+	}
+
+	public String cell_string(HSSFCell cell) {
+		if (cell == null) {
+			return "";
+		}
+		cell.setCellType(Cell.CELL_TYPE_STRING);
+		return cell.getStringCellValue();
+	}
+
+	public String dealDateToString(String strDate) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar cal1 = Calendar.getInstance();
+		cal1.set(Calendar.YEAR, 1900);
+		cal1.set(Calendar.DAY_OF_MONTH, 1);
+		cal1.set(Calendar.DAY_OF_YEAR, 1);
+		cal1.set(Calendar.HOUR_OF_DAY, 0);
+		cal1.set(Calendar.MINUTE, 0);
+		cal1.set(Calendar.SECOND, 0);
+
+		cal1.add(Calendar.DAY_OF_YEAR, Integer.parseInt(strDate) - 2);
+		Date date = cal1.getTime();
+		return sdf.format(date);
 	}
 }
