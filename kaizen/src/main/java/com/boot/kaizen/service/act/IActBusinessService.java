@@ -65,7 +65,7 @@ public interface IActBusinessService {
 	 * @param content
 	 * @return
 	 */
-	Long queryCountMatchBusinessKey(String bussType, String content);
+	Long queryCountMatchBusinessKey(String bussType, String content,Long projId);
 	/**
 	 * 根据业务类型、环节、流程实例id 判断 是不是存在
 	 * @param bussType

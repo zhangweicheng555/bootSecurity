@@ -62,8 +62,8 @@ public class ActBusinessService implements IActBusinessService {
 	}
 
 	@Override
-	public Long queryCountMatchBusinessKey(String bussType, String content) {
-		return actBusinessDao.queryCountMatchBusinessKey(bussType, content);
+	public Long queryCountMatchBusinessKey(String bussType, String content,Long projId) {
+		return actBusinessDao.queryCountMatchBusinessKey(bussType, content,projId);
 	}
 
 	@Override

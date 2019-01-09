@@ -57,7 +57,7 @@ public interface ActBusinessDao {
 	 */
 	List<String> queryProcessInstanceIds(@Param("recordId") Long recordId,@Param("bussType")  String bussType);
 
-	Long queryCountMatchBusinessKey(@Param("bussType") String bussType,@Param("content")  String content);
+	Long queryCountMatchBusinessKey(@Param("bussType") String bussType,@Param("content")  String content,@Param("projId")  Long projId);
 	
 	String queryMatchBusinessKey(@Param("bussType") String bussType,@Param("content")  String content);
 

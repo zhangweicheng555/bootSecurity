@@ -105,7 +105,7 @@ class LtePlanServiceImpl implements ILtePlanService {
 			planDao.save(ltePlan);
 			// 判断流程业务关联表是不是有与businesskey模糊匹配的记录
 			Long num = actBusinessService.queryCountMatchBusinessKey("LtePlan",
-					"LtePlan_" + ltePlan.getmENodeBID() + "_");
+					"LtePlan_" + ltePlan.getmENodeBID() + "_",loginUser.getProjId());
 			if (num != 0) {
 				throw new IllegalArgumentException("存在此站号的流程，添加失败");
 			}

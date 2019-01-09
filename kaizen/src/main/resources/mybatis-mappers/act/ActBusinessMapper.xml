@@ -9,7 +9,7 @@
 		select distinct act_piid from business_activiti_relation where buss_id=#{recordId} and buss_type=#{bussType}
 	</select>
 	<select id="queryCountMatchBusinessKey" resultType="java.lang.Long">
-		select count(1) from business_activiti_relation where  buss_type=#{bussType} and act_business_key like '%${content}%'
+		select count(1) from business_activiti_relation where  buss_type=#{bussType} and act_business_key like '%${content}%' and proj_id=#{projId}
 	</select>
 	
 	<select id="queryMatchBusinessKey" resultType="java.lang.String">
