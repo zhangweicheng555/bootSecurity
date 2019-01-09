@@ -44,7 +44,7 @@
 							<button id="exportBtnModel" class="layui-btn layui-btn-sm  layui-btn-normal" style="margin-left: 1px;"  >
 								  <i class="layui-icon">&#xe640;</i>导出报告
 							</button>
-							<button id="importBtnModel" class="layui-btn layui-btn-sm  layui-btn-normal" style="margin-left: 1px;"  >
+							<button id="importBtnModel"  onclick="location.href='/pages/lte/plan/import.html'" class="layui-btn layui-btn-sm  layui-btn-normal" style="margin-left: 1px;"  >
 								  <i class="layui-icon layui-icon-next"></i>批量导入
 							</button>
 						</td>
@@ -201,15 +201,7 @@
 				  parent.layer.msg('请重新登录');
 		  }
 	  });
-	  /**批量导入*/
-	  $("#importBtnModel").click(function(){
-		  var token = localStorage.getItem("token");
-		  if (token != null && token.trim().length != 0) {
-			  common.openEditDialogView("导入","pages/lte/plan/import.html","1200px","620px",false);
-		  }else{
-			  parent.layer.msg('请重新登录');
-		  }
-	  });
+	 
 	  
 	  //currData  checkArray  监听checkbox  选中取消事件
 	  table.on('checkbox', function(obj){
