@@ -111,7 +111,7 @@ public class LteFddHzPlanController {
 	@ResponseBody
 	@RequestMapping(value = "/queryCheckInfoById", method = RequestMethod.POST)
 	public JsonMsgUtil queryCheckInfoById(@RequestParam("id") String id) {
-		return lteFddPlanService.queryCheckInfoById(id,"1");
+		return lteFddPlanService.queryCheckInfoById(id,"2");
 	}
 
 	/**

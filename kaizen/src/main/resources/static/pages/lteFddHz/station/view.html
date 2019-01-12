@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>修改计划表</title>
+<link rel="stylesheet" type="text/css" media="screen" href="../../../../css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" media="screen" href="../../../../layui/css/layui.css">
+</head>
+<body>
+
+	
+	
+	<form class="layui-form" lay-filter="formDemo"  id="formDemo" style="margin-top: 20px;">
+	
+	 <div class="layui-form-item">
+	    <label class="layui-form-label" style="width: 150px;">基站号</label>
+	    <div class="layui-input-inline">
+	     <input type="hidden" name="id" id="id" >
+	      <input type="text" name="eNodeBID" id="eNodeBID"   required  lay-verify="required"  autocomplete="off" class="layui-input">
+	    </div>
+	    
+	    <label class="layui-form-label" style="width: 150px;">基站名称</label>
+	    <div class="layui-input-inline" >
+	      <input type="text" name="mBaseStationName" id="mBaseStationName"   required  lay-verify="required"  autocomplete="off" class="layui-input">
+	    </div>
+	    
+	    <label class="layui-form-label" style="width: 150px;">CSFB功能测试通过</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="csfbFunctionTest" id="csfbFunctionTest"  autocomplete="off" class="layui-input">
+	    </div>
+	  </div>
+	
+	
+	
+	  <div class="layui-form-item">
+	    <label class="layui-form-label" style="width: 150px;">VoLTE功能测试通过</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="volteFunctionTest" id="volteFunctionTest"    required  lay-verify="required"   autocomplete="off" class="layui-input">
+	    </div>
+	    
+	    <label class="layui-form-label" style="width: 150px;">四超(超近、超远、超高、超重叠覆盖)检查通过</label>
+	    <div class="layui-input-inline" >
+	      <input type="text" name="fourCoverCheck" id="fourCoverCheck"   autocomplete="off" class="layui-input">
+	    </div>
+	    
+	    <label class="layui-form-label" style="width: 150px;">天线挂高、位置、方向检查通过</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="heightLocationDirectionCheck" id="heightLocationDirectionCheck"   autocomplete="off" class="layui-input">
+	    </div>
+	  </div>
+	 
+	  
+	  <div class="layui-form-item">
+	    <label class="layui-form-label" style="width: 150px;">天面阻挡情况检查通过</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="skyBlockCheck" id="skyBlockCheck"   autocomplete="off" class="layui-input">
+	    </div>
+	    <label class="layui-form-label" style="width: 150px;">天线后期可调整情况检查通过</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="wireBackCheck" id="wireBackCheck"   autocomplete="off" class="layui-input">
+	    </div>
+	    <label class="layui-form-label" style="width: 150px;">测试时间</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="testDate" id="testDate"   autocomplete="off" class="layui-input">
+	    </div>
+	  </div>
+	  
+	  <div class="layui-form-item">
+	    <label class="layui-form-label" style="width: 150px;">经度</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="latitude" id="latitude"   autocomplete="off" class="layui-input">
+	    </div>
+
+	    <label class="layui-form-label" style="width: 150px;">纬度</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="longitude" id="longitude"   autocomplete="off" class="layui-input">
+	    </div>
+	    <label class="layui-form-label" style="width: 150px;">TAC</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="tac" id="tac"   autocomplete="off" class="layui-input">
+	    </div>
+	  </div>
+	  
+	   <blockquote class="layui-elem-quote"><span style="color: red;">图片预览</span>
+	   		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	
+	   		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	   		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	   		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	   		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	   		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	   		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	   		<span style="color: red;" id="spanModel">当前图片的名字</span>
+	   </blockquote>
+	  <!-- 轮播显示图片 -->
+	  <div class="layui-form-item">
+	  	<div class="layui-carousel" id="test1" lay-filter="test1">
+		  <div carousel-item id="carouselDiv">
+		   <!--  <div>条目1</div>
+		    <div>条目2</div>
+		    <div>条目3</div>
+		    <div>条目4</div>
+		    <div>条目5</div> -->
+		  </div>
+		</div>
+	  </div>
+	  
+	</form>
+	
+	<script type="text/javascript" src="../../../../js/libs/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="../../../../layui/layui.js"></script>
+	<script type="text/javascript" src="../../../../js/jq.js"></script>
+	
+<script>
+
+
+	
+	
+	var form;
+	layui.use(['layer', 'form','jquery','carousel'], function(){
+	  var layer = layui.layer,form = layui.form,$=layui.jquery;
+	  var carousel = layui.carousel;
+	  //初始化工作
+	  initData();
+	  function initData(){
+			var id=getUrlParam("id");
+			if(!id){
+				layer.msg('获取数据ID异常');
+				return;
+			}
+			$.ajax({
+				   type: "POST",url: "/fddhz/station/findById",data: {"id":id},dataType:"json",
+				   success: function(msg){
+				     if(msg.success){
+				    	var model = jQuery.parseJSON(msg.object);
+				 		form.val("formDemo", model);
+				 		//初始化轮播  滚动
+				 		$("#carouselDiv").append(handePic('建筑物全景照（从地面仰视）',model.allViewPic));
+				 		$("#carouselDiv").append(handePic('站点入口图',model.stationEntrancePic));
+				 		$("#carouselDiv").append(handePic('屋顶天面全景图',model.roofViewPic));
+				 		$("#carouselDiv").append(handePic('天面：（共址站点楼顶每个天面拍一张、包含塔桅、天面）_小区1',model.cellFirstPic));
+				 		$("#carouselDiv").append(handePic('天面：（共址站点楼顶每个天面拍一张、包含塔桅、天面）_小区2',model.cellScecondPic));
+				 		$("#carouselDiv").append(handePic('天面：（共址站点楼顶每个天面拍一张、包含塔桅、天面）_小区3',model.cellThirdPic));
+				 		$("#carouselDiv").append(handePic('站点周边区域：（楼顶360°每45°方向拍一张）_0°',model.stationDirection0));
+				 		$("#carouselDiv").append(handePic('站点周边区域：（楼顶360°每45°方向拍一张）_45°',model.stationDirection45));
+				 		$("#carouselDiv").append(handePic('站点周边区域：（楼顶360°每45°方向拍一张）_90°',model.stationDirection90));
+				 		$("#carouselDiv").append(handePic('站点周边区域：（楼顶360°每45°方向拍一张）_135°',model.stationDirection135));
+				 		$("#carouselDiv").append(handePic('站点周边区域：（楼顶360°每45°方向拍一张）_180°',model.stationDirection180));
+				 		$("#carouselDiv").append(handePic('站点周边区域：（楼顶360°每45°方向拍一张）_225°',model.stationDirection225));
+				 		$("#carouselDiv").append(handePic('站点周边区域：（楼顶360°每45°方向拍一张）_270°',model.stationDirection270));
+				 		$("#carouselDiv").append(handePic('站点周边区域：（楼顶360°每45°方向拍一张）_315°',model.stationDirection315));
+				 		$("#carouselDiv").append(handePic('覆盖效果_RSRP覆盖图',model.stationRsrpPic));
+				 		$("#carouselDiv").append(handePic('覆盖效果_SINR',model.stationSinrPic));
+				 		$("#carouselDiv").append(handePic('覆盖效果_下载速率',model.stationDownRatePic));
+				 		$("#carouselDiv").append(handePic('覆盖效果_PCI',model.stationPciPic));
+				 		//开始轮播
+				 		carouselFun();
+				     }else{
+				    	 layer.msg('返回修改数据信息异常');
+				     }
+				   }
+			});
+		};
+		
+		
+		//开始轮播
+		function carouselFun(){
+			 //建造实例
+			  carousel.render({
+			    elem: '#test1'
+			    ,width: '100%' 
+			    ,arrow: 'none'
+			    ,height:'400px'
+			    ,autoplay:true
+			    ,interval:2000
+			  });
+	   }
+		
+		//处理轮播内部的div
+		function handePic(flagName,url){
+			if(url){
+				return '<div><img lang="'+flagName+'" style="width:100%;height:380px;" src="/statics'+url+'"></div>';
+			}else{
+				return "";
+			}
+		}
+		
+		//监听轮播切换事件
+		carousel.on('change(test1)', function(obj){ 
+			var model=obj.item;//当前条目的元素对象
+			var image=model.html();
+			$("#spanModel").html($(image).attr('lang'))
+		}); 
+	});
+	
+	
+</script> 
+
+</body>
+</html>

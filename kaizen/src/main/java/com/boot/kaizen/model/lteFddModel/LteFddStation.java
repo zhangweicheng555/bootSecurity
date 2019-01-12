@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
+ * fdd  fddhz一样
  * lte fdd app对接参数信息 以基站为单位
  * 
  * @author weichengz
@@ -43,6 +44,16 @@ public class LteFddStation implements Serializable {
 	private String stationEntrancePic;// 站点入口图
 	private String roofViewPic;// 屋顶天面全景图
 
+	// 基站遍历覆盖效果图
+	private String stationRsrpPic;// RSRP覆盖图
+	private String stationSinrPic;// SINR覆盖图
+	private String stationDownRatePic;// 下载速率
+	private String stationPciPic;// PCI
+
+	
+	
+	
+	
 	// 天面 每个小区一张
 	private String cellFirstPic;// 小区1
 	private String cellScecondPic;// 小区2
@@ -57,12 +68,6 @@ public class LteFddStation implements Serializable {
 	private String stationDirection225;//
 	private String stationDirection270;//
 	private String stationDirection315;//
-
-	// 基站遍历覆盖效果图
-	private String stationRsrpPic;// RSRP覆盖图
-	private String stationSinrPic;// SINR覆盖图
-	private String stationDownRatePic;// 下载速率
-	private String stationPciPic;// PCI
 
 	private String stationType;// 站点类型
 	private String buildingFunction;// 建筑物功能

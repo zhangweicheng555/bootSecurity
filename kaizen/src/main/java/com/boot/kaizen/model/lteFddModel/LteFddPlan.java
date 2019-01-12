@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
+ * fdd  fdd宏站是一样的
  * @author weichengz
  * @date 2018年12月31日 上午10:06:55
  */
@@ -11,19 +12,29 @@ public class LteFddPlan implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private String id;
-
 	private String mENodeBID;// 基站号
 	private String mBaseStationName;// 基站名
+	private String testTime;// 测试时间 yyyy-mm-dd
+	private String districtCountry;// 区县
+	private String address;// 详细地址
 	private String mBaseStationType;// 基站类型
-	private String mAltitude;// 海拔
+	private String deviceType;// 设备类型
+	private String videoFrequency;// 频段
 	private String mLongitude;// 经度
 	private String mLatitude;// 纬度
+	private String broadBand;// 传输宽带
+	private String ipConfig;// 传输ip配置
+
+	private String region;// 行政区
+	private String commonStationName;// 共址站名
+	
+	private String mAltitude;// 海拔
+	
 	private String mTac;// tac
 	private String testPerson;// 测试工程师
 	private String testPersonPhone;// 测试工程师电话
 	private String backPerson;// 后台工程师
 	private String backPersonPhone;// 后台工程师电话
-	private String testTime;// 测试时间 yyyy-mm-dd
 	private String dealPersonId;// 接收改计划任务的人的id
 
 	private Integer status;// 最终是不是报告可以审核 之后最后一步的时候 才设置为1 0 未审核 1审核通过 2审核不通过
@@ -35,15 +46,7 @@ public class LteFddPlan implements Serializable {
 	private Date updateTime;
 	private Integer createAt;
 
-	private String districtCountry;// 区县
-	private String deviceType;// 设备类型
-	private String videoFrequency;// 频段
-	private String broadBand;// 传输宽带
-	private String ipConfig;// 传输ip配置
 
-	private String region;// 行政区
-	private String address;// 详细地址
-	private String commonStationName;// 共址站名
 
 	private String jzType;
 

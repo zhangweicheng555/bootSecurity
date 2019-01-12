@@ -18,47 +18,22 @@ public class LteFddParameter implements Serializable {
 	private String id;
 	private String eNodeBID;// 基站号
 	private String mBaseStationName;// 基站名
-
 	/** 小区工程参数 **/
 	private String cellId;// 小区号
 	private String cellName;// 小区名称
 	private String testDate;// 测试时间
-
 	private String eci;
 	private String earfcn;
 	private String pci;
 	private String tac;
-
+	// 上下行子帧配比
+	private String updownMatching;
+	// 特殊子帧配比
+	private String specialMatching;
 	// CSFB手机主叫的呼叫成功率
 	private String csfbCallSuccAttempt;// 尝试次数
 	private String csfbCallSuccSucc;// 成功次数
 	private String csfbCallSuccfailure;// 失败次数
-
-	// CSFB手机被叫的接通成功率
-	private String csfbPassiveCallSuccAttempt;
-	private String csfbPassiveCallSuccSucc;
-	private String csfbPassiveCallSuccfailure;
-
-	private String volteWirelessAttempt;// VOLTE无线接通率 尝试次数
-	private String volteWirelessConnSucc;// VOLTE无线接通率 成功次数
-	private String volteWirelessConnFailure;// VOLTE无线接通率 失败次数
-
-	private String volteWirelessConnFirst;// VOLTE无线接通率 第一次
-	private String volteWirelessConnSecond;// VOLTE无线接通率 第二次
-	private String volteWirelessConnBad;// VOLTE无线接通率 差点
-	private String volteWirelessConnRandom;// VOLTE无线接通率 任意点
-
-	// CSFB手机语音通话后返回成功率
-	private String csfbVoiceSuccAttempt;
-	private String csfbVoiceSuccSucc;
-	private String csfbVoiceSuccfailure;
-
-	// CSFB手机主叫增加的呼叫接通时延
-	private String csfbCallDelay;
-	// CSFB手机被叫增加的呼叫接通时延
-	private String csfbPassiveCallDelay;
-	// CSFB手机语音通话后返回FDD时间
-	private String csfbVoiceDelay;
 
 	// FTP下行吞吐率
 	private String ftpDownRsrpFirst;// RSRP 第一次
@@ -110,13 +85,44 @@ public class LteFddParameter implements Serializable {
 	private Date updateTime;
 	private Integer createAt;
 
-	// 上下行子帧配比
-	private String updownMatching;
-	// 特殊子帧配比
-	private String specialMatching;
-
 	// 类型 fdd fdd宏站的区别
 	private String jzType;// 1是 fdd 2是宏站
+
+	/**
+	 * fdd私有
+	 */
+	private String volteWirelessConnFirst;// VOLTE无线接通率 第一次
+	private String volteWirelessConnSecond;// VOLTE无线接通率 第二次
+	private String volteWirelessConnBad;// VOLTE无线接通率 差点
+	private String volteWirelessConnRandom;// VOLTE无线接通率 任意点
+	// CSFB手机主叫增加的呼叫接通时延
+	private String csfbCallDelay;
+	// CSFB手机被叫增加的呼叫接通时延
+	private String csfbPassiveCallDelay;
+	// CSFB手机语音通话后返回FDD时间
+	private String csfbVoiceDelay;
+
+	
+	/**
+	 * 区别
+	 * 
+	 * @Description: TODO
+	 * @author weichengz
+	 * @date 2019年1月13日 上午1:27:04
+	 */
+	private String volteWirelessAttempt;// VOLTE无线接通率 尝试次数 hz volte呼叫成功率
+	private String volteWirelessConnSucc;// VOLTE无线接通率 成功次数
+	private String volteWirelessConnFailure;// VOLTE无线接通率 失败次数
+
+	// CSFB手机被叫的接通成功率 hz volte呼叫掉线率
+	private String csfbPassiveCallSuccAttempt;
+	private String csfbPassiveCallSuccSucc;
+	private String csfbPassiveCallSuccfailure;
+
+	// CSFB手机语音通话后返回成功率   hz 系统间切换
+	private String csfbVoiceSuccAttempt;
+	private String csfbVoiceSuccSucc;
+	private String csfbVoiceSuccfailure;
 
 	public String getJzType() {
 		return jzType;

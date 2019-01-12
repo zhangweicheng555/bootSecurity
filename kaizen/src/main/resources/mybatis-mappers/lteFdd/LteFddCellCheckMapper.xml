@@ -106,6 +106,7 @@
 		<result column="testTime" jdbcType="VARCHAR"
 			property="testTime" />
 		<result column="jzType" jdbcType="VARCHAR" property="jzType" />
+		<result column="volteDelay" jdbcType="VARCHAR" property="volteDelay" />
 	</resultMap>
 	<sql id="Base_Column_List">
 		id, mENodeBID, mBaseStationName, cellId, cellName, upDownRatio,
@@ -124,7 +125,7 @@
 		lteFddChangeAttempt, lteFddChangeSucc, lteFddChangeFailure, systemChangeAttempt,
 		systemChangeSucc, systemChangeFailure, csfbReturnAttempt,
 		csfbReturnSucc, csfbReturnFailure,
-		projId, createTime, updateTime, createAt,frequency,testTime,jzType
+		projId, createTime, updateTime, createAt,frequency,testTime,jzType,volteDelay
 	</sql>
 
 
@@ -356,6 +357,9 @@
 			<if test="jzType != null">
 				jzType,
 			</if>
+			<if test="volteDelay != null">
+				volteDelay,
+			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="id != null">
@@ -531,6 +535,9 @@
 			</if>
 			<if test="jzType != null">
 				#{jzType,jdbcType=VARCHAR},
+			</if>
+			<if test="volteDelay != null">
+				#{volteDelay,jdbcType=VARCHAR},
 			</if>
 		</trim>
 	</insert>
@@ -711,6 +718,9 @@
 			</if>
 			<if test="jzType != null">
 				jzType = #{jzType,jdbcType=VARCHAR},
+			</if>
+			<if test="volteDelay != null">
+				volteDelay = #{volteDelay,jdbcType=VARCHAR},
 			</if>
 		</set>
 		where id = #{id,jdbcType=VARCHAR}
