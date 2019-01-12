@@ -38,6 +38,7 @@ public class LteFddStationController {
 	public TableResultUtil find(RequestParamEntity param) {
 
 		param.getMap().put("projId", MyUtil.getDealProjId(UserUtil.getLoginUser()));
+		param.getMap().put("jzType", "1");
 
 		PageInfo<LteFddStation> pageInfo = PageHelper.startPage(param.getPage(), param.getLimit())
 				.doSelectPageInfo(new ISelect() {
@@ -58,6 +59,7 @@ public class LteFddStationController {
 	@ResponseBody
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
 	public JsonMsgUtil edit(LteFddStation lteFddStation) {
+		lteFddStation.setJzType("1");
 		LoginUser loginUser = UserUtil.getLoginUser();
 		return lteFddStationService.edit(lteFddStation, loginUser);
 	}

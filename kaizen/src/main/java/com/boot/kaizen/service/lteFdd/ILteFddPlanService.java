@@ -31,15 +31,16 @@ public interface ILteFddPlanService {
 	 * @date 2018年12月31日 上午10:10:48
 	 */
 	LteFddPlan selectByPrimaryKey(String id);
-	
+
 	/**
 	 * 根据规划表的任务id获取详细信息
-	* @Description: TODO
-	* @author weichengz
-	* @date 2019年1月5日 下午5:27:57
+	 * 
+	 * @Description: TODO
+	 * @author weichengz
+	 * @date 2019年1月5日 下午5:27:57
 	 */
-	LteFddPlanInfo findLteFddPlanInfo(String id);
-	
+	LteFddPlanInfo findLteFddPlanInfo(String id,String jzType);
+
 	/**
 	 * 
 	 * @Description: 列表查询
@@ -79,7 +80,7 @@ public interface ILteFddPlanService {
 	 * @author weichengz
 	 * @date 2019年1月1日 上午9:56:40
 	 */
-	List<Map<String, Object>> queryPlanList(Long userId, Long projId);
+	List<Map<String, Object>> queryPlanList(Long userId, Long projId,String jzType);
 
 	/**
 	 * 拉去基站信息 app对接
@@ -88,21 +89,23 @@ public interface ILteFddPlanService {
 	 * @author weichengz
 	 * @date 2019年1月1日 上午10:34:50
 	 */
-	List<BaseStationBean> queryStationList(Long userId, Long projId, String testDate);
+	List<BaseStationBean> queryStationList(Long userId, Long projId, String testDate, String jzType);
 
 	/**
 	 * 通过规划表的id查询所有的相关的审核信息
-	* @Description: TODO
-	* @author weichengz
-	* @date 2019年1月1日 下午6:33:10
+	 * 
+	 * @Description: TODO
+	 * @author weichengz
+	 * @date 2019年1月1日 下午6:33:10
 	 */
-	JsonMsgUtil queryCheckInfoById(String id);
+	JsonMsgUtil queryCheckInfoById(String id,String jzType);
 
 	/**
 	 * 报告导出
-	* @Description: TODO
-	* @author weichengz
-	* @date 2019年1月6日 上午6:03:11
+	 * 
+	 * @Description: TODO
+	 * @author weichengz
+	 * @date 2019年1月6日 上午6:03:11
 	 */
 	void exportPlanDoc(String absolutePath, LteFddPlanInfo lteFddPlanInfo, Map<String, String> map,
 			HttpServletResponse response, HttpSession session);

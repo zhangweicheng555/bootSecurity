@@ -98,6 +98,17 @@ public class LteFddCellCheck implements Serializable {
 	private Date updateTime;
 	private Integer createAt;
 
+	// 类型 fdd fdd宏站的区别
+	private String jzType;// 1是 fdd 2是宏站
+
+	public String getJzType() {
+		return jzType;
+	}
+
+	public void setJzType(String jzType) {
+		this.jzType = jzType;
+	}
+
 	public String getId() {
 		return id;
 	}

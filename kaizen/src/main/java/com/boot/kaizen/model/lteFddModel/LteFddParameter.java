@@ -115,6 +115,17 @@ public class LteFddParameter implements Serializable {
 	// 特殊子帧配比
 	private String specialMatching;
 
+	// 类型 fdd fdd宏站的区别
+	private String jzType;// 1是 fdd 2是宏站
+
+	public String getJzType() {
+		return jzType;
+	}
+
+	public void setJzType(String jzType) {
+		this.jzType = jzType;
+	}
+
 	public String getTestDate() {
 		return testDate;
 	}

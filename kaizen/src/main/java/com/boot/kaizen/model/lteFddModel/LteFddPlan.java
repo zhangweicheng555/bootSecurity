@@ -45,6 +45,8 @@ public class LteFddPlan implements Serializable {
 	private String address;// 详细地址
 	private String commonStationName;// 共址站名
 
+	private String jzType;
+
 	public String getRegion() {
 		return region;
 	}
@@ -53,10 +55,13 @@ public class LteFddPlan implements Serializable {
 		this.region = region;
 	}
 
-	
-	
+	public String getJzType() {
+		return jzType;
+	}
 
-	
+	public void setJzType(String jzType) {
+		this.jzType = jzType;
+	}
 
 	public String getRemark() {
 		return remark;

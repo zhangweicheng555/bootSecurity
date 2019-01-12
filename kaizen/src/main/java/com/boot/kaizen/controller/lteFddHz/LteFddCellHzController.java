@@ -1,4 +1,4 @@
-package com.boot.kaizen.controller.lteFdd;
+package com.boot.kaizen.controller.lteFddHz;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,8 +24,8 @@ import com.github.pagehelper.PageInfo;
  * @date 2018年12月31日 上午10:17:16
  */
 @Controller
-@RequestMapping("/fdd/cell")
-public class LteFddCellController {
+@RequestMapping("/fddhz/cell")
+public class LteFddCellHzController {
 
 	@Autowired
 	private ILteFddCellService lteFddCellService;
@@ -35,7 +35,7 @@ public class LteFddCellController {
 	public TableResultUtil find(RequestParamEntity param) {
 
 		param.getMap().put("projId", MyUtil.getDealProjId(UserUtil.getLoginUser()));
-		param.getMap().put("jzType", "1");
+		param.getMap().put("jzType", "2");
 
 		PageInfo<LteFddCellCheck> pageInfo = PageHelper.startPage(param.getPage(), param.getLimit())
 				.doSelectPageInfo(new ISelect() {
@@ -56,7 +56,7 @@ public class LteFddCellController {
 	@ResponseBody
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
 	public JsonMsgUtil edit(LteFddCellCheck lteFddCellCheck) {
-		lteFddCellCheck.setJzType("1");
+		lteFddCellCheck.setJzType("2");
 		LoginUser loginUser = UserUtil.getLoginUser();
 		return lteFddCellService.edit(lteFddCellCheck, loginUser);
 	}

@@ -1,4 +1,4 @@
-package com.boot.kaizen.controller.lteFdd;
+package com.boot.kaizen.controller.lteFddHz;
 
 import java.io.File;
 import java.util.HashMap;
@@ -36,8 +36,8 @@ import com.github.pagehelper.PageInfo;
  * @date 2018年12月31日 上午10:17:16
  */
 @Controller
-@RequestMapping("/fdd/plan")
-public class LteFddPlanController {
+@RequestMapping("/fddhz/plan")
+public class LteFddHzPlanController {
 
 	@Autowired
 	private ILteFddPlanService lteFddPlanService;
@@ -51,7 +51,7 @@ public class LteFddPlanController {
 	public TableResultUtil find(RequestParamEntity param) {
 
 		param.getMap().put("projId", MyUtil.getDealProjId(UserUtil.getLoginUser()));
-		param.getMap().put("jzType", "1");
+		param.getMap().put("jzType", "2");
 
 		PageInfo<LteFddPlan> pageInfo = PageHelper.startPage(param.getPage(), param.getLimit())
 				.doSelectPageInfo(new ISelect() {
@@ -72,7 +72,7 @@ public class LteFddPlanController {
 	@ResponseBody
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
 	public JsonMsgUtil edit(LteFddPlan lteFddPlan) {
-		lteFddPlan.setJzType("1");
+		lteFddPlan.setJzType("2");
 		LoginUser loginUser = UserUtil.getLoginUser();
 		return lteFddPlanService.edit(lteFddPlan, loginUser);
 	}
@@ -111,7 +111,7 @@ public class LteFddPlanController {
 	@ResponseBody
 	@RequestMapping(value = "/queryCheckInfoById", method = RequestMethod.POST)
 	public JsonMsgUtil queryCheckInfoById(@RequestParam("id") String id) {
-		return lteFddPlanService.queryCheckInfoById(id, "1");
+		return lteFddPlanService.queryCheckInfoById(id,"1");
 	}
 
 	/**
@@ -495,7 +495,7 @@ public class LteFddPlanController {
 		LteFddPlanInfo lteFddPlanInfo = null;
 		try {
 			if (StringUtils.isNoneBlank(id)) {
-				lteFddPlanInfo = lteFddPlanService.findLteFddPlanInfo(id, "1");
+				lteFddPlanInfo = lteFddPlanService.findLteFddPlanInfo(id,"2");
 				if (lteFddPlanInfo != null) {
 					map.put("mBaseStationName", lteFddPlanInfo.getmBaseStationName());
 					map.put("testTime", lteFddPlanInfo.getTestTime());

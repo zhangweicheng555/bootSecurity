@@ -10,9 +10,9 @@ import com.boot.kaizen.model.lteFddModel.LteFddStation;
 
 @Mapper
 public interface LteFddStatrionMapper {
+	
     int deleteByPrimaryKey(String id);
 
-    int insert(LteFddStation record);
 
     int insertSelective(LteFddStation record);
 
@@ -20,7 +20,6 @@ public interface LteFddStatrionMapper {
 
     int updateByPrimaryKeySelective(LteFddStation record);
 
-    int updateByPrimaryKey(LteFddStation record);
     
     List<LteFddStation> query(@Param("map") Map<String, Object> map);
     

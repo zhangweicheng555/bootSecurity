@@ -1,636 +1,646 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.boot.kaizen.dao.lteFdd.LteFddStatrionMapper">
-  <resultMap id="BaseResultMap" type="com.boot.kaizen.model.lteFddModel.LteFddStation">
-    <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="eNodeBID" jdbcType="VARCHAR" property="eNodeBID" />
-    <result column="mBaseStationName" jdbcType="VARCHAR" property="mBaseStationName" />
-    <result column="csfbFunctionTest" jdbcType="VARCHAR" property="csfbFunctionTest" />
-    <result column="volteFunctionTest" jdbcType="VARCHAR" property="volteFunctionTest" />
-    <result column="fourCoverCheck" jdbcType="VARCHAR" property="fourCoverCheck" />
-    <result column="heightLocationDirectionCheck" jdbcType="VARCHAR" property="heightLocationDirectionCheck" />
-    <result column="skyBlockCheck" jdbcType="VARCHAR" property="skyBlockCheck" />
-    <result column="wireBackCheck" jdbcType="VARCHAR" property="wireBackCheck" />
-    <result column="allViewPic" jdbcType="VARCHAR" property="allViewPic" />
-    <result column="stationEntrancePic" jdbcType="VARCHAR" property="stationEntrancePic" />
-    <result column="roofViewPic" jdbcType="VARCHAR" property="roofViewPic" />
-    <result column="cellFirstPic" jdbcType="VARCHAR" property="cellFirstPic" />
-    <result column="cellScecondPic" jdbcType="VARCHAR" property="cellScecondPic" />
-    <result column="cellThirdPic" jdbcType="VARCHAR" property="cellThirdPic" />
-    <result column="stationDirection0" jdbcType="VARCHAR" property="stationDirection0" />
-    <result column="stationDirection45" jdbcType="VARCHAR" property="stationDirection45" />
-    <result column="stationDirection90" jdbcType="VARCHAR" property="stationDirection90" />
-    <result column="stationDirection135" jdbcType="VARCHAR" property="stationDirection135" />
-    <result column="stationDirection180" jdbcType="VARCHAR" property="stationDirection180" />
-    <result column="stationDirection225" jdbcType="VARCHAR" property="stationDirection225" />
-    <result column="stationDirection270" jdbcType="VARCHAR" property="stationDirection270" />
-    <result column="stationDirection315" jdbcType="VARCHAR" property="stationDirection315" />
-    <result column="stationRsrpPic" jdbcType="VARCHAR" property="stationRsrpPic" />
-    <result column="stationSinrPic" jdbcType="VARCHAR" property="stationSinrPic" />
-    <result column="stationDownRatePic" jdbcType="VARCHAR" property="stationDownRatePic" />
-    <result column="stationPciPic" jdbcType="VARCHAR" property="stationPciPic" />
-    <result column="projId" jdbcType="INTEGER" property="projId" />
-    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
-    <result column="createAt" jdbcType="INTEGER" property="createAt" />
-    <result column="testDate" jdbcType="VARCHAR" property="testDate" />
-    <result column="latitude" jdbcType="VARCHAR" property="latitude" />
-    <result column="longitude" jdbcType="VARCHAR" property="longitude" />
-    <result column="tac" jdbcType="VARCHAR" property="tac" />
-    
-    <result column="stationType" jdbcType="VARCHAR" property="stationType" />
-    <result column="buildingFunction" jdbcType="VARCHAR" property="buildingFunction" />
-    <result column="floorsNum" jdbcType="VARCHAR" property="floorsNum" />
-    <result column="yuanTaWeizhi" jdbcType="VARCHAR" property="yuanTaWeizhi" />
-    <result column="yuanTiMianFs" jdbcType="VARCHAR" property="yuanTiMianFs" />
-    <result column="yuanTiMianGg" jdbcType="VARCHAR" property="yuanTiMianGg" />
-    <result column="xinZengTiMianType" jdbcType="VARCHAR" property="xinZengTiMianType" />
-    <result column="reasonDescrib" jdbcType="VARCHAR" property="reasonDescrib" />
-    <result column="xinZengTiMianFs" jdbcType="VARCHAR" property="xinZengTiMianFs" />
-    <result column="reasonDescribNew" jdbcType="VARCHAR" property="reasonDescribNew" />
-    <result column="xinZengFwj" jdbcType="VARCHAR" property="xinZengFwj" />
-    <result column="xinTiMianGg" jdbcType="VARCHAR" property="xinTiMianGg" />
-    <result column="tianMianZd" jdbcType="VARCHAR" property="tianMianZd" />
-    <result column="stationDistance" jdbcType="VARCHAR" property="stationDistance" />
-    <result column="remark" jdbcType="VARCHAR" property="remark" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    id, eNodeBID, mBaseStationName, csfbFunctionTest, volteFunctionTest, fourCoverCheck, 
-    heightLocationDirectionCheck, skyBlockCheck, wireBackCheck, allViewPic, stationEntrancePic, 
-    roofViewPic, cellFirstPic, cellScecondPic, cellThirdPic, stationDirection0, stationDirection45, 
-    stationDirection90, stationDirection135, stationDirection180, stationDirection225, 
-    stationDirection270, stationDirection315, stationRsrpPic, stationSinrPic, stationDownRatePic, 
-    stationPciPic, projId, createTime, updateTime, createAt,testDate,latitude,longitude,tac
-    ,stationType,buildingFunction,floorsNum,yuanTaWeizhi,yuanTiMianFs,yuanTiMianGg,xinZengTiMianType,reasonDescrib,xinZengTiMianFs,reasonDescribNew,xinZengFwj,xinTiMianGg,tianMianZd,stationDistance,remark
-  
-  </sql>
-  
-  
- 
-   <select id="query"  resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from lte_fdd_station 
-    where 1=1
-     <if test="map.projId != null">
-           and projId = #{map.projId}
-       </if>
-	 <if test="map.eNodeBID != null and map.eNodeBID != ''">
-           and eNodeBID = #{map.eNodeBID}
-     </if>
-	 <if test="map.testDate != null and map.testDate != ''">
-           and testDate = #{map.testDate}
-     </if>
+<mapper
+	namespace="com.boot.kaizen.dao.lteFdd.LteFddStatrionMapper">
+	<resultMap id="BaseResultMap"
+		type="com.boot.kaizen.model.lteFddModel.LteFddStation">
+		<id column="id" jdbcType="VARCHAR" property="id" />
+		<result column="eNodeBID" jdbcType="VARCHAR"
+			property="eNodeBID" />
+		<result column="mBaseStationName" jdbcType="VARCHAR"
+			property="mBaseStationName" />
+		<result column="csfbFunctionTest" jdbcType="VARCHAR"
+			property="csfbFunctionTest" />
+		<result column="volteFunctionTest" jdbcType="VARCHAR"
+			property="volteFunctionTest" />
+		<result column="fourCoverCheck" jdbcType="VARCHAR"
+			property="fourCoverCheck" />
+		<result column="heightLocationDirectionCheck"
+			jdbcType="VARCHAR" property="heightLocationDirectionCheck" />
+		<result column="skyBlockCheck" jdbcType="VARCHAR"
+			property="skyBlockCheck" />
+		<result column="wireBackCheck" jdbcType="VARCHAR"
+			property="wireBackCheck" />
+		<result column="allViewPic" jdbcType="VARCHAR"
+			property="allViewPic" />
+		<result column="stationEntrancePic" jdbcType="VARCHAR"
+			property="stationEntrancePic" />
+		<result column="roofViewPic" jdbcType="VARCHAR"
+			property="roofViewPic" />
+		<result column="cellFirstPic" jdbcType="VARCHAR"
+			property="cellFirstPic" />
+		<result column="cellScecondPic" jdbcType="VARCHAR"
+			property="cellScecondPic" />
+		<result column="cellThirdPic" jdbcType="VARCHAR"
+			property="cellThirdPic" />
+		<result column="stationDirection0" jdbcType="VARCHAR"
+			property="stationDirection0" />
+		<result column="stationDirection45" jdbcType="VARCHAR"
+			property="stationDirection45" />
+		<result column="stationDirection90" jdbcType="VARCHAR"
+			property="stationDirection90" />
+		<result column="stationDirection135" jdbcType="VARCHAR"
+			property="stationDirection135" />
+		<result column="stationDirection180" jdbcType="VARCHAR"
+			property="stationDirection180" />
+		<result column="stationDirection225" jdbcType="VARCHAR"
+			property="stationDirection225" />
+		<result column="stationDirection270" jdbcType="VARCHAR"
+			property="stationDirection270" />
+		<result column="stationDirection315" jdbcType="VARCHAR"
+			property="stationDirection315" />
+		<result column="stationRsrpPic" jdbcType="VARCHAR"
+			property="stationRsrpPic" />
+		<result column="stationSinrPic" jdbcType="VARCHAR"
+			property="stationSinrPic" />
+		<result column="stationDownRatePic" jdbcType="VARCHAR"
+			property="stationDownRatePic" />
+		<result column="stationPciPic" jdbcType="VARCHAR"
+			property="stationPciPic" />
+		<result column="projId" jdbcType="INTEGER" property="projId" />
+		<result column="createTime" jdbcType="TIMESTAMP"
+			property="createTime" />
+		<result column="updateTime" jdbcType="TIMESTAMP"
+			property="updateTime" />
+		<result column="createAt" jdbcType="INTEGER"
+			property="createAt" />
+		<result column="testDate" jdbcType="VARCHAR"
+			property="testDate" />
+		<result column="latitude" jdbcType="VARCHAR"
+			property="latitude" />
+		<result column="longitude" jdbcType="VARCHAR"
+			property="longitude" />
+		<result column="tac" jdbcType="VARCHAR" property="tac" />
+
+		<result column="stationType" jdbcType="VARCHAR"
+			property="stationType" />
+		<result column="buildingFunction" jdbcType="VARCHAR"
+			property="buildingFunction" />
+		<result column="floorsNum" jdbcType="VARCHAR"
+			property="floorsNum" />
+		<result column="yuanTaWeizhi" jdbcType="VARCHAR"
+			property="yuanTaWeizhi" />
+		<result column="yuanTiMianFs" jdbcType="VARCHAR"
+			property="yuanTiMianFs" />
+		<result column="yuanTiMianGg" jdbcType="VARCHAR"
+			property="yuanTiMianGg" />
+		<result column="xinZengTiMianType" jdbcType="VARCHAR"
+			property="xinZengTiMianType" />
+		<result column="reasonDescrib" jdbcType="VARCHAR"
+			property="reasonDescrib" />
+		<result column="xinZengTiMianFs" jdbcType="VARCHAR"
+			property="xinZengTiMianFs" />
+		<result column="reasonDescribNew" jdbcType="VARCHAR"
+			property="reasonDescribNew" />
+		<result column="xinZengFwj" jdbcType="VARCHAR"
+			property="xinZengFwj" />
+		<result column="xinTiMianGg" jdbcType="VARCHAR"
+			property="xinTiMianGg" />
+		<result column="tianMianZd" jdbcType="VARCHAR"
+			property="tianMianZd" />
+		<result column="stationDistance" jdbcType="VARCHAR"
+			property="stationDistance" />
+		<result column="remark" jdbcType="VARCHAR" property="remark" />
+		<result column="jzType" jdbcType="VARCHAR" property="jzType" />
+	</resultMap>
 	
-  </select>
-  
-  
-  
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from lte_fdd_station
-    where id = #{id,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from lte_fdd_station
-    where id = #{id,jdbcType=VARCHAR}
-  </delete>
-  
-  
-   <delete id="delete">
-		 delete from lte_fdd_station
-		 where id in
-		 <foreach collection="idsArray" index="index" item="item"
-            open="(" separator="," close=")">
-            '${item}'
-        </foreach>
-   </delete>
-  
-  <insert id="insert" parameterType="com.boot.kaizen.model.lteFddModel.LteFddStation">
-    insert into lte_fdd_station (id, eNodeBID, mBaseStationName, 
-      csfbFunctionTest, volteFunctionTest, fourCoverCheck, 
-      heightLocationDirectionCheck, skyBlockCheck, 
-      wireBackCheck, allViewPic, stationEntrancePic, 
-      roofViewPic, cellFirstPic, cellScecondPic, 
-      cellThirdPic, stationDirection0, stationDirection45, 
-      stationDirection90, stationDirection135, 
-      stationDirection180, stationDirection225, 
-      stationDirection270, stationDirection315, 
-      stationRsrpPic, stationSinrPic, stationDownRatePic, 
-      stationPciPic, projId, createTime, 
-      updateTime, createAt)
-    values (#{id,jdbcType=VARCHAR}, #{eNodeBID,jdbcType=VARCHAR}, #{mBaseStationName,jdbcType=VARCHAR}, 
-      #{csfbFunctionTest,jdbcType=VARCHAR}, #{volteFunctionTest,jdbcType=VARCHAR}, #{fourCoverCheck,jdbcType=VARCHAR}, 
-      #{heightLocationDirectionCheck,jdbcType=VARCHAR}, #{skyBlockCheck,jdbcType=VARCHAR}, 
-      #{wireBackCheck,jdbcType=VARCHAR}, #{allViewPic,jdbcType=VARCHAR}, #{stationEntrancePic,jdbcType=VARCHAR}, 
-      #{roofViewPic,jdbcType=VARCHAR}, #{cellFirstPic,jdbcType=VARCHAR}, #{cellScecondPic,jdbcType=VARCHAR}, 
-      #{cellThirdPic,jdbcType=VARCHAR}, #{stationDirection0,jdbcType=VARCHAR}, #{stationDirection45,jdbcType=VARCHAR}, 
-      #{stationDirection90,jdbcType=VARCHAR}, #{stationDirection135,jdbcType=VARCHAR}, 
-      #{stationDirection180,jdbcType=VARCHAR}, #{stationDirection225,jdbcType=VARCHAR}, 
-      #{stationDirection270,jdbcType=VARCHAR}, #{stationDirection315,jdbcType=VARCHAR}, 
-      #{stationRsrpPic,jdbcType=VARCHAR}, #{stationSinrPic,jdbcType=VARCHAR}, #{stationDownRatePic,jdbcType=VARCHAR}, 
-      #{stationPciPic,jdbcType=VARCHAR}, #{projId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{createAt,jdbcType=INTEGER})
-  </insert>
-  <insert id="insertSelective" parameterType="com.boot.kaizen.model.lteFddModel.LteFddStation">
-    insert into lte_fdd_station
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="eNodeBID != null">
-        eNodeBID,
-      </if>
-      <if test="mBaseStationName != null">
-        mBaseStationName,
-      </if>
-      <if test="csfbFunctionTest != null">
-        csfbFunctionTest,
-      </if>
-      <if test="volteFunctionTest != null">
-        volteFunctionTest,
-      </if>
-      <if test="fourCoverCheck != null">
-        fourCoverCheck,
-      </if>
-      <if test="heightLocationDirectionCheck != null">
-        heightLocationDirectionCheck,
-      </if>
-      <if test="skyBlockCheck != null">
-        skyBlockCheck,
-      </if>
-      <if test="wireBackCheck != null">
-        wireBackCheck,
-      </if>
-      <if test="allViewPic != null">
-        allViewPic,
-      </if>
-      <if test="stationEntrancePic != null">
-        stationEntrancePic,
-      </if>
-      <if test="roofViewPic != null">
-        roofViewPic,
-      </if>
-      <if test="cellFirstPic != null">
-        cellFirstPic,
-      </if>
-      <if test="cellScecondPic != null">
-        cellScecondPic,
-      </if>
-      <if test="cellThirdPic != null">
-        cellThirdPic,
-      </if>
-      <if test="stationDirection0 != null">
-        stationDirection0,
-      </if>
-      <if test="stationDirection45 != null">
-        stationDirection45,
-      </if>
-      <if test="stationDirection90 != null">
-        stationDirection90,
-      </if>
-      <if test="stationDirection135 != null">
-        stationDirection135,
-      </if>
-      <if test="stationDirection180 != null">
-        stationDirection180,
-      </if>
-      <if test="stationDirection225 != null">
-        stationDirection225,
-      </if>
-      <if test="stationDirection270 != null">
-        stationDirection270,
-      </if>
-      <if test="stationDirection315 != null">
-        stationDirection315,
-      </if>
-      <if test="stationRsrpPic != null">
-        stationRsrpPic,
-      </if>
-      <if test="stationSinrPic != null">
-        stationSinrPic,
-      </if>
-      <if test="stationDownRatePic != null">
-        stationDownRatePic,
-      </if>
-      <if test="stationPciPic != null">
-        stationPciPic,
-      </if>
-      <if test="projId != null">
-        projId,
-      </if>
-      <if test="createTime != null">
-        createTime,
-      </if>
-      <if test="updateTime != null">
-        updateTime,
-      </if>
-      <if test="createAt != null">
-        createAt,
-      </if>
-     
-      <if test="testDate != null">
-        testDate,
-      </if>
-      <if test="latitude != null">
-        latitude,
-      </if>
-      <if test="longitude != null">
-        longitude,
-      </if>
-      <if test="tac != null">
-        tac,
-      </if>
-      <if test="stationType != null">
-        stationType,
-      </if>
-      <if test="buildingFunction != null">
-        buildingFunction,
-      </if>
-      <if test="floorsNum != null">
-        floorsNum,
-      </if>
-      <if test="yuanTaWeizhi != null">
-        yuanTaWeizhi,
-      </if>
-      <if test="yuanTiMianFs != null">
-        yuanTiMianFs,
-      </if>
-      <if test="yuanTiMianGg != null">
-        yuanTiMianGg,
-      </if>
-      <if test="xinZengTiMianType != null">
-        xinZengTiMianType,
-      </if>
-      <if test="reasonDescrib != null">
-        reasonDescrib,
-      </if>
-      <if test="xinZengTiMianFs != null">
-        xinZengTiMianFs,
-      </if>
-      <if test="reasonDescribNew != null">
-        reasonDescribNew,
-      </if>
-      <if test="xinZengFwj != null">
-        xinZengFwj,
-      </if>
-      <if test="xinTiMianGg != null">
-        xinTiMianGg,
-      </if>
-      <if test="tianMianZd != null">
-        tianMianZd,
-      </if>
-      <if test="stationDistance != null">
-        stationDistance,
-      </if>
-      <if test="remark != null">
-        remark,
-      </if>
-      
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=VARCHAR},
-      </if>
-      <if test="eNodeBID != null">
-        #{eNodeBID,jdbcType=VARCHAR},
-      </if>
-      <if test="mBaseStationName != null">
-        #{mBaseStationName,jdbcType=VARCHAR},
-      </if>
-      <if test="csfbFunctionTest != null">
-        #{csfbFunctionTest,jdbcType=VARCHAR},
-      </if>
-      <if test="volteFunctionTest != null">
-        #{volteFunctionTest,jdbcType=VARCHAR},
-      </if>
-      <if test="fourCoverCheck != null">
-        #{fourCoverCheck,jdbcType=VARCHAR},
-      </if>
-      <if test="heightLocationDirectionCheck != null">
-        #{heightLocationDirectionCheck,jdbcType=VARCHAR},
-      </if>
-      <if test="skyBlockCheck != null">
-        #{skyBlockCheck,jdbcType=VARCHAR},
-      </if>
-      <if test="wireBackCheck != null">
-        #{wireBackCheck,jdbcType=VARCHAR},
-      </if>
-      <if test="allViewPic != null">
-        #{allViewPic,jdbcType=VARCHAR},
-      </if>
-      <if test="stationEntrancePic != null">
-        #{stationEntrancePic,jdbcType=VARCHAR},
-      </if>
-      <if test="roofViewPic != null">
-        #{roofViewPic,jdbcType=VARCHAR},
-      </if>
-      <if test="cellFirstPic != null">
-        #{cellFirstPic,jdbcType=VARCHAR},
-      </if>
-      <if test="cellScecondPic != null">
-        #{cellScecondPic,jdbcType=VARCHAR},
-      </if>
-      <if test="cellThirdPic != null">
-        #{cellThirdPic,jdbcType=VARCHAR},
-      </if>
-      <if test="stationDirection0 != null">
-        #{stationDirection0,jdbcType=VARCHAR},
-      </if>
-      <if test="stationDirection45 != null">
-        #{stationDirection45,jdbcType=VARCHAR},
-      </if>
-      <if test="stationDirection90 != null">
-        #{stationDirection90,jdbcType=VARCHAR},
-      </if>
-      <if test="stationDirection135 != null">
-        #{stationDirection135,jdbcType=VARCHAR},
-      </if>
-      <if test="stationDirection180 != null">
-        #{stationDirection180,jdbcType=VARCHAR},
-      </if>
-      <if test="stationDirection225 != null">
-        #{stationDirection225,jdbcType=VARCHAR},
-      </if>
-      <if test="stationDirection270 != null">
-        #{stationDirection270,jdbcType=VARCHAR},
-      </if>
-      <if test="stationDirection315 != null">
-        #{stationDirection315,jdbcType=VARCHAR},
-      </if>
-      <if test="stationRsrpPic != null">
-        #{stationRsrpPic,jdbcType=VARCHAR},
-      </if>
-      <if test="stationSinrPic != null">
-        #{stationSinrPic,jdbcType=VARCHAR},
-      </if>
-      <if test="stationDownRatePic != null">
-        #{stationDownRatePic,jdbcType=VARCHAR},
-      </if>
-      <if test="stationPciPic != null">
-        #{stationPciPic,jdbcType=VARCHAR},
-      </if>
-      <if test="projId != null">
-        #{projId,jdbcType=INTEGER},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createAt != null">
-        #{createAt,jdbcType=INTEGER},
-      </if>
-     
-      <if test="testDate != null">
-        #{testDate,jdbcType=VARCHAR},
-      </if>
-      <if test="latitude != null">
-        #{latitude,jdbcType=VARCHAR},
-      </if>
-      <if test="longitude != null">
-        #{longitude,jdbcType=VARCHAR},
-      </if>
-      <if test="tac != null">
-        #{tac,jdbcType=VARCHAR},
-      </if>
-      <if test="stationType != null">
-        #{stationType,jdbcType=VARCHAR},
-      </if>
-      <if test="buildingFunction != null">
-        #{buildingFunction,jdbcType=VARCHAR},
-      </if>
-      <if test="floorsNum != null">
-        #{floorsNum,jdbcType=VARCHAR},
-      </if>
-      <if test="yuanTaWeizhi != null">
-        #{yuanTaWeizhi,jdbcType=VARCHAR},
-      </if>
-      <if test="yuanTiMianFs != null">
-        #{yuanTiMianFs,jdbcType=VARCHAR},
-      </if>
-      <if test="yuanTiMianGg != null">
-        #{yuanTiMianGg,jdbcType=VARCHAR},
-      </if>
-      <if test="xinZengTiMianType != null">
-        #{xinZengTiMianType,jdbcType=VARCHAR},
-      </if>
-      <if test="reasonDescrib != null">
-        #{reasonDescrib,jdbcType=VARCHAR},
-      </if>
-      <if test="xinZengTiMianFs != null">
-        #{xinZengTiMianFs,jdbcType=VARCHAR},
-      </if>
-      <if test="reasonDescribNew != null">
-        #{reasonDescribNew,jdbcType=VARCHAR},
-      </if>
-      <if test="xinZengFwj != null">
-        #{xinZengFwj,jdbcType=VARCHAR},
-      </if>
-      <if test="xinTiMianGg != null">
-        #{xinTiMianGg,jdbcType=VARCHAR},
-      </if>
-      <if test="tianMianZd != null">
-        #{tianMianZd,jdbcType=VARCHAR},
-      </if>
-      <if test="stationDistance != null">
-        #{stationDistance,jdbcType=VARCHAR},
-      </if>
-      <if test="remark != null">
-        #{remark,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  
-  <update id="updateByPrimaryKeySelective" parameterType="com.boot.kaizen.model.lteFddModel.LteFddStation">
-    update lte_fdd_station
-    <set>
-      <if test="eNodeBID != null">
-        eNodeBID = #{eNodeBID,jdbcType=VARCHAR},
-      </if>
-      <if test="mBaseStationName != null">
-        mBaseStationName = #{mBaseStationName,jdbcType=VARCHAR},
-      </if>
-      <if test="csfbFunctionTest != null">
-        csfbFunctionTest = #{csfbFunctionTest,jdbcType=VARCHAR},
-      </if>
-      <if test="volteFunctionTest != null">
-        volteFunctionTest = #{volteFunctionTest,jdbcType=VARCHAR},
-      </if>
-      <if test="fourCoverCheck != null">
-        fourCoverCheck = #{fourCoverCheck,jdbcType=VARCHAR},
-      </if>
-      <if test="heightLocationDirectionCheck != null">
-        heightLocationDirectionCheck = #{heightLocationDirectionCheck,jdbcType=VARCHAR},
-      </if>
-      <if test="skyBlockCheck != null">
-        skyBlockCheck = #{skyBlockCheck,jdbcType=VARCHAR},
-      </if>
-      <if test="wireBackCheck != null">
-        wireBackCheck = #{wireBackCheck,jdbcType=VARCHAR},
-      </if>
-      <if test="allViewPic != null">
-        allViewPic = #{allViewPic,jdbcType=VARCHAR},
-      </if>
-      <if test="stationEntrancePic != null">
-        stationEntrancePic = #{stationEntrancePic,jdbcType=VARCHAR},
-      </if>
-      <if test="roofViewPic != null">
-        roofViewPic = #{roofViewPic,jdbcType=VARCHAR},
-      </if>
-      <if test="cellFirstPic != null">
-        cellFirstPic = #{cellFirstPic,jdbcType=VARCHAR},
-      </if>
-      <if test="cellScecondPic != null">
-        cellScecondPic = #{cellScecondPic,jdbcType=VARCHAR},
-      </if>
-      <if test="cellThirdPic != null">
-        cellThirdPic = #{cellThirdPic,jdbcType=VARCHAR},
-      </if>
-      <if test="stationDirection0 != null">
-        stationDirection0 = #{stationDirection0,jdbcType=VARCHAR},
-      </if>
-      <if test="stationDirection45 != null">
-        stationDirection45 = #{stationDirection45,jdbcType=VARCHAR},
-      </if>
-      <if test="stationDirection90 != null">
-        stationDirection90 = #{stationDirection90,jdbcType=VARCHAR},
-      </if>
-      <if test="stationDirection135 != null">
-        stationDirection135 = #{stationDirection135,jdbcType=VARCHAR},
-      </if>
-      <if test="stationDirection180 != null">
-        stationDirection180 = #{stationDirection180,jdbcType=VARCHAR},
-      </if>
-      <if test="stationDirection225 != null">
-        stationDirection225 = #{stationDirection225,jdbcType=VARCHAR},
-      </if>
-      <if test="stationDirection270 != null">
-        stationDirection270 = #{stationDirection270,jdbcType=VARCHAR},
-      </if>
-      <if test="stationDirection315 != null">
-        stationDirection315 = #{stationDirection315,jdbcType=VARCHAR},
-      </if>
-      <if test="stationRsrpPic != null">
-        stationRsrpPic = #{stationRsrpPic,jdbcType=VARCHAR},
-      </if>
-      <if test="stationSinrPic != null">
-        stationSinrPic = #{stationSinrPic,jdbcType=VARCHAR},
-      </if>
-      <if test="stationDownRatePic != null">
-        stationDownRatePic = #{stationDownRatePic,jdbcType=VARCHAR},
-      </if>
-      <if test="stationPciPic != null">
-        stationPciPic = #{stationPciPic,jdbcType=VARCHAR},
-      </if>
-      <if test="projId != null">
-        projId = #{projId,jdbcType=INTEGER},
-      </if>
-      <if test="createTime != null">
-        createTime = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null">
-        updateTime = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createAt != null">
-        createAt = #{createAt,jdbcType=INTEGER},
-      </if>
-     
-      <if test="testDate != null">
-        testDate = #{testDate,jdbcType=VARCHAR},
-      </if>
-      <if test="latitude != null">
-        latitude = #{latitude,jdbcType=VARCHAR},
-      </if>
-      <if test="longitude != null">
-        longitude = #{longitude,jdbcType=VARCHAR},
-      </if>
-      <if test="tac != null">
-        tac = #{tac,jdbcType=VARCHAR},
-      </if>
-      <if test="stationType != null">
-        stationType = #{stationType,jdbcType=VARCHAR},
-      </if>
-      <if test="buildingFunction != null">
-        buildingFunction = #{buildingFunction,jdbcType=VARCHAR},
-      </if>
-      <if test="floorsNum != null">
-        floorsNum = #{floorsNum,jdbcType=VARCHAR},
-      </if>
-      <if test="yuanTaWeizhi != null">
-        yuanTaWeizhi = #{yuanTaWeizhi,jdbcType=VARCHAR},
-      </if>
-      <if test="yuanTiMianFs != null">
-        yuanTiMianFs = #{yuanTiMianFs,jdbcType=VARCHAR},
-      </if>
-      <if test="yuanTiMianGg != null">
-        yuanTiMianGg = #{yuanTiMianGg,jdbcType=VARCHAR},
-      </if>
-      <if test="xinZengTiMianType != null">
-        xinZengTiMianType = #{xinZengTiMianType,jdbcType=VARCHAR},
-      </if>
-      <if test="reasonDescrib != null">
-        reasonDescrib = #{reasonDescrib,jdbcType=VARCHAR},
-      </if>
-      <if test="xinZengTiMianFs != null">
-        xinZengTiMianFs = #{xinZengTiMianFs,jdbcType=VARCHAR},
-      </if>
-      <if test="reasonDescribNew != null">
-        reasonDescribNew = #{reasonDescribNew,jdbcType=VARCHAR},
-      </if>
-      <if test="xinZengFwj != null">
-        xinZengFwj = #{xinZengFwj,jdbcType=VARCHAR},
-      </if>
-      <if test="xinTiMianGg != null">
-        xinTiMianGg = #{xinTiMianGg,jdbcType=VARCHAR},
-      </if>
-      <if test="tianMianZd != null">
-        tianMianZd = #{tianMianZd,jdbcType=VARCHAR},
-      </if>
-      <if test="stationDistance != null">
-        stationDistance = #{stationDistance,jdbcType=VARCHAR},
-      </if>
-      <if test="remark != null">
-        remark = #{remark,jdbcType=VARCHAR},
-      </if>
-  
-    </set>
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.boot.kaizen.model.lteFddModel.LteFddStation">
-    update lte_fdd_station
-    set eNodeBID = #{eNodeBID,jdbcType=VARCHAR},
-      mBaseStationName = #{mBaseStationName,jdbcType=VARCHAR},
-      csfbFunctionTest = #{csfbFunctionTest,jdbcType=VARCHAR},
-      volteFunctionTest = #{volteFunctionTest,jdbcType=VARCHAR},
-      fourCoverCheck = #{fourCoverCheck,jdbcType=VARCHAR},
-      heightLocationDirectionCheck = #{heightLocationDirectionCheck,jdbcType=VARCHAR},
-      skyBlockCheck = #{skyBlockCheck,jdbcType=VARCHAR},
-      wireBackCheck = #{wireBackCheck,jdbcType=VARCHAR},
-      allViewPic = #{allViewPic,jdbcType=VARCHAR},
-      stationEntrancePic = #{stationEntrancePic,jdbcType=VARCHAR},
-      roofViewPic = #{roofViewPic,jdbcType=VARCHAR},
-      cellFirstPic = #{cellFirstPic,jdbcType=VARCHAR},
-      cellScecondPic = #{cellScecondPic,jdbcType=VARCHAR},
-      cellThirdPic = #{cellThirdPic,jdbcType=VARCHAR},
-      stationDirection0 = #{stationDirection0,jdbcType=VARCHAR},
-      stationDirection45 = #{stationDirection45,jdbcType=VARCHAR},
-      stationDirection90 = #{stationDirection90,jdbcType=VARCHAR},
-      stationDirection135 = #{stationDirection135,jdbcType=VARCHAR},
-      stationDirection180 = #{stationDirection180,jdbcType=VARCHAR},
-      stationDirection225 = #{stationDirection225,jdbcType=VARCHAR},
-      stationDirection270 = #{stationDirection270,jdbcType=VARCHAR},
-      stationDirection315 = #{stationDirection315,jdbcType=VARCHAR},
-      stationRsrpPic = #{stationRsrpPic,jdbcType=VARCHAR},
-      stationSinrPic = #{stationSinrPic,jdbcType=VARCHAR},
-      stationDownRatePic = #{stationDownRatePic,jdbcType=VARCHAR},
-      stationPciPic = #{stationPciPic,jdbcType=VARCHAR},
-      projId = #{projId,jdbcType=INTEGER},
-      createTime = #{createTime,jdbcType=TIMESTAMP},
-      updateTime = #{updateTime,jdbcType=TIMESTAMP},
-      createAt = #{createAt,jdbcType=INTEGER}
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
+	<sql id="Base_Column_List">
+		id, eNodeBID, mBaseStationName, csfbFunctionTest, volteFunctionTest,
+		fourCoverCheck,
+		heightLocationDirectionCheck, skyBlockCheck, wireBackCheck, allViewPic, stationEntrancePic,
+		roofViewPic, cellFirstPic, cellScecondPic, cellThirdPic,
+		stationDirection0, stationDirection45,
+		stationDirection90, stationDirection135, stationDirection180, stationDirection225,
+		stationDirection270, stationDirection315, stationRsrpPic,
+		stationSinrPic, stationDownRatePic,
+		stationPciPic, projId, createTime, updateTime,
+		createAt,testDate,latitude,longitude,tac
+		,stationType,buildingFunction,floorsNum,yuanTaWeizhi,yuanTiMianFs,yuanTiMianGg,xinZengTiMianType,reasonDescrib,xinZengTiMianFs,reasonDescribNew,xinZengFwj,xinTiMianGg,tianMianZd,stationDistance,remark
+		,jzType
+	</sql>
+
+
+
+	<select id="query" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from lte_fdd_station
+		where 1=1
+		<if test="map.projId != null">
+			and projId = #{map.projId}
+		</if>
+		<if test="map.eNodeBID != null and map.eNodeBID != ''">
+			and eNodeBID = #{map.eNodeBID}
+		</if>
+		<if test="map.testDate != null and map.testDate != ''">
+			and testDate = #{map.testDate}
+		</if>
+		<if test="map.jzType != null and map.jzType != ''">
+			and jzType = #{map.jzType}
+		</if>
+
+	</select>
+
+
+
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from lte_fdd_station
+		where id = #{id,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from lte_fdd_station
+		where id = #{id,jdbcType=VARCHAR}
+	</delete>
+
+
+	<delete id="delete">
+		delete from lte_fdd_station
+		where id in
+		<foreach collection="idsArray" index="index" item="item"
+			open="(" separator="," close=")">
+			'${item}'
+		</foreach>
+	</delete>
+
+	<insert id="insertSelective"
+		parameterType="com.boot.kaizen.model.lteFddModel.LteFddStation">
+		insert into lte_fdd_station
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="eNodeBID != null">
+				eNodeBID,
+			</if>
+			<if test="mBaseStationName != null">
+				mBaseStationName,
+			</if>
+			<if test="csfbFunctionTest != null">
+				csfbFunctionTest,
+			</if>
+			<if test="volteFunctionTest != null">
+				volteFunctionTest,
+			</if>
+			<if test="fourCoverCheck != null">
+				fourCoverCheck,
+			</if>
+			<if test="heightLocationDirectionCheck != null">
+				heightLocationDirectionCheck,
+			</if>
+			<if test="skyBlockCheck != null">
+				skyBlockCheck,
+			</if>
+			<if test="wireBackCheck != null">
+				wireBackCheck,
+			</if>
+			<if test="allViewPic != null">
+				allViewPic,
+			</if>
+			<if test="stationEntrancePic != null">
+				stationEntrancePic,
+			</if>
+			<if test="roofViewPic != null">
+				roofViewPic,
+			</if>
+			<if test="cellFirstPic != null">
+				cellFirstPic,
+			</if>
+			<if test="cellScecondPic != null">
+				cellScecondPic,
+			</if>
+			<if test="cellThirdPic != null">
+				cellThirdPic,
+			</if>
+			<if test="stationDirection0 != null">
+				stationDirection0,
+			</if>
+			<if test="stationDirection45 != null">
+				stationDirection45,
+			</if>
+			<if test="stationDirection90 != null">
+				stationDirection90,
+			</if>
+			<if test="stationDirection135 != null">
+				stationDirection135,
+			</if>
+			<if test="stationDirection180 != null">
+				stationDirection180,
+			</if>
+			<if test="stationDirection225 != null">
+				stationDirection225,
+			</if>
+			<if test="stationDirection270 != null">
+				stationDirection270,
+			</if>
+			<if test="stationDirection315 != null">
+				stationDirection315,
+			</if>
+			<if test="stationRsrpPic != null">
+				stationRsrpPic,
+			</if>
+			<if test="stationSinrPic != null">
+				stationSinrPic,
+			</if>
+			<if test="stationDownRatePic != null">
+				stationDownRatePic,
+			</if>
+			<if test="stationPciPic != null">
+				stationPciPic,
+			</if>
+			<if test="projId != null">
+				projId,
+			</if>
+			<if test="createTime != null">
+				createTime,
+			</if>
+			<if test="updateTime != null">
+				updateTime,
+			</if>
+			<if test="createAt != null">
+				createAt,
+			</if>
+
+			<if test="testDate != null">
+				testDate,
+			</if>
+			<if test="latitude != null">
+				latitude,
+			</if>
+			<if test="longitude != null">
+				longitude,
+			</if>
+			<if test="tac != null">
+				tac,
+			</if>
+			<if test="stationType != null">
+				stationType,
+			</if>
+			<if test="buildingFunction != null">
+				buildingFunction,
+			</if>
+			<if test="floorsNum != null">
+				floorsNum,
+			</if>
+			<if test="yuanTaWeizhi != null">
+				yuanTaWeizhi,
+			</if>
+			<if test="yuanTiMianFs != null">
+				yuanTiMianFs,
+			</if>
+			<if test="yuanTiMianGg != null">
+				yuanTiMianGg,
+			</if>
+			<if test="xinZengTiMianType != null">
+				xinZengTiMianType,
+			</if>
+			<if test="reasonDescrib != null">
+				reasonDescrib,
+			</if>
+			<if test="xinZengTiMianFs != null">
+				xinZengTiMianFs,
+			</if>
+			<if test="reasonDescribNew != null">
+				reasonDescribNew,
+			</if>
+			<if test="xinZengFwj != null">
+				xinZengFwj,
+			</if>
+			<if test="xinTiMianGg != null">
+				xinTiMianGg,
+			</if>
+			<if test="tianMianZd != null">
+				tianMianZd,
+			</if>
+			<if test="stationDistance != null">
+				stationDistance,
+			</if>
+			<if test="remark != null">
+				remark,
+			</if>
+			<if test="jzType != null">
+				jzType,
+			</if>
+
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="eNodeBID != null">
+				#{eNodeBID,jdbcType=VARCHAR},
+			</if>
+			<if test="mBaseStationName != null">
+				#{mBaseStationName,jdbcType=VARCHAR},
+			</if>
+			<if test="csfbFunctionTest != null">
+				#{csfbFunctionTest,jdbcType=VARCHAR},
+			</if>
+			<if test="volteFunctionTest != null">
+				#{volteFunctionTest,jdbcType=VARCHAR},
+			</if>
+			<if test="fourCoverCheck != null">
+				#{fourCoverCheck,jdbcType=VARCHAR},
+			</if>
+			<if test="heightLocationDirectionCheck != null">
+				#{heightLocationDirectionCheck,jdbcType=VARCHAR},
+			</if>
+			<if test="skyBlockCheck != null">
+				#{skyBlockCheck,jdbcType=VARCHAR},
+			</if>
+			<if test="wireBackCheck != null">
+				#{wireBackCheck,jdbcType=VARCHAR},
+			</if>
+			<if test="allViewPic != null">
+				#{allViewPic,jdbcType=VARCHAR},
+			</if>
+			<if test="stationEntrancePic != null">
+				#{stationEntrancePic,jdbcType=VARCHAR},
+			</if>
+			<if test="roofViewPic != null">
+				#{roofViewPic,jdbcType=VARCHAR},
+			</if>
+			<if test="cellFirstPic != null">
+				#{cellFirstPic,jdbcType=VARCHAR},
+			</if>
+			<if test="cellScecondPic != null">
+				#{cellScecondPic,jdbcType=VARCHAR},
+			</if>
+			<if test="cellThirdPic != null">
+				#{cellThirdPic,jdbcType=VARCHAR},
+			</if>
+			<if test="stationDirection0 != null">
+				#{stationDirection0,jdbcType=VARCHAR},
+			</if>
+			<if test="stationDirection45 != null">
+				#{stationDirection45,jdbcType=VARCHAR},
+			</if>
+			<if test="stationDirection90 != null">
+				#{stationDirection90,jdbcType=VARCHAR},
+			</if>
+			<if test="stationDirection135 != null">
+				#{stationDirection135,jdbcType=VARCHAR},
+			</if>
+			<if test="stationDirection180 != null">
+				#{stationDirection180,jdbcType=VARCHAR},
+			</if>
+			<if test="stationDirection225 != null">
+				#{stationDirection225,jdbcType=VARCHAR},
+			</if>
+			<if test="stationDirection270 != null">
+				#{stationDirection270,jdbcType=VARCHAR},
+			</if>
+			<if test="stationDirection315 != null">
+				#{stationDirection315,jdbcType=VARCHAR},
+			</if>
+			<if test="stationRsrpPic != null">
+				#{stationRsrpPic,jdbcType=VARCHAR},
+			</if>
+			<if test="stationSinrPic != null">
+				#{stationSinrPic,jdbcType=VARCHAR},
+			</if>
+			<if test="stationDownRatePic != null">
+				#{stationDownRatePic,jdbcType=VARCHAR},
+			</if>
+			<if test="stationPciPic != null">
+				#{stationPciPic,jdbcType=VARCHAR},
+			</if>
+			<if test="projId != null">
+				#{projId,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createAt != null">
+				#{createAt,jdbcType=INTEGER},
+			</if>
+
+			<if test="testDate != null">
+				#{testDate,jdbcType=VARCHAR},
+			</if>
+			<if test="latitude != null">
+				#{latitude,jdbcType=VARCHAR},
+			</if>
+			<if test="longitude != null">
+				#{longitude,jdbcType=VARCHAR},
+			</if>
+			<if test="tac != null">
+				#{tac,jdbcType=VARCHAR},
+			</if>
+			<if test="stationType != null">
+				#{stationType,jdbcType=VARCHAR},
+			</if>
+			<if test="buildingFunction != null">
+				#{buildingFunction,jdbcType=VARCHAR},
+			</if>
+			<if test="floorsNum != null">
+				#{floorsNum,jdbcType=VARCHAR},
+			</if>
+			<if test="yuanTaWeizhi != null">
+				#{yuanTaWeizhi,jdbcType=VARCHAR},
+			</if>
+			<if test="yuanTiMianFs != null">
+				#{yuanTiMianFs,jdbcType=VARCHAR},
+			</if>
+			<if test="yuanTiMianGg != null">
+				#{yuanTiMianGg,jdbcType=VARCHAR},
+			</if>
+			<if test="xinZengTiMianType != null">
+				#{xinZengTiMianType,jdbcType=VARCHAR},
+			</if>
+			<if test="reasonDescrib != null">
+				#{reasonDescrib,jdbcType=VARCHAR},
+			</if>
+			<if test="xinZengTiMianFs != null">
+				#{xinZengTiMianFs,jdbcType=VARCHAR},
+			</if>
+			<if test="reasonDescribNew != null">
+				#{reasonDescribNew,jdbcType=VARCHAR},
+			</if>
+			<if test="xinZengFwj != null">
+				#{xinZengFwj,jdbcType=VARCHAR},
+			</if>
+			<if test="xinTiMianGg != null">
+				#{xinTiMianGg,jdbcType=VARCHAR},
+			</if>
+			<if test="tianMianZd != null">
+				#{tianMianZd,jdbcType=VARCHAR},
+			</if>
+			<if test="stationDistance != null">
+				#{stationDistance,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="jzType != null">
+				#{jzType,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.boot.kaizen.model.lteFddModel.LteFddStation">
+		update lte_fdd_station
+		<set>
+			<if test="eNodeBID != null">
+				eNodeBID = #{eNodeBID,jdbcType=VARCHAR},
+			</if>
+			<if test="mBaseStationName != null">
+				mBaseStationName = #{mBaseStationName,jdbcType=VARCHAR},
+			</if>
+			<if test="csfbFunctionTest != null">
+				csfbFunctionTest = #{csfbFunctionTest,jdbcType=VARCHAR},
+			</if>
+			<if test="volteFunctionTest != null">
+				volteFunctionTest = #{volteFunctionTest,jdbcType=VARCHAR},
+			</if>
+			<if test="fourCoverCheck != null">
+				fourCoverCheck = #{fourCoverCheck,jdbcType=VARCHAR},
+			</if>
+			<if test="heightLocationDirectionCheck != null">
+				heightLocationDirectionCheck = #{heightLocationDirectionCheck,jdbcType=VARCHAR},
+			</if>
+			<if test="skyBlockCheck != null">
+				skyBlockCheck = #{skyBlockCheck,jdbcType=VARCHAR},
+			</if>
+			<if test="wireBackCheck != null">
+				wireBackCheck = #{wireBackCheck,jdbcType=VARCHAR},
+			</if>
+			<if test="allViewPic != null">
+				allViewPic = #{allViewPic,jdbcType=VARCHAR},
+			</if>
+			<if test="stationEntrancePic != null">
+				stationEntrancePic = #{stationEntrancePic,jdbcType=VARCHAR},
+			</if>
+			<if test="roofViewPic != null">
+				roofViewPic = #{roofViewPic,jdbcType=VARCHAR},
+			</if>
+			<if test="cellFirstPic != null">
+				cellFirstPic = #{cellFirstPic,jdbcType=VARCHAR},
+			</if>
+			<if test="cellScecondPic != null">
+				cellScecondPic = #{cellScecondPic,jdbcType=VARCHAR},
+			</if>
+			<if test="cellThirdPic != null">
+				cellThirdPic = #{cellThirdPic,jdbcType=VARCHAR},
+			</if>
+			<if test="stationDirection0 != null">
+				stationDirection0 = #{stationDirection0,jdbcType=VARCHAR},
+			</if>
+			<if test="stationDirection45 != null">
+				stationDirection45 = #{stationDirection45,jdbcType=VARCHAR},
+			</if>
+			<if test="stationDirection90 != null">
+				stationDirection90 = #{stationDirection90,jdbcType=VARCHAR},
+			</if>
+			<if test="stationDirection135 != null">
+				stationDirection135 = #{stationDirection135,jdbcType=VARCHAR},
+			</if>
+			<if test="stationDirection180 != null">
+				stationDirection180 = #{stationDirection180,jdbcType=VARCHAR},
+			</if>
+			<if test="stationDirection225 != null">
+				stationDirection225 = #{stationDirection225,jdbcType=VARCHAR},
+			</if>
+			<if test="stationDirection270 != null">
+				stationDirection270 = #{stationDirection270,jdbcType=VARCHAR},
+			</if>
+			<if test="stationDirection315 != null">
+				stationDirection315 = #{stationDirection315,jdbcType=VARCHAR},
+			</if>
+			<if test="stationRsrpPic != null">
+				stationRsrpPic = #{stationRsrpPic,jdbcType=VARCHAR},
+			</if>
+			<if test="stationSinrPic != null">
+				stationSinrPic = #{stationSinrPic,jdbcType=VARCHAR},
+			</if>
+			<if test="stationDownRatePic != null">
+				stationDownRatePic = #{stationDownRatePic,jdbcType=VARCHAR},
+			</if>
+			<if test="stationPciPic != null">
+				stationPciPic = #{stationPciPic,jdbcType=VARCHAR},
+			</if>
+			<if test="projId != null">
+				projId = #{projId,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null">
+				createTime = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				updateTime = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createAt != null">
+				createAt = #{createAt,jdbcType=INTEGER},
+			</if>
+
+			<if test="testDate != null">
+				testDate = #{testDate,jdbcType=VARCHAR},
+			</if>
+			<if test="latitude != null">
+				latitude = #{latitude,jdbcType=VARCHAR},
+			</if>
+			<if test="longitude != null">
+				longitude = #{longitude,jdbcType=VARCHAR},
+			</if>
+			<if test="tac != null">
+				tac = #{tac,jdbcType=VARCHAR},
+			</if>
+			<if test="stationType != null">
+				stationType = #{stationType,jdbcType=VARCHAR},
+			</if>
+			<if test="buildingFunction != null">
+				buildingFunction = #{buildingFunction,jdbcType=VARCHAR},
+			</if>
+			<if test="floorsNum != null">
+				floorsNum = #{floorsNum,jdbcType=VARCHAR},
+			</if>
+			<if test="yuanTaWeizhi != null">
+				yuanTaWeizhi = #{yuanTaWeizhi,jdbcType=VARCHAR},
+			</if>
+			<if test="yuanTiMianFs != null">
+				yuanTiMianFs = #{yuanTiMianFs,jdbcType=VARCHAR},
+			</if>
+			<if test="yuanTiMianGg != null">
+				yuanTiMianGg = #{yuanTiMianGg,jdbcType=VARCHAR},
+			</if>
+			<if test="xinZengTiMianType != null">
+				xinZengTiMianType = #{xinZengTiMianType,jdbcType=VARCHAR},
+			</if>
+			<if test="reasonDescrib != null">
+				reasonDescrib = #{reasonDescrib,jdbcType=VARCHAR},
+			</if>
+			<if test="xinZengTiMianFs != null">
+				xinZengTiMianFs = #{xinZengTiMianFs,jdbcType=VARCHAR},
+			</if>
+			<if test="reasonDescribNew != null">
+				reasonDescribNew = #{reasonDescribNew,jdbcType=VARCHAR},
+			</if>
+			<if test="xinZengFwj != null">
+				xinZengFwj = #{xinZengFwj,jdbcType=VARCHAR},
+			</if>
+			<if test="xinTiMianGg != null">
+				xinTiMianGg = #{xinTiMianGg,jdbcType=VARCHAR},
+			</if>
+			<if test="tianMianZd != null">
+				tianMianZd = #{tianMianZd,jdbcType=VARCHAR},
+			</if>
+			<if test="stationDistance != null">
+				stationDistance = #{stationDistance,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				remark = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="jzType != null">
+				jzType = #{jzType,jdbcType=VARCHAR},
+			</if>
+
+		</set>
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+
 </mapper>

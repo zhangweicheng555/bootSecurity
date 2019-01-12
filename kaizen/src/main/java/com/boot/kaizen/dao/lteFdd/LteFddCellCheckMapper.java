@@ -10,15 +10,11 @@ import com.boot.kaizen.model.lteFddModel.LteFddCellCheck;
 public interface LteFddCellCheckMapper {
 	int deleteByPrimaryKey(String id);
 
-	int insert(LteFddCellCheck record);
-
 	int insertSelective(LteFddCellCheck record);
 
 	LteFddCellCheck selectByPrimaryKey(String id);
 
 	int updateByPrimaryKeySelective(LteFddCellCheck record);
-
-	int updateByPrimaryKey(LteFddCellCheck record);
 
 	List<LteFddCellCheck> query(@Param("map") Map<String, Object> map);
 

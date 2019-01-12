@@ -72,16 +72,14 @@ public class LteFddCellServiceImpl implements ILteFddCellService {
 		}
 		return new JsonMsgUtil(true, "查询成功", JSONObject.toJSONString(lteFddCellCheck));
 	}
-	
-	
 
 	@Override
 	public JsonMsgUtil delete(String ids) {
 		JsonMsgUtil j = new JsonMsgUtil(false);
 		if (StringUtils.isNoneBlank(ids)) {
 			String[] idsArray = ids.trim().split(",");
-			Integer deleteNum=lteFddCellCheckMapper.delete(idsArray);
-			j = new JsonMsgUtil(true, "删除操作成功,成功删除【"+deleteNum+"】条数据", null);
+			Integer deleteNum = lteFddCellCheckMapper.delete(idsArray);
+			j = new JsonMsgUtil(true, "删除操作成功,成功删除【" + deleteNum + "】条数据", null);
 		}
 		return j;
 	}

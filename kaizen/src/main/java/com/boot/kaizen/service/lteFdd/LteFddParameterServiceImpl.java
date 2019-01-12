@@ -14,7 +14,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.boot.kaizen.dao.lteFdd.LteFddParameterMapper;
 import com.boot.kaizen.entity.LoginUser;
 import com.boot.kaizen.model.lteFddModel.LteFddParameter;
-import com.boot.kaizen.util.AppUtil;
 import com.boot.kaizen.util.JsonMsgUtil;
 import com.boot.kaizen.util.MyUtil;
 
@@ -88,27 +87,28 @@ public class LteFddParameterServiceImpl implements ILteFddParameterService {
 
 	@Override
 	public void upSert(LteFddParameter lteFddParameter) {
-		Integer projId=lteFddParameter.getProjId();
-		String eNodeBID=lteFddParameter.geteNodeBID();
-		String cellId=lteFddParameter.getCellId();
-		Integer createAt=lteFddParameter.getCreateAt();
-		if (projId == null || createAt==null || StringUtils.isBlank(eNodeBID) || StringUtils.isBlank(cellId)) {
+		Integer projId = lteFddParameter.getProjId();
+		String eNodeBID = lteFddParameter.geteNodeBID();
+		String cellId = lteFddParameter.getCellId();
+		Integer createAt = lteFddParameter.getCreateAt();
+		if (projId == null || createAt == null || StringUtils.isBlank(eNodeBID) || StringUtils.isBlank(cellId)) {
 			throw new IllegalArgumentException("项目projId、基站号eNodeBID、小区号cellId、创建者createAt不能为空");
 		}
-		
-		Map<String, Object> map=new HashMap<>();
+
+		Map<String, Object> map = new HashMap<>();
 		map.put("projId", projId);
 		map.put("eNodeBID", eNodeBID);
 		map.put("cellId", cellId);
+		map.put("jzType", lteFddParameter.getJzType());
 		map.put("testDate", lteFddParameter.getTestDate());
-		
+
 		List<LteFddParameter> lteFddParameters = lteFddParameterMapper.query(map);
-		if (lteFddParameters != null  && lteFddParameters.size()>0) {//更新
-			LteFddParameter model=lteFddParameters.get(0);
+		if (lteFddParameters != null && lteFddParameters.size() > 0) {// 更新
+			LteFddParameter model = lteFddParameters.get(0);
 			lteFddParameter.setId(model.getId());
 			lteFddParameter.setUpdateTime(new Date());
 			lteFddParameterMapper.updateByPrimaryKeySelective(lteFddParameter);
-		}else {//创建
+		} else {// 创建
 			lteFddParameter.setId(MyUtil.getUuid());
 			lteFddParameter.setCreateTime(new Date());
 			lteFddParameterMapper.insertSelective(lteFddParameter);

@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.boot.kaizen.entity.LoginUser;
-import com.boot.kaizen.model.lteFddModel.LteFddCellCheck;
 import com.boot.kaizen.model.lteFddModel.LteFddStation;
 import com.boot.kaizen.util.JsonMsgUtil;
 
@@ -59,10 +58,11 @@ public interface ILteFddStationService {
 	JsonMsgUtil delete(String ids);
 
 	/**
-	 * 添加更新  app对接
-	* @Description: TODO
-	* @author weichengz
-	* @date 2019年1月1日 上午11:33:10
+	 * 添加更新 app对接
+	 * 
+	 * @Description: TODO
+	 * @author weichengz
+	 * @date 2019年1月1日 上午11:33:10
 	 */
 	void upSert(LteFddStation lteFddStation);
 }

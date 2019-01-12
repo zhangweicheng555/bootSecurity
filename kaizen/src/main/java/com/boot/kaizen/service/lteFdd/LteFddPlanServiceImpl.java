@@ -52,7 +52,7 @@ public class LteFddPlanServiceImpl implements ILteFddPlanService {
 	private ILteFddStationService lteFddStationService;
 	@Value("${files.lteImage}")
 	private String lteImage;
-	
+
 	@Override
 	public int insertSelective(LteFddPlan record) {
 		return lteFddPlanMapper.insertSelective(record);
@@ -118,12 +118,13 @@ public class LteFddPlanServiceImpl implements ILteFddPlanService {
 	}
 
 	@Override
-	public List<Map<String, Object>> queryPlanList(Long userId, Long projId) {
+	public List<Map<String, Object>> queryPlanList(Long userId, Long projId, String jzType) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("projId", projId);
 		map.put("dealPersonId", userId);
 		map.put("beginTime", MyDateUtil.getNowDate("yyyy-MM-dd"));
 		map.put("endTime", MyDateUtil.getNowDate("yyyy-MM-dd"));
+		map.put("jzType", jzType);
 		List<LteFddPlan> lteFddPlans = lteFddPlanMapper.query(map);
 		List<Map<String, Object>> list = new ArrayList<>();
 		if (lteFddPlans != null && lteFddPlans.size() > 0) {
@@ -138,48 +139,50 @@ public class LteFddPlanServiceImpl implements ILteFddPlanService {
 	}
 
 	@Override
-	public List<BaseStationBean> queryStationList(Long userId, Long projId, String testDate) {
-		return lteFddPlanMapper.queryStationList(userId, projId, testDate);
+	public List<BaseStationBean> queryStationList(Long userId, Long projId, String testDate, String jzType) {
+		return lteFddPlanMapper.queryStationList(userId, projId, testDate, jzType);
 	}
 
 	@Override
-	public JsonMsgUtil queryCheckInfoById(String id) {
+	public JsonMsgUtil queryCheckInfoById(String id, String jzType) {
 		if (StringUtils.isBlank(id)) {
 			throw new IllegalArgumentException("未传入数据id");
 		}
-		LteFddPlanInfo lteFddPlanInfo=findLteFddPlanInfo(id);
+		LteFddPlanInfo lteFddPlanInfo = findLteFddPlanInfo(id, jzType);
 		return new JsonMsgUtil(true, "查询成功", lteFddPlanInfo);
 	}
 
-	public LteFddPlanInfo findLteFddPlanInfo(String id) {
-		LteFddPlanInfo lteFddPlanInfo=new LteFddPlanInfo();
+	public LteFddPlanInfo findLteFddPlanInfo(String id, String jzType) {
+		LteFddPlanInfo lteFddPlanInfo = new LteFddPlanInfo();
 		LteFddPlan lteFddPlan = selectByPrimaryKey(id);
 		if (lteFddPlan == null) {
 			throw new IllegalArgumentException("查询的数据不存在");
 		}
 		BeanUtils.copyProperties(lteFddPlan, lteFddPlanInfo);
-		
-		Map<String, Object> map=new HashMap<>();
+
+		Map<String, Object> map = new HashMap<>();
 		map.put("mENodeBID", lteFddPlanInfo.getmENodeBID());
+		map.put("jzType", jzType);
 		map.put("testTime", lteFddPlanInfo.getTestTime());
 		map.put("projId", lteFddPlanInfo.getProjId());
-		List<LteFddCellCheck> lteFddCellChecks= lteFddCellService.query(map);
-		if (lteFddCellChecks != null  && lteFddCellChecks.size()>0) {
+		List<LteFddCellCheck> lteFddCellChecks = lteFddCellService.query(map);
+		if (lteFddCellChecks != null && lteFddCellChecks.size() > 0) {
 			lteFddPlanInfo.setLteFddCellChecks(lteFddCellChecks);
 		}
 
-		Map<String, Object> map1=new HashMap<>();
+		Map<String, Object> map1 = new HashMap<>();
 		map1.put("eNodeBID", lteFddPlanInfo.getmENodeBID());
 		map1.put("testDate", lteFddPlanInfo.getTestTime());
+		map1.put("jzType", jzType);
 		map1.put("projId", lteFddPlanInfo.getProjId());
-		
+
 		List<LteFddParameter> lteFddParameters = lteFddParameterService.query(map1);
-		if (lteFddParameters != null  && lteFddParameters.size()>0) {
+		if (lteFddParameters != null && lteFddParameters.size() > 0) {
 			lteFddPlanInfo.setLteFddParameters(lteFddParameters);
 		}
-		
+
 		List<LteFddStation> lteFddStations = lteFddStationService.query(map1);
-		if (lteFddStations != null  && lteFddStations.size()>0) {
+		if (lteFddStations != null && lteFddStations.size() > 0) {
 			lteFddPlanInfo.setLteFddStations(lteFddStations);
 		}
 		return lteFddPlanInfo;
@@ -194,8 +197,6 @@ public class LteFddPlanServiceImpl implements ILteFddPlanService {
 			if (lteFddPlanInfo != null) {
 				HSSFCell cell;
 				HSSFRow row;
-				
-				
 
 				HSSFSheet sheetOne = workbook.getSheetAt(0);
 				HSSFPatriarch patriarchOne = sheetOne.createDrawingPatriarch();
@@ -214,46 +215,43 @@ public class LteFddPlanServiceImpl implements ILteFddPlanService {
 				cell.setCellValue(map.get("mENodeBID"));
 				cell = row.getCell(25);
 				cell.setCellValue(map.get("districtCountry"));
-				
+
 				row = sheetOne.getRow(6);
 				cell = row.getCell(5);
 				cell.setCellValue(map.get("address"));
 				cell = row.getCell(25);
 				cell.setCellValue(map.get("mBaseStationType"));
-				
-				
+
 				row = sheetOne.getRow(8);
 				cell = row.getCell(5);
 				cell.setCellValue(map.get("deviceType"));
 				cell = row.getCell(25);
 				cell.setCellValue(map.get("videoFrequency"));
-				
-				
+
 				row = sheetOne.getRow(12);
 				cell = row.getCell(7);
 				cell.setCellValue(map.get("mLongitude"));
 				cell = row.getCell(13);
 				cell.setCellValue(map.get("mLongitude"));
-				
+
 				row = sheetOne.getRow(13);
 				cell = row.getCell(7);
 				cell.setCellValue(map.get("mLatitude"));
 				cell = row.getCell(13);
 				cell.setCellValue(map.get("mLatitude"));
-				
-				
+
 				row = sheetOne.getRow(14);
 				cell = row.getCell(7);
 				cell.setCellValue(map.get("broadBand"));
 				cell = row.getCell(13);
 				cell.setCellValue(map.get("broadBand"));
-				
+
 				row = sheetOne.getRow(15);
 				cell = row.getCell(7);
 				cell.setCellValue(map.get("ipConfig"));
 				cell = row.getCell(13);
 				cell.setCellValue(map.get("ipConfig"));
-				
+
 				row = sheetOne.getRow(16);
 				cell = row.getCell(7);
 				cell.setCellValue(map.get("cellName0"));
@@ -261,7 +259,7 @@ public class LteFddPlanServiceImpl implements ILteFddPlanService {
 				cell.setCellValue(map.get("cellName1"));
 				cell = row.getCell(23);
 				cell.setCellValue(map.get("cellName2"));
-				
+
 				row = sheetOne.getRow(18);
 				cell = row.getCell(7);
 				cell.setCellValue(map.get("upDownRatio0"));
@@ -275,7 +273,7 @@ public class LteFddPlanServiceImpl implements ILteFddPlanService {
 				cell.setCellValue(map.get("upDownRatio2"));
 				cell = row.getCell(26);
 				cell.setCellValue(map.get("upDownRatio2"));
-				
+
 				row = sheetOne.getRow(19);
 				cell = row.getCell(7);
 				cell.setCellValue(map.get("specialRatio0"));
@@ -289,19 +287,17 @@ public class LteFddPlanServiceImpl implements ILteFddPlanService {
 				cell.setCellValue(map.get("specialRatio2"));
 				cell = row.getCell(26);
 				cell.setCellValue(map.get("specialRatio2"));
-				
-				
+
 				String eci0 = map.get("eci0");
 				String appeci0 = map.get("appeci0");
-				String eci0Is=getIsoK(eci0, appeci0);
+				String eci0Is = getIsoK(eci0, appeci0);
 				String eci1 = map.get("eci1");
 				String appeci1 = map.get("appeci1");
-				String eci1Is=getIsoK(eci1, appeci1);
+				String eci1Is = getIsoK(eci1, appeci1);
 				String eci2 = map.get("eci2");
 				String appeci2 = map.get("appeci2");
-				String eci2Is=getIsoK(eci2, appeci2);
-				
-				
+				String eci2Is = getIsoK(eci2, appeci2);
+
 				row = sheetOne.getRow(20);
 				cell = row.getCell(7);
 				cell.setCellValue(eci0);
@@ -321,20 +317,18 @@ public class LteFddPlanServiceImpl implements ILteFddPlanService {
 				cell.setCellValue(eci1Is);
 				cell = row.getCell(29);
 				cell.setCellValue(eci2Is);
-				
-				
-				
+
 				row = sheetOne.getRow(21);
-				String earfcn0Is=getIsoK(map.get("earfcn0"), map.get("appearfcn0"));
-				String earfcn1Is=getIsoK(map.get("earfcn1"), map.get("appearfcn1"));
-				String earfcn2Is=getIsoK(map.get("earfcn2"), map.get("appearfcn2"));
+				String earfcn0Is = getIsoK(map.get("earfcn0"), map.get("appearfcn0"));
+				String earfcn1Is = getIsoK(map.get("earfcn1"), map.get("appearfcn1"));
+				String earfcn2Is = getIsoK(map.get("earfcn2"), map.get("appearfcn2"));
 				cell = row.getCell(13);
 				cell.setCellValue(earfcn0Is);
 				cell = row.getCell(21);
 				cell.setCellValue(earfcn1Is);
 				cell = row.getCell(29);
 				cell.setCellValue(earfcn2Is);
-				
+
 				cell = row.getCell(7);
 				cell.setCellValue(map.get("earfcn0"));
 				cell = row.getCell(10);
@@ -347,20 +341,19 @@ public class LteFddPlanServiceImpl implements ILteFddPlanService {
 				cell.setCellValue(map.get("earfcn2"));
 				cell = row.getCell(26);
 				cell.setCellValue(map.get("appearfcn2"));
-				
-				
+
 				//
 				row = sheetOne.getRow(22);
-				String pci0Is=getIsoK(map.get("pci0"), map.get("apppci0"));
-				String pci1Is=getIsoK(map.get("pci1"), map.get("apppci1"));
-				String pci2Is=getIsoK(map.get("pci2"), map.get("apppci2"));
+				String pci0Is = getIsoK(map.get("pci0"), map.get("apppci0"));
+				String pci1Is = getIsoK(map.get("pci1"), map.get("apppci1"));
+				String pci2Is = getIsoK(map.get("pci2"), map.get("apppci2"));
 				cell = row.getCell(13);
 				cell.setCellValue(pci0Is);
 				cell = row.getCell(21);
 				cell.setCellValue(pci1Is);
 				cell = row.getCell(29);
 				cell.setCellValue(pci2Is);
-				
+
 				cell = row.getCell(7);
 				cell.setCellValue(map.get("pci0"));
 				cell = row.getCell(10);
@@ -373,18 +366,18 @@ public class LteFddPlanServiceImpl implements ILteFddPlanService {
 				cell.setCellValue(map.get("pci2"));
 				cell = row.getCell(26);
 				cell.setCellValue(map.get("apppci2"));
-				
+
 				row = sheetOne.getRow(23);
-				String tac0Is=getIsoK(map.get("tac0"), map.get("apptac0"));
-				String tac1Is=getIsoK(map.get("tac1"), map.get("apptac1"));
-				String tac2Is=getIsoK(map.get("tac2"), map.get("apptac2"));
+				String tac0Is = getIsoK(map.get("tac0"), map.get("apptac0"));
+				String tac1Is = getIsoK(map.get("tac1"), map.get("apptac1"));
+				String tac2Is = getIsoK(map.get("tac2"), map.get("apptac2"));
 				cell = row.getCell(13);
 				cell.setCellValue(tac0Is);
 				cell = row.getCell(21);
 				cell.setCellValue(tac1Is);
 				cell = row.getCell(29);
 				cell.setCellValue(tac2Is);
-				
+
 				cell = row.getCell(7);
 				cell.setCellValue(map.get("tac0"));
 				cell = row.getCell(10);
@@ -397,7 +390,7 @@ public class LteFddPlanServiceImpl implements ILteFddPlanService {
 				cell.setCellValue(map.get("tac2"));
 				cell = row.getCell(26);
 				cell.setCellValue(map.get("apptac2"));
-				
+
 				row = sheetOne.getRow(25);
 				cell = row.getCell(7);
 				cell.setCellValue(map.get("rsPower0"));
@@ -411,7 +404,7 @@ public class LteFddPlanServiceImpl implements ILteFddPlanService {
 				cell.setCellValue(map.get("rsPower2"));
 				cell = row.getCell(26);
 				cell.setCellValue(map.get("rsPower2"));
-				
+
 				row = sheetOne.getRow(26);
 				cell = row.getCell(7);
 				cell.setCellValue(map.get("pa0"));
@@ -425,7 +418,7 @@ public class LteFddPlanServiceImpl implements ILteFddPlanService {
 				cell.setCellValue(map.get("pa2"));
 				cell = row.getCell(26);
 				cell.setCellValue(map.get("pa2"));
-				
+
 				row = sheetOne.getRow(27);
 				cell = row.getCell(7);
 				cell.setCellValue(map.get("pb0"));
@@ -439,7 +432,7 @@ public class LteFddPlanServiceImpl implements ILteFddPlanService {
 				cell.setCellValue(map.get("pb2"));
 				cell = row.getCell(26);
 				cell.setCellValue(map.get("pb2"));
-				
+
 				row = sheetOne.getRow(28);
 				cell = row.getCell(7);
 				cell.setCellValue(map.get("antennaHangUp0"));
@@ -453,7 +446,7 @@ public class LteFddPlanServiceImpl implements ILteFddPlanService {
 				cell.setCellValue(map.get("antennaHangUp2"));
 				cell = row.getCell(26);
 				cell.setCellValue(map.get("antennaHangUp2"));
-				
+
 				row = sheetOne.getRow(29);
 				cell = row.getCell(7);
 				cell.setCellValue(map.get("azimuth0"));
@@ -467,7 +460,7 @@ public class LteFddPlanServiceImpl implements ILteFddPlanService {
 				cell.setCellValue(map.get("azimuth2"));
 				cell = row.getCell(26);
 				cell.setCellValue(map.get("azimuth2"));
-				
+
 				row = sheetOne.getRow(30);
 				cell = row.getCell(7);
 				cell.setCellValue(map.get("mtotalLowerInclination0"));
@@ -481,7 +474,7 @@ public class LteFddPlanServiceImpl implements ILteFddPlanService {
 				cell.setCellValue(map.get("mtotalLowerInclination2"));
 				cell = row.getCell(26);
 				cell.setCellValue(map.get("mtotalLowerInclination2"));
-			
+
 				row = sheetOne.getRow(31);
 				cell = row.getCell(7);
 				cell.setCellValue(map.get("presetElectricDip0"));
@@ -509,7 +502,7 @@ public class LteFddPlanServiceImpl implements ILteFddPlanService {
 				cell.setCellValue(map.get("mechanicalLowerInclination2"));
 				cell = row.getCell(26);
 				cell.setCellValue(map.get("mechanicalLowerInclination2"));
-				
+
 				String allViewPic = map.get("allViewPic");
 				if (StringUtils.isNoneBlank(allViewPic)) {
 					allViewPic = lteImage + allViewPic;
@@ -518,13 +511,10 @@ public class LteFddPlanServiceImpl implements ILteFddPlanService {
 				if (StringUtils.isNoneBlank(stationEntrancePic)) {
 					stationEntrancePic = lteImage + stationEntrancePic;
 				}
-				
-				MyUtil.createExcelPic(workbook, patriarchOne, allViewPic, (short) 0, 34, (short) 18, 36);//37
+
+				MyUtil.createExcelPic(workbook, patriarchOne, allViewPic, (short) 0, 34, (short) 18, 36);// 37
 				MyUtil.createExcelPic(workbook, patriarchOne, stationEntrancePic, (short) 18, 34, (short) 37, 36);
-				
-				
-				
-				
+
 				row = sheetOne.getRow(39);
 				cell = row.getCell(11);
 				cell.setCellValue(map.get("appftpDownPass0"));
@@ -539,7 +529,7 @@ public class LteFddPlanServiceImpl implements ILteFddPlanService {
 				cell.setCellValue(map.get("appftpUpPass1"));
 				cell = row.getCell(21);
 				cell.setCellValue(map.get("appftpUpPass2"));
-				
+
 				row = sheetOne.getRow(48);
 				cell = row.getCell(13);
 				cell.setCellValue(map.get("csfbFunctionTest"));
@@ -558,7 +548,7 @@ public class LteFddPlanServiceImpl implements ILteFddPlanService {
 				row = sheetOne.getRow(55);
 				cell = row.getCell(13);
 				cell.setCellValue(map.get("wireBackCheck"));
-				
+
 				row = sheetOne.getRow(72);
 				cell = row.getCell(8);
 				cell.setCellValue(map.get("testPerson"));
@@ -573,8 +563,8 @@ public class LteFddPlanServiceImpl implements ILteFddPlanService {
 				cell.setCellValue(map.get("testTime"));
 				cell = row.getCell(22);
 				cell.setCellValue(map.get("backPersonPhone"));
-			
-				//6
+
+				// 6
 				HSSFSheet sheetSix = workbook.getSheetAt(6);
 				row = sheetSix.getRow(1);
 				cell = row.getCell(2);
@@ -585,53 +575,53 @@ public class LteFddPlanServiceImpl implements ILteFddPlanService {
 				cell.setCellValue(map.get("testTime"));
 				cell = row.getCell(49);
 				cell.setCellValue(map.get("testPerson"));
-				
-				int w=0;
+
+				int w = 0;
 				for (int i = 0; i < 3; i++) {
-					row = sheetSix.getRow(4+w);
+					row = sheetSix.getRow(4 + w);
 					cell = row.getCell(16);
-					cell.setCellValue(map.get("tdLteCxAttempt"+i));
+					cell.setCellValue(map.get("tdLteCxAttempt" + i));
 					cell = row.getCell(24);
-					cell.setCellValue(map.get("tdLteCxSucc"+i));
+					cell.setCellValue(map.get("tdLteCxSucc" + i));
 					cell = row.getCell(30);
-					cell.setCellValue(map.get("tdLteCxFailure"+i));
+					cell.setCellValue(map.get("tdLteCxFailure" + i));
 					cell = row.getCell(36);
-					cell.setCellValue(map.get("tdLteCxpercent"+i));
-					
-					row = sheetSix.getRow(5+w);
+					cell.setCellValue(map.get("tdLteCxpercent" + i));
+
+					row = sheetSix.getRow(5 + w);
 					cell = row.getCell(16);
-					cell.setCellValue(map.get("lteFddCxAttempt"+i));
+					cell.setCellValue(map.get("lteFddCxAttempt" + i));
 					cell = row.getCell(24);
-					cell.setCellValue(map.get("lteFddCxSucc"+i));
+					cell.setCellValue(map.get("lteFddCxSucc" + i));
 					cell = row.getCell(30);
-					cell.setCellValue(map.get("lteFddCxFailure"+i));
+					cell.setCellValue(map.get("lteFddCxFailure" + i));
 					cell = row.getCell(36);
-					cell.setCellValue(map.get("lteFddCxpercent"+i));
-					
-					row = sheetSix.getRow(6+w);
+					cell.setCellValue(map.get("lteFddCxpercent" + i));
+
+					row = sheetSix.getRow(6 + w);
 					cell = row.getCell(16);
-					cell.setCellValue(map.get("tdLteChangeAttempt"+i));
+					cell.setCellValue(map.get("tdLteChangeAttempt" + i));
 					cell = row.getCell(24);
-					cell.setCellValue(map.get("tdLteChangeSucc"+i));
+					cell.setCellValue(map.get("tdLteChangeSucc" + i));
 					cell = row.getCell(30);
-					cell.setCellValue(map.get("tdLteChangeFailure"+i));
+					cell.setCellValue(map.get("tdLteChangeFailure" + i));
 					cell = row.getCell(36);
-					cell.setCellValue(map.get("tdLteChangepercent"+i));
-					
-					row = sheetSix.getRow(7+w);
+					cell.setCellValue(map.get("tdLteChangepercent" + i));
+
+					row = sheetSix.getRow(7 + w);
 					cell = row.getCell(16);
-					cell.setCellValue(map.get("lteFddChangeAttempt"+i));
+					cell.setCellValue(map.get("lteFddChangeAttempt" + i));
 					cell = row.getCell(24);
-					cell.setCellValue(map.get("lteFddChangeSucc"+i));
+					cell.setCellValue(map.get("lteFddChangeSucc" + i));
 					cell = row.getCell(30);
-					cell.setCellValue(map.get("lteFddChangeFailure"+i));
+					cell.setCellValue(map.get("lteFddChangeFailure" + i));
 					cell = row.getCell(36);
-					cell.setCellValue(map.get("lteFddChangepercent"+i));
-					
-					w=w+6;
+					cell.setCellValue(map.get("lteFddChangepercent" + i));
+
+					w = w + 6;
 				}
-				
-				//5
+
+				// 5
 				HSSFSheet sheetFive = workbook.getSheetAt(4);
 				HSSFPatriarch patriarchFive = sheetFive.createDrawingPatriarch();
 				row = sheetFive.getRow(1);
@@ -658,57 +648,57 @@ public class LteFddPlanServiceImpl implements ILteFddPlanService {
 				cell.setCellValue(map.get("mLongitude"));
 				cell = row.getCell(3);
 				cell.setCellValue(map.get("mLatitude"));
-				
+
 				row = sheetFive.getRow(11);
 				cell = row.getCell(1);
 				cell.setCellValue(map.get("stationType"));
 				cell = row.getCell(3);
 				cell.setCellValue(map.get("buildingFunction"));
-				
+
 				row = sheetFive.getRow(12);
 				cell = row.getCell(1);
 				cell.setCellValue(map.get("floorsNum"));
 				cell = row.getCell(3);
 				cell.setCellValue(map.get("yuanTaWeizhi"));
-				
+
 				row = sheetFive.getRow(13);
 				cell = row.getCell(1);
 				cell.setCellValue(map.get("yuanTiMianFs"));
 				cell = row.getCell(3);
 				cell.setCellValue(map.get("yuanTiMianGg"));
-				
+
 				row = sheetFive.getRow(14);
 				cell = row.getCell(1);
 				cell.setCellValue(map.get("xinZengTiMianType"));
 				row = sheetFive.getRow(15);
 				cell = row.getCell(1);
 				cell.setCellValue(map.get("reasonDescrib"));
-				
+
 				row = sheetFive.getRow(16);
 				cell = row.getCell(1);
 				cell.setCellValue(map.get("xinZengTiMianFs"));
 				row = sheetFive.getRow(17);
 				cell = row.getCell(1);
 				cell.setCellValue(map.get("reasonDescribNew"));
-				
+
 				row = sheetFive.getRow(18);
 				cell = row.getCell(1);
 				cell.setCellValue(map.get("xinZengFwj"));
 				cell = row.getCell(3);
 				cell.setCellValue(map.get("xinTiMianGg"));
-				
+
 				row = sheetFive.getRow(19);
 				cell = row.getCell(1);
 				cell.setCellValue(map.get("tianMianZd"));
 				cell = row.getCell(3);
 				cell.setCellValue(map.get("stationDistance"));
-				
+
 				row = sheetFive.getRow(20);
 				cell = row.getCell(1);
 				cell.setCellValue(map.get("remark"));
-				
-				//String allViewPic = map.get("allViewPic");
-				//String stationEntrancePic = map.get("stationEntrancePic");
+
+				// String allViewPic = map.get("allViewPic");
+				// String stationEntrancePic = map.get("stationEntrancePic");
 				String roofViewPic = map.get("roofViewPic");
 				if (StringUtils.isNoneBlank(roofViewPic)) {
 					roofViewPic = lteImage + roofViewPic;
@@ -716,7 +706,7 @@ public class LteFddPlanServiceImpl implements ILteFddPlanService {
 				MyUtil.createExcelPic(workbook, patriarchFive, allViewPic, (short) 0, 25, (short) 2, 26);
 				MyUtil.createExcelPic(workbook, patriarchFive, stationEntrancePic, (short) 2, 25, (short) 4, 26);
 				MyUtil.createExcelPic(workbook, patriarchFive, roofViewPic, (short) 0, 27, (short) 1, 28);
-				
+
 				String cellFirstPic = map.get("cellFirstPic");
 				if (StringUtils.isNoneBlank(cellFirstPic)) {
 					cellFirstPic = lteImage + cellFirstPic;
@@ -732,7 +722,7 @@ public class LteFddPlanServiceImpl implements ILteFddPlanService {
 				MyUtil.createExcelPic(workbook, patriarchFive, cellFirstPic, (short) 0, 30, (short) 2, 31);
 				MyUtil.createExcelPic(workbook, patriarchFive, cellScecondPic, (short) 2, 30, (short) 4, 31);
 				MyUtil.createExcelPic(workbook, patriarchFive, cellThirdPic, (short) 0, 32, (short) 2, 33);
-				
+
 				String stationDirection0 = map.get("stationDirection0");
 				if (StringUtils.isNoneBlank(stationDirection0)) {
 					stationDirection0 = lteImage + stationDirection0;
@@ -765,19 +755,17 @@ public class LteFddPlanServiceImpl implements ILteFddPlanService {
 				if (StringUtils.isNoneBlank(stationDirection315)) {
 					stationDirection315 = lteImage + stationDirection315;
 				}
-				
+
 				MyUtil.createExcelPic(workbook, patriarchFive, stationDirection0, (short) 0, 35, (short) 2, 36);
 				MyUtil.createExcelPic(workbook, patriarchFive, stationDirection45, (short) 2, 35, (short) 4, 36);
 				MyUtil.createExcelPic(workbook, patriarchFive, stationDirection90, (short) 0, 37, (short) 2, 38);
 				MyUtil.createExcelPic(workbook, patriarchFive, stationDirection135, (short) 2, 37, (short) 4, 38);
 				MyUtil.createExcelPic(workbook, patriarchFive, stationDirection180, (short) 0, 39, (short) 2, 40);
 				MyUtil.createExcelPic(workbook, patriarchFive, stationDirection225, (short) 2, 39, (short) 4, 40);
-				MyUtil.createExcelPic(workbook, patriarchFive, stationDirection270, (short) 0,41, (short) 2, 42);
+				MyUtil.createExcelPic(workbook, patriarchFive, stationDirection270, (short) 0, 41, (short) 2, 42);
 				MyUtil.createExcelPic(workbook, patriarchFive, stationDirection315, (short) 2, 41, (short) 4, 42);
-				
-				
-				
-				//4
+
+				// 4
 				HSSFSheet sheetFore = workbook.getSheetAt(3);
 				HSSFPatriarch patriarchFore = sheetFore.createDrawingPatriarch();
 				String stationRsrpPic = map.get("stationRsrpPic");
@@ -796,14 +784,13 @@ public class LteFddPlanServiceImpl implements ILteFddPlanService {
 				if (StringUtils.isNoneBlank(stationPciPic)) {
 					stationPciPic = lteImage + stationPciPic;
 				}
-				
-				
+
 				MyUtil.createExcelPic(workbook, patriarchFore, stationRsrpPic, (short) 0, 6, (short) 18, 26);
 				MyUtil.createExcelPic(workbook, patriarchFore, stationSinrPic, (short) 0, 29, (short) 18, 49);
 				MyUtil.createExcelPic(workbook, patriarchFore, stationDownRatePic, (short) 0, 52, (short) 18, 72);
 				MyUtil.createExcelPic(workbook, patriarchFore, stationPciPic, (short) 0, 75, (short) 18, 95);
-				
-				//3
+
+				// 3
 				HSSFSheet sheetThress = workbook.getSheetAt(2);
 				HSSFPatriarch patriarchThree = sheetThress.createDrawingPatriarch();
 				String rsrpPic0 = map.get("rsrpPic0");
@@ -826,14 +813,13 @@ public class LteFddPlanServiceImpl implements ILteFddPlanService {
 				if (StringUtils.isNoneBlank(rsrpWirePic0)) {
 					rsrpWirePic0 = lteImage + rsrpWirePic0;
 				}
-				
-				
+
 				MyUtil.createExcelPic(workbook, patriarchThree, rsrpPic0, (short) 0, 6, (short) 18, 26);
 				MyUtil.createExcelPic(workbook, patriarchThree, sinrPic0, (short) 0, 29, (short) 18, 49);
 				MyUtil.createExcelPic(workbook, patriarchThree, downRatePic0, (short) 0, 52, (short) 18, 72);
 				MyUtil.createExcelPic(workbook, patriarchThree, upRatePic0, (short) 0, 75, (short) 18, 95);
 				MyUtil.createExcelPic(workbook, patriarchThree, rsrpWirePic0, (short) 0, 98, (short) 18, 118);
-				
+
 				String rsrpPic1 = map.get("rsrpPic1");
 				if (StringUtils.isNoneBlank(rsrpPic1)) {
 					rsrpPic1 = lteImage + rsrpPic1;
@@ -854,15 +840,13 @@ public class LteFddPlanServiceImpl implements ILteFddPlanService {
 				if (StringUtils.isNoneBlank(rsrpWirePic1)) {
 					rsrpWirePic1 = lteImage + rsrpWirePic1;
 				}
-				
-				
+
 				MyUtil.createExcelPic(workbook, patriarchThree, rsrpPic1, (short) 0, 98, (short) 18, 118);
 				MyUtil.createExcelPic(workbook, patriarchThree, sinrPic1, (short) 0, 121, (short) 18, 141);
 				MyUtil.createExcelPic(workbook, patriarchThree, downRatePic1, (short) 0, 144, (short) 18, 164);
 				MyUtil.createExcelPic(workbook, patriarchThree, upRatePic1, (short) 0, 167, (short) 18, 187);
 				MyUtil.createExcelPic(workbook, patriarchThree, rsrpWirePic1, (short) 0, 190, (short) 18, 210);
-				
-				
+
 				String rsrpPic2 = map.get("rsrpPic2");
 				if (StringUtils.isNoneBlank(rsrpPic2)) {
 					rsrpPic2 = lteImage + rsrpPic2;
@@ -883,17 +867,14 @@ public class LteFddPlanServiceImpl implements ILteFddPlanService {
 				if (StringUtils.isNoneBlank(rsrpWirePic2)) {
 					rsrpWirePic2 = lteImage + rsrpWirePic2;
 				}
-				
+
 				MyUtil.createExcelPic(workbook, patriarchThree, rsrpPic2, (short) 0, 236, (short) 18, 256);
 				MyUtil.createExcelPic(workbook, patriarchThree, sinrPic2, (short) 0, 259, (short) 18, 279);
 				MyUtil.createExcelPic(workbook, patriarchThree, downRatePic2, (short) 0, 282, (short) 18, 302);
 				MyUtil.createExcelPic(workbook, patriarchThree, upRatePic2, (short) 0, 305, (short) 18, 325);
 				MyUtil.createExcelPic(workbook, patriarchThree, rsrpWirePic2, (short) 0, 328, (short) 18, 348);
-				
-				
-				
-				
-				//2
+
+				// 2
 				HSSFSheet sheetTwo = workbook.getSheetAt(1);
 				HSSFPatriarch patriarchTwo = sheetTwo.createDrawingPatriarch();
 				row = sheetTwo.getRow(1);
@@ -905,203 +886,200 @@ public class LteFddPlanServiceImpl implements ILteFddPlanService {
 				cell.setCellValue(map.get("testTime"));
 				cell = row.getCell(49);
 				cell.setCellValue(map.get("testPerson"));
-				int j=0;
+				int j = 0;
 				for (int i = 0; i < 3; i++) {
-					
-					row = sheetTwo.getRow(4+j);
+
+					row = sheetTwo.getRow(4 + j);
 					cell = row.getCell(15);
-					cell.setCellValue(map.get("rrcSuccRateAttempt"+i));
+					cell.setCellValue(map.get("rrcSuccRateAttempt" + i));
 					cell = row.getCell(22);
-					cell.setCellValue(map.get("rrcSuccRateSucc"+i));
+					cell.setCellValue(map.get("rrcSuccRateSucc" + i));
 					cell = row.getCell(28);
-					cell.setCellValue(map.get("rrcSuccRateFailure"+i));
+					cell.setCellValue(map.get("rrcSuccRateFailure" + i));
 					cell = row.getCell(35);
-					cell.setCellValue(map.get("rrcSuccRatepercent"+i));
-					
-					row = sheetTwo.getRow(5+j);
+					cell.setCellValue(map.get("rrcSuccRatepercent" + i));
+
+					row = sheetTwo.getRow(5 + j);
 					cell = row.getCell(15);
-					cell.setCellValue(map.get("erabSuccRateAttempt"+i));
+					cell.setCellValue(map.get("erabSuccRateAttempt" + i));
 					cell = row.getCell(22);
-					cell.setCellValue(map.get("erabSuccRateSucc"+i));
+					cell.setCellValue(map.get("erabSuccRateSucc" + i));
 					cell = row.getCell(28);
-					cell.setCellValue(map.get("erabSuccRateFailure"+i));
+					cell.setCellValue(map.get("erabSuccRateFailure" + i));
 					cell = row.getCell(35);
-					cell.setCellValue(map.get("erabSuccRatepercent"+i));
-					
-					row = sheetTwo.getRow(6+j);
+					cell.setCellValue(map.get("erabSuccRatepercent" + i));
+
+					row = sheetTwo.getRow(6 + j);
 					cell = row.getCell(15);
-					cell.setCellValue(map.get("accessSuccRateAttempt"+i));
+					cell.setCellValue(map.get("accessSuccRateAttempt" + i));
 					cell = row.getCell(22);
-					cell.setCellValue(map.get("accessSuccRateSucc"+i));
+					cell.setCellValue(map.get("accessSuccRateSucc" + i));
 					cell = row.getCell(28);
-					cell.setCellValue(map.get("accessSuccRateFailure"+i));
+					cell.setCellValue(map.get("accessSuccRateFailure" + i));
 					cell = row.getCell(35);
-					cell.setCellValue(map.get("accessSuccRatepercent"+i));
-					
-					row = sheetTwo.getRow(7+j);
+					cell.setCellValue(map.get("accessSuccRatepercent" + i));
+
+					row = sheetTwo.getRow(7 + j);
 					cell = row.getCell(15);
-					cell.setCellValue(map.get("volteWirelessAttempt"+i));
+					cell.setCellValue(map.get("volteWirelessAttempt" + i));
 					cell = row.getCell(22);
-					cell.setCellValue(map.get("volteWirelessConnSucc"+i));
+					cell.setCellValue(map.get("volteWirelessConnSucc" + i));
 					cell = row.getCell(28);
-					cell.setCellValue(map.get("volteWirelessConnFailure"+i));
+					cell.setCellValue(map.get("volteWirelessConnFailure" + i));
 					cell = row.getCell(35);
-					cell.setCellValue(map.get("volteWirelessConnpercent"+i));
-					
-					row = sheetTwo.getRow(8+j);
+					cell.setCellValue(map.get("volteWirelessConnpercent" + i));
+
+					row = sheetTwo.getRow(8 + j);
 					cell = row.getCell(15);
-					cell.setCellValue(map.get("volteFailureAttempt"+i));
+					cell.setCellValue(map.get("volteFailureAttempt" + i));
 					cell = row.getCell(22);
-					cell.setCellValue(map.get("volteFailureSucc"+i));
+					cell.setCellValue(map.get("volteFailureSucc" + i));
 					cell = row.getCell(28);
-					cell.setCellValue(map.get("volteFailureFailure"+i));
+					cell.setCellValue(map.get("volteFailureFailure" + i));
 					cell = row.getCell(35);
-					cell.setCellValue(map.get("volteFailurepercent"+i));
-					
-					
-					row = sheetTwo.getRow(11+j);
+					cell.setCellValue(map.get("volteFailurepercent" + i));
+
+					row = sheetTwo.getRow(11 + j);
 					cell = row.getCell(15);
-					cell.setCellValue(map.get("tdLteCxAttempt"+i));
+					cell.setCellValue(map.get("tdLteCxAttempt" + i));
 					cell = row.getCell(22);
-					cell.setCellValue(map.get("tdLteCxSucc"+i));
+					cell.setCellValue(map.get("tdLteCxSucc" + i));
 					cell = row.getCell(28);
-					cell.setCellValue(map.get("tdLteCxFailure"+i));
+					cell.setCellValue(map.get("tdLteCxFailure" + i));
 					cell = row.getCell(35);
-					cell.setCellValue(map.get("tdLteCxpercent"+i));
-					
-					row = sheetTwo.getRow(12+j);
+					cell.setCellValue(map.get("tdLteCxpercent" + i));
+
+					row = sheetTwo.getRow(12 + j);
 					cell = row.getCell(15);
-					cell.setCellValue(map.get("lteFddCxAttempt"+i));
+					cell.setCellValue(map.get("lteFddCxAttempt" + i));
 					cell = row.getCell(22);
-					cell.setCellValue(map.get("lteFddCxSucc"+i));
+					cell.setCellValue(map.get("lteFddCxSucc" + i));
 					cell = row.getCell(28);
-					cell.setCellValue(map.get("lteFddCxFailure"+i));
+					cell.setCellValue(map.get("lteFddCxFailure" + i));
 					cell = row.getCell(35);
-					cell.setCellValue(map.get("lteFddCxpercent"+i));
-					
-					row = sheetTwo.getRow(13+j);
+					cell.setCellValue(map.get("lteFddCxpercent" + i));
+
+					row = sheetTwo.getRow(13 + j);
 					cell = row.getCell(15);
-					cell.setCellValue(map.get("tdLteChangeAttempt"+i));
+					cell.setCellValue(map.get("tdLteChangeAttempt" + i));
 					cell = row.getCell(22);
-					cell.setCellValue(map.get("tdLteChangeSucc"+i));
+					cell.setCellValue(map.get("tdLteChangeSucc" + i));
 					cell = row.getCell(28);
-					cell.setCellValue(map.get("tdLteChangeFailure"+i));
+					cell.setCellValue(map.get("tdLteChangeFailure" + i));
 					cell = row.getCell(35);
-					cell.setCellValue(map.get("tdLteChangepercent"+i));
-					
-					row = sheetTwo.getRow(14+j);
+					cell.setCellValue(map.get("tdLteChangepercent" + i));
+
+					row = sheetTwo.getRow(14 + j);
 					cell = row.getCell(15);
-					cell.setCellValue(map.get("lteFddChangeAttempt"+i));
+					cell.setCellValue(map.get("lteFddChangeAttempt" + i));
 					cell = row.getCell(22);
-					cell.setCellValue(map.get("lteFddChangeSucc"+i));
+					cell.setCellValue(map.get("lteFddChangeSucc" + i));
 					cell = row.getCell(28);
-					cell.setCellValue(map.get("lteFddChangeFailure"+i));
+					cell.setCellValue(map.get("lteFddChangeFailure" + i));
 					cell = row.getCell(35);
-					cell.setCellValue(map.get("lteFddChangepercent"+i));
-					
-					row = sheetTwo.getRow(15+j);
+					cell.setCellValue(map.get("lteFddChangepercent" + i));
+
+					row = sheetTwo.getRow(15 + j);
 					cell = row.getCell(15);
-					cell.setCellValue(map.get("csfbVoiceSuccAttempt"+i));
+					cell.setCellValue(map.get("csfbVoiceSuccAttempt" + i));
 					cell = row.getCell(22);
-					cell.setCellValue(map.get("csfbVoiceSuccSucc"+i));
+					cell.setCellValue(map.get("csfbVoiceSuccSucc" + i));
 					cell = row.getCell(28);
-					cell.setCellValue(map.get("csfbVoiceSuccfailure"+i));
+					cell.setCellValue(map.get("csfbVoiceSuccfailure" + i));
 					cell = row.getCell(35);
-					cell.setCellValue(map.get("csfbVoiceSuccpercent"+i));
-					
-					row = sheetTwo.getRow(16+j);
+					cell.setCellValue(map.get("csfbVoiceSuccpercent" + i));
+
+					row = sheetTwo.getRow(16 + j);
 					cell = row.getCell(15);
-					cell.setCellValue(map.get("csfbCallDelay"+i));
+					cell.setCellValue(map.get("csfbCallDelay" + i));
 					cell = row.getCell(33);
-					cell.setCellValue(map.get("csfbPassiveCallDelay"+i));
-					
-					row = sheetTwo.getRow(17+j);
+					cell.setCellValue(map.get("csfbPassiveCallDelay" + i));
+
+					row = sheetTwo.getRow(17 + j);
 					cell = row.getCell(15);
-					cell.setCellValue(map.get("csfbVoiceDelay"+i));
-					
-					
-					row = sheetTwo.getRow(19+j);
+					cell.setCellValue(map.get("csfbVoiceDelay" + i));
+
+					row = sheetTwo.getRow(19 + j);
 					cell = row.getCell(15);
-					cell.setCellValue(map.get("ftpDownRsrpFirst"+i));
+					cell.setCellValue(map.get("ftpDownRsrpFirst" + i));
 					cell = row.getCell(22);
-					cell.setCellValue(map.get("ftpDownRsrpSecond"+i));
+					cell.setCellValue(map.get("ftpDownRsrpSecond" + i));
 					cell = row.getCell(28);
-					cell.setCellValue(map.get("ftpDownRsrpBad"+i));
+					cell.setCellValue(map.get("ftpDownRsrpBad" + i));
 					cell = row.getCell(35);
-					cell.setCellValue(map.get("ftpDownRsrpRandom"+i));
-					
-					row = sheetTwo.getRow(20+j);
+					cell.setCellValue(map.get("ftpDownRsrpRandom" + i));
+
+					row = sheetTwo.getRow(20 + j);
 					cell = row.getCell(15);
-					cell.setCellValue(map.get("ftpDownSinrFirst"+i));
+					cell.setCellValue(map.get("ftpDownSinrFirst" + i));
 					cell = row.getCell(22);
-					cell.setCellValue(map.get("ftpDownSinrSecond"+i));
+					cell.setCellValue(map.get("ftpDownSinrSecond" + i));
 					cell = row.getCell(28);
-					cell.setCellValue(map.get("ftpDownSinrBad"+i));
+					cell.setCellValue(map.get("ftpDownSinrBad" + i));
 					cell = row.getCell(35);
-					cell.setCellValue(map.get("ftpDownSinrRandom"+i));
-					
-					row = sheetTwo.getRow(21+j);
+					cell.setCellValue(map.get("ftpDownSinrRandom" + i));
+
+					row = sheetTwo.getRow(21 + j);
 					cell = row.getCell(15);
-					cell.setCellValue(map.get("ftpDownThroughputFirst"+i));
+					cell.setCellValue(map.get("ftpDownThroughputFirst" + i));
 					cell = row.getCell(22);
-					cell.setCellValue(map.get("ftpDownThroughputSecond"+i));
+					cell.setCellValue(map.get("ftpDownThroughputSecond" + i));
 					cell = row.getCell(28);
-					cell.setCellValue(map.get("ftpDownThroughputBad"+i));
+					cell.setCellValue(map.get("ftpDownThroughputBad" + i));
 					cell = row.getCell(35);
-					cell.setCellValue(map.get("ftpDownThroughputRandom"+i));
-					
-					row = sheetTwo.getRow(22+j);
+					cell.setCellValue(map.get("ftpDownThroughputRandom" + i));
+
+					row = sheetTwo.getRow(22 + j);
 					cell = row.getCell(15);
-					cell.setCellValue(map.get("ftpUpRsrpFirst"+i));
+					cell.setCellValue(map.get("ftpUpRsrpFirst" + i));
 					cell = row.getCell(22);
-					cell.setCellValue(map.get("ftpUpRsrpSecond"+i));
+					cell.setCellValue(map.get("ftpUpRsrpSecond" + i));
 					cell = row.getCell(28);
-					cell.setCellValue(map.get("ftpUpRsrpBad"+i));
+					cell.setCellValue(map.get("ftpUpRsrpBad" + i));
 					cell = row.getCell(35);
-					cell.setCellValue(map.get("ftpUpRsrpRandom"+i));
-					
-					row = sheetTwo.getRow(23+j);
+					cell.setCellValue(map.get("ftpUpRsrpRandom" + i));
+
+					row = sheetTwo.getRow(23 + j);
 					cell = row.getCell(15);
-					cell.setCellValue(map.get("ftpUpSinrFirst"+i));
+					cell.setCellValue(map.get("ftpUpSinrFirst" + i));
 					cell = row.getCell(22);
-					cell.setCellValue(map.get("ftpUpSinrSecond"+i));
+					cell.setCellValue(map.get("ftpUpSinrSecond" + i));
 					cell = row.getCell(28);
-					cell.setCellValue(map.get("ftpUpSinrBad"+i));
+					cell.setCellValue(map.get("ftpUpSinrBad" + i));
 					cell = row.getCell(35);
-					cell.setCellValue(map.get("ftpUpSinrRandom"+i));
-					
-					row = sheetTwo.getRow(24+j);
+					cell.setCellValue(map.get("ftpUpSinrRandom" + i));
+
+					row = sheetTwo.getRow(24 + j);
 					cell = row.getCell(15);
-					cell.setCellValue(map.get("ftpUpThroughputFirst"+i));
+					cell.setCellValue(map.get("ftpUpThroughputFirst" + i));
 					cell = row.getCell(22);
-					cell.setCellValue(map.get("ftpUpThroughputSecond"+i));
+					cell.setCellValue(map.get("ftpUpThroughputSecond" + i));
 					cell = row.getCell(28);
-					cell.setCellValue(map.get("ftpUpThroughputBad"+i));
+					cell.setCellValue(map.get("ftpUpThroughputBad" + i));
 					cell = row.getCell(35);
-					cell.setCellValue(map.get("ftpUpThroughputRandom"+i));
-					
-					
-					row = sheetTwo.getRow(25+j);
+					cell.setCellValue(map.get("ftpUpThroughputRandom" + i));
+
+					row = sheetTwo.getRow(25 + j);
 					cell = row.getCell(15);
-					cell.setCellValue(map.get("systemChangeAttempt"+i));
+					cell.setCellValue(map.get("systemChangeAttempt" + i));
 					cell = row.getCell(22);
-					cell.setCellValue(map.get("systemChangeSucc"+i));
+					cell.setCellValue(map.get("systemChangeSucc" + i));
 					cell = row.getCell(28);
-					cell.setCellValue(map.get("systemChangeFailure"+i));
+					cell.setCellValue(map.get("systemChangeFailure" + i));
 					cell = row.getCell(35);
-					cell.setCellValue(map.get("systemChangepercent"+i));
-					
-					row = sheetTwo.getRow(26+j);
+					cell.setCellValue(map.get("systemChangepercent" + i));
+
+					row = sheetTwo.getRow(26 + j);
 					cell = row.getCell(15);
-					cell.setCellValue(map.get("csfbReturnAttempt"+i));
+					cell.setCellValue(map.get("csfbReturnAttempt" + i));
 					cell = row.getCell(22);
-					cell.setCellValue(map.get("csfbReturnSucc"+i));
+					cell.setCellValue(map.get("csfbReturnSucc" + i));
 					cell = row.getCell(28);
-					cell.setCellValue(map.get("csfbReturnFailure"+i));
+					cell.setCellValue(map.get("csfbReturnFailure" + i));
 					cell = row.getCell(35);
-					cell.setCellValue(map.get("csfbReturnpercent"+i));
-					
-					j=j+25;
+					cell.setCellValue(map.get("csfbReturnpercent" + i));
+
+					j = j + 25;
 				}
 
 				map.put("title", lteFddPlanInfo.getmENodeBID() + "_" + lteFddPlanInfo.getmBaseStationType() + "_"
@@ -1121,10 +1099,10 @@ public class LteFddPlanServiceImpl implements ILteFddPlanService {
 	}
 
 	private String getIsoK(String eci0, String appeci0) {
-		String eci1Is="否";
+		String eci1Is = "否";
 		if (StringUtils.isNoneBlank(eci0) && StringUtils.isNoneBlank(appeci0)) {
 			if (eci0.equals(appeci0)) {
-				eci1Is="是";
+				eci1Is = "是";
 			}
 		}
 		return eci1Is;

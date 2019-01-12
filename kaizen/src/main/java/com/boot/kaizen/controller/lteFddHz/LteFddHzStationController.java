@@ -1,4 +1,4 @@
-package com.boot.kaizen.controller.lteFdd;
+package com.boot.kaizen.controller.lteFddHz;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.boot.kaizen.entity.LoginUser;
 import com.boot.kaizen.entity.RequestParamEntity;
-import com.boot.kaizen.model.lteFddModel.LteFddCellCheck;
-import com.boot.kaizen.service.lteFdd.ILteFddCellService;
+import com.boot.kaizen.model.lteFddModel.LteFddStation;
+import com.boot.kaizen.service.lteFdd.ILteFddStationService;
 import com.boot.kaizen.util.JsonMsgUtil;
 import com.boot.kaizen.util.MyUtil;
 import com.boot.kaizen.util.TableResultUtil;
@@ -24,24 +24,24 @@ import com.github.pagehelper.PageInfo;
  * @date 2018年12月31日 上午10:17:16
  */
 @Controller
-@RequestMapping("/fdd/cell")
-public class LteFddCellController {
+@RequestMapping("/fddhz/station")
+public class LteFddHzStationController {
 
 	@Autowired
-	private ILteFddCellService lteFddCellService;
+	private ILteFddStationService lteFddStationService;
 
 	@ResponseBody
 	@RequestMapping(value = "/query", method = RequestMethod.POST)
 	public TableResultUtil find(RequestParamEntity param) {
 
 		param.getMap().put("projId", MyUtil.getDealProjId(UserUtil.getLoginUser()));
-		param.getMap().put("jzType", "1");
+		param.getMap().put("jzType", "2");
 
-		PageInfo<LteFddCellCheck> pageInfo = PageHelper.startPage(param.getPage(), param.getLimit())
+		PageInfo<LteFddStation> pageInfo = PageHelper.startPage(param.getPage(), param.getLimit())
 				.doSelectPageInfo(new ISelect() {
 					@Override
 					public void doSelect() {
-						lteFddCellService.query(param.getMap());
+						lteFddStationService.query(param.getMap());
 					}
 				});
 		return new TableResultUtil(0l, "操作成功", pageInfo.getTotal(), pageInfo.getList());
@@ -55,10 +55,10 @@ public class LteFddCellController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
-	public JsonMsgUtil edit(LteFddCellCheck lteFddCellCheck) {
-		lteFddCellCheck.setJzType("1");
+	public JsonMsgUtil edit(LteFddStation lteFddStation) {
+		lteFddStation.setJzType("2");
 		LoginUser loginUser = UserUtil.getLoginUser();
-		return lteFddCellService.edit(lteFddCellCheck, loginUser);
+		return lteFddStationService.edit(lteFddStation, loginUser);
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class LteFddCellController {
 	@ResponseBody
 	@RequestMapping(value = "/findById", method = RequestMethod.POST)
 	public JsonMsgUtil findById(@RequestParam("id") String id) {
-		return lteFddCellService.findById(id);
+		return lteFddStationService.findById(id);
 	}
 
 	/**
@@ -82,7 +82,7 @@ public class LteFddCellController {
 	@ResponseBody
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	public JsonMsgUtil delete(@RequestParam("ids") String ids) {
-		return lteFddCellService.delete(ids);
+		return lteFddStationService.delete(ids);
 	}
 
 }

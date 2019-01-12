@@ -10,17 +10,14 @@ import com.boot.kaizen.model.lteFddModel.LteFddParameter;
 
 @Mapper
 public interface LteFddParameterMapper {
-	int deleteByPrimaryKey(String id);
 
-	int insert(LteFddParameter record);
+	int deleteByPrimaryKey(String id);
 
 	int insertSelective(LteFddParameter record);
 
 	LteFddParameter selectByPrimaryKey(String id);
 
 	int updateByPrimaryKeySelective(LteFddParameter record);
-
-	int updateByPrimaryKey(LteFddParameter record);
 
 	List<LteFddParameter> query(@Param("map") Map<String, Object> map);
 

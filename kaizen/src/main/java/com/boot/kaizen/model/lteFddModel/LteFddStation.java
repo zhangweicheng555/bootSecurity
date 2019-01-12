@@ -80,6 +80,16 @@ public class LteFddStation implements Serializable {
 	private String stationDistance;// 站间距
 	private String remark;// 备注
 
+	private String jzType;
+
+	public String getJzType() {
+		return jzType;
+	}
+
+	public void setJzType(String jzType) {
+		this.jzType = jzType;
+	}
+
 	public String getStationType() {
 		return stationType;
 	}

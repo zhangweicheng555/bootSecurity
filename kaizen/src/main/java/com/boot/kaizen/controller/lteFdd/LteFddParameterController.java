@@ -8,9 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.boot.kaizen.entity.LoginUser;
 import com.boot.kaizen.entity.RequestParamEntity;
-import com.boot.kaizen.model.lteFddModel.LteFddCellCheck;
 import com.boot.kaizen.model.lteFddModel.LteFddParameter;
-import com.boot.kaizen.service.lteFdd.ILteFddCellService;
 import com.boot.kaizen.service.lteFdd.ILteFddParameterService;
 import com.boot.kaizen.util.JsonMsgUtil;
 import com.boot.kaizen.util.MyUtil;
@@ -37,6 +35,7 @@ public class LteFddParameterController {
 	public TableResultUtil find(RequestParamEntity param) {
 
 		param.getMap().put("projId", MyUtil.getDealProjId(UserUtil.getLoginUser()));
+		param.getMap().put("jzType", "1");
 
 		PageInfo<LteFddParameter> pageInfo = PageHelper.startPage(param.getPage(), param.getLimit())
 				.doSelectPageInfo(new ISelect() {
@@ -57,6 +56,7 @@ public class LteFddParameterController {
 	@ResponseBody
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
 	public JsonMsgUtil edit(LteFddParameter lteFddParameter) {
+		lteFddParameter.setJzType("1");
 		LoginUser loginUser = UserUtil.getLoginUser();
 		return lteFddParameterService.edit(lteFddParameter, loginUser);
 	}

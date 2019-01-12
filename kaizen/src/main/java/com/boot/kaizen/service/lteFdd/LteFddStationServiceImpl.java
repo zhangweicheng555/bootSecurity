@@ -4,16 +4,13 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.stereotype.Service;
-
 import com.alibaba.fastjson.JSONObject;
 import com.boot.kaizen.dao.lteFdd.LteFddStatrionMapper;
 import com.boot.kaizen.entity.LoginUser;
-import com.boot.kaizen.model.lteFddModel.LteFddStation;
 import com.boot.kaizen.model.lteFddModel.LteFddStation;
 import com.boot.kaizen.util.JsonMsgUtil;
 import com.boot.kaizen.util.MyUtil;
@@ -74,33 +71,32 @@ public class LteFddStationServiceImpl implements ILteFddStationService {
 		}
 		return new JsonMsgUtil(true, "查询成功", JSONObject.toJSONString(lteFddStatrion));
 	}
-	
-	
 
 	@Override
 	public JsonMsgUtil delete(String ids) {
 		JsonMsgUtil j = new JsonMsgUtil(false);
 		if (StringUtils.isNoneBlank(ids)) {
 			String[] idsArray = ids.trim().split(",");
-			Integer deleteNum=lteFddStatrionMapper.delete(idsArray);
-			j = new JsonMsgUtil(true, "删除操作成功,成功删除【"+deleteNum+"】条数据", null);
+			Integer deleteNum = lteFddStatrionMapper.delete(idsArray);
+			j = new JsonMsgUtil(true, "删除操作成功,成功删除【" + deleteNum + "】条数据", null);
 		}
 		return j;
 	}
 
 	@Override
 	public void upSert(LteFddStation lteFddStation) {
-		Map<String, Object> map=new HashMap<>();
+		Map<String, Object> map = new HashMap<>();
 		map.put("projId", lteFddStation.getProjId());
 		map.put("eNodeBID", lteFddStation.geteNodeBID());
 		map.put("testDate", lteFddStation.getTestDate());
+		map.put("jzType", lteFddStation.getJzType());
 		List<LteFddStation> lteFddStations = lteFddStatrionMapper.query(map);
-		if (lteFddStations != null  && lteFddStations.size()>0) {//修改
-			LteFddStation model=lteFddStations.get(0);
+		if (lteFddStations != null && lteFddStations.size() > 0) {// 修改
+			LteFddStation model = lteFddStations.get(0);
 			lteFddStation.setId(model.getId());
 			lteFddStation.setUpdateTime(new Date());
 			lteFddStatrionMapper.updateByPrimaryKeySelective(lteFddStation);
-		}else {//添加
+		} else {// 添加
 			lteFddStation.setId(MyUtil.getUuid());
 			lteFddStation.setCreateTime(new Date());
 			insertSelective(lteFddStation);

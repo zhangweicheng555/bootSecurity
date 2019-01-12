@@ -30,8 +30,7 @@ public class LteFddPlanInfo implements Serializable {
 
 	private Integer status;// 最终是不是报告可以审核 之后最后一步的时候 才设置为1 0 未审核 1审核通过 2审核不通过
 	private String remark;// 审核描述
-	
-	
+
 	// common
 	private Integer projId;
 	private Date createTime;
@@ -48,10 +47,20 @@ public class LteFddPlanInfo implements Serializable {
 	private String address;// 详细地址
 	private String commonStationName;// 共址站名
 
-	private List<LteFddCellCheck> lteFddCellChecks=new ArrayList<>();
-	private List<LteFddParameter> lteFddParameters=new ArrayList<>();
-	private List<LteFddStation> lteFddStations=new ArrayList<>();
-	
+	private List<LteFddCellCheck> lteFddCellChecks = new ArrayList<>();
+	private List<LteFddParameter> lteFddParameters = new ArrayList<>();
+	private List<LteFddStation> lteFddStations = new ArrayList<>();
+
+	private String jzType;
+
+	public String getJzType() {
+		return jzType;
+	}
+
+	public void setJzType(String jzType) {
+		this.jzType = jzType;
+	}
+
 	public List<LteFddCellCheck> getLteFddCellChecks() {
 		return lteFddCellChecks;
 	}
@@ -327,7 +336,6 @@ public class LteFddPlanInfo implements Serializable {
 	public LteFddPlanInfo() {
 		super();
 	}
-	
 
 	public String getRemark() {
 		return remark;
@@ -336,7 +344,6 @@ public class LteFddPlanInfo implements Serializable {
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
-
 
 	public enum StatueType {
 		NO_CHECK(0, "未审核"), CHECK_PASS(1, "审核通过"), CHECK_NO_PASS(2, "审核不通过");

@@ -38,8 +38,8 @@ import com.boot.kaizen.util.FileUtil;
 import com.google.gson.Gson;
 
 @RestController
-@RequestMapping("/lte/fdd/app")
-public class LteFddAppController {
+@RequestMapping("/lte/fddhz/app")
+public class LteFddHzAppController {
 
 	@Value("${files.path}")
 	private String filesPath;
@@ -100,7 +100,7 @@ public class LteFddAppController {
 			@RequestParam(value = "projId", required = true) Long projId) {
 		AppUtil appUtil = new AppUtil(1, "查询成功", "");
 		try {
-			List<Map<String, Object>> planList = lteFddPlanService.queryPlanList(userId, projId, "1");
+			List<Map<String, Object>> planList = lteFddPlanService.queryPlanList(userId, projId, "2");
 
 			if (planList == null || planList.size() == 0) {
 				appUtil = new AppUtil(0, "查询任务列表为空", "");
@@ -127,7 +127,7 @@ public class LteFddAppController {
 			@RequestParam(value = "testDate", required = true) String testDate) {
 		AppUtil appUtil = new AppUtil(1, "查询成功", "");
 		try {
-			List<BaseStationBean> stationList = lteFddPlanService.queryStationList(userId, projId, testDate, "1");
+			List<BaseStationBean> stationList = lteFddPlanService.queryStationList(userId, projId, testDate, "2");
 			if (stationList != null && stationList.size() > 0) {
 				for (BaseStationBean baseStationBean : stationList) {
 					Map<String, Object> map = new HashMap<>();
@@ -244,7 +244,7 @@ public class LteFddAppController {
 			lteFddStation.setStationDownRatePic(stationDownRatePicStr);
 			lteFddStation.setStationPciPic(stationPciPicStr);
 
-			lteFddStation.setJzType("1");
+			lteFddStation.setJzType("2");
 			lteFddStationService.upSert(lteFddStation);
 
 			appUtil.setDataSource("上传成功,接收的信息为：" + new Gson().toJson(lteFddStation));
@@ -292,7 +292,7 @@ public class LteFddAppController {
 			lteFddParameter.setUpRatePic(upRatePicStr);
 			lteFddParameter.setRsrpWirePic(rsrpWirePicStr);
 
-			lteFddParameter.setJzType("1");
+			lteFddParameter.setJzType("2");
 			lteFddParameterService.upSert(lteFddParameter);
 			appUtil.setDataSource("上传成功,接收的信息为：" + new Gson().toJson(lteFddParameter));
 			return appUtil;
