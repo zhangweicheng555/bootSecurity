@@ -177,8 +177,9 @@
 	     elem: '#testTime'
 	    ,max: 0
 	    ,theme: 'molv'
+	    ,min: -60 //7天前
+	    ,max: 60 //7天后
    	    ,done: function(val, date, endDate){
-   	    	$("#beginTime").val(val);//给搜索赋值
    		 }
 	  });
 	    //加载项目下的所有的用户

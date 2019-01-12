@@ -135,7 +135,7 @@
 	   <div class="layui-form-item">
 	    <label class="layui-form-label" style="width: 150px;">测试时间</label>
 	    <div class="layui-input-inline">
-	      <input type="text" name="testTime" id="testTime"   autocomplete="off" class="layui-input">
+	      <input type="text" name="testTime" id="testTime"  required  lay-verify="required"  autocomplete="off" class="layui-input">
 	    </div>
 	  </div>
 	  
@@ -329,7 +329,17 @@
 	    return false;
 	  });
 	
-
+	  /**日期框*/
+	  laydate.render({
+	     elem: '#testTime'
+	    ,max: 0
+	    ,min: -60 //7天前
+	    ,max: 60 //7天后
+	    ,theme: 'molv'
+   	    ,done: function(val, date, endDate){
+   	    	$("#beginTime").val(val);//给搜索赋值
+   		 }
+	  });
 	
 	  //初始化工作
 	  initData();

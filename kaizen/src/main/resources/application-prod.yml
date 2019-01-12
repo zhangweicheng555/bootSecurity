@@ -5,9 +5,9 @@ spring:
       config: classpath:ehcache.xml
   datasource: 
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://172.16.207.90:3306/nokia?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
-    username: root123
-    password: 123456321
+    url: jdbc:mysql://172.16.207.83:3306/kaizen?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
+    username: root
+    password: 123456
     druid:
       initialSize: 5
       minIdle: 5
