@@ -60,20 +60,9 @@ class LtePlanServiceImpl implements ILtePlanService {
 	@Autowired
 	private ILteConfigService lteConfigService;
 	@Autowired
-	private RuntimeService runtimeService;
-	@Autowired
-	private TaskService taskService;
-	@Autowired
 	private IActBusinessService actBusinessService;
 	@Autowired
-	private ILteCellCheckService lteCellCheckService;
-	@Autowired
 	private Activitiservice activitiservice;
-	@Autowired
-	private ILteLoadTestService lteLoadTestService;
-	@Autowired
-	private ILteStationCheckService lteStationCheckService;
-	@Autowired
 	private ILteCellStructuralValidationService lteCellStructuralValidationService;
 	@Autowired
 	private ILteCellParamtersService lteCellParamtersService;
@@ -103,57 +92,6 @@ class LtePlanServiceImpl implements ILtePlanService {
 			ltePlan.setCreateAt(loginUser.getId());
 			ltePlan.setCreateTime(new Date());
 			planDao.save(ltePlan);
-			// 判断流程业务关联表是不是有与businesskey模糊匹配的记录
-			Long num = actBusinessService.queryCountMatchBusinessKey("LtePlan",
-					"LtePlan_" + ltePlan.getmENodeBID() + "_",loginUser.getProjId());
-			if (num != 0) {
-				throw new IllegalArgumentException("存在此站号的流程，添加失败");
-			}
-			// 启动流程
-			String businessKey = "LtePlan" + "_" + ltePlan.getmENodeBID() + "_" + ltePlan.getId();
-			Map<String, Object> variables = new HashMap<>();
-			variables.put("user", "");
-			variables.put("recordId", ltePlan.getId());
-			variables.put("projId", loginUser.getProjId());
-
-			ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("LtePlan", businessKey,
-					variables);
-			// 添加与业务表的关系
-			if (processInstance != null) {
-				// 记录流程与业务表的关系
-				Map<String, Object> map = new HashMap<>();
-				map.put("bussType", "LtePlan");
-				map.put("createTime", new Date());
-				map.put("bussId", ltePlan.getId());
-				map.put("projId", loginUser.getProjId());
-				map.put("businessKey", processInstance.getBusinessKey());
-				map.put("assignIds", "");
-				map.put("actPiid", processInstance.getId());
-				actBusinessService.insert(map);
-
-				// 查询当前任务是不是存在 测试计划 这个环节 存在的话 自动完成
-				Task task = taskService.createTaskQuery().processInstanceId(processInstance.getId()).taskName("测试计划")
-						.singleResult();
-				if (task == null) {
-					throw new IllegalArgumentException("流程中测试计划环节不存在");
-				}
-				// 添加关系表
-				Map<String, Object> mapAll = new HashMap<>();
-				mapAll.put("checkResult", "");
-				mapAll.put("bussType", "LtePlan");
-				mapAll.put("createTime", new Date());
-				mapAll.put("bussId", ltePlan.getId());
-				mapAll.put("checkAssignee", "");
-				mapAll.put("projId", loginUser.getProjId());
-				mapAll.put("actName", task.getName());
-				mapAll.put("actId", task.getTaskDefinitionKey());
-				mapAll.put("piid", processInstance.getId());
-				mapAll.put("businessKey", processInstance.getBusinessKey());
-				actBusinessService.insertAll(mapAll);
-				// 完成任务
-				taskService.complete(task.getId());
-
-			}
 		}
 		return new JsonMsgUtil(true, "添加成功", ltePlan);
 	}
@@ -180,16 +118,6 @@ class LtePlanServiceImpl implements ILtePlanService {
 				for (int i = 0; i < idsArray.length; i++) {
 					String id = idsArray[i];
 					array[i] = Long.valueOf(id.trim());
-
-					// 删除正在运行的流程
-					List<String> processInstanceIds = actBusinessService.queryProcessInstanceIds(array[i], "LtePlan");
-					if (processInstanceIds != null && processInstanceIds.size() > 0) {
-						for (String piid : processInstanceIds) {
-							activitiservice.deleteProcessIntance(piid, "delete");
-						}
-					}
-					// 删除关联表
-					actBusinessService.deleteByIdAndType(array[i], "LtePlan");
 				}
 				// 删除项目
 				Integer deleteNum = planDao.delete(array);
@@ -202,8 +130,11 @@ class LtePlanServiceImpl implements ILtePlanService {
 	}
 
 	@Override
-	public List<Map<String, Object>> queryPlanList(Long userId, Long projId) {
-		return planDao.queryPlanList(userId, projId, MyDateUtil.getNowDate("yyyy-MM-dd"));
+	public List<Map<String, Object>> queryPlanList(Long userId, Long projId,String testDate) {
+		if (StringUtils.isBlank(testDate)) {
+			testDate=MyDateUtil.getNowDate("yyyy-MM-dd");
+		}
+		return planDao.queryPlanList(userId, projId, testDate);
 	}
 
 	@Override
@@ -242,77 +173,12 @@ class LtePlanServiceImpl implements ILtePlanService {
 		return ltePlanInfo;
 	}
 
-	@Override
-	public void findLteConfigActivitiImage(Long id, HttpServletResponse response) {
-		String piid = actBusinessService.queryPiid(id, "LtePlan");
-		if (StringUtils.isBlank(piid)) {
-			throw new IllegalArgumentException("流程实例不存在");
-		}
-		activitiservice.findActivitiProccessImage(piid, response);
-	}
 
 	@Override
 	public JsonMsgUtil check(Long id, Long statusM) {
 		LtePlan ltePlan = planDao.findById(id);
 		if (ltePlan == null) {
 			throw new IllegalArgumentException("测试计划已被删除");
-		}
-		;
-
-		String piid = actBusinessService.queryMatchBusinessKey("LtePlan",
-				"LtePlan" + "_" + ltePlan.getmENodeBID() + "_" + id);
-		if (StringUtils.isBlank(piid)) {
-			throw new IllegalArgumentException("流程实例不存在");
-		}
-
-		Long num = actBusinessService.queryCountMatchLink("LtePlan", "审核报告", piid);
-		if (num == 0) {
-			// 查询小区核查的任务
-			Task task = taskService.createTaskQuery().processInstanceId(piid).taskName("审核报告").singleResult();
-			if (task == null) {
-				throw new IllegalArgumentException("审核报告环节不存在");
-			}
-
-			if (1 == statusM) {
-				// 记录关联表的关系
-				Map<String, Object> mapAll = new HashMap<>();
-				mapAll.put("checkResult", "");
-				mapAll.put("bussType", "LtePlan");
-				mapAll.put("createTime", new Date());
-				mapAll.put("bussId", ltePlan.getId());
-				mapAll.put("checkAssignee", "");
-				mapAll.put("projId", ltePlan.getProjId());
-				mapAll.put("actName", "审核报告");
-				mapAll.put("actId", task.getTaskDefinitionKey());
-				mapAll.put("piid", piid);
-				mapAll.put("businessKey", "LtePlan" + "_" + ltePlan.getmENodeBID() + "_" + id);
-				actBusinessService.insertAll(mapAll);
-				// 完成任务
-				Map<String, Object> map = new HashMap<>();
-				map.put("pass", 1);
-				taskService.complete(task.getId(), map);
-			}
-			if (2 == statusM) {
-				// 完成任务
-				Map<String, Object> map = new HashMap<>();
-				map.put("pass", 0);
-				taskService.complete(task.getId(), map);
-				// 删除上传的信息
-				actBusinessService.deleteActBusinessBykey("LtePlan_" + ltePlan.getmENodeBID() + "_" + ltePlan.getId());
-				// 删除三表的数据
-				lteCellCheckService.deleteByeNodeBID(ltePlan.getmENodeBID());
-				lteLoadTestService.deleteByeNodeBID(ltePlan.getmENodeBID());
-				lteStationCheckService.deleteByeNodeBID(ltePlan.getmENodeBID());
-			}
-		} else {
-			if (2 == statusM) {
-				// 删除上传的信息
-				actBusinessService.deleteActBusinessBykey("LtePlan_" + ltePlan.getmENodeBID() + "_" + ltePlan.getId());
-				// 删除三表的数据
-				lteCellCheckService.deleteByeNodeBID(ltePlan.getmENodeBID());
-				lteLoadTestService.deleteByeNodeBID(ltePlan.getmENodeBID());
-				lteStationCheckService.deleteByeNodeBID(ltePlan.getmENodeBID());
-			}
 		}
 		planDao.check(id, statusM);
 		return new JsonMsgUtil(true, "审核完成", "");

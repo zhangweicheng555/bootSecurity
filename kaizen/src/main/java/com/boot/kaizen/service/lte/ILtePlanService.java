@@ -54,7 +54,7 @@ public interface ILtePlanService {
 	 * @param userId
 	 * @param projId
 	 */
-	List<Map<String, Object>> queryPlanList(Long userId, Long projId);
+	List<Map<String, Object>> queryPlanList(Long userId, Long projId,String testDate);
 
 	/**
 	 * 拉取基站列表 app
@@ -72,14 +72,6 @@ public interface ILtePlanService {
 	 * @date 2018年11月11日 上午8:41:06
 	 */
 	JsonMsgUtil queryLtePlanInfo(Long id, LoginUser user);
-
-	/**
-	 * 
-	 * @Description: 查看流程图
-	 * @author weichengz
-	 * @date 2018年11月11日 上午10:18:52
-	 */
-	public void findLteConfigActivitiImage(Long id, HttpServletResponse response);
 
 	/**
 	 * 审核
@@ -120,12 +112,11 @@ public interface ILtePlanService {
 
 	/**
 	 * 上传
-	* @Description: TODO
-	* @author weichengz
-	* @date 2019年1月9日 上午12:57:32
+	 * 
+	 * @Description: TODO
+	 * @author weichengz
+	 * @date 2019年1月9日 上午12:57:32
 	 */
-	public JsonMsgUtil upload(MultipartFile file,LoginUser loginUser);
-
-	
+	public JsonMsgUtil upload(MultipartFile file, LoginUser loginUser);
 
 }

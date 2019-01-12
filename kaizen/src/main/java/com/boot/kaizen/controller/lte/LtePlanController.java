@@ -1,24 +1,12 @@
 package com.boot.kaizen.controller.lte;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
-
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFCellStyle;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -27,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.boot.kaizen._enum.Constant;
 import com.boot.kaizen.entity.LoginUser;
 import com.boot.kaizen.entity.RequestParamEntity;
@@ -59,8 +46,6 @@ public class LtePlanController {
 
 	@Autowired
 	private ILtePlanService ltePlanService;
-	@Autowired
-	private ILteCellStructuralValidationService lteCellStructuralValidationService;
 	@Value("${files.lteExcel}")
 	private String lteExcel;
 	@Value("${files.lteImage}")
@@ -94,17 +79,6 @@ public class LtePlanController {
 	public JsonMsgUtil edit(LtePlan ltePlan) {
 		LoginUser loginUser = UserUtil.getLoginUser();
 		return ltePlanService.edit(ltePlan, loginUser);
-	}
-
-	/**
-	 * 
-	 * @Description: 查看流程图
-	 * @author weichengz
-	 * @date 2018年11月11日 上午10:18:31
-	 */
-	@RequestMapping(value = "/findLteConfigActivitiImage")
-	public void findLteConfigActivitiImage(@RequestParam("id") Long id, HttpServletResponse response) {
-		ltePlanService.findLteConfigActivitiImage(id, response);
 	}
 
 	/**
@@ -556,6 +530,6 @@ public class LtePlanController {
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	public JsonMsgUtil uploadRoadTest(@RequestParam(value = "files") MultipartFile file) {
 		LoginUser loginUser = UserUtil.getLoginUser();
-		return ltePlanService.upload(file,loginUser);
+		return ltePlanService.upload(file, loginUser);
 	}
 }

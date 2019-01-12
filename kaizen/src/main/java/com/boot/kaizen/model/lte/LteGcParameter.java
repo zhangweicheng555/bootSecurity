@@ -29,7 +29,7 @@ public class LteGcParameter extends BaseEntity<Long> {
 	private String mPresetElectricDip;// 预置电下倾
 	private String mtotalLowerInclination;// 总下倾角
 
-	private String configName;// 配置名
+	private String configName;// 这个字段用于测试时间
 
 	public String getmENodeBID() {
 		return mENodeBID;

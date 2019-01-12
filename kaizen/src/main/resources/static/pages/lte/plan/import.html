@@ -162,9 +162,19 @@
 	      parent.layer.closeAll('loading'); //关闭loading
 	    }
 	    ,choose: function(obj){  //选择文件的回调   可以将文件利用与追加到dom  主要是利用回调显示
+	    	
 	    	 var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
 	         //读取本地文件
 	         obj.preview(function(index, file, result){
+	        	 
+	        	 var fileName=file.name;
+		           var ldot = fileName.lastIndexOf(".");
+		           var type = fileName.substring(ldot + 1);
+		           if('xls' !=type){
+		        	   parent.layer.msg('只支持上传xls后缀的excel');
+		        	   return ;
+		           }
+	        	 
 	           var tr = $(['<tr id="upload-'+ index +'">'
 	             ,'<td>'+ file.name +'</td>'
 	             ,'<td>'+ (file.size/1014).toFixed(1) +'kb</td>'

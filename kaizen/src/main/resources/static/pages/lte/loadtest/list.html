@@ -138,7 +138,10 @@
 	    var row = obj.data;
 	    if(obj.event === 'del'){//单行删除
 	    	common.getConfirmDelDialog("确定要删除吗？","删除【"+row.projName+"】记录",2,"/project/delete",{"ids":row.id},function(){deleteRow(obj);});
-	    } else if(obj.event === 'edit'){//编辑
+	    	if(checkArray){
+	   			checkArray.length=0
+	   		}
+		} else if(obj.event === 'edit'){//编辑
 		    common.openEditDialog(fresh,"编辑项目","pages/project/edit.html?id="+row.id,"1000px","520px",false,"确定","取消","/project/edit");
 	    }
 	  });
@@ -157,6 +160,9 @@
 	  $("#deleteProjectBtn").click(function(){
 		  if(checkArray && checkArray.length>0){
 		  	  common.getConfirmDelDialog("确定要删除吗？",'共删除【'+checkArray.length+'】条记录',2,"/project/delete",{"ids":checkArray.join(",")},fresh);
+		  	if(checkArray){
+	   			checkArray.length=0
+	   		}
 		  }else{
 			  layer.msg('未选中要删除的记录');
 		  }

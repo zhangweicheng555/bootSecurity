@@ -150,10 +150,10 @@ public class LteAppController {
 	 */
 	@RequestMapping(value = "/queryPlanList", method = RequestMethod.POST)
 	public AppUtil queryPlanList(@RequestParam(value = "userId", required = true) Long userId,
-			@RequestParam(value = "projId", required = true) Long projId) {
+			@RequestParam(value = "projId", required = true) Long projId, String testDate) {
 		AppUtil appUtil = new AppUtil(1, "查询成功", "");
 		try {
-			List<Map<String, Object>> planList = ltePlanService.queryPlanList(userId, projId);
+			List<Map<String, Object>> planList = ltePlanService.queryPlanList(userId, projId, testDate);
 
 			if (planList == null || planList.size() == 0) {
 				appUtil = new AppUtil(0, "查询任务列表为空", "");
@@ -263,13 +263,14 @@ public class LteAppController {
 			return appUtil;
 		}
 	}
+
 	/**
 	 * 上传小区参数验收接口
 	 */
 	@RequestMapping(value = "/uploadCellParameters", method = RequestMethod.POST)
 	public AppUtil uploadCellParameters(LteCellParamters lteCellParamters) {
 		AppUtil appUtil = new AppUtil(1, "上传成功", null);
-		
+
 		try {
 			// 批量添加
 			lteCellParamtersService.upSert(lteCellParamters);
@@ -280,13 +281,14 @@ public class LteAppController {
 			return appUtil;
 		}
 	}
+
 	/**
 	 * 上传结构验收接口
 	 */
 	@RequestMapping(value = "/structuralValidation", method = RequestMethod.POST)
 	public AppUtil structuralValidation(LteCellStructuralValidation lteCellStructuralValidation) {
 		AppUtil appUtil = new AppUtil(1, "上传成功", null);
-		
+
 		try {
 			// 批量添加
 			lteCellStructuralValidationService.upSert(lteCellStructuralValidation);
@@ -379,9 +381,9 @@ public class LteAppController {
 					String name = upFile(cellFiles[i], "lte");
 					if (StringUtils.isNoneBlank(name)) {
 						if (StringUtils.isNoneBlank(rsrpFtpUpImage)) {
-							rsrpFtpUpImage =  rsrpFtpUpImage+","+name;
-						}else {
-							rsrpFtpUpImage =   name;
+							rsrpFtpUpImage = rsrpFtpUpImage + "," + name;
+						} else {
+							rsrpFtpUpImage = name;
 						}
 					}
 				}

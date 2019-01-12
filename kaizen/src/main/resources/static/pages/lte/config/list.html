@@ -134,6 +134,9 @@
 	    var row = obj.data;
 	    if(obj.event === 'del'){//单行删除
 	    	common.getConfirmDelDialog("确定要删除吗？","删除【"+row.id+"】记录",2,"/config/delete",{"ids":row.id},function(){deleteRow(obj);});
+	    	if(checkArray){
+	   			checkArray.length=0
+	   		}
 	    } else if(obj.event === 'edit'){//编辑
 		    common.openEditDialog(fresh,"编辑","pages/lte/config/edit.html?id="+row.id,"1000px","570px",false,"确定","取消","/config/edit");
 	    }
@@ -180,6 +183,9 @@
 	  $("#deleteBtnModel").click(function(){
 		  if(checkArray && checkArray.length>0){
 		  	  common.getConfirmDelDialog("确定要删除吗？",'共删除【'+checkArray.length+'】条记录',2,"/config/delete",{"ids":checkArray.join(",")},fresh);
+		  	if(checkArray){
+	   			checkArray.length=0
+	   		}
 		  }else{
 			  layer.msg('未选中要删除的记录');
 		  }

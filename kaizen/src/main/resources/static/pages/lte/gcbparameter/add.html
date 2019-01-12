@@ -84,9 +84,9 @@
 	    </div>
 	  </div>
 	  <div class="layui-form-item">
-	    <label class="layui-form-label" style="width: 150px;">配置名</label>
+	    <label class="layui-form-label" style="width: 150px;">测试时间</label>
 	    <div class="layui-input-inline">
-	      <input type="text" name="configName" id="configName"   autocomplete="off" class="layui-input">
+	      <input type="text" name="configName" id="configName" required  lay-verify="required"   autocomplete="off" class="layui-input">
 	    </div>
 	  </div>
 	  
@@ -124,6 +124,17 @@
 	    return false;
 	  });
 	
+	  /**日期框*/
+	  laydate.render({
+	     elem: '#configName'
+	    ,max: 0
+	    ,min: -60 //7天前
+	    ,max: 60 //7天后
+	    ,theme: 'molv'
+   	    ,done: function(val, date, endDate){
+   	    	
+   		 }
+	  });
 	
 	});
 	

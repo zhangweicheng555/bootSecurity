@@ -101,22 +101,22 @@
 			   ,"map[endTime]":$("#endTime").val() 
 			   }
 	    ,cols: [[        
-	      {field:'id', width:30, title: 'ID', sort: true,type:'checkbox'}
-	      ,{title: '序号',width:70,templet: '#indexTpl',align:'center'}
-	      ,{field:'status', width:150, title: '审核状态',align:'center', templet: '#statusTpl'}
-	      ,{field:'mENodeBID',   minWidth:150, title: '基站号',align:'center'}
-	      ,{field:'mBaseStationName',   minWidth:300, title: '基站名称',align:'center'}
-	      ,{field:'mBaseStationType',  minWidth:150, title: '基站类型',align:'center'}
-	      ,{field:'mAltitude',   width:150, title: '海拔',align:'center'}
-	      ,{field:'mLongitude', width:150, title: '经度',align:'center'}
-	      ,{field:'mLatitude', width:150, title: '纬度',align:'center'}
-	      ,{field:'mTac', width:150, title: 'Tac',align:'center'}
-	      ,{field:'testPerson', width:150, title: '测试工程师',align:'center'}
-	      ,{field:'testPersonPhone', width:220, title: '测试工程师电话',align:'center'}
+	      {field:'id', width:'2%', title: 'ID', sort: true,type:'checkbox'}
+	      ,{title: '序号',width:'5%',templet: '#indexTpl',align:'center'}
+	     /*  ,{field:'status', width:'9.2%', title: '审核状态',align:'center', templet: '#statusTpl'} */
+	      ,{field:'mENodeBID',   width:'8.2%', title: '基站号',align:'center'}
+	      ,{field:'mBaseStationName',   width:'9.2%', title: '基站名称',align:'center'}
+	      ,{field:'mBaseStationType',  width:'9.2%', title: '基站类型',align:'center'}
+	      ,{field:'mAltitude',   width:'8.2%', title: '海拔',align:'center'}
+	      ,{field:'mLongitude', width:'8.2%', title: '经度',align:'center'}
+	      ,{field:'mLatitude', width:'9.2%', title: '纬度',align:'center'}
+	      ,{field:'mTac', width:'9.2%', title: 'Tac',align:'center'}
+	      ,{field:'testPerson', width:'9.2%', title: '测试工程师',align:'center'}
+	  /*     ,{field:'testPersonPhone', width:220, title: '测试工程师电话',align:'center'}
 	      ,{field:'backPerson', width:150, title: '后台工程师',align:'center'}
-	      ,{field:'backPersonPhone', width:220, title: '后台工程师电话',align:'center'}
-	      ,{field:'testTime', width:220, title: '测试时间',align:'center'}
-	      ,{title:'操作', toolbar: '#editBtnBar', width:150,align:'center', fixed: 'right'}
+	      ,{field:'backPersonPhone', width:220, title: '后台工程师电话',align:'center'} */
+	      ,{field:'testTime', width:'9.2%', title: '测试时间',align:'center'}
+	      ,{title:'操作', toolbar: '#editBtnBar', width:'12.2%',align:'center', fixed: 'right'}
 	    ]]
 	    ,page: true
 	    ,limit:10
@@ -139,14 +139,7 @@
                         $('.layui-table tr[data-index=' + index + '] input[type="checkbox"]').next().addClass('layui-form-checked');
                     }
                 }
-            }
-            //设置全选checkbox的选中状态
-            var checkStatus = table.checkStatus('infolist');
-            console.info(checkStatus);
-            if(checkStatus.isAll){
-                $('.layui-table-header th[data-field="id"] input[type="checkbox"]').prop('checked', true);
-                $('.layui-table-header th[data-field="id"] input[type="checkbox"]').next().addClass('layui-form-checked');
-            }
+            };
 	    }
         ,height:'full'
         ,cellMinWidth: 80
@@ -158,6 +151,9 @@
 	    var row = obj.data;
 	    if(obj.event === 'del'){//单行删除
 	    	common.getConfirmDelDialog("确定要删除吗？","删除【"+row.mENodeBID+"】记录",2,"/plan/delete",{"ids":row.id},function(){deleteRow(obj);});
+	   		if(checkArray){
+	   			checkArray.length=0
+	   		}
 	    } else if(obj.event === 'edit'){//编辑
 		    common.openEditDialog(fresh,"编辑","pages/lte/plan/edit.html?id="+row.id,"1000px","550px",false,"确定","取消","/plan/edit");
 	    }else if(obj.event === 'check'){//审核
@@ -179,10 +175,12 @@
 	  $("#deleteBtnModel").click(function(){
 		  if(checkArray && checkArray.length>0){
 		  	  common.getConfirmDelDialog("确定要删除吗？",'共删除【'+checkArray.length+'】条记录',2,"/plan/delete",{"ids":checkArray.join(",")},fresh);
+		  	if(checkArray){
+	   			checkArray.length=0
+	   		}
 		  }else{
 			  layer.msg('未选中要删除的记录');
 		  }
-		  
 	  });
 	  /**导出报告*/
 	  $("#exportBtnModel").click(function(){
@@ -271,13 +269,14 @@
 				   ,page: {curr: 1}
 		  		   }
 		  );
+		  
+		  
 	  }
 	  /**只删除行 无刷新*/
 	  function deleteRow(obj){
 		  obj.del();
 		  fresh();
 	  }
-	  
 	  
 	  /**日期框*/
 	  laydate.render({

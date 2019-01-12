@@ -39,9 +39,6 @@
 			    <button id="downBt"  class="layui-btn layui-btn-sm  layui-btn-danger" style="margin-left: 1px;">
 					<i class="layui-icon layui-icon-triangle-r" style="font-size: 30px; color: white-space;"></i>下载模板
 				</button>
-				<button id="importBtnModel1"   class="layui-btn layui-btn-sm  layui-btn-normal" style="margin-left: 1px;"  >
-						<i class="layui-icon layui-icon-next"></i>返回列表
-				</button>
 			  </div>
 			  <div class="layui-form-item">
 			     <table class="layui-table">
@@ -74,8 +71,9 @@
 	
 	<div class="layui-upload" style="margin-left: 20px;margin-right: 20px;">
 	  <button type="button" class="layui-btn layui-btn-normal" id="testList">选择文件</button> 
+	  <label style="color: red;margin-left: 5px;" id="uploadBackMsg"></label>
 	  <div class="layui-upload-list">
-	    <table class="layui-table">
+	    <table class="layui-table"  id="upTable">
 	      <thead>
 	        <tr><th>文件名</th>
 	        <th>大小</th>
@@ -128,7 +126,6 @@
 	    elem: '#testList' //绑定元素
 	    ,url: '/gc/upload' //上传接口
 	    ,accept: 'file' //允许上传的文件类型  images（图片）、file（所有文件）、video（视频）、audio（音频）
-	    ,size: 50 //最大允许上传的文件大小
 	    ,auto:false//不允许自动上传
 	    ,bindAction:'#testListAction'  //指定一个上传dom     配合auto:false使用
 	    ,field:'files'//设定文件的字段名字
@@ -145,9 +142,10 @@
 	    	parent.layer.closeAll('loading'); //关闭loading
 	    	if(res.success){
 	    		location.href = "/pages/lte/gcbparameter/list.html";
-	    		parent.layer.msg('上传成功');
+	    		 $("#uploadBackMsg").text("上传成功");
+	    		 parent.layer.msg("上传成功");
 	    	}else{
-	    		parent.layer.msg('上传失败：'+res.msg);
+	    		$("#uploadBackMsg").text('上传失败：'+res.msg);
 	    	}
 	    }
 	    ,allDone: function(obj){ //当文件全部被提交后，才触发  注意多文件上传时候done  每次都执行
@@ -156,9 +154,28 @@
 	      parent.layer.closeAll('loading'); //关闭loading
 	    }
 	    ,choose: function(obj){  //选择文件的回调   可以将文件利用与追加到dom  主要是利用回调显示
+	    	 var num=$("#demoList > tr").length;
+	    alert(num);
+	    	 if(num ==1){
+	    		 $("#uploadBackMsg").text("不允许上传多个文件");
+	    		 return ;
+	    	 }else{
+	    		 $("#uploadBackMsg").text("");
+	    	 }
+	    	 
 	    	 var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
 	         //读取本地文件
 	         obj.preview(function(index, file, result){
+	           var fileName=file.name;
+	           var ldot = fileName.lastIndexOf(".");
+	           var type = fileName.substring(ldot + 1);
+	           if('xls' !=type){
+	        	   $("#uploadBackMsg").text("只支持上传xls后缀的excel");
+	        	   return ;
+	           }else{
+	        	   $("#uploadBackMsg").text("");
+	           }
+	        	 
 	           var tr = $(['<tr id="upload-'+ index +'">'
 	             ,'<td>'+ file.name +'</td>'
 	             ,'<td>'+ (file.size/1014).toFixed(1) +'kb</td>'

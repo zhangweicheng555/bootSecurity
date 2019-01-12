@@ -148,6 +148,9 @@
 	    var row = obj.data;
 	    if(obj.event === 'del'){//单行删除
 	    	common.getConfirmDelDialog("确定要删除吗？","删除【"+row.eNodeBID+"】记录",2,"/cell/delete",{"ids":row.id},function(){deleteRow(obj);});
+	    	if(checkArray){
+	   			checkArray.length=0
+	   		}
 	    } 
 	  });
 	
@@ -158,6 +161,9 @@
 	  $("#deleteBtnModel").click(function(){
 		  if(checkArray && checkArray.length>0){
 		  	  common.getConfirmDelDialog("确定要删除吗？",'共删除【'+checkArray.length+'】条记录',2,"/cell/delete",{"ids":checkArray.join(",")},fresh);
+		  	if(checkArray){
+	   			checkArray.length=0
+	   		}
 		  }else{
 			  layer.msg('未选中要删除的记录');
 		  }
