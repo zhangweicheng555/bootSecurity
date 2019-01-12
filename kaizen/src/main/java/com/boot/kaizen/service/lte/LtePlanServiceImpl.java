@@ -132,7 +132,7 @@ class LtePlanServiceImpl implements ILtePlanService {
 	@Override
 	public List<Map<String, Object>> queryPlanList(Long userId, Long projId,String testDate) {
 		if (StringUtils.isBlank(testDate)) {
-			testDate=MyDateUtil.getNowDate("yyyy-MM-dd");
+			testDate="";
 		}
 		return planDao.queryPlanList(userId, projId, testDate);
 	}

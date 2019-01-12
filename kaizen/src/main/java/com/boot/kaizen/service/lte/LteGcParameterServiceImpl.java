@@ -86,8 +86,8 @@ class LteGcParameterServiceImpl implements ILteGcParameterService {
 	}
 
 	@Override
-	public List<LteGcParameter> queryGcParameterList(String mENodeBID) {
-		return gcParameterDao.queryGcParameterList(mENodeBID);
+	public List<LteGcParameter> queryGcParameterList(String mENodeBID,String testDate) {
+		return gcParameterDao.queryGcParameterList(mENodeBID,testDate);
 	}
 	
 	@Transactional

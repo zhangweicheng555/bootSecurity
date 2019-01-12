@@ -31,8 +31,12 @@
 		   lp.* 
 		 from
 		   lte_gc lp 
-		 where 
-            lp.mENodeBID =#{mENodeBID}
+		 where 1=1
+            and lp.mENodeBID =#{mENodeBID}
+             <if test="testDate != null and testDate != ''">
+	            and lp.configName = #{testDate}
+	        </if>
+            
 		 order by lp.mCellID asc
 	</select>
 	

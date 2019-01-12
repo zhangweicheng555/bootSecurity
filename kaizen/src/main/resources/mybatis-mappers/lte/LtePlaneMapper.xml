@@ -37,8 +37,10 @@
 		    testTime as "testDate"
 		 from
 		 lte_plane lp 
-		 where 
-		    lp.testTime =#{nowDate}
+		 where 1=1
+		    <if test="nowDate != null and nowDate != ''">
+			    and lp.testTime =#{nowDate}
+	        </if>
 		    and dealPersonId =#{userId}
 		    and projId =#{projId}
 	</select>

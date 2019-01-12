@@ -50,6 +50,6 @@ public interface LteGcParameterDao {
 	 * 
 	 * @param mENodeBID
 	 */
-	List<LteGcParameter> queryGcParameterList(@Param("mENodeBID") String mENodeBID);
+	List<LteGcParameter> queryGcParameterList(@Param("mENodeBID") String mENodeBID,@Param("testDate") String testDate);
 
 }

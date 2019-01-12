@@ -143,14 +143,15 @@ public class LteAppController {
 	}
 
 	/**
-	 * 查询测试计划任务列表
+	 * 查询测试计划任务列表 默认是查询今天的 传日期就查询相应日期的
 	 * 
 	 * @param username
 	 * @param projId
 	 */
 	@RequestMapping(value = "/queryPlanList", method = RequestMethod.POST)
 	public AppUtil queryPlanList(@RequestParam(value = "userId", required = true) Long userId,
-			@RequestParam(value = "projId", required = true) Long projId, String testDate) {
+			@RequestParam(value = "projId", required = true) Long projId,
+			@RequestParam(value = "testDate", required = false) String testDate) {
 		AppUtil appUtil = new AppUtil(1, "查询成功", "");
 		try {
 			List<Map<String, Object>> planList = ltePlanService.queryPlanList(userId, projId, testDate);
@@ -184,7 +185,7 @@ public class LteAppController {
 			if (stationList != null && stationList.size() > 0) {
 				for (BaseStationBean baseStationBean : stationList) {
 					List<LteGcParameter> lteGcParameters = lteGcParameterService
-							.queryGcParameterList(baseStationBean.getmENodeBID());
+							.queryGcParameterList(baseStationBean.getmENodeBID(), testDate);
 					if (lteGcParameters != null && lteGcParameters.size() > 0) {
 						for (LteGcParameter lteGcParameter : lteGcParameters) {
 							CommunityBean communityBean = new CommunityBean();
@@ -228,6 +229,13 @@ public class LteAppController {
 			appUtil = new AppUtil(0, "接收基站核查列表为空", "");
 			return appUtil;
 		}
+
+		if (stationCheck.getProjId() == null || StringUtils.isBlank(stationCheck.getTestDate())
+				|| StringUtils.isBlank(stationCheck.geteNodeBID())) {
+			appUtil = new AppUtil(0, "项目id/测试时间/基站号不能为空", "");
+			return appUtil;
+		}
+
 		List<LteStationCheck> stationChecks = new ArrayList<LteStationCheck>();
 		stationChecks.add(stationCheck);
 		try {
@@ -250,7 +258,10 @@ public class LteAppController {
 			appUtil = new AppUtil(0, "接收小区测试列表为空", "");
 			return appUtil;
 		}
-
+		if (StringUtils.isBlank(cellCheck.geteNodeBID())  || cellCheck.getProjId()==null || StringUtils.isBlank(cellCheck.getCellId()) || StringUtils.isBlank(cellCheck.getTestDate())) {
+			appUtil = new AppUtil(0, "基站号/项目ID/小区号/测试时间不能为空", "");
+			return appUtil;
+		}
 		List<LteCellCheck> cellChecks = new ArrayList<>();
 		cellChecks.add(cellCheck);
 		try {
@@ -270,7 +281,6 @@ public class LteAppController {
 	@RequestMapping(value = "/uploadCellParameters", method = RequestMethod.POST)
 	public AppUtil uploadCellParameters(LteCellParamters lteCellParamters) {
 		AppUtil appUtil = new AppUtil(1, "上传成功", null);
-
 		try {
 			// 批量添加
 			lteCellParamtersService.upSert(lteCellParamters);
@@ -365,7 +375,7 @@ public class LteAppController {
 		AppUtil appUtil = new AppUtil(1, "上传成功", null);
 		try {
 			if (projId == null || StringUtils.isBlank(eNodeBID) || userId == null) {
-				appUtil = new AppUtil(0, "项目projId、用户userId、基站号eNodeBID不能为空", "");
+				appUtil = new AppUtil(0, "项目projId、用户userId、基站号eNodeBID/测试时间testDate不能为空", "");
 				return appUtil;
 			}
 

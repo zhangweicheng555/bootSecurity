@@ -47,7 +47,7 @@ public interface ILteGcParameterService {
 	 * 查询工参列表  app
 	 * @param getmENodeBID
 	 */
-	public List<LteGcParameter> queryGcParameterList(String mENodeBID);
+	public List<LteGcParameter> queryGcParameterList(String mENodeBID,String testDate);
 
 	/**
 	 * 上传
