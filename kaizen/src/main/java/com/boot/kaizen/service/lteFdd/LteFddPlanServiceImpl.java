@@ -771,9 +771,9 @@ public class LteFddPlanServiceImpl implements ILteFddPlanService {
 				MyUtil.createExcelPic(workbook, patriarchFive, stationDirection90, (short) 0, 37, (short) 2, 38);
 				MyUtil.createExcelPic(workbook, patriarchFive, stationDirection135, (short) 2, 37, (short) 4, 38);
 				MyUtil.createExcelPic(workbook, patriarchFive, stationDirection180, (short) 0, 39, (short) 2, 40);
-				MyUtil.createExcelPic(workbook, patriarchFive, stationDirection225, (short) 0, 39, (short) 2, 40);
+				MyUtil.createExcelPic(workbook, patriarchFive, stationDirection225, (short) 2, 39, (short) 4, 40);
 				MyUtil.createExcelPic(workbook, patriarchFive, stationDirection270, (short) 0,41, (short) 2, 42);
-				MyUtil.createExcelPic(workbook, patriarchFive, stationDirection315, (short) 0, 41, (short) 2, 42);
+				MyUtil.createExcelPic(workbook, patriarchFive, stationDirection315, (short) 2, 41, (short) 4, 42);
 				
 				
 				
