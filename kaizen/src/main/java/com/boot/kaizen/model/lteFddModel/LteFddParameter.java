@@ -30,6 +30,8 @@ public class LteFddParameter implements Serializable {
 	private String updownMatching;
 	// 特殊子帧配比
 	private String specialMatching;
+	
+	
 	// CSFB手机主叫的呼叫成功率
 	private String csfbCallSuccAttempt;// 尝试次数
 	private String csfbCallSuccSucc;// 成功次数

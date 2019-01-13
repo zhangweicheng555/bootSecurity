@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @author weichengz
  * @date 2019年1月1日 上午12:30:48
  */
-public class LteFddStation implements Serializable {
+public class LteFddStation2 implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

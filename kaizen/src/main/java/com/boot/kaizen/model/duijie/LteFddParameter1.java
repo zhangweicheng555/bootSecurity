@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
  * @author weichengz
  * @date 2018年12月31日 下午10:31:14
  */
-public class LteFddParameter implements Serializable {
+public class LteFddParameter1 implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

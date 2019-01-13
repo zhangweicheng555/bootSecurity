@@ -41,7 +41,7 @@ public class LteFddHzPlanController {
 
 	@Autowired
 	private ILteFddPlanService lteFddPlanService;
-	@Value("${files.lteFddExcel}")
+	@Value("${files.lteFddHzExcel}")
 	private String lteExcel;
 	@Value("${files.lteImage}")
 	private String lteImage;
@@ -223,10 +223,6 @@ public class LteFddHzPlanController {
 		map.put("accessSuccRateFailure0", "");
 		map.put("accessSuccRatepercent0", "");
 
-		map.put("volteFailureAttempt0", "");
-		map.put("volteFailureSucc0", "");
-		map.put("volteFailureFailure0", "");
-		map.put("volteFailurepercent0", "");
 
 		map.put("tdLteCxAttempt0", "");
 		map.put("tdLteCxSucc0", "");
@@ -257,6 +253,13 @@ public class LteFddHzPlanController {
 		map.put("csfbReturnSucc0", "");
 		map.put("csfbReturnFailure0", "");
 		map.put("csfbReturnpercent0", "");
+		
+		
+		map.put("volteDelay0", "");
+		map.put("volteDelay1", "");
+		map.put("volteDelay2", "");
+		
+		
 
 		// 2
 		map.put("cellName1", "");
@@ -290,10 +293,6 @@ public class LteFddHzPlanController {
 		map.put("accessSuccRateFailure1", "");
 		map.put("accessSuccRatepercent1", "");
 
-		map.put("volteFailureAttempt1", "");
-		map.put("volteFailureSucc1", "");
-		map.put("volteFailureFailure1", "");
-		map.put("volteFailurepercent1", "");
 
 		map.put("tdLteCxAttempt1", "");
 		map.put("tdLteCxSucc1", "");
@@ -357,10 +356,6 @@ public class LteFddHzPlanController {
 		map.put("accessSuccRateFailure2", "");
 		map.put("accessSuccRatepercent2", "");
 
-		map.put("volteFailureAttempt2", "");
-		map.put("volteFailureSucc2", "");
-		map.put("volteFailureFailure2", "");
-		map.put("volteFailurepercent2", "");
 
 		map.put("tdLteCxAttempt2", "");
 		map.put("tdLteCxSucc2", "");
@@ -573,6 +568,7 @@ public class LteFddHzPlanController {
 						for (int i = 0; i < lteFddCellChecks.size(); i++) {
 							LteFddCellCheck lteFddCellCheck = lteFddCellChecks.get(i);
 							if (i == 0) {
+								map.put("volteDelay0", lteFddCellCheck.getVolteDelay());
 								map.put("cellName0", lteFddCellCheck.getCellName());
 								map.put("upDownRatio0", lteFddCellCheck.getUpDownRatio());
 								map.put("specialRatio0", lteFddCellCheck.getSpecialRatio());
@@ -610,12 +606,6 @@ public class LteFddHzPlanController {
 										MyUtil.getNumPercent(lteFddCellCheck.getAccessSuccRateSucc(),
 												lteFddCellCheck.getAccessSuccRateAttempt()));
 
-								map.put("volteFailureAttempt0", lteFddCellCheck.getVolteFailureAttempt());
-								map.put("volteFailureSucc0", lteFddCellCheck.getVolteFailureSucc());
-								map.put("volteFailureFailure0", lteFddCellCheck.getVolteFailureFailure());
-								map.put("volteFailurepercent0",
-										MyUtil.getNumPercent(lteFddCellCheck.getVolteFailureSucc(),
-												lteFddCellCheck.getVolteFailureAttempt()));
 
 								map.put("tdLteCxAttempt0", lteFddCellCheck.getTdLteCxAttempt());
 								map.put("tdLteCxSucc0", lteFddCellCheck.getTdLteCxSucc());
@@ -732,6 +722,7 @@ public class LteFddHzPlanController {
 							}
 							if (i == 1) {
 								map.put("cellName1", lteFddCellCheck.getCellName());
+								map.put("volteDelay1", lteFddCellCheck.getVolteDelay());
 								map.put("upDownRatio1", lteFddCellCheck.getUpDownRatio());
 								map.put("specialRatio1", lteFddCellCheck.getSpecialRatio());
 								map.put("eci1", lteFddCellCheck.getEci());
@@ -768,12 +759,6 @@ public class LteFddHzPlanController {
 										MyUtil.getNumPercent(lteFddCellCheck.getAccessSuccRateSucc(),
 												lteFddCellCheck.getAccessSuccRateAttempt()));
 
-								map.put("volteFailureAttempt1", lteFddCellCheck.getVolteFailureAttempt());
-								map.put("volteFailureSucc1", lteFddCellCheck.getVolteFailureSucc());
-								map.put("volteFailureFailure1", lteFddCellCheck.getVolteFailureFailure());
-								map.put("volteFailurepercent1",
-										MyUtil.getNumPercent(lteFddCellCheck.getVolteFailureSucc(),
-												lteFddCellCheck.getVolteFailureAttempt()));
 
 								map.put("tdLteCxAttempt1", lteFddCellCheck.getTdLteCxAttempt());
 								map.put("tdLteCxSucc1", lteFddCellCheck.getTdLteCxSucc());
@@ -882,6 +867,7 @@ public class LteFddHzPlanController {
 								}
 							}
 							if (i == 2) {
+								map.put("volteDelay2", lteFddCellCheck.getVolteDelay());
 								map.put("cellName2", lteFddCellCheck.getCellName());
 								map.put("upDownRatio2", lteFddCellCheck.getUpDownRatio());
 								map.put("specialRatio2", lteFddCellCheck.getSpecialRatio());
@@ -919,12 +905,6 @@ public class LteFddHzPlanController {
 										MyUtil.getNumPercent(lteFddCellCheck.getAccessSuccRateSucc(),
 												lteFddCellCheck.getAccessSuccRateAttempt()));
 
-								map.put("volteFailureAttempt2", lteFddCellCheck.getVolteFailureAttempt());
-								map.put("volteFailureSucc2", lteFddCellCheck.getVolteFailureSucc());
-								map.put("volteFailureFailure2", lteFddCellCheck.getVolteFailureFailure());
-								map.put("volteFailurepercent2",
-										MyUtil.getNumPercent(lteFddCellCheck.getVolteFailureSucc(),
-												lteFddCellCheck.getVolteFailureAttempt()));
 
 								map.put("tdLteCxAttempt2", lteFddCellCheck.getTdLteCxAttempt());
 								map.put("tdLteCxSucc2", lteFddCellCheck.getTdLteCxSucc());
@@ -1047,6 +1027,6 @@ public class LteFddHzPlanController {
 		// 模板的路径
 		File file = null;
 		file = new File(lteExcel);
-		lteFddPlanService.exportPlanDoc(file.getAbsolutePath(), lteFddPlanInfo, map, response, session);
+		lteFddPlanService.exportPlanDocHz(file.getAbsolutePath(), lteFddPlanInfo, map, response, session);
 	}
 }

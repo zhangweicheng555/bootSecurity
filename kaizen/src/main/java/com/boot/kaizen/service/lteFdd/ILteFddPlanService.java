@@ -39,7 +39,7 @@ public interface ILteFddPlanService {
 	 * @author weichengz
 	 * @date 2019年1月5日 下午5:27:57
 	 */
-	LteFddPlanInfo findLteFddPlanInfo(String id,String jzType);
+	LteFddPlanInfo findLteFddPlanInfo(String id, String jzType);
 
 	/**
 	 * 
@@ -80,7 +80,7 @@ public interface ILteFddPlanService {
 	 * @author weichengz
 	 * @date 2019年1月1日 上午9:56:40
 	 */
-	List<Map<String, Object>> queryPlanList(Long userId, Long projId,String jzType);
+	List<Map<String, Object>> queryPlanList(Long userId, Long projId, String jzType);
 
 	/**
 	 * 拉去基站信息 app对接
@@ -98,7 +98,7 @@ public interface ILteFddPlanService {
 	 * @author weichengz
 	 * @date 2019年1月1日 下午6:33:10
 	 */
-	JsonMsgUtil queryCheckInfoById(String id,String jzType);
+	JsonMsgUtil queryCheckInfoById(String id, String jzType);
 
 	/**
 	 * 报告导出
@@ -108,5 +108,8 @@ public interface ILteFddPlanService {
 	 * @date 2019年1月6日 上午6:03:11
 	 */
 	void exportPlanDoc(String absolutePath, LteFddPlanInfo lteFddPlanInfo, Map<String, String> map,
+			HttpServletResponse response, HttpSession session);
+
+	void exportPlanDocHz(String absolutePath, LteFddPlanInfo lteFddPlanInfo, Map<String, String> map,
 			HttpServletResponse response, HttpSession session);
 }
