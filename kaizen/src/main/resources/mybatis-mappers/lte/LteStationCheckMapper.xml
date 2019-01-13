@@ -10,12 +10,22 @@
 		 from
 		 lte_station_check lp 
 		 where 1=1
-		 <if test="map.projId != null and map.projId != ''">
+		 <if test="map.projId != null ">
             and lp.projId = #{map.projId}
         </if>
-		 <if test="map.eNodeBID != null and map.eNodeBID != ''">
-            and lp.eNodeBID like '%${map.eNodeBID}%'
+         
+        <if test="map.eNodeBID != null and map.eNodeBID != ''">
+            and lp.eNodeBID = #{map.eNodeBID}
         </if>
+        
+        <if test="map.testDate != null and map.testDate != ''">
+            and lp.testDate = #{map.testDate}
+        </if> 
+		<!-- 
+		<if test="map.testDate != null and map.testDate != ''">
+            and lp.testDate = #{testDate}
+        </if> 
+		 -->
 		 order by lp.createTime desc
 	</select>
 	

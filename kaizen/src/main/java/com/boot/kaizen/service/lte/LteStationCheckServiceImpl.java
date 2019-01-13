@@ -1,23 +1,15 @@
 package com.boot.kaizen.service.lte;
 
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.activiti.engine.RuntimeService;
-import org.activiti.engine.TaskService;
-import org.activiti.engine.runtime.ProcessInstance;
-import org.activiti.engine.task.Task;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.boot.kaizen.dao.lte.LteStationCheckDao;
-import com.boot.kaizen.model.lte.LteCellCheck;
 import com.boot.kaizen.model.lte.LteStationCheck;
-import com.boot.kaizen.service.act.IActBusinessService;
 import com.boot.kaizen.util.JsonMsgUtil;
 
 @Service
@@ -25,12 +17,6 @@ class LteStationCheckServiceImpl implements ILteStationCheckService {
 
 	@Autowired
 	private LteStationCheckDao stationCheckDao;
-	@Autowired
-	private IActBusinessService actBusinessService;
-	@Autowired
-	private TaskService taskService;
-	@Autowired
-	private RuntimeService runtimeService;
 
 	@Override
 	public List<LteStationCheck> find(Map<String, Object> map) {

@@ -1,15 +1,11 @@
 package com.boot.kaizen.model.duijie;
 
 import java.io.Serializable;
-import java.util.Date;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 /**
- * lte fdd app对接参数信息 以小区为单位
- * 
+ * lte TDD app对接参数信息 以小区为单位
  * @author weichengz
- * @date 2018年12月31日 下午10:31:14
+ * @date 2019年1月13日 下午1:52:49
  */
 public class LteFddParameter1 implements Serializable {
 
@@ -29,6 +25,8 @@ public class LteFddParameter1 implements Serializable {
 	private String updownMatching;
 	// 特殊子帧配比
 	private String specialMatching;
+	
+	
 	// CSFB手机主叫的呼叫成功率
 	private String csfbCallSuccAttempt;// 尝试次数
 	private String csfbCallSuccSucc;// 成功次数
@@ -73,22 +71,35 @@ public class LteFddParameter1 implements Serializable {
 	private Integer projId;
 	private Integer userId;
 
-	private String volteWirelessAttempt;// volte呼叫成功率 尝试次数
-	private String volteWirelessConnSucc;// VOLTE无线接通率 成功次数
-	private String volteWirelessConnFailure;// VOLTE无线接通率 失败次数
 
-	// volte呼叫掉线率
-	private String csfbPassiveCallSuccAttempt; // 尝试次数
-	private String csfbPassiveCallSuccSucc; // 成功次数
-	private String csfbPassiveCallSuccfailure;// 失败次数
+	private String volteWirelessAttempt;// VOLTE呼叫成功率
+	private String volteWirelessConnSucc;// VOLTE成功次数
+	private String volteWirelessConnFailure;//VOLTE  失败次数
+	
+	
+	// volte呼叫掉线率   这个是采用了原来其他的字段作为  volte呼叫掉线率
+	private String csfbPassiveCallSuccAttempt;
+	private String csfbPassiveCallSuccSucc;
+	private String csfbPassiveCallSuccfailure;
 
+	// 系统间切换   这个是采用了原来其他的字段作为  系统间切换的字段使用
+	private String csfbVoiceSuccAttempt;
+	private String csfbVoiceSuccSucc;
+	private String csfbVoiceSuccfailure;
+
+	
+	
+	
 	/**
-	 * 图片
+	 * 图片字段
 	 */
 	private String rsrpPic;// RSRP覆盖图
 	private String sinrPic;// SINR
 	private String downRatePic;// 下载速率
 	private String upRatePic;// 上传速率
 	private String rsrpWirePic;// RSRP拉线图
+	
+	
+	
 
 }

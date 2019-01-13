@@ -9,7 +9,16 @@
 		 select *
 		 from
 		 lte_load_test  
-		 where eNodeBID=#{mENodeBID}
+		 where 1=1
+		 <if test="map.eNodeBID != null and map.eNodeBID != '' ">
+			 and eNodeBID=#{map.eNodeBID}
+        </if>
+		 <if test="map.testDate != null and map.testDate != '' ">
+			 and testDate=#{map.testDate}
+        </if>
+		 <if test="map.projId != null  ">
+			 and projId=#{map.projId}
+        </if>
 		</select>
 	
 	<insert id="save"  useGeneratedKeys="true" keyProperty="id">

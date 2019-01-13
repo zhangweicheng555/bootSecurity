@@ -1,7 +1,5 @@
 package com.boot.kaizen.model.lte;
 
-import org.springframework.web.multipart.MultipartFile;
-
 import com.boot.kaizen.model.BaseEntity;
 
 /**

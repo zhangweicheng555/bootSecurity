@@ -59,13 +59,19 @@ class LtePlanServiceImpl implements ILtePlanService {
 	private LtePlanDao planDao;
 	@Autowired
 	private ILteConfigService lteConfigService;
-	@Autowired
-	private IActBusinessService actBusinessService;
-	@Autowired
-	private Activitiservice activitiservice;
 	private ILteCellStructuralValidationService lteCellStructuralValidationService;
 	@Autowired
 	private ILteCellParamtersService lteCellParamtersService;
+	@Autowired
+	private ILteStationCheckService lteStationCheckService;
+	@Autowired
+	private ILteGcParameterService lteGcParameterService;
+	
+	@Autowired
+	private ILteLoadTestService lteLoadTestService;
+	@Autowired
+	private ILteCellCheckService lteCellCheckService;
+	
 	@Autowired
 	private UserService userService;
 	@Value("${files.lteImage}")
@@ -130,9 +136,9 @@ class LtePlanServiceImpl implements ILtePlanService {
 	}
 
 	@Override
-	public List<Map<String, Object>> queryPlanList(Long userId, Long projId,String testDate) {
+	public List<Map<String, Object>> queryPlanList(Long userId, Long projId, String testDate) {
 		if (StringUtils.isBlank(testDate)) {
-			testDate="";
+			testDate = "";
 		}
 		return planDao.queryPlanList(userId, projId, testDate);
 	}
@@ -141,6 +147,8 @@ class LtePlanServiceImpl implements ILtePlanService {
 	public List<BaseStationBean> queryStationList(Long userId, Long projId, String testDate) {
 		return planDao.queryStationList(userId, projId, testDate);
 	}
+
+	
 
 	@Override
 	public JsonMsgUtil queryLtePlanInfo(Long id, LoginUser user) {
@@ -152,6 +160,18 @@ class LtePlanServiceImpl implements ILtePlanService {
 				throw new IllegalArgumentException("登陆超时");
 			}
 			planInfo.setConfigs(lteConfigService.queryListByProjId(user.getProjId()));
+			
+			Map<String, Object> map = new HashMap<>();
+			map.put("mENodeBID", planInfo.getmENodeBID());
+			map.put("eNodeBID", planInfo.getmENodeBID());
+			map.put("projId", planInfo.getProjId());
+			map.put("testDate", planInfo.getTestTime());
+
+			planInfo.setGcParameters(lteGcParameterService.find(map));
+			planInfo.setStationChecks(lteStationCheckService.find(map));
+			planInfo.setLoadTests(lteLoadTestService.findListByMenodeBID(map));
+			planInfo.setCellChecks(lteCellCheckService.find(map));
+
 			j = new JsonMsgUtil(true, "查询规划信息成功", planInfo);
 		} else {
 			j.setMessage("查询的规划信息不存在");
@@ -172,7 +192,6 @@ class LtePlanServiceImpl implements ILtePlanService {
 		}
 		return ltePlanInfo;
 	}
-
 
 	@Override
 	public JsonMsgUtil check(Long id, Long statusM) {

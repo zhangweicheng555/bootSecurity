@@ -14,13 +14,16 @@
             and lp.projId = #{map.projId}
         </if>
 		 <if test="map.mENodeBID != null and map.mENodeBID != ''">
-            and lp.mENodeBID like '%${map.mENodeBID}%'
+            and lp.mENodeBID   = #{map.mENodeBID}
         </if>
 		 <if test="map.mBaseStationName != null and map.mBaseStationName != ''">
             and lp.mBaseStationName like '%${map.mBaseStationName}%'
         </if>
 		 <if test="map.mCellID != null and map.mCellID != ''">
             and lp.mCellID = #{map.mCellID}
+        </if>
+		 <if test="map.testDate != null and map.testDate != ''">
+            and lp.configName = #{map.testDate}
         </if>
 		
 		 order by lp.createTime desc
@@ -34,7 +37,7 @@
 		 where 1=1
             and lp.mENodeBID =#{mENodeBID}
              <if test="testDate != null and testDate != ''">
-	            and lp.configName = #{testDate}
+	            and lp.testDate = #{testDate}
 	        </if>
             
 		 order by lp.mCellID asc

@@ -53,7 +53,7 @@ files:
   path: ${file-path:/kaizen/doc}
   lteExcel: /kaizen/doc/excelModel/lteExcelModel.xls
   lteFddExcel: /kaizen/doc/excelModel/lteFddModel.xls
-  lteFddHzExcel: d:/kaizen/doc/excelModel/lteFddHzMode.xls
+  lteFddHzExcel: /kaizen/doc/excelModel/lteFddHzMode.xls
   lteImage: /kaizen/doc
   importExcel: /kaizen/doc/excelModel
   

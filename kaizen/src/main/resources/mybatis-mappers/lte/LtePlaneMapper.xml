@@ -164,10 +164,6 @@
 		<result property="testTime" column="testTime" />
 		<result property="dealPersonId" column="dealPersonId" />
 		<result property="status" column="status" />
-		<collection property="gcParameters" column="mENodeBID" ofType="com.boot.kaizen.model.lte.LteGcParameter" select="com.boot.kaizen.dao.lte.LteGcParameterDao.queryGcParameterList" />
-		<collection property="stationChecks" column="mENodeBID" ofType="com.boot.kaizen.model.lte.LteStationCheck" select="com.boot.kaizen.dao.lte.LteStationCheckDao.findListByMenodeBID" />
-		<collection property="loadTests" column="mENodeBID" ofType="com.boot.kaizen.model.lte.LteLoadTest" select="com.boot.kaizen.dao.lte.LteLoadTestDao.findListByMenodeBID" />
-		<collection property="cellChecks" column="mENodeBID" ofType="com.boot.kaizen.model.lte.LteCellCheck" select="com.boot.kaizen.dao.lte.LteCellCheckDao.findListByMenodeBID" />
 	</resultMap>
 	
 	<resultMap type="com.boot.kaizen.controller.lte.model.BaseStationBean" id="queryStationListMap">

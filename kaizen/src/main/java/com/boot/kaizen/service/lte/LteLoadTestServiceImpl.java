@@ -84,4 +84,9 @@ class LteLoadTestServiceImpl implements ILteLoadTestService {
 		loadTestDao.deleteByeNodeBID(mENodeBID);
 	}
 
+	@Override
+	public List<LteLoadTest> findListByMenodeBID(Map<String, Object> map) {
+		return loadTestDao.findListByMenodeBID(map);
+	}
+
 }

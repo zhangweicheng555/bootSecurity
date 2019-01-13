@@ -14,7 +14,10 @@
             and lp.projId = #{map.projId}
         </if>
 		 <if test="map.eNodeBID != null and map.eNodeBID != ''">
-            and lp.eNodeBID like '%${map.eNodeBID}%'
+            and lp.eNodeBID  = #{map.eNodeBID}
+        </if>
+		 <if test="map.testDate != null and map.testDate != ''">
+            and lp.testDate = #{map.testDate}
         </if>
 		 order by lp.createTime desc
 	</select>
