@@ -132,7 +132,7 @@ public class LteFddHzAppController {
 				for (BaseStationBean baseStationBean : stationList) {
 					Map<String, Object> map = new HashMap<>();
 					map.put("mENodeBID", baseStationBean.getmENodeBID());
-					map.put("jzType", "1");
+					map.put("jzType", "2");
 					// 查询小区信息
 					List<LteFddCellCheck> lteFddCellChecks = lteFddCellService.query(map);
 
