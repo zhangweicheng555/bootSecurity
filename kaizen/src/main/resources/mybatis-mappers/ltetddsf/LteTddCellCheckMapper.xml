@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.boot.kaizen.business.tddsf.dao.LteTddCellCheckMapper">
+	<resultMap id="BaseResultMap"
+		type="com.boot.kaizen.business.tddsf.model.LteTddCellCheck">
+		<id column="id" jdbcType="VARCHAR" property="id" />
+		<result column="enodeBID" jdbcType="VARCHAR" property="enodeBID" />
+		<result column="baseStationName" jdbcType="VARCHAR"
+			property="baseStationName" />
+		<result column="cellId" jdbcType="VARCHAR" property="cellId" />
+		<result column="cellName" jdbcType="VARCHAR"
+			property="cellName" />
+		<result column="upDownRatio" jdbcType="VARCHAR"
+			property="upDownRatio" />
+		<result column="specialRatio" jdbcType="VARCHAR"
+			property="specialRatio" />
+		<result column="eci" jdbcType="VARCHAR" property="eci" />
+		<result column="earfcn" jdbcType="VARCHAR" property="earfcn" />
+		<result column="pci" jdbcType="VARCHAR" property="pci" />
+		<result column="tac" jdbcType="VARCHAR" property="tac" />
+		<result column="rsPower" jdbcType="VARCHAR" property="rsPower" />
+		<result column="pa" jdbcType="VARCHAR" property="pa" />
+		<result column="pb" jdbcType="VARCHAR" property="pb" />
+		<result column="antennaHangUp" jdbcType="VARCHAR"
+			property="antennaHangUp" />
+		<result column="azimuth" jdbcType="VARCHAR" property="azimuth" />
+		<result column="rrcSuccRateAttempt" jdbcType="VARCHAR"
+			property="rrcSuccRateAttempt" />
+		<result column="rrcSuccRateSucc" jdbcType="VARCHAR"
+			property="rrcSuccRateSucc" />
+		<result column="rrcSuccRateFailure" jdbcType="VARCHAR"
+			property="rrcSuccRateFailure" />
+		<result column="erabSuccRateAttempt" jdbcType="VARCHAR"
+			property="erabSuccRateAttempt" />
+		<result column="erabSuccRateSucc" jdbcType="VARCHAR"
+			property="erabSuccRateSucc" />
+		<result column="erabSuccRateFailure" jdbcType="VARCHAR"
+			property="erabSuccRateFailure" />
+		<result column="accessSuccRateAttempt" jdbcType="VARCHAR"
+			property="accessSuccRateAttempt" />
+		<result column="accessSuccRateSucc" jdbcType="VARCHAR"
+			property="accessSuccRateSucc" />
+		<result column="accessSuccRateFailure" jdbcType="VARCHAR"
+			property="accessSuccRateFailure" />
+		<result column="volteDownWire" jdbcType="VARCHAR"
+			property="volteDownWire" />
+		<result column="volteDelay" jdbcType="VARCHAR"
+			property="volteDelay" />
+		<result column="systemInChangeAttempt" jdbcType="VARCHAR"
+			property="systemInChangeAttempt" />
+		<result column="systemInChangeSuccSucc" jdbcType="VARCHAR"
+			property="systemInChangeSuccSucc" />
+		<result column="systemInChangefailure" jdbcType="VARCHAR"
+			property="systemInChangefailure" />
+		<result column="systemOutChangeAttempt" jdbcType="VARCHAR"
+			property="systemOutChangeAttempt" />
+		<result column="systemOutChangeSuccSucc" jdbcType="VARCHAR"
+			property="systemOutChangeSuccSucc" />
+		<result column="systemOutChangefailure" jdbcType="VARCHAR"
+			property="systemOutChangefailure" />
+		<result column="floorHeight" jdbcType="VARCHAR"
+			property="floorHeight" />
+		<result column="testDate" jdbcType="VARCHAR"
+			property="testDate" />
+		<result column="projId" jdbcType="INTEGER" property="projId" />
+		<result column="createTime" jdbcType="TIMESTAMP"
+			property="createTime" />
+		<result column="updateTime" jdbcType="TIMESTAMP"
+			property="updateTime" />
+		<result column="createAt" jdbcType="INTEGER"
+			property="createAt" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, enodeBID, baseStationName, cellId, cellName,
+		upDownRatio,
+		specialRatio, eci, earfcn,
+		pci, tac, rsPower, pa, pb,
+		antennaHangUp, azimuth, rrcSuccRateAttempt,
+		rrcSuccRateSucc,
+		rrcSuccRateFailure, erabSuccRateAttempt, erabSuccRateSucc,
+		erabSuccRateFailure,
+		accessSuccRateAttempt,
+		accessSuccRateSucc,
+		accessSuccRateFailure, volteDownWire, volteDelay,
+		systemInChangeAttempt,
+		systemInChangeSuccSucc, systemInChangefailure,
+		systemOutChangeAttempt,
+		systemOutChangeSuccSucc,
+		systemOutChangefailure, floorHeight, testDate, projId, createTime,
+		updateTime, createAt
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from lte_tdd_cell_check
+		where id = #{id,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		lte_tdd_cell_check
+		where id = #{id,jdbcType=VARCHAR}
+	</delete>
+
+	<select id="find" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from lte_tdd_cell_check
+		where 1=1
+		<if test="map.projId != null">
+			and projId = #{map.projId}
+		</if>
+		<if test="map.enodeBID != null and map.enodeBID != ''">
+			and enodeBID like '%${map.enodeBID}%'
+		</if>
+		<if test="map.dealPersonId != null and map.dealPersonId != ''">
+			and dealPersonId = #{map.dealPersonId}
+		</if>
+		<if
+			test="map.beginTime != null and map.beginTime != '' and (map.endTime == null or map.endTime == '')">
+			and testDate &gt;= #{map.beginTime}
+		</if>
+		<if
+			test="map.endTime != null and map.endTime != '' and (map.beginTime == null or map.beginTime == '')">
+			and testDate &lt;= #{map.endTime}
+		</if>
+		<if
+			test="map.endTime != null and map.endTime != '' and map.beginTime != null and map.beginTime != ''">
+			and testDate between #{map.beginTime} and #{map.endTime}
+		</if>
+
+	</select>
+
+	<insert id="insertSelective"
+		parameterType="com.boot.kaizen.business.tddsf.model.LteTddCellCheck">
+		insert into lte_tdd_cell_check
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="enodeBID != null">
+				enodeBID,
+			</if>
+			<if test="baseStationName != null">
+				baseStationName,
+			</if>
+			<if test="cellId != null">
+				cellId,
+			</if>
+			<if test="cellName != null">
+				cellName,
+			</if>
+			<if test="upDownRatio != null">
+				upDownRatio,
+			</if>
+			<if test="specialRatio != null">
+				specialRatio,
+			</if>
+			<if test="eci != null">
+				eci,
+			</if>
+			<if test="earfcn != null">
+				earfcn,
+			</if>
+			<if test="pci != null">
+				pci,
+			</if>
+			<if test="tac != null">
+				tac,
+			</if>
+			<if test="rsPower != null">
+				rsPower,
+			</if>
+			<if test="pa != null">
+				pa,
+			</if>
+			<if test="pb != null">
+				pb,
+			</if>
+			<if test="antennaHangUp != null">
+				antennaHangUp,
+			</if>
+			<if test="azimuth != null">
+				azimuth,
+			</if>
+			<if test="rrcSuccRateAttempt != null">
+				rrcSuccRateAttempt,
+			</if>
+			<if test="rrcSuccRateSucc != null">
+				rrcSuccRateSucc,
+			</if>
+			<if test="rrcSuccRateFailure != null">
+				rrcSuccRateFailure,
+			</if>
+			<if test="erabSuccRateAttempt != null">
+				erabSuccRateAttempt,
+			</if>
+			<if test="erabSuccRateSucc != null">
+				erabSuccRateSucc,
+			</if>
+			<if test="erabSuccRateFailure != null">
+				erabSuccRateFailure,
+			</if>
+			<if test="accessSuccRateAttempt != null">
+				accessSuccRateAttempt,
+			</if>
+			<if test="accessSuccRateSucc != null">
+				accessSuccRateSucc,
+			</if>
+			<if test="accessSuccRateFailure != null">
+				accessSuccRateFailure,
+			</if>
+			<if test="volteDownWire != null">
+				volteDownWire,
+			</if>
+			<if test="volteDelay != null">
+				volteDelay,
+			</if>
+			<if test="systemInChangeAttempt != null">
+				systemInChangeAttempt,
+			</if>
+			<if test="systemInChangeSuccSucc != null">
+				systemInChangeSuccSucc,
+			</if>
+			<if test="systemInChangefailure != null">
+				systemInChangefailure,
+			</if>
+			<if test="systemOutChangeAttempt != null">
+				systemOutChangeAttempt,
+			</if>
+			<if test="systemOutChangeSuccSucc != null">
+				systemOutChangeSuccSucc,
+			</if>
+			<if test="systemOutChangefailure != null">
+				systemOutChangefailure,
+			</if>
+			<if test="floorHeight != null">
+				floorHeight,
+			</if>
+			<if test="testDate != null">
+				testDate,
+			</if>
+			<if test="projId != null">
+				projId,
+			</if>
+			<if test="createTime != null">
+				createTime,
+			</if>
+			<if test="updateTime != null">
+				updateTime,
+			</if>
+			<if test="createAt != null">
+				createAt,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="enodeBID != null">
+				#{enodeBID,jdbcType=VARCHAR},
+			</if>
+			<if test="baseStationName != null">
+				#{baseStationName,jdbcType=VARCHAR},
+			</if>
+			<if test="cellId != null">
+				#{cellId,jdbcType=VARCHAR},
+			</if>
+			<if test="cellName != null">
+				#{cellName,jdbcType=VARCHAR},
+			</if>
+			<if test="upDownRatio != null">
+				#{upDownRatio,jdbcType=VARCHAR},
+			</if>
+			<if test="specialRatio != null">
+				#{specialRatio,jdbcType=VARCHAR},
+			</if>
+			<if test="eci != null">
+				#{eci,jdbcType=VARCHAR},
+			</if>
+			<if test="earfcn != null">
+				#{earfcn,jdbcType=VARCHAR},
+			</if>
+			<if test="pci != null">
+				#{pci,jdbcType=VARCHAR},
+			</if>
+			<if test="tac != null">
+				#{tac,jdbcType=VARCHAR},
+			</if>
+			<if test="rsPower != null">
+				#{rsPower,jdbcType=VARCHAR},
+			</if>
+			<if test="pa != null">
+				#{pa,jdbcType=VARCHAR},
+			</if>
+			<if test="pb != null">
+				#{pb,jdbcType=VARCHAR},
+			</if>
+			<if test="antennaHangUp != null">
+				#{antennaHangUp,jdbcType=VARCHAR},
+			</if>
+			<if test="azimuth != null">
+				#{azimuth,jdbcType=VARCHAR},
+			</if>
+			<if test="rrcSuccRateAttempt != null">
+				#{rrcSuccRateAttempt,jdbcType=VARCHAR},
+			</if>
+			<if test="rrcSuccRateSucc != null">
+				#{rrcSuccRateSucc,jdbcType=VARCHAR},
+			</if>
+			<if test="rrcSuccRateFailure != null">
+				#{rrcSuccRateFailure,jdbcType=VARCHAR},
+			</if>
+			<if test="erabSuccRateAttempt != null">
+				#{erabSuccRateAttempt,jdbcType=VARCHAR},
+			</if>
+			<if test="erabSuccRateSucc != null">
+				#{erabSuccRateSucc,jdbcType=VARCHAR},
+			</if>
+			<if test="erabSuccRateFailure != null">
+				#{erabSuccRateFailure,jdbcType=VARCHAR},
+			</if>
+			<if test="accessSuccRateAttempt != null">
+				#{accessSuccRateAttempt,jdbcType=VARCHAR},
+			</if>
+			<if test="accessSuccRateSucc != null">
+				#{accessSuccRateSucc,jdbcType=VARCHAR},
+			</if>
+			<if test="accessSuccRateFailure != null">
+				#{accessSuccRateFailure,jdbcType=VARCHAR},
+			</if>
+			<if test="volteDownWire != null">
+				#{volteDownWire,jdbcType=VARCHAR},
+			</if>
+			<if test="volteDelay != null">
+				#{volteDelay,jdbcType=VARCHAR},
+			</if>
+			<if test="systemInChangeAttempt != null">
+				#{systemInChangeAttempt,jdbcType=VARCHAR},
+			</if>
+			<if test="systemInChangeSuccSucc != null">
+				#{systemInChangeSuccSucc,jdbcType=VARCHAR},
+			</if>
+			<if test="systemInChangefailure != null">
+				#{systemInChangefailure,jdbcType=VARCHAR},
+			</if>
+			<if test="systemOutChangeAttempt != null">
+				#{systemOutChangeAttempt,jdbcType=VARCHAR},
+			</if>
+			<if test="systemOutChangeSuccSucc != null">
+				#{systemOutChangeSuccSucc,jdbcType=VARCHAR},
+			</if>
+			<if test="systemOutChangefailure != null">
+				#{systemOutChangefailure,jdbcType=VARCHAR},
+			</if>
+			<if test="floorHeight != null">
+				#{floorHeight,jdbcType=VARCHAR},
+			</if>
+			<if test="testDate != null">
+				#{testDate,jdbcType=VARCHAR},
+			</if>
+			<if test="projId != null">
+				#{projId,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createAt != null">
+				#{createAt,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.boot.kaizen.business.tddsf.model.LteTddCellCheck">
+		update lte_tdd_cell_check
+		<set>
+			<if test="enodeBID != null">
+				enodeBID = #{enodeBID,jdbcType=VARCHAR},
+			</if>
+			<if test="baseStationName != null">
+				baseStationName = #{baseStationName,jdbcType=VARCHAR},
+			</if>
+			<if test="cellId != null">
+				cellId = #{cellId,jdbcType=VARCHAR},
+			</if>
+			<if test="cellName != null">
+				cellName = #{cellName,jdbcType=VARCHAR},
+			</if>
+			<if test="upDownRatio != null">
+				upDownRatio = #{upDownRatio,jdbcType=VARCHAR},
+			</if>
+			<if test="specialRatio != null">
+				specialRatio = #{specialRatio,jdbcType=VARCHAR},
+			</if>
+			<if test="eci != null">
+				eci = #{eci,jdbcType=VARCHAR},
+			</if>
+			<if test="earfcn != null">
+				earfcn = #{earfcn,jdbcType=VARCHAR},
+			</if>
+			<if test="pci != null">
+				pci = #{pci,jdbcType=VARCHAR},
+			</if>
+			<if test="tac != null">
+				tac = #{tac,jdbcType=VARCHAR},
+			</if>
+			<if test="rsPower != null">
+				rsPower = #{rsPower,jdbcType=VARCHAR},
+			</if>
+			<if test="pa != null">
+				pa = #{pa,jdbcType=VARCHAR},
+			</if>
+			<if test="pb != null">
+				pb = #{pb,jdbcType=VARCHAR},
+			</if>
+			<if test="antennaHangUp != null">
+				antennaHangUp = #{antennaHangUp,jdbcType=VARCHAR},
+			</if>
+			<if test="azimuth != null">
+				azimuth = #{azimuth,jdbcType=VARCHAR},
+			</if>
+			<if test="rrcSuccRateAttempt != null">
+				rrcSuccRateAttempt =
+				#{rrcSuccRateAttempt,jdbcType=VARCHAR},
+			</if>
+			<if test="rrcSuccRateSucc != null">
+				rrcSuccRateSucc = #{rrcSuccRateSucc,jdbcType=VARCHAR},
+			</if>
+			<if test="rrcSuccRateFailure != null">
+				rrcSuccRateFailure =
+				#{rrcSuccRateFailure,jdbcType=VARCHAR},
+			</if>
+			<if test="erabSuccRateAttempt != null">
+				erabSuccRateAttempt =
+				#{erabSuccRateAttempt,jdbcType=VARCHAR},
+			</if>
+			<if test="erabSuccRateSucc != null">
+				erabSuccRateSucc = #{erabSuccRateSucc,jdbcType=VARCHAR},
+			</if>
+			<if test="erabSuccRateFailure != null">
+				erabSuccRateFailure =
+				#{erabSuccRateFailure,jdbcType=VARCHAR},
+			</if>
+			<if test="accessSuccRateAttempt != null">
+				accessSuccRateAttempt =
+				#{accessSuccRateAttempt,jdbcType=VARCHAR},
+			</if>
+			<if test="accessSuccRateSucc != null">
+				accessSuccRateSucc =
+				#{accessSuccRateSucc,jdbcType=VARCHAR},
+			</if>
+			<if test="accessSuccRateFailure != null">
+				accessSuccRateFailure =
+				#{accessSuccRateFailure,jdbcType=VARCHAR},
+			</if>
+			<if test="volteDownWire != null">
+				volteDownWire = #{volteDownWire,jdbcType=VARCHAR},
+			</if>
+			<if test="volteDelay != null">
+				volteDelay = #{volteDelay,jdbcType=VARCHAR},
+			</if>
+			<if test="systemInChangeAttempt != null">
+				systemInChangeAttempt =
+				#{systemInChangeAttempt,jdbcType=VARCHAR},
+			</if>
+			<if test="systemInChangeSuccSucc != null">
+				systemInChangeSuccSucc =
+				#{systemInChangeSuccSucc,jdbcType=VARCHAR},
+			</if>
+			<if test="systemInChangefailure != null">
+				systemInChangefailure =
+				#{systemInChangefailure,jdbcType=VARCHAR},
+			</if>
+			<if test="systemOutChangeAttempt != null">
+				systemOutChangeAttempt =
+				#{systemOutChangeAttempt,jdbcType=VARCHAR},
+			</if>
+			<if test="systemOutChangeSuccSucc != null">
+				systemOutChangeSuccSucc =
+				#{systemOutChangeSuccSucc,jdbcType=VARCHAR},
+			</if>
+			<if test="systemOutChangefailure != null">
+				systemOutChangefailure =
+				#{systemOutChangefailure,jdbcType=VARCHAR},
+			</if>
+			<if test="floorHeight != null">
+				floorHeight = #{floorHeight,jdbcType=VARCHAR},
+			</if>
+			<if test="testDate != null">
+				testDate = #{testDate,jdbcType=VARCHAR},
+			</if>
+			<if test="projId != null">
+				projId = #{projId,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null">
+				createTime = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				updateTime = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createAt != null">
+				createAt = #{createAt,jdbcType=INTEGER},
+			</if>
+		</set>
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+
+</mapper>

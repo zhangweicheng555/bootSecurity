@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>上传小区测试</title>
+<link rel="stylesheet" type="text/css" media="screen" href="../../../../css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" media="screen" href="../../../../layui/css/layui.css">
+</head>
+<body>
+
+	
+	
+	<form class="layui-form" lay-filter="formDemo"  id="formDemo" style="margin-top: 20px;">
+	
+	 <div class="layui-form-item">
+	    <label class="layui-form-label" style="width: 150px;">基站号</label>
+	    <div class="layui-input-inline">
+	     <input type="hidden" name="id" id="id" >
+	      <input type="text" name="eNodeBID" id="eNodeBID"   required  lay-verify="required"  autocomplete="off" class="layui-input">
+	    </div>
+	    
+	    <label class="layui-form-label" style="width: 150px;">基站名称</label>
+	    <div class="layui-input-inline" >
+	      <input type="text" name="mBaseStationName" id="mBaseStationName"   required  lay-verify="required"  autocomplete="off" class="layui-input">
+	    </div>
+	    
+	    <label class="layui-form-label" style="width: 150px;">小区ID</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="cellId" id="cellId"   required  lay-verify="required" autocomplete="off" class="layui-input">
+	    </div>
+	  </div>
+	
+	
+	
+	  <div class="layui-form-item">
+	    <label class="layui-form-label" style="width: 150px;">小区名字</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="cellName" id="cellName"    required  lay-verify="required"   autocomplete="off" class="layui-input">
+	    </div>
+	    
+	    <label class="layui-form-label" style="width: 150px;">测试时间</label>
+	    <div class="layui-input-inline" >
+	      <input type="text" name="testDate" id="testDate"   autocomplete="off" class="layui-input">
+	    </div>
+	    
+	    <label class="layui-form-label" style="width: 150px;">ECI</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="eci" id="eci"   autocomplete="off" class="layui-input">
+	    </div>
+	  </div>
+	 
+	  
+	  <div class="layui-form-item">
+	    <label class="layui-form-label" style="width: 150px;">EARFCN</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="earfcn" id="earfcn"   autocomplete="off" class="layui-input">
+	    </div>
+	    <label class="layui-form-label" style="width: 150px;">PCI</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="pci" id="pci"   autocomplete="off" class="layui-input">
+	    </div>
+	    <label class="layui-form-label" style="width: 150px;">TAC</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="tac" id="tac"   autocomplete="off" class="layui-input">
+	    </div>
+	  </div>
+	  
+	  
+	   
+	  
+	  	    <div class="layui-form-item">
+	    <label class="layui-form-label" style="width: 150px;">FTP下载是否通过</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="ftpDownPass" id="ftpDownPass"   autocomplete="off" class="layui-input">
+	    </div>
+	    <label class="layui-form-label" style="width: 150px;">FTP上传是否通过</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="ftpUpPass" id="ftpUpPass"   autocomplete="off" class="layui-input">
+	    </div>
+	  </div>
+	  
+	  
+	 <blockquote class="layui-elem-quote">CSFB手机主叫的呼叫成功率</blockquote>
+	    <div class="layui-form-item">
+	    <label class="layui-form-label" style="width: 150px;">尝试次数</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="csfbCallSuccAttempt" id="csfbCallSuccAttempt"   autocomplete="off" class="layui-input">
+	    </div>
+	    <label class="layui-form-label" style="width: 150px;">成功次数</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="csfbCallSuccSucc" id="csfbCallSuccSucc"   autocomplete="off" class="layui-input">
+	    </div>
+	    <label class="layui-form-label" style="width: 150px;">失败次数</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="csfbCallSuccfailure" id="csfbCallSuccfailure"   autocomplete="off" class="layui-input">
+	    </div>
+	  </div>
+	  
+	 <blockquote class="layui-elem-quote">VOLTE呼叫掉线率</blockquote>
+	    <div class="layui-form-item">
+	    <label class="layui-form-label" style="width: 150px;">尝试次数</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="csfbPassiveCallSuccAttempt" id="csfbPassiveCallSuccAttempt"   autocomplete="off" class="layui-input">
+	    </div>
+	    <label class="layui-form-label" style="width: 150px;">成功次数</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="csfbPassiveCallSuccSucc" id="csfbPassiveCallSuccSucc"   autocomplete="off" class="layui-input">
+	    </div>
+	    <label class="layui-form-label" style="width: 150px;">失败次数</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="csfbPassiveCallSuccfailure" id="csfbPassiveCallSuccfailure"   autocomplete="off" class="layui-input">
+	    </div>
+	  </div>
+	  
+	  
+	 <blockquote class="layui-elem-quote">FTP下行吞吐率_RSRP</blockquote>
+	    <div class="layui-form-item">
+	    <label class="layui-form-label" style="width: 150px;">第一次</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="ftpDownRsrpFirst" id="ftpDownRsrpFirst"   autocomplete="off" class="layui-input">
+	    </div>
+	    <label class="layui-form-label" style="width: 150px;">第二次</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="ftpDownRsrpSecond" id="ftpDownRsrpSecond"   autocomplete="off" class="layui-input">
+	    </div>
+	    <label class="layui-form-label" style="width: 150px;">差点</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="ftpDownRsrpBad" id="ftpDownRsrpBad"   autocomplete="off" class="layui-input">
+	    </div>
+	  </div>
+	    <div class="layui-form-item">
+	    <label class="layui-form-label" style="width: 150px;">任意点</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="ftpDownRsrpRandom" id="ftpDownRsrpRandom"   autocomplete="off" class="layui-input">
+	    </div>
+	  </div>
+	 <blockquote class="layui-elem-quote">FTP下行吞吐率_Average SINR</blockquote>
+	    <div class="layui-form-item">
+	    <label class="layui-form-label" style="width: 150px;">第一次</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="ftpDownSinrFirst" id="ftpDownSinrFirst"   autocomplete="off" class="layui-input">
+	    </div>
+	    <label class="layui-form-label" style="width: 150px;">第二次</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="ftpDownSinrSecond" id="ftpDownSinrSecond"   autocomplete="off" class="layui-input">
+	    </div>
+	    <label class="layui-form-label" style="width: 150px;">差点</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="ftpDownSinrBad" id="ftpDownSinrBad"   autocomplete="off" class="layui-input">
+	    </div>
+	  </div>
+	    <div class="layui-form-item">
+	    <label class="layui-form-label" style="width: 150px;">任意点</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="ftpDownSinrRandom" id="ftpDownSinrRandom"   autocomplete="off" class="layui-input">
+	    </div>
+	  </div>
+	 <blockquote class="layui-elem-quote">FTP下行吞吐率_下行吞吐率</blockquote>
+	    <div class="layui-form-item">
+	    <label class="layui-form-label" style="width: 150px;">第一次</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="ftpDownThroughputFirst" id="ftpDownThroughputFirst"   autocomplete="off" class="layui-input">
+	    </div>
+	    <label class="layui-form-label" style="width: 150px;">第二次</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="ftpDownThroughputSecond" id="ftpDownThroughputSecond"   autocomplete="off" class="layui-input">
+	    </div>
+	    <label class="layui-form-label" style="width: 150px;">差点</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="ftpDownThroughputBad" id="ftpDownThroughputBad"   autocomplete="off" class="layui-input">
+	    </div>
+	  </div>
+	    <div class="layui-form-item">
+	    <label class="layui-form-label" style="width: 150px;">任意点</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="ftpDownThroughputRandom" id="ftpDownThroughputRandom"   autocomplete="off" class="layui-input">
+	    </div>
+	  </div>
+	  
+	 <blockquote class="layui-elem-quote">FTP上行吞吐率_RSRP</blockquote>
+	    <div class="layui-form-item">
+	    <label class="layui-form-label" style="width: 150px;">第一次</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="ftpUpRsrpFirst" id="ftpUpRsrpFirst"   autocomplete="off" class="layui-input">
+	    </div>
+	    <label class="layui-form-label" style="width: 150px;">第二次</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="ftpUpRsrpSecond" id="ftpUpRsrpSecond"   autocomplete="off" class="layui-input">
+	    </div>
+	    <label class="layui-form-label" style="width: 150px;">差点</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="ftpUpRsrpBad" id="ftpUpRsrpBad"   autocomplete="off" class="layui-input">
+	    </div>
+	  </div>
+	    <div class="layui-form-item">
+	    <label class="layui-form-label" style="width: 150px;">任意点</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="ftpUpRsrpRandom" id="ftpUpRsrpRandom"   autocomplete="off" class="layui-input">
+	    </div>
+	  </div>
+	 <blockquote class="layui-elem-quote">FTP上行吞吐率_Average SINR</blockquote>
+	    <div class="layui-form-item">
+	    <label class="layui-form-label" style="width: 150px;">第一次</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="ftpUpSinrFirst" id="ftpUpSinrFirst"   autocomplete="off" class="layui-input">
+	    </div>
+	    <label class="layui-form-label" style="width: 150px;">第二次</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="ftpUpSinrSecond" id="ftpUpSinrSecond"   autocomplete="off" class="layui-input">
+	    </div>
+	    <label class="layui-form-label" style="width: 150px;">差点</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="ftpUpSinrBad" id="ftpUpSinrBad"   autocomplete="off" class="layui-input">
+	    </div>
+	  </div>
+	    <div class="layui-form-item">
+	    <label class="layui-form-label" style="width: 150px;">任意点</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="ftpUpSinrRandom" id="ftpUpSinrRandom"   autocomplete="off" class="layui-input">
+	    </div>
+	  </div>
+	 <blockquote class="layui-elem-quote">FTP上行吞吐率_下行吞吐率</blockquote>
+	    <div class="layui-form-item">
+	    <label class="layui-form-label" style="width: 150px;">第一次</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="ftpUpThroughputFirst" id="ftpUpThroughputFirst"   autocomplete="off" class="layui-input">
+	    </div>
+	    <label class="layui-form-label" style="width: 150px;">第二次</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="ftpUpThroughputSecond" id="ftpUpThroughputSecond"   autocomplete="off" class="layui-input">
+	    </div>
+	    <label class="layui-form-label" style="width: 150px;">差点</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="ftpUpThroughputBad" id="ftpUpThroughputBad"   autocomplete="off" class="layui-input">
+	    </div>
+	  </div>
+	    <div class="layui-form-item">
+	    <label class="layui-form-label" style="width: 150px;">任意点</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="ftpUpThroughputRandom" id="ftpUpThroughputRandom"   autocomplete="off" class="layui-input">
+	    </div>
+	  </div>
+	
+	
+		<blockquote class="layui-elem-quote"><span style="color: red;">图片预览</span>
+	   		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	
+	   		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	   		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	   		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	   		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	   		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	   		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	   		<span style="color: red;" id="spanModel">当前图片的名字</span>
+	   </blockquote>
+	  <!-- 轮播显示图片 -->
+	  <div class="layui-form-item">
+	  	<div class="layui-carousel" id="test1" lay-filter="test1">
+		  <div carousel-item id="carouselDiv">
+		   <!--  <div>条目1</div>
+		    <div>条目2</div>
+		    <div>条目3</div>
+		    <div>条目4</div>
+		    <div>条目5</div> -->
+		  </div>
+		</div>
+	  </div>
+	
+	</form>
+	
+	
+	
+	
+	
+	<script type="text/javascript" src="../../../../js/libs/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="../../../../layui/layui.js"></script>
+	<script type="text/javascript" src="../../../../js/jq.js"></script>
+	
+<script>
+
+
+	
+	
+	var form;
+	layui.use(['layer', 'form','jquery','carousel'], function(){
+	  var layer = layui.layer,form = layui.form,$=layui.jquery;
+	  var carousel = layui.carousel;
+	
+	  //初始化工作
+	  initData();
+	  function initData(){
+			var id=getUrlParam("id");
+			if(!id){
+				layer.msg('获取数据ID异常');
+				return;
+			}
+			$.ajax({
+				   type: "POST",url: "/tdd/parameter/findById",data: {"id":id},dataType:"json",
+				   success: function(msg){
+				     if(msg.success){
+				    	 console.info(msg);
+				    	var model = jQuery.parseJSON(msg.object);
+				 		form.val("formDemo", model);
+				 		
+				 		//初始化轮播  滚动
+				 		$("#carouselDiv").append(handePic('覆盖效果_RSRP覆盖图',model.rsrpPic));
+				 		$("#carouselDiv").append(handePic('覆盖效果_SINR',model.sinrPic));
+				 		$("#carouselDiv").append(handePic('覆盖效果_下载速率',model.downRatePic));
+				 		$("#carouselDiv").append(handePic('覆盖效果_上传速率',model.upRatePic));
+				 		$("#carouselDiv").append(handePic('覆盖效果_RSRP拉线图',model.rsrpWirePic));
+				 		//开始轮播
+				 		carouselFun();
+				     }else{
+				    	 layer.msg('返回修改数据信息异常');
+				     }
+				   }
+			});
+		};
+		//开始轮播
+		function carouselFun(){
+			 //建造实例
+			  carousel.render({
+			    elem: '#test1'
+			    ,width: '100%' 
+			    ,arrow: 'none'
+			    ,height:'400px'
+			    ,autoplay:true
+			    ,interval:2000
+			  });
+	   }
+		
+		//处理轮播内部的div
+		function handePic(flagName,url){
+			if(url){
+				return '<div><img lang="'+flagName+'" style="width:100%;height:380px;" src="/statics'+url+'"></div>';
+			}else{
+				return "";
+			}
+		}
+		
+		
+		//监听轮播切换事件
+		carousel.on('change(test1)', function(obj){ 
+			var model=obj.item;//当前条目的元素对象
+			var image=model.html();
+			$("#spanModel").html($(image).attr('lang'))
+		});
+	});
+	
+	
+</script> 
+
+</body>
+</html>

@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.boot.kaizen.business.tddsf.dao.LteTddPlanMapper">
+	<resultMap id="BaseResultMap"
+		type="com.boot.kaizen.business.tddsf.model.LteTddPlan">
+		<id column="id" jdbcType="VARCHAR" property="id" />
+		<result column="enodeBID" jdbcType="VARCHAR"
+			property="enodeBID" />
+		<result column="baseStationName" jdbcType="VARCHAR"
+			property="baseStationName" />
+		<result column="testDate" jdbcType="VARCHAR"
+			property="testDate" />
+		<result column="districtCountry" jdbcType="VARCHAR"
+			property="districtCountry" />
+		<result column="address" jdbcType="VARCHAR" property="address" />
+		<result column="baseStationType" jdbcType="VARCHAR"
+			property="baseStationType" />
+		<result column="deviceType" jdbcType="VARCHAR"
+			property="deviceType" />
+		<result column="videoFrequency" jdbcType="VARCHAR"
+			property="videoFrequency" />
+		<result column="longitude" jdbcType="VARCHAR"
+			property="longitude" />
+		<result column="latitude" jdbcType="VARCHAR"
+			property="latitude" />
+		<result column="broadBand" jdbcType="VARCHAR"
+			property="broadBand" />
+		<result column="ipConfig" jdbcType="VARCHAR"
+			property="ipConfig" />
+		<result column="testPerson" jdbcType="VARCHAR"
+			property="testPerson" />
+		<result column="testPersonPhone" jdbcType="VARCHAR"
+			property="testPersonPhone" />
+		<result column="backPerson" jdbcType="VARCHAR"
+			property="backPerson" />
+		<result column="backPersonPhone" jdbcType="VARCHAR"
+			property="backPersonPhone" />
+		<result column="dealPersonId" jdbcType="VARCHAR"
+			property="dealPersonId" />
+		<result column="administrativeArea" jdbcType="VARCHAR"
+			property="administrativeArea" />
+		<result column="commonStationName" jdbcType="VARCHAR"
+			property="commonStationName" />
+		<result column="stationAddressType" jdbcType="VARCHAR"
+			property="stationAddressType" />
+		<result column="buildingFunction" jdbcType="VARCHAR"
+			property="buildingFunction" />
+		<result column="floorNumber" jdbcType="VARCHAR"
+			property="floorNumber" />
+		<result column="oriSfSystem" jdbcType="VARCHAR"
+			property="oriSfSystem" />
+		<result column="combinationRoad" jdbcType="VARCHAR"
+			property="combinationRoad" />
+		<result column="singleAndDoubleRold" jdbcType="VARCHAR"
+			property="singleAndDoubleRold" />
+		<result column="combinationRoadInstallOk" jdbcType="VARCHAR"
+			property="combinationRoadInstallOk" />
+		<result column="status" jdbcType="INTEGER" property="status" />
+		<result column="projId" jdbcType="INTEGER" property="projId" />
+		<result column="createTime" jdbcType="TIMESTAMP"
+			property="createTime" />
+		<result column="updateTime" jdbcType="TIMESTAMP"
+			property="updateTime" />
+		<result column="createAt" jdbcType="INTEGER"
+			property="createAt" />
+		<result column="stationChangeTestPass" jdbcType="VARCHAR"
+			property="stationChangeTestPass" />
+		<result column="threeFourOperatePass" jdbcType="VARCHAR"
+			property="threeFourOperatePass" />
+		<result column="combinationWayPass" jdbcType="VARCHAR"
+			property="combinationWayPass" />
+		<result column="deviceSupportPass" jdbcType="VARCHAR"
+			property="deviceSupportPass" />
+		<result column="wirePointsReasonablePass" jdbcType="VARCHAR"
+			property="wirePointsReasonablePass" />
+		<result column="wirePortOutputPass" jdbcType="VARCHAR"
+			property="wirePortOutputPass" />
+		<result column="networkPlatformPass" jdbcType="VARCHAR"
+			property="networkPlatformPass" />
+		<result column="informationPlatformPass" jdbcType="VARCHAR"
+			property="informationPlatformPass" />
+		<result column="mrrPass" jdbcType="VARCHAR" property="mrrPass" />
+		<result column="cellConfigPass" jdbcType="VARCHAR"
+			property="cellConfigPass" />
+	</resultMap>
+	<resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
+		type="com.boot.kaizen.business.tddsf.model.LteTddPlan">
+		<result column="remark" jdbcType="LONGVARCHAR"
+			property="remark" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, enodeBID, baseStationName, testDate, districtCountry, address,
+		baseStationType,
+		deviceType, videoFrequency, longitude, latitude, broadBand, ipConfig, testPerson,
+		testPersonPhone, backPerson, backPersonPhone, dealPersonId,
+		administrativeArea, commonStationName,
+		stationAddressType, buildingFunction, floorNumber, oriSfSystem, combinationRoad,
+		singleAndDoubleRold, combinationRoadInstallOk, status, projId,
+		createTime, updateTime,
+		createAt, stationChangeTestPass, threeFourOperatePass, combinationWayPass,
+		deviceSupportPass,
+		wirePointsReasonablePass, wirePortOutputPass, networkPlatformPass, informationPlatformPass,
+		mrrPass, cellConfigPass
+	</sql>
+	<sql id="Blob_Column_List">
+		remark
+	</sql>
+	
+	
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="ResultMapWithBLOBs">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from lte_tdd_plan
+		where id = #{id,jdbcType=VARCHAR}
+	</select>
+	
+	
+	
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from lte_tdd_plan
+		where id = #{id,jdbcType=VARCHAR}
+	</delete>
+
+
+
+	<select id="find" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from lte_tdd_plan
+		where 1=1
+		<if test="map.projId != null">
+			and projId = #{map.projId}
+		</if>
+		<if test="map.enodeBID != null and map.enodeBID != ''">
+			and enodeBID like '%${map.enodeBID}%'
+		</if>
+		<if test="map.dealPersonId != null and map.dealPersonId != ''">
+			and dealPersonId = #{map.dealPersonId}
+		</if>
+		<if
+			test="map.beginTime != null and map.beginTime != '' and (map.endTime == null or map.endTime == '')">
+			and testDate &gt;= #{map.beginTime}
+		</if>
+		<if
+			test="map.endTime != null and map.endTime != '' and (map.beginTime == null or map.beginTime == '')">
+			and testDate &lt;= #{map.endTime}
+		</if>
+		<if
+			test="map.endTime != null and map.endTime != '' and map.beginTime != null and map.beginTime != ''">
+			and testDate between #{map.beginTime} and #{map.endTime}
+		</if>
+
+	</select>
+
+
+	<insert id="insertSelective"
+		parameterType="com.boot.kaizen.business.tddsf.model.LteTddPlan">
+		insert into lte_tdd_plan
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="enodeBID != null">
+				enodeBID,
+			</if>
+			<if test="baseStationName != null">
+				baseStationName,
+			</if>
+			<if test="testDate != null">
+				testDate,
+			</if>
+			<if test="districtCountry != null">
+				districtCountry,
+			</if>
+			<if test="address != null">
+				address,
+			</if>
+			<if test="baseStationType != null">
+				baseStationType,
+			</if>
+			<if test="deviceType != null">
+				deviceType,
+			</if>
+			<if test="videoFrequency != null">
+				videoFrequency,
+			</if>
+			<if test="longitude != null">
+				longitude,
+			</if>
+			<if test="latitude != null">
+				latitude,
+			</if>
+			<if test="broadBand != null">
+				broadBand,
+			</if>
+			<if test="ipConfig != null">
+				ipConfig,
+			</if>
+			<if test="testPerson != null">
+				testPerson,
+			</if>
+			<if test="testPersonPhone != null">
+				testPersonPhone,
+			</if>
+			<if test="backPerson != null">
+				backPerson,
+			</if>
+			<if test="backPersonPhone != null">
+				backPersonPhone,
+			</if>
+			<if test="dealPersonId != null">
+				dealPersonId,
+			</if>
+			<if test="administrativeArea != null">
+				administrativeArea,
+			</if>
+			<if test="commonStationName != null">
+				commonStationName,
+			</if>
+			<if test="stationAddressType != null">
+				stationAddressType,
+			</if>
+			<if test="buildingFunction != null">
+				buildingFunction,
+			</if>
+			<if test="floorNumber != null">
+				floorNumber,
+			</if>
+			<if test="oriSfSystem != null">
+				oriSfSystem,
+			</if>
+			<if test="combinationRoad != null">
+				combinationRoad,
+			</if>
+			<if test="singleAndDoubleRold != null">
+				singleAndDoubleRold,
+			</if>
+			<if test="combinationRoadInstallOk != null">
+				combinationRoadInstallOk,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="projId != null">
+				projId,
+			</if>
+			<if test="createTime != null">
+				createTime,
+			</if>
+			<if test="updateTime != null">
+				updateTime,
+			</if>
+			<if test="createAt != null">
+				createAt,
+			</if>
+			<if test="stationChangeTestPass != null">
+				stationChangeTestPass,
+			</if>
+			<if test="threeFourOperatePass != null">
+				threeFourOperatePass,
+			</if>
+			<if test="combinationWayPass != null">
+				combinationWayPass,
+			</if>
+			<if test="deviceSupportPass != null">
+				deviceSupportPass,
+			</if>
+			<if test="wirePointsReasonablePass != null">
+				wirePointsReasonablePass,
+			</if>
+			<if test="wirePortOutputPass != null">
+				wirePortOutputPass,
+			</if>
+			<if test="networkPlatformPass != null">
+				networkPlatformPass,
+			</if>
+			<if test="informationPlatformPass != null">
+				informationPlatformPass,
+			</if>
+			<if test="mrrPass != null">
+				mrrPass,
+			</if>
+			<if test="cellConfigPass != null">
+				cellConfigPass,
+			</if>
+			<if test="remark != null">
+				remark,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="enodeBID != null">
+				#{enodeBID,jdbcType=VARCHAR},
+			</if>
+			<if test="baseStationName != null">
+				#{baseStationName,jdbcType=VARCHAR},
+			</if>
+			<if test="testDate != null">
+				#{testDate,jdbcType=VARCHAR},
+			</if>
+			<if test="districtCountry != null">
+				#{districtCountry,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				#{address,jdbcType=VARCHAR},
+			</if>
+			<if test="baseStationType != null">
+				#{baseStationType,jdbcType=VARCHAR},
+			</if>
+			<if test="deviceType != null">
+				#{deviceType,jdbcType=VARCHAR},
+			</if>
+			<if test="videoFrequency != null">
+				#{videoFrequency,jdbcType=VARCHAR},
+			</if>
+			<if test="longitude != null">
+				#{longitude,jdbcType=VARCHAR},
+			</if>
+			<if test="latitude != null">
+				#{latitude,jdbcType=VARCHAR},
+			</if>
+			<if test="broadBand != null">
+				#{broadBand,jdbcType=VARCHAR},
+			</if>
+			<if test="ipConfig != null">
+				#{ipConfig,jdbcType=VARCHAR},
+			</if>
+			<if test="testPerson != null">
+				#{testPerson,jdbcType=VARCHAR},
+			</if>
+			<if test="testPersonPhone != null">
+				#{testPersonPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="backPerson != null">
+				#{backPerson,jdbcType=VARCHAR},
+			</if>
+			<if test="backPersonPhone != null">
+				#{backPersonPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="dealPersonId != null">
+				#{dealPersonId,jdbcType=VARCHAR},
+			</if>
+			<if test="administrativeArea != null">
+				#{administrativeArea,jdbcType=VARCHAR},
+			</if>
+			<if test="commonStationName != null">
+				#{commonStationName,jdbcType=VARCHAR},
+			</if>
+			<if test="stationAddressType != null">
+				#{stationAddressType,jdbcType=VARCHAR},
+			</if>
+			<if test="buildingFunction != null">
+				#{buildingFunction,jdbcType=VARCHAR},
+			</if>
+			<if test="floorNumber != null">
+				#{floorNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="oriSfSystem != null">
+				#{oriSfSystem,jdbcType=VARCHAR},
+			</if>
+			<if test="combinationRoad != null">
+				#{combinationRoad,jdbcType=VARCHAR},
+			</if>
+			<if test="singleAndDoubleRold != null">
+				#{singleAndDoubleRold,jdbcType=VARCHAR},
+			</if>
+			<if test="combinationRoadInstallOk != null">
+				#{combinationRoadInstallOk,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="projId != null">
+				#{projId,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createAt != null">
+				#{createAt,jdbcType=INTEGER},
+			</if>
+			<if test="stationChangeTestPass != null">
+				#{stationChangeTestPass,jdbcType=VARCHAR},
+			</if>
+			<if test="threeFourOperatePass != null">
+				#{threeFourOperatePass,jdbcType=VARCHAR},
+			</if>
+			<if test="combinationWayPass != null">
+				#{combinationWayPass,jdbcType=VARCHAR},
+			</if>
+			<if test="deviceSupportPass != null">
+				#{deviceSupportPass,jdbcType=VARCHAR},
+			</if>
+			<if test="wirePointsReasonablePass != null">
+				#{wirePointsReasonablePass,jdbcType=VARCHAR},
+			</if>
+			<if test="wirePortOutputPass != null">
+				#{wirePortOutputPass,jdbcType=VARCHAR},
+			</if>
+			<if test="networkPlatformPass != null">
+				#{networkPlatformPass,jdbcType=VARCHAR},
+			</if>
+			<if test="informationPlatformPass != null">
+				#{informationPlatformPass,jdbcType=VARCHAR},
+			</if>
+			<if test="mrrPass != null">
+				#{mrrPass,jdbcType=VARCHAR},
+			</if>
+			<if test="cellConfigPass != null">
+				#{cellConfigPass,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.boot.kaizen.business.tddsf.model.LteTddPlan">
+		update lte_tdd_plan
+		<set>
+			<if test="enodeBID != null">
+				enodeBID = #{enodeBID,jdbcType=VARCHAR},
+			</if>
+			<if test="baseStationName != null">
+				baseStationName = #{baseStationName,jdbcType=VARCHAR},
+			</if>
+			<if test="testDate != null">
+				testDate = #{testDate,jdbcType=VARCHAR},
+			</if>
+			<if test="districtCountry != null">
+				districtCountry = #{districtCountry,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				address = #{address,jdbcType=VARCHAR},
+			</if>
+			<if test="baseStationType != null">
+				baseStationType = #{baseStationType,jdbcType=VARCHAR},
+			</if>
+			<if test="deviceType != null">
+				deviceType = #{deviceType,jdbcType=VARCHAR},
+			</if>
+			<if test="videoFrequency != null">
+				videoFrequency = #{videoFrequency,jdbcType=VARCHAR},
+			</if>
+			<if test="longitude != null">
+				longitude = #{longitude,jdbcType=VARCHAR},
+			</if>
+			<if test="latitude != null">
+				latitude = #{latitude,jdbcType=VARCHAR},
+			</if>
+			<if test="broadBand != null">
+				broadBand = #{broadBand,jdbcType=VARCHAR},
+			</if>
+			<if test="ipConfig != null">
+				ipConfig = #{ipConfig,jdbcType=VARCHAR},
+			</if>
+			<if test="testPerson != null">
+				testPerson = #{testPerson,jdbcType=VARCHAR},
+			</if>
+			<if test="testPersonPhone != null">
+				testPersonPhone = #{testPersonPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="backPerson != null">
+				backPerson = #{backPerson,jdbcType=VARCHAR},
+			</if>
+			<if test="backPersonPhone != null">
+				backPersonPhone = #{backPersonPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="dealPersonId != null">
+				dealPersonId = #{dealPersonId,jdbcType=VARCHAR},
+			</if>
+			<if test="administrativeArea != null">
+				administrativeArea = #{administrativeArea,jdbcType=VARCHAR},
+			</if>
+			<if test="commonStationName != null">
+				commonStationName = #{commonStationName,jdbcType=VARCHAR},
+			</if>
+			<if test="stationAddressType != null">
+				stationAddressType = #{stationAddressType,jdbcType=VARCHAR},
+			</if>
+			<if test="buildingFunction != null">
+				buildingFunction = #{buildingFunction,jdbcType=VARCHAR},
+			</if>
+			<if test="floorNumber != null">
+				floorNumber = #{floorNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="oriSfSystem != null">
+				oriSfSystem = #{oriSfSystem,jdbcType=VARCHAR},
+			</if>
+			<if test="combinationRoad != null">
+				combinationRoad = #{combinationRoad,jdbcType=VARCHAR},
+			</if>
+			<if test="singleAndDoubleRold != null">
+				singleAndDoubleRold = #{singleAndDoubleRold,jdbcType=VARCHAR},
+			</if>
+			<if test="combinationRoadInstallOk != null">
+				combinationRoadInstallOk = #{combinationRoadInstallOk,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="projId != null">
+				projId = #{projId,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null">
+				createTime = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				updateTime = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createAt != null">
+				createAt = #{createAt,jdbcType=INTEGER},
+			</if>
+			<if test="stationChangeTestPass != null">
+				stationChangeTestPass = #{stationChangeTestPass,jdbcType=VARCHAR},
+			</if>
+			<if test="threeFourOperatePass != null">
+				threeFourOperatePass = #{threeFourOperatePass,jdbcType=VARCHAR},
+			</if>
+			<if test="combinationWayPass != null">
+				combinationWayPass = #{combinationWayPass,jdbcType=VARCHAR},
+			</if>
+			<if test="deviceSupportPass != null">
+				deviceSupportPass = #{deviceSupportPass,jdbcType=VARCHAR},
+			</if>
+			<if test="wirePointsReasonablePass != null">
+				wirePointsReasonablePass = #{wirePointsReasonablePass,jdbcType=VARCHAR},
+			</if>
+			<if test="wirePortOutputPass != null">
+				wirePortOutputPass = #{wirePortOutputPass,jdbcType=VARCHAR},
+			</if>
+			<if test="networkPlatformPass != null">
+				networkPlatformPass = #{networkPlatformPass,jdbcType=VARCHAR},
+			</if>
+			<if test="informationPlatformPass != null">
+				informationPlatformPass = #{informationPlatformPass,jdbcType=VARCHAR},
+			</if>
+			<if test="mrrPass != null">
+				mrrPass = #{mrrPass,jdbcType=VARCHAR},
+			</if>
+			<if test="cellConfigPass != null">
+				cellConfigPass = #{cellConfigPass,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				remark = #{remark,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+
+</mapper>

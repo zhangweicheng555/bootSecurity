@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>修改计划表</title>
+<link rel="stylesheet" type="text/css" media="screen" href="../../../../css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" media="screen" href="../../../../layui/css/layui.css">
+</head>
+<body>
+
+	
+	
+	<form class="layui-form" lay-filter="formDemo"  id="formDemo" style="margin-top: 20px;">
+	
+	 <div class="layui-form-item">
+	    <label class="layui-form-label" style="width: 150px;">基站号</label>
+	    <div class="layui-input-inline">
+	     <input type="hidden" name="id" id="id" >
+	      <input type="text" name="mENodeBID" id="mENodeBID"   required  lay-verify="required"  autocomplete="off" class="layui-input">
+	    </div>
+	    
+	    <label class="layui-form-label" style="width: 150px;">基站名称</label>
+	    <div class="layui-input-inline" >
+	      <input type="text" name="mBaseStationName" id="mBaseStationName"   required  lay-verify="required"  autocomplete="off" class="layui-input">
+	    </div>
+	    
+	    <label class="layui-form-label" style="width: 150px;">小区ID</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="cellId" id="cellId"   required  lay-verify="required" autocomplete="off" class="layui-input">
+	    </div>
+	  </div>
+	
+	
+	
+	  <div class="layui-form-item">
+	    <label class="layui-form-label" style="width: 150px;">小区名字</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="cellName" id="cellName"    required  lay-verify="required"   autocomplete="off" class="layui-input">
+	    </div>
+	    
+	    <label class="layui-form-label" style="width: 150px;">上下行子帧配比</label>
+	    <div class="layui-input-inline" >
+	      <input type="text" name="upDownRatio" id="upDownRatio"   autocomplete="off" class="layui-input">
+	    </div>
+	    
+	    <label class="layui-form-label" style="width: 150px;">特殊子帧配比</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="specialRatio" id="specialRatio"   autocomplete="off" class="layui-input">
+	    </div>
+	  </div>
+	 
+	  
+	  <div class="layui-form-item">
+	    <label class="layui-form-label" style="width: 150px;">PCI</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="pci" id="pci"   autocomplete="off" class="layui-input">
+	    </div>
+	    <label class="layui-form-label" style="width: 150px;">ECI</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="eci" id="eci"   autocomplete="off" class="layui-input">
+	    </div>
+	    <label class="layui-form-label" style="width: 150px;">TAC</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="tac" id="tac"   autocomplete="off" class="layui-input">
+	    </div>
+	  </div>
+	  
+	  <div class="layui-form-item">
+	    <label class="layui-form-label" style="width: 150px;">EARFCN</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="earfcn" id="earfcn"   autocomplete="off" class="layui-input">
+	    </div>
+
+	    <label class="layui-form-label" style="width: 150px;">RsPower</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="rsPower" id="rsPower"   autocomplete="off" class="layui-input">
+	    </div>
+	    <label class="layui-form-label" style="width: 150px;">PA</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="pa" id="pa"   autocomplete="off" class="layui-input">
+	    </div>
+	  </div>
+	  
+	 
+	  
+	  <div class="layui-form-item">
+	    <label class="layui-form-label" style="width: 150px;">PB</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="pb" id="pb"   autocomplete="off" class="layui-input">
+	    </div>
+	    <label class="layui-form-label" style="width: 150px;">天线挂高</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="antennaHangUp" id="antennaHangUp"   autocomplete="off" class="layui-input">
+	    </div>
+	    <label class="layui-form-label" style="width: 150px;">方位角</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="azimuth" id="azimuth"   autocomplete="off" class="layui-input">
+	    </div>
+
+	  </div>
+	  
+	  
+	  
+	  <div class="layui-form-item">
+	    <label class="layui-form-label" style="width: 150px;">机械下倾角</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="mechanicalLowerInclination" id="mechanicalLowerInclination"   autocomplete="off" class="layui-input">
+	    </div>
+	    <label class="layui-form-label" style="width: 150px;">预置电下倾</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="presetElectricDip" id="presetElectricDip"   autocomplete="off" class="layui-input">
+	    </div>
+	    <label class="layui-form-label" style="width: 150px;">总下倾角</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="mtotalLowerInclination" id="mtotalLowerInclination"   autocomplete="off" class="layui-input">
+	    </div>
+
+	  </div>
+	  
+	  <div class="layui-form-item">
+	    <label class="layui-form-label" style="width: 150px;">FTP下载速率</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="ftpDown" id="ftpDown"   autocomplete="off" class="layui-input">
+	    </div>
+	    <label class="layui-form-label" style="width: 150px;">FTP上传速率</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="ftpUp" id="ftpUp"   autocomplete="off" class="layui-input">
+	    </div>
+	     <label class="layui-form-label" style="width: 150px;">频点</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="frequency" id="frequency"   autocomplete="off" class="layui-input">
+	    </div>
+	  </div>
+	  
+	   <div class="layui-form-item">
+	    <label class="layui-form-label" style="width: 150px;">测试时间</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="testDate" id="testDate"  required  lay-verify="required"  autocomplete="off" class="layui-input">
+	    </div>
+	    <label class="layui-form-label" style="width: 150px;">Volte呼叫接入时延</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="volteDelay" id="volteDelay"   autocomplete="off" class="layui-input">
+	    </div>
+	  </div>
+	  
+	 <blockquote class="layui-elem-quote">RRC Setup Success Rate</blockquote>
+	    <div class="layui-form-item">
+	    <label class="layui-form-label" style="width: 150px;">尝试次数</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="rrcSuccRateAttempt" id="rrcSuccRateAttempt"   autocomplete="off" class="layui-input">
+	    </div>
+	    <label class="layui-form-label" style="width: 150px;">成功次数</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="rrcSuccRateSucc" id="rrcSuccRateSucc"   autocomplete="off" class="layui-input">
+	    </div>
+	    <label class="layui-form-label" style="width: 150px;">失败次数</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="rrcSuccRateFailure" id="rrcSuccRateFailure"   autocomplete="off" class="layui-input">
+	    </div>
+	  </div>
+	  
+	  
+	 <blockquote class="layui-elem-quote">ERAB Setup Success Rate</blockquote>
+	    <div class="layui-form-item">
+	    <label class="layui-form-label" style="width: 150px;">尝试次数</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="erabSuccRateAttempt" id="erabSuccRateAttempt"   autocomplete="off" class="layui-input">
+	    </div>
+	    <label class="layui-form-label" style="width: 150px;">成功次数</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="erabSuccRateSucc" id="erabSuccRateSucc"   autocomplete="off" class="layui-input">
+	    </div>
+	    <label class="layui-form-label" style="width: 150px;">失败次数</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="erabSuccRateFailure" id="erabSuccRateFailure"   autocomplete="off" class="layui-input">
+	    </div>
+	  </div>
+	  
+	 <blockquote class="layui-elem-quote">Access Success Rate</blockquote>
+	    <div class="layui-form-item">
+	    <label class="layui-form-label" style="width: 150px;">尝试次数</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="accessSuccRateAttempt" id="accessSuccRateAttempt"   autocomplete="off" class="layui-input">
+	    </div>
+	    <label class="layui-form-label" style="width: 150px;">成功次数</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="accessSuccRateSucc" id="accessSuccRateSucc"   autocomplete="off" class="layui-input">
+	    </div>
+	    <label class="layui-form-label" style="width: 150px;">失败次数</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="accessSuccRateFailure" id="accessSuccRateFailure"   autocomplete="off" class="layui-input">
+	    </div>
+	  </div>
+	  
+	
+	 <blockquote class="layui-elem-quote">系统内切换</blockquote>
+	    <div class="layui-form-item">
+	    <label class="layui-form-label" style="width: 150px;">尝试次数</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="systemChangeAttempt" id="systemChangeAttempt"   autocomplete="off" class="layui-input">
+	    </div>
+	    <label class="layui-form-label" style="width: 150px;">成功次数</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="systemChangeSucc" id="systemChangeSucc"   autocomplete="off" class="layui-input">
+	    </div>
+	    <label class="layui-form-label" style="width: 150px;">失败次数</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="systemChangeFailure" id="systemChangeFailure"   autocomplete="off" class="layui-input">
+	    </div>
+	  </div>
+	 
+	  
+		<button class="layui-btn" id="formDemoBtn" style="display: none;" lay-submit lay-filter="formDemo">立即提交</button>
+	</form>
+	
+	
+	
+	
+	
+	<script type="text/javascript" src="../../../../js/libs/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="../../../../layui/layui.js"></script>
+	<script type="text/javascript" src="../../../../js/jq.js"></script>
+	
+<script>
+
+	var flag=false;
+	
+	
+	function submitForm(){
+		$("#formDemoBtn").click();
+		return flag;
+	 }
+	
+	
+	var form;
+	layui.use(['layer', 'form','jquery','laydate'], function(){
+	  var layer = layui.layer,form = layui.form,$=layui.jquery;
+	  var laydate = layui.laydate;
+	  
+	
+	//监听提交
+	  form.on('submit(formDemo)', function(data){
+		flag=true;
+	    return false;
+	  });
+	
+	  /**日期框*/
+	  laydate.render({
+	     elem: '#testDate'
+	    ,max: 0
+	    ,min: -60 //7天前
+	    ,max: 60 //7天后
+	    ,theme: 'molv'
+   	    ,done: function(val, date, endDate){
+   	    	
+   		 }
+	  });
+	
+	  //初始化工作
+	  initData();
+	  function initData(){
+			var id=getUrlParam("id");
+			if(!id){
+				layer.msg('获取数据ID异常');
+				return;
+			}
+			$.ajax({
+				   type: "POST",url: "/tdd/cellcheck/findById",data: {"id":id},dataType:"json",
+				   success: function(msg){
+				     if(msg.success){
+				    	var model = jQuery.parseJSON(msg.object);
+				 		form.val("formDemo", model);
+				     }else{
+				    	 layer.msg('返回修改数据信息异常');
+				     }
+				   }
+			});
+		};
+		
+	});
+	
+	
+</script> 
+
+</body>
+</html>

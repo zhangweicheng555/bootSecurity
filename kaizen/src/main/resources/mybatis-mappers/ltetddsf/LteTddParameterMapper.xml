@@ -1,0 +1,795 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.boot.kaizen.business.tddsf.dao.LteTddParameterMapper">
+	<resultMap id="BaseResultMap"
+		type="com.boot.kaizen.business.tddsf.model.LteTddParameter">
+		<id column="id" jdbcType="VARCHAR" property="id" />
+		<result column="enodeBID" jdbcType="VARCHAR"
+			property="enodeBID" />
+		<result column="baseStationName" jdbcType="VARCHAR"
+			property="baseStationName" />
+		<result column="cellId" jdbcType="VARCHAR" property="cellId" />
+		<result column="cellName" jdbcType="VARCHAR"
+			property="cellName" />
+		<result column="testDate" jdbcType="VARCHAR"
+			property="testDate" />
+		<result column="ftpDownPass" jdbcType="VARCHAR"
+			property="ftpDownPass" />
+		<result column="ftpUpPass" jdbcType="VARCHAR"
+			property="ftpUpPass" />
+		<result column="convenienceCoveragePerPass" jdbcType="VARCHAR"
+			property="convenienceCoveragePerPass" />
+		<result column="eci" jdbcType="VARCHAR" property="eci" />
+		<result column="earfcn" jdbcType="VARCHAR" property="earfcn" />
+		<result column="pci" jdbcType="VARCHAR" property="pci" />
+		<result column="tac" jdbcType="VARCHAR" property="tac" />
+		<result column="csfCallAttempt" jdbcType="VARCHAR"
+			property="csfCallAttempt" />
+		<result column="csfbCallSucc" jdbcType="VARCHAR"
+			property="csfbCallSucc" />
+		<result column="csfbCallFailure" jdbcType="VARCHAR"
+			property="csfbCallFailure" />
+		<result column="volteCallAttempt" jdbcType="VARCHAR"
+			property="volteCallAttempt" />
+		<result column="volteCallSucc" jdbcType="VARCHAR"
+			property="volteCallSucc" />
+		<result column="volteCallFailure" jdbcType="VARCHAR"
+			property="volteCallFailure" />
+		<result column="volteDownAttempt" jdbcType="VARCHAR"
+			property="volteDownAttempt" />
+		<result column="volteDownSucc" jdbcType="VARCHAR"
+			property="volteDownSucc" />
+		<result column="volteDownFailure" jdbcType="VARCHAR"
+			property="volteDownFailure" />
+		<result column="ftpDownCover" jdbcType="VARCHAR"
+			property="ftpDownCover" />
+		<result column="ftpDownCoverRandom" jdbcType="VARCHAR"
+			property="ftpDownCoverRandom" />
+		<result column="ftpDownThroughput" jdbcType="VARCHAR"
+			property="ftpDownThroughput" />
+		<result column="ftpDownThroughputRandom" jdbcType="VARCHAR"
+			property="ftpDownThroughputRandom" />
+		<result column="ftpUpCover" jdbcType="VARCHAR"
+			property="ftpUpCover" />
+		<result column="ftpUpCoverRandom" jdbcType="VARCHAR"
+			property="ftpUpCoverRandom" />
+		<result column="ftpUpThroughput" jdbcType="VARCHAR"
+			property="ftpUpThroughput" />
+		<result column="ftpUpThroughputRandom" jdbcType="VARCHAR"
+			property="ftpUpThroughputRandom" />
+		<result column="projId" jdbcType="INTEGER" property="projId" />
+		<result column="createTime" jdbcType="TIMESTAMP"
+			property="createTime" />
+		<result column="updateTime" jdbcType="TIMESTAMP"
+			property="updateTime" />
+		<result column="createAt" jdbcType="INTEGER"
+			property="createAt" />
+		<result column="lowNum" jdbcType="VARCHAR" property="lowNum" />
+		<result column="lowRsrp" jdbcType="VARCHAR" property="lowRsrp" />
+		<result column="lowSinr" jdbcType="VARCHAR" property="lowSinr" />
+		<result column="lowCallSuccPercent" jdbcType="VARCHAR"
+			property="lowCallSuccPercent" />
+		<result column="middleNum" jdbcType="VARCHAR"
+			property="middleNum" />
+		<result column="middleRsrp" jdbcType="VARCHAR"
+			property="middleRsrp" />
+		<result column="middleSinr" jdbcType="VARCHAR"
+			property="middleSinr" />
+		<result column="middleCallSuccPercent" jdbcType="VARCHAR"
+			property="middleCallSuccPercent" />
+		<result column="highNum" jdbcType="VARCHAR" property="highNum" />
+		<result column="highRsrp" jdbcType="VARCHAR"
+			property="highRsrp" />
+		<result column="highSinr" jdbcType="VARCHAR"
+			property="highSinr" />
+		<result column="highCallSuccPercent" jdbcType="VARCHAR"
+			property="highCallSuccPercent" />
+		<result column="baseNum" jdbcType="VARCHAR" property="baseNum" />
+		<result column="baseRsrp" jdbcType="VARCHAR"
+			property="baseRsrp" />
+		<result column="baseSinr" jdbcType="VARCHAR"
+			property="baseSinr" />
+		<result column="baseCallSuccPercent" jdbcType="VARCHAR"
+			property="baseCallSuccPercent" />
+		<result column="elevatorNum" jdbcType="VARCHAR"
+			property="elevatorNum" />
+		<result column="elevatorRsrp" jdbcType="VARCHAR"
+			property="elevatorRsrp" />
+		<result column="elevatorSinr" jdbcType="VARCHAR"
+			property="elevatorSinr" />
+		<result column="elevatorCallSuccPercent" jdbcType="VARCHAR"
+			property="elevatorCallSuccPercent" />
+		<result column="volteSwitch" jdbcType="VARCHAR"
+			property="volteSwitch" />
+		<result column="rsrpImage" jdbcType="VARCHAR"
+			property="rsrpImage" />
+		<result column="sinrImage" jdbcType="VARCHAR"
+			property="sinrImage" />
+		<result column="downRateImage" jdbcType="VARCHAR"
+			property="downRateImage" />
+		<result column="upRateImage" jdbcType="VARCHAR"
+			property="upRateImage" />
+		<result column="flowCoverRsrpImage" jdbcType="VARCHAR"
+			property="flowCoverRsrpImage" />
+		<result column="flowCoverSinrImage" jdbcType="VARCHAR"
+			property="flowCoverSinrImage" />
+		<result column="flowCoverpCIImage" jdbcType="VARCHAR"
+			property="flowCoverpCIImage" />
+	</resultMap>
+	<resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
+		type="com.boot.kaizen.business.tddsf.model.LteTddParameter">
+		<result column="testFlowImage" jdbcType="LONGVARCHAR"
+			property="testFlowImage" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, enodeBID, baseStationName, cellId, cellName, testDate,
+		ftpDownPass,
+		ftpUpPass,
+		convenienceCoveragePerPass, eci, earfcn, pci,
+		tac, csfCallAttempt, csfbCallSucc,
+		csfbCallFailure, volteCallAttempt,
+		volteCallSucc, volteCallFailure, volteDownAttempt,
+		volteDownSucc,
+		volteDownFailure, ftpDownCover, ftpDownCoverRandom,
+		ftpDownThroughput,
+		ftpDownThroughputRandom, ftpUpCover, ftpUpCoverRandom,
+		ftpUpThroughput, ftpUpThroughputRandom,
+		projId, createTime, updateTime,
+		createAt, lowNum, lowRsrp, lowSinr,
+		lowCallSuccPercent,
+		middleNum,
+		middleRsrp, middleSinr, middleCallSuccPercent, highNum, highRsrp,
+		highSinr,
+		highCallSuccPercent, baseNum, baseRsrp, baseSinr,
+		baseCallSuccPercent, elevatorNum,
+		elevatorRsrp, elevatorSinr,
+		elevatorCallSuccPercent, volteSwitch,
+		rsrpImage, sinrImage,
+		downRateImage, upRateImage, flowCoverRsrpImage, flowCoverSinrImage,
+		flowCoverpCIImage
+	</sql>
+	<sql id="Blob_Column_List">
+		testFlowImage
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="ResultMapWithBLOBs">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from lte_tdd_parameter
+		where id = #{id,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		lte_tdd_parameter
+		where id = #{id,jdbcType=VARCHAR}
+	</delete>
+
+
+
+	<select id="find" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from lte_tdd_parameter
+		where 1=1
+		<if test="map.projId != null">
+			and projId = #{map.projId}
+		</if>
+		<if test="map.enodeBID != null and map.enodeBID != ''">
+			and enodeBID like '%${map.enodeBID}%'
+		</if>
+		<if test="map.dealPersonId != null and map.dealPersonId != ''">
+			and dealPersonId = #{map.dealPersonId}
+		</if>
+		<if
+			test="map.beginTime != null and map.beginTime != '' and (map.endTime == null or map.endTime == '')">
+			and testDate &gt;= #{map.beginTime}
+		</if>
+		<if
+			test="map.endTime != null and map.endTime != '' and (map.beginTime == null or map.beginTime == '')">
+			and testDate &lt;= #{map.endTime}
+		</if>
+		<if
+			test="map.endTime != null and map.endTime != '' and map.beginTime != null and map.beginTime != ''">
+			and testDate between #{map.beginTime} and #{map.endTime}
+		</if>
+
+	</select>
+
+	<insert id="insertSelective"
+		parameterType="com.boot.kaizen.business.tddsf.model.LteTddParameter">
+		insert into lte_tdd_parameter
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="enodeBID != null">
+				enodeBID,
+			</if>
+			<if test="baseStationName != null">
+				baseStationName,
+			</if>
+			<if test="cellId != null">
+				cellId,
+			</if>
+			<if test="cellName != null">
+				cellName,
+			</if>
+			<if test="testDate != null">
+				testDate,
+			</if>
+			<if test="ftpDownPass != null">
+				ftpDownPass,
+			</if>
+			<if test="ftpUpPass != null">
+				ftpUpPass,
+			</if>
+			<if test="convenienceCoveragePerPass != null">
+				convenienceCoveragePerPass,
+			</if>
+			<if test="eci != null">
+				eci,
+			</if>
+			<if test="earfcn != null">
+				earfcn,
+			</if>
+			<if test="pci != null">
+				pci,
+			</if>
+			<if test="tac != null">
+				tac,
+			</if>
+			<if test="csfCallAttempt != null">
+				csfCallAttempt,
+			</if>
+			<if test="csfbCallSucc != null">
+				csfbCallSucc,
+			</if>
+			<if test="csfbCallFailure != null">
+				csfbCallFailure,
+			</if>
+			<if test="volteCallAttempt != null">
+				volteCallAttempt,
+			</if>
+			<if test="volteCallSucc != null">
+				volteCallSucc,
+			</if>
+			<if test="volteCallFailure != null">
+				volteCallFailure,
+			</if>
+			<if test="volteDownAttempt != null">
+				volteDownAttempt,
+			</if>
+			<if test="volteDownSucc != null">
+				volteDownSucc,
+			</if>
+			<if test="volteDownFailure != null">
+				volteDownFailure,
+			</if>
+			<if test="ftpDownCover != null">
+				ftpDownCover,
+			</if>
+			<if test="ftpDownCoverRandom != null">
+				ftpDownCoverRandom,
+			</if>
+			<if test="ftpDownThroughput != null">
+				ftpDownThroughput,
+			</if>
+			<if test="ftpDownThroughputRandom != null">
+				ftpDownThroughputRandom,
+			</if>
+			<if test="ftpUpCover != null">
+				ftpUpCover,
+			</if>
+			<if test="ftpUpCoverRandom != null">
+				ftpUpCoverRandom,
+			</if>
+			<if test="ftpUpThroughput != null">
+				ftpUpThroughput,
+			</if>
+			<if test="ftpUpThroughputRandom != null">
+				ftpUpThroughputRandom,
+			</if>
+			<if test="projId != null">
+				projId,
+			</if>
+			<if test="createTime != null">
+				createTime,
+			</if>
+			<if test="updateTime != null">
+				updateTime,
+			</if>
+			<if test="createAt != null">
+				createAt,
+			</if>
+			<if test="lowNum != null">
+				lowNum,
+			</if>
+			<if test="lowRsrp != null">
+				lowRsrp,
+			</if>
+			<if test="lowSinr != null">
+				lowSinr,
+			</if>
+			<if test="lowCallSuccPercent != null">
+				lowCallSuccPercent,
+			</if>
+			<if test="middleNum != null">
+				middleNum,
+			</if>
+			<if test="middleRsrp != null">
+				middleRsrp,
+			</if>
+			<if test="middleSinr != null">
+				middleSinr,
+			</if>
+			<if test="middleCallSuccPercent != null">
+				middleCallSuccPercent,
+			</if>
+			<if test="highNum != null">
+				highNum,
+			</if>
+			<if test="highRsrp != null">
+				highRsrp,
+			</if>
+			<if test="highSinr != null">
+				highSinr,
+			</if>
+			<if test="highCallSuccPercent != null">
+				highCallSuccPercent,
+			</if>
+			<if test="baseNum != null">
+				baseNum,
+			</if>
+			<if test="baseRsrp != null">
+				baseRsrp,
+			</if>
+			<if test="baseSinr != null">
+				baseSinr,
+			</if>
+			<if test="baseCallSuccPercent != null">
+				baseCallSuccPercent,
+			</if>
+			<if test="elevatorNum != null">
+				elevatorNum,
+			</if>
+			<if test="elevatorRsrp != null">
+				elevatorRsrp,
+			</if>
+			<if test="elevatorSinr != null">
+				elevatorSinr,
+			</if>
+			<if test="elevatorCallSuccPercent != null">
+				elevatorCallSuccPercent,
+			</if>
+			<if test="volteSwitch != null">
+				volteSwitch,
+			</if>
+			<if test="rsrpImage != null">
+				rsrpImage,
+			</if>
+			<if test="sinrImage != null">
+				sinrImage,
+			</if>
+			<if test="downRateImage != null">
+				downRateImage,
+			</if>
+			<if test="upRateImage != null">
+				upRateImage,
+			</if>
+			<if test="flowCoverRsrpImage != null">
+				flowCoverRsrpImage,
+			</if>
+			<if test="flowCoverSinrImage != null">
+				flowCoverSinrImage,
+			</if>
+			<if test="flowCoverpCIImage != null">
+				flowCoverpCIImage,
+			</if>
+			<if test="testFlowImage != null">
+				testFlowImage,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="enodeBID != null">
+				#{enodeBID,jdbcType=VARCHAR},
+			</if>
+			<if test="baseStationName != null">
+				#{baseStationName,jdbcType=VARCHAR},
+			</if>
+			<if test="cellId != null">
+				#{cellId,jdbcType=VARCHAR},
+			</if>
+			<if test="cellName != null">
+				#{cellName,jdbcType=VARCHAR},
+			</if>
+			<if test="testDate != null">
+				#{testDate,jdbcType=VARCHAR},
+			</if>
+			<if test="ftpDownPass != null">
+				#{ftpDownPass,jdbcType=VARCHAR},
+			</if>
+			<if test="ftpUpPass != null">
+				#{ftpUpPass,jdbcType=VARCHAR},
+			</if>
+			<if test="convenienceCoveragePerPass != null">
+				#{convenienceCoveragePerPass,jdbcType=VARCHAR},
+			</if>
+			<if test="eci != null">
+				#{eci,jdbcType=VARCHAR},
+			</if>
+			<if test="earfcn != null">
+				#{earfcn,jdbcType=VARCHAR},
+			</if>
+			<if test="pci != null">
+				#{pci,jdbcType=VARCHAR},
+			</if>
+			<if test="tac != null">
+				#{tac,jdbcType=VARCHAR},
+			</if>
+			<if test="csfCallAttempt != null">
+				#{csfCallAttempt,jdbcType=VARCHAR},
+			</if>
+			<if test="csfbCallSucc != null">
+				#{csfbCallSucc,jdbcType=VARCHAR},
+			</if>
+			<if test="csfbCallFailure != null">
+				#{csfbCallFailure,jdbcType=VARCHAR},
+			</if>
+			<if test="volteCallAttempt != null">
+				#{volteCallAttempt,jdbcType=VARCHAR},
+			</if>
+			<if test="volteCallSucc != null">
+				#{volteCallSucc,jdbcType=VARCHAR},
+			</if>
+			<if test="volteCallFailure != null">
+				#{volteCallFailure,jdbcType=VARCHAR},
+			</if>
+			<if test="volteDownAttempt != null">
+				#{volteDownAttempt,jdbcType=VARCHAR},
+			</if>
+			<if test="volteDownSucc != null">
+				#{volteDownSucc,jdbcType=VARCHAR},
+			</if>
+			<if test="volteDownFailure != null">
+				#{volteDownFailure,jdbcType=VARCHAR},
+			</if>
+			<if test="ftpDownCover != null">
+				#{ftpDownCover,jdbcType=VARCHAR},
+			</if>
+			<if test="ftpDownCoverRandom != null">
+				#{ftpDownCoverRandom,jdbcType=VARCHAR},
+			</if>
+			<if test="ftpDownThroughput != null">
+				#{ftpDownThroughput,jdbcType=VARCHAR},
+			</if>
+			<if test="ftpDownThroughputRandom != null">
+				#{ftpDownThroughputRandom,jdbcType=VARCHAR},
+			</if>
+			<if test="ftpUpCover != null">
+				#{ftpUpCover,jdbcType=VARCHAR},
+			</if>
+			<if test="ftpUpCoverRandom != null">
+				#{ftpUpCoverRandom,jdbcType=VARCHAR},
+			</if>
+			<if test="ftpUpThroughput != null">
+				#{ftpUpThroughput,jdbcType=VARCHAR},
+			</if>
+			<if test="ftpUpThroughputRandom != null">
+				#{ftpUpThroughputRandom,jdbcType=VARCHAR},
+			</if>
+			<if test="projId != null">
+				#{projId,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createAt != null">
+				#{createAt,jdbcType=INTEGER},
+			</if>
+			<if test="lowNum != null">
+				#{lowNum,jdbcType=VARCHAR},
+			</if>
+			<if test="lowRsrp != null">
+				#{lowRsrp,jdbcType=VARCHAR},
+			</if>
+			<if test="lowSinr != null">
+				#{lowSinr,jdbcType=VARCHAR},
+			</if>
+			<if test="lowCallSuccPercent != null">
+				#{lowCallSuccPercent,jdbcType=VARCHAR},
+			</if>
+			<if test="middleNum != null">
+				#{middleNum,jdbcType=VARCHAR},
+			</if>
+			<if test="middleRsrp != null">
+				#{middleRsrp,jdbcType=VARCHAR},
+			</if>
+			<if test="middleSinr != null">
+				#{middleSinr,jdbcType=VARCHAR},
+			</if>
+			<if test="middleCallSuccPercent != null">
+				#{middleCallSuccPercent,jdbcType=VARCHAR},
+			</if>
+			<if test="highNum != null">
+				#{highNum,jdbcType=VARCHAR},
+			</if>
+			<if test="highRsrp != null">
+				#{highRsrp,jdbcType=VARCHAR},
+			</if>
+			<if test="highSinr != null">
+				#{highSinr,jdbcType=VARCHAR},
+			</if>
+			<if test="highCallSuccPercent != null">
+				#{highCallSuccPercent,jdbcType=VARCHAR},
+			</if>
+			<if test="baseNum != null">
+				#{baseNum,jdbcType=VARCHAR},
+			</if>
+			<if test="baseRsrp != null">
+				#{baseRsrp,jdbcType=VARCHAR},
+			</if>
+			<if test="baseSinr != null">
+				#{baseSinr,jdbcType=VARCHAR},
+			</if>
+			<if test="baseCallSuccPercent != null">
+				#{baseCallSuccPercent,jdbcType=VARCHAR},
+			</if>
+			<if test="elevatorNum != null">
+				#{elevatorNum,jdbcType=VARCHAR},
+			</if>
+			<if test="elevatorRsrp != null">
+				#{elevatorRsrp,jdbcType=VARCHAR},
+			</if>
+			<if test="elevatorSinr != null">
+				#{elevatorSinr,jdbcType=VARCHAR},
+			</if>
+			<if test="elevatorCallSuccPercent != null">
+				#{elevatorCallSuccPercent,jdbcType=VARCHAR},
+			</if>
+			<if test="volteSwitch != null">
+				#{volteSwitch,jdbcType=VARCHAR},
+			</if>
+			<if test="rsrpImage != null">
+				#{rsrpImage,jdbcType=VARCHAR},
+			</if>
+			<if test="sinrImage != null">
+				#{sinrImage,jdbcType=VARCHAR},
+			</if>
+			<if test="downRateImage != null">
+				#{downRateImage,jdbcType=VARCHAR},
+			</if>
+			<if test="upRateImage != null">
+				#{upRateImage,jdbcType=VARCHAR},
+			</if>
+			<if test="flowCoverRsrpImage != null">
+				#{flowCoverRsrpImage,jdbcType=VARCHAR},
+			</if>
+			<if test="flowCoverSinrImage != null">
+				#{flowCoverSinrImage,jdbcType=VARCHAR},
+			</if>
+			<if test="flowCoverpCIImage != null">
+				#{flowCoverpCIImage,jdbcType=VARCHAR},
+			</if>
+			<if test="testFlowImage != null">
+				#{testFlowImage,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.boot.kaizen.business.tddsf.model.LteTddParameter">
+		update lte_tdd_parameter
+		<set>
+			<if test="enodeBID != null">
+				enodeBID = #{enodeBID,jdbcType=VARCHAR},
+			</if>
+			<if test="baseStationName != null">
+				baseStationName = #{baseStationName,jdbcType=VARCHAR},
+			</if>
+			<if test="cellId != null">
+				cellId = #{cellId,jdbcType=VARCHAR},
+			</if>
+			<if test="cellName != null">
+				cellName = #{cellName,jdbcType=VARCHAR},
+			</if>
+			<if test="testDate != null">
+				testDate = #{testDate,jdbcType=VARCHAR},
+			</if>
+			<if test="ftpDownPass != null">
+				ftpDownPass = #{ftpDownPass,jdbcType=VARCHAR},
+			</if>
+			<if test="ftpUpPass != null">
+				ftpUpPass = #{ftpUpPass,jdbcType=VARCHAR},
+			</if>
+			<if test="convenienceCoveragePerPass != null">
+				convenienceCoveragePerPass =
+				#{convenienceCoveragePerPass,jdbcType=VARCHAR},
+			</if>
+			<if test="eci != null">
+				eci = #{eci,jdbcType=VARCHAR},
+			</if>
+			<if test="earfcn != null">
+				earfcn = #{earfcn,jdbcType=VARCHAR},
+			</if>
+			<if test="pci != null">
+				pci = #{pci,jdbcType=VARCHAR},
+			</if>
+			<if test="tac != null">
+				tac = #{tac,jdbcType=VARCHAR},
+			</if>
+			<if test="csfCallAttempt != null">
+				csfCallAttempt = #{csfCallAttempt,jdbcType=VARCHAR},
+			</if>
+			<if test="csfbCallSucc != null">
+				csfbCallSucc = #{csfbCallSucc,jdbcType=VARCHAR},
+			</if>
+			<if test="csfbCallFailure != null">
+				csfbCallFailure = #{csfbCallFailure,jdbcType=VARCHAR},
+			</if>
+			<if test="volteCallAttempt != null">
+				volteCallAttempt = #{volteCallAttempt,jdbcType=VARCHAR},
+			</if>
+			<if test="volteCallSucc != null">
+				volteCallSucc = #{volteCallSucc,jdbcType=VARCHAR},
+			</if>
+			<if test="volteCallFailure != null">
+				volteCallFailure = #{volteCallFailure,jdbcType=VARCHAR},
+			</if>
+			<if test="volteDownAttempt != null">
+				volteDownAttempt = #{volteDownAttempt,jdbcType=VARCHAR},
+			</if>
+			<if test="volteDownSucc != null">
+				volteDownSucc = #{volteDownSucc,jdbcType=VARCHAR},
+			</if>
+			<if test="volteDownFailure != null">
+				volteDownFailure = #{volteDownFailure,jdbcType=VARCHAR},
+			</if>
+			<if test="ftpDownCover != null">
+				ftpDownCover = #{ftpDownCover,jdbcType=VARCHAR},
+			</if>
+			<if test="ftpDownCoverRandom != null">
+				ftpDownCoverRandom =
+				#{ftpDownCoverRandom,jdbcType=VARCHAR},
+			</if>
+			<if test="ftpDownThroughput != null">
+				ftpDownThroughput =
+				#{ftpDownThroughput,jdbcType=VARCHAR},
+			</if>
+			<if test="ftpDownThroughputRandom != null">
+				ftpDownThroughputRandom =
+				#{ftpDownThroughputRandom,jdbcType=VARCHAR},
+			</if>
+			<if test="ftpUpCover != null">
+				ftpUpCover = #{ftpUpCover,jdbcType=VARCHAR},
+			</if>
+			<if test="ftpUpCoverRandom != null">
+				ftpUpCoverRandom = #{ftpUpCoverRandom,jdbcType=VARCHAR},
+			</if>
+			<if test="ftpUpThroughput != null">
+				ftpUpThroughput = #{ftpUpThroughput,jdbcType=VARCHAR},
+			</if>
+			<if test="ftpUpThroughputRandom != null">
+				ftpUpThroughputRandom =
+				#{ftpUpThroughputRandom,jdbcType=VARCHAR},
+			</if>
+			<if test="projId != null">
+				projId = #{projId,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null">
+				createTime = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				updateTime = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createAt != null">
+				createAt = #{createAt,jdbcType=INTEGER},
+			</if>
+			<if test="lowNum != null">
+				lowNum = #{lowNum,jdbcType=VARCHAR},
+			</if>
+			<if test="lowRsrp != null">
+				lowRsrp = #{lowRsrp,jdbcType=VARCHAR},
+			</if>
+			<if test="lowSinr != null">
+				lowSinr = #{lowSinr,jdbcType=VARCHAR},
+			</if>
+			<if test="lowCallSuccPercent != null">
+				lowCallSuccPercent =
+				#{lowCallSuccPercent,jdbcType=VARCHAR},
+			</if>
+			<if test="middleNum != null">
+				middleNum = #{middleNum,jdbcType=VARCHAR},
+			</if>
+			<if test="middleRsrp != null">
+				middleRsrp = #{middleRsrp,jdbcType=VARCHAR},
+			</if>
+			<if test="middleSinr != null">
+				middleSinr = #{middleSinr,jdbcType=VARCHAR},
+			</if>
+			<if test="middleCallSuccPercent != null">
+				middleCallSuccPercent =
+				#{middleCallSuccPercent,jdbcType=VARCHAR},
+			</if>
+			<if test="highNum != null">
+				highNum = #{highNum,jdbcType=VARCHAR},
+			</if>
+			<if test="highRsrp != null">
+				highRsrp = #{highRsrp,jdbcType=VARCHAR},
+			</if>
+			<if test="highSinr != null">
+				highSinr = #{highSinr,jdbcType=VARCHAR},
+			</if>
+			<if test="highCallSuccPercent != null">
+				highCallSuccPercent =
+				#{highCallSuccPercent,jdbcType=VARCHAR},
+			</if>
+			<if test="baseNum != null">
+				baseNum = #{baseNum,jdbcType=VARCHAR},
+			</if>
+			<if test="baseRsrp != null">
+				baseRsrp = #{baseRsrp,jdbcType=VARCHAR},
+			</if>
+			<if test="baseSinr != null">
+				baseSinr = #{baseSinr,jdbcType=VARCHAR},
+			</if>
+			<if test="baseCallSuccPercent != null">
+				baseCallSuccPercent =
+				#{baseCallSuccPercent,jdbcType=VARCHAR},
+			</if>
+			<if test="elevatorNum != null">
+				elevatorNum = #{elevatorNum,jdbcType=VARCHAR},
+			</if>
+			<if test="elevatorRsrp != null">
+				elevatorRsrp = #{elevatorRsrp,jdbcType=VARCHAR},
+			</if>
+			<if test="elevatorSinr != null">
+				elevatorSinr = #{elevatorSinr,jdbcType=VARCHAR},
+			</if>
+			<if test="elevatorCallSuccPercent != null">
+				elevatorCallSuccPercent =
+				#{elevatorCallSuccPercent,jdbcType=VARCHAR},
+			</if>
+			<if test="volteSwitch != null">
+				volteSwitch = #{volteSwitch,jdbcType=VARCHAR},
+			</if>
+			<if test="rsrpImage != null">
+				rsrpImage = #{rsrpImage,jdbcType=VARCHAR},
+			</if>
+			<if test="sinrImage != null">
+				sinrImage = #{sinrImage,jdbcType=VARCHAR},
+			</if>
+			<if test="downRateImage != null">
+				downRateImage = #{downRateImage,jdbcType=VARCHAR},
+			</if>
+			<if test="upRateImage != null">
+				upRateImage = #{upRateImage,jdbcType=VARCHAR},
+			</if>
+			<if test="flowCoverRsrpImage != null">
+				flowCoverRsrpImage =
+				#{flowCoverRsrpImage,jdbcType=VARCHAR},
+			</if>
+			<if test="flowCoverSinrImage != null">
+				flowCoverSinrImage =
+				#{flowCoverSinrImage,jdbcType=VARCHAR},
+			</if>
+			<if test="flowCoverpCIImage != null">
+				flowCoverpCIImage =
+				#{flowCoverpCIImage,jdbcType=VARCHAR},
+			</if>
+			<if test="testFlowImage != null">
+				testFlowImage = #{testFlowImage,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+
+
+</mapper>
