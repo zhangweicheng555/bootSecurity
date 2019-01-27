@@ -22,26 +22,21 @@ public class BaseStationBean {
 		super();
 	}
 
-	
 	public String getmENodeBID() {
 		return mENodeBID;
 	}
-
 
 	public void setmENodeBID(String mENodeBID) {
 		this.mENodeBID = mENodeBID;
 	}
 
-
 	public String getmTac() {
 		return mTac;
 	}
 
-
 	public void setmTac(String mTac) {
 		this.mTac = mTac;
 	}
-
 
 	public String getmAltitude() {
 		return mAltitude;

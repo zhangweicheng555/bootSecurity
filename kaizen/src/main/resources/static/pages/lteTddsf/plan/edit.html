@@ -10,32 +10,32 @@
 
 	
 	
-	<form class="layui-form" lay-filter="formDemo"  id="formDemo" style="margin-top: 20px;">
+	<form class="layui-form"  id="formDemo"  lay-filter="formDemo" style="margin-top: 20px;">
 	
-	<div class="layui-form-item">
+	  <div class="layui-form-item">
 	    <label class="layui-form-label" style="width: 150px;">基站号</label>
 	    <div class="layui-input-inline">
-	      <input type="hidden" name="id" id="id" >
-	      <input type="text" name="mENodeBID" id="mENodeBID"   required  lay-verify="required"  autocomplete="off" class="layui-input">
+	      <input type="hidden" name="id" id="id"   />
+	      <input type="text" name="enodeBID" id="enodeBID"   required  lay-verify="required"  autocomplete="off" class="layui-input">
 	    </div>
 	    
 	    <label class="layui-form-label" style="width: 150px;">基站名称</label>
 	    <div class="layui-input-inline" >
-	      <input type="text" name="mBaseStationName" id="mBaseStationName"   required  lay-verify="required"  autocomplete="off" class="layui-input">
+	      <input type="text" name="baseStationName" id="baseStationName"   required  lay-verify="required"  autocomplete="off" class="layui-input">
 	    </div>
 	    
 	    <label class="layui-form-label" style="width: 150px;">基站类型</label>
 	    <div class="layui-input-inline">
-	      <input type="text" name="mBaseStationType" id="mBaseStationType"   autocomplete="off" class="layui-input">
+	      <input type="text" name="baseStationType" id="baseStationType"   autocomplete="off" class="layui-input">
 	    </div>
 	  </div>
-	 
-	  
-	  
+	
+	
+	
 	  <div class="layui-form-item">
 	    <label class="layui-form-label" style="width: 150px;">行政区</label>
 	    <div class="layui-input-inline">
-	      <input type="text" name="region" id="region"     autocomplete="off" class="layui-input">
+	      <input type="text" name="administrativeArea" id="administrativeArea"     autocomplete="off" class="layui-input">
 	    </div>
 	    
 	    <label class="layui-form-label" style="width: 150px;">详细地址</label>
@@ -48,27 +48,46 @@
 	      <input type="text" name="commonStationName" id="commonStationName"   autocomplete="off" class="layui-input">
 	    </div>
 	  </div>
+	 
 	  
 	  <div class="layui-form-item">
-	    <label class="layui-form-label" style="width: 150px;">海拔</label>
-	    <div class="layui-input-inline">
-	      <input type="text" name="mAltitude" id="mAltitude"   autocomplete="off" class="layui-input">
-	    </div>
 	    <label class="layui-form-label" style="width: 150px;">经度</label>
 	    <div class="layui-input-inline">
-	      <input type="text" name="mLongitude" id="mLongitude"   autocomplete="off" class="layui-input">
+	      <input type="text" name="longitude" id="longitude"   autocomplete="off" class="layui-input">
 	    </div>
-
 	    <label class="layui-form-label" style="width: 150px;">纬度</label>
 	    <div class="layui-input-inline">
-	      <input type="text" name="mLatitude" id="mLatitude"   autocomplete="off" class="layui-input">
+	      <input type="text" name="latitude" id="latitude"   autocomplete="off" class="layui-input">
+	    </div>
+	    <label class="layui-form-label" style="width: 150px;">区县</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="districtCountry" id="districtCountry"   autocomplete="off" class="layui-input">
 	    </div>
 	  </div>
 	  
+	  
+	  
 	  <div class="layui-form-item">
-	    <label class="layui-form-label" style="width: 150px;">Tac</label>
+	    <label class="layui-form-label" style="width: 150px;">设备类型</label>
 	    <div class="layui-input-inline">
-	      <input type="text" name="mTac" id="mTac"   autocomplete="off" class="layui-input">
+	      <input type="text" name="deviceType" id="deviceType"   autocomplete="off" class="layui-input">
+	    </div>
+
+	    <label class="layui-form-label" style="width: 150px;">频段</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="videoFrequency" id="videoFrequency"   autocomplete="off" class="layui-input">
+	    </div>
+	    <label class="layui-form-label" style="width: 150px;">传输宽带</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="broadBand" id="broadBand"   autocomplete="off" class="layui-input">
+	    </div>
+	  </div>
+	  
+	  
+	  <div class="layui-form-item">
+	    <label class="layui-form-label" style="width: 150px;">传输ip配置</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="ipConfig" id="ipConfig"   autocomplete="off" class="layui-input">
 	    </div>
 
 	    <label class="layui-form-label" style="width: 150px;">测试工程师</label>
@@ -93,7 +112,7 @@
 	      <input type="text" name="backPersonPhone" id="backPersonPhone"   autocomplete="off" class="layui-input">
 	    </div>
 
-	    <label class="layui-form-label" style="width: 150px;color: red;">测试时间</label>
+	    <label class="layui-form-label"  style="width: 150px;color: red;">测试时间</label>
 	    <div class="layui-input-inline"> 
 	      <input type="text" name="testDate" id="testDate"   required  lay-verify="required"   autocomplete="off" class="layui-input">
 	    </div>
@@ -101,34 +120,47 @@
 	  
 	  
 	  <div class="layui-form-item">
-	    <label class="layui-form-label" style="width: 150px;">区县</label>
+	    <label class="layui-form-label" style="width: 150px;">楼层数</label>
 	    <div class="layui-input-inline">
-	      <input type="text" name="districtCountry" id="districtCountry"   autocomplete="off" class="layui-input">
+	      <input type="text" name="floorNumber" id="floorNumber"   autocomplete="off" class="layui-input">
 	    </div>
-	    <label class="layui-form-label" style="width: 150px;">设备类型</label>
+	    <label class="layui-form-label" style="width: 150px;">原有室分系统</label>
 	    <div class="layui-input-inline">
-	      <input type="text" name="deviceType" id="deviceType"   autocomplete="off" class="layui-input">
+	      <input type="text" name="oriSfSystem" id="oriSfSystem"   autocomplete="off" class="layui-input">
 	    </div>
 
-	    <label class="layui-form-label" style="width: 150px;">频段</label>
+	    <label class="layui-form-label"  style="width: 150px;">是否合路</label>
 	    <div class="layui-input-inline"> 
-	      <input type="text" name="videoFrequency" id="videoFrequency"    autocomplete="off" class="layui-input">
+	      <input type="text" name="combinationRoad" id="combinationRoad"     autocomplete="off" class="layui-input">
+	    </div>
+	   </div> 
+	    
+	  <div class="layui-form-item">
+	    <label class="layui-form-label" style="width: 150px;">单双路</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="singleAndDoubleRold" id="singleAndDoubleRold"   autocomplete="off" class="layui-input">
+	    </div>
+	    <label class="layui-form-label" style="width: 150px;">合路器是否安装正确</label>
+	    <div class="layui-input-inline">
+	      <input type="text" name="combinationRoadInstallOk" id="combinationRoadInstallOk"   autocomplete="off" class="layui-input">
+	    </div>
+	    <label class="layui-form-label" style="width: 150px;"></label>
+	    <div class="layui-input-inline">
 	    </div>
 	  </div>
 	  
-	  
 	  <div class="layui-form-item">
-	    <label class="layui-form-label" style="width: 150px;">传输宽带</label>
+	    <label class="layui-form-label" style="width: 150px;">站址类型</label>
 	    <div class="layui-input-inline">
-	      <input type="text" name="broadBand" id="broadBand"   autocomplete="off" class="layui-input">
+	      <input type="text" name="stationAddressType" id="stationAddressType"   autocomplete="off" class="layui-input">
 	    </div>
-	    <label class="layui-form-label" style="width: 150px;">传输ip配置</label>
+	    <label class="layui-form-label" style="width: 150px;">建筑物功能</label>
 	    <div class="layui-input-inline">
-	      <input type="text" name="ipConfig" id="ipConfig"   autocomplete="off" class="layui-input">
+	      <input type="text" name="buildingFunction" id="buildingFunction"   autocomplete="off" class="layui-input">
 	    </div>
 		<label class="layui-form-label" style="width: 150px;color: red;">处理人</label>
-		<input type="hidden" id="dealPersonIdModel" name="dealPersonIdModel" />
 	    <div class="layui-input-inline" id="dealPersonIdDiv">
+	          <input type="hidden" id="dealPersonIdModel" name="dealPersonIdModel" />
 		      <select name="dealPersonId" id="dealPersonId" lay-verify="required">
 		      </select>
 	    </div>
@@ -136,9 +168,10 @@
 	  </div>
 	  
 	  
-		<button class="layui-btn" id="formDemoBtn" style="display: none;" lay-submit lay-filter="formDemo">立即提交</button>
+		<button class="layui-btn" id="formDemoBtn" style="display: none;" lay-submit lay-filter="formDemoBtn">立即提交</button>
 	</form>
 	
+
 	
 	
 	
@@ -175,7 +208,7 @@
    		 }
 	  });
 	//监听提交
-	  form.on('submit(formDemo)', function(data){
+	  form.on('submit(formDemoBtn)', function(data){
 		flag=true;
 	    return false;
 	  });
@@ -194,11 +227,13 @@
 				   type: "POST",url: "/tdd/plan/findById",data: {"id":id},dataType:"json",
 				   success: function(msg){
 				     if(msg.success){
-				    	var model = jQuery.parseJSON(msg.object);
+				    	 var model=msg.object;
 				 		form.val("formDemo",model);
 				 		//加载项目下的所有的用户
-						  queryUserByProjId("dealPersonId",$("#dealPersonIdModel").val());
-						  form.render('select'); 
+				 		console.info(model.dealPersonId);
+				 		$("#dealPersonIdModel").val(model.dealPersonId);
+						queryUserByProjId("dealPersonId",$("#dealPersonIdModel").val());
+						form.render('select'); 
 				     }else{
 				    	 layer.msg('返回修改数据信息异常');
 				     }

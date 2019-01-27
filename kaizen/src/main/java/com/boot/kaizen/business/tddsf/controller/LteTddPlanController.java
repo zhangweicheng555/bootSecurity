@@ -23,7 +23,7 @@ import com.github.pagehelper.PageInfo;
  * @date 2019年1月25日 下午5:13:41
  */
 @RestController
-@RequestMapping("/tdd/plane")
+@RequestMapping("/tdd/plan")
 public class LteTddPlanController {
 
 	@Autowired

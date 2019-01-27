@@ -17,17 +17,24 @@ public class LteTddPlan implements Serializable {
 	// 基站描述
 	private String enodeBID;// 基站号
 	private String baseStationName;// 基站名
-	private String testDate;// 测试时间 yyyy-mm-dd
-	private String districtCountry;// 区县
-	private String address;// 详细地址
 	private String baseStationType;// 基站类型 站点类型
-	private String deviceType;// 设备类型
-	private String videoFrequency;// 频段
-
+	
+	private String testDate;// 测试时间 yyyy-mm-dd
+	private String address;// 详细地址
+	private String administrativeArea;// 行政区
+	private String commonStationName;// 共址站名
+	
 	// 相关参数验收
 	private String longitude;// 经度
 	private String latitude;// 纬度
+	private String districtCountry;// 区县
+	
+	
+	private String deviceType;// 设备类型
+	private String videoFrequency;// 频段
 	private String broadBand;// 传输宽带
+	
+	
 	private String ipConfig;// 传输ip配置
 
 	private String testPerson;// 测试工程师
@@ -35,10 +42,13 @@ public class LteTddPlan implements Serializable {
 	private String backPerson;// 后台工程师
 	private String backPersonPhone;// 后台工程师电话
 
+	
+	
+	
 	private String dealPersonId;// 接收改计划任务的人的id
 
-	private String administrativeArea;// 行政区
-	private String commonStationName;// 共址站名
+	
+	
 	private String stationAddressType;// 站址类型
 	private String buildingFunction;// 建筑物功能
 	private String floorNumber;// 楼层数

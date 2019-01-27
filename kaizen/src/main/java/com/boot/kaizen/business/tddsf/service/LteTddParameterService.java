@@ -1,7 +1,9 @@
 package com.boot.kaizen.business.tddsf.service;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import org.apache.commons.collections4.map.HashedMap;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.DisabledException;
@@ -91,6 +93,26 @@ public class LteTddParameterService implements ILteTddParameterService {
 			deleteByPrimaryKey(id);
 		}
 		return new JsonMsgUtil(true, "删除成功:共删除【" + idsArray.length + "】条记录", null);
+	}
+
+	@Override
+	public void upsert(LteTddParameter lteFddParameter) {
+		Map<String, Object> map = new HashedMap<>();
+		map.put("projId", lteFddParameter.getProjId());
+		map.put("enodeBID", lteFddParameter.getEnodeBID());
+		map.put("beginTime", lteFddParameter.getTestDate());
+		map.put("endTime", lteFddParameter.getTestDate());
+		List<LteTddParameter> lteFddParameters = find(map);
+		if (lteFddParameters != null && lteFddParameters.size() > 0) {
+			LteTddParameter model = lteFddParameters.get(0);
+			lteFddParameter.setId(model.getId());
+			lteFddParameter.setUpdateTime(new Date());
+			lteTddParameterMapper.updateByPrimaryKeySelective(lteFddParameter);
+		} else {// 添加
+			lteFddParameter.setId(MyUtil.getUuid());
+			lteFddParameter.setCreateTime(new Date());
+			insertSelective(lteFddParameter);
+		}
 	}
 
 }

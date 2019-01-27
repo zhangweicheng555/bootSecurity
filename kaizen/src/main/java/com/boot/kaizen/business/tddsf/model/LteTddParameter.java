@@ -67,10 +67,10 @@ public class LteTddParameter implements Serializable {
 	private Integer createAt;
 
 	// 底层
-	private String lowNum;
-	private String lowRsrp;
-	private String lowSinr;
-	private String lowCallSuccPercent;
+	private String lowNum;//楼层
+	private String lowRsrp;//RSRP
+	private String lowSinr;//SINR
+	private String lowCallSuccPercent;//呼叫成功率
 	// 中层
 	private String middleNum;
 	private String middleRsrp;

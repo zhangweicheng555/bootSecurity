@@ -18,7 +18,7 @@
 							<form class="form-inline" onsubmit="return false">
 								<div class="form-group">
 									基站号：
-									<input id="enodeBID" name="enodeBID" type="text" class="form-control" placeholder="精确查询"> 
+									<input id="enodeBID" name="enodeBID" type="text" class="form-control" placeholder="模糊查询"> 
 									
 									<button id="searchBt" class="layui-btn layui-btn-sm">
 										<i class="layui-icon">&#xe615;</i>搜索
@@ -132,7 +132,7 @@
 	  table.on('tool(infolist)', function(obj){
 	    var row = obj.data;
 	    if(obj.event === 'del'){//单行删除
-	    	common.getConfirmDelDialog("确定要删除吗？","删除【"+row.enodeBID+"】记录",2,"/tdd/cellcheck/delete",{"ids":row.id},function(){deleteRow(obj);});
+	    	common.getConfirmDelDialog("确定要删除吗？","删除【"+row.enodeBID+"】记录",2,"/tdd/cellcheck/deleteByIds",{"ids":row.id},function(){deleteRow(obj);});
 	    	if(checkArray){
 	   			checkArray.length=0
 	   		}

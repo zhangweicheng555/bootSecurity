@@ -80,7 +80,7 @@
 	  var tableIns=table.render({
 	    elem: '#infolist'    
 	    ,id:'infolist'
-	    ,url:'/tdd/plane/find'  
+	    ,url:'/tdd/plan/find'  
 	    ,method:'post' 
 	    ,where:{
 			   "map[enodeBID]":$("#enodeBID").val()
@@ -146,18 +146,18 @@
 	  table.on('tool(infolist)', function(obj){
 	    var row = obj.data;
 	    if(obj.event === 'del'){//单行删除
-	    	common.getConfirmDelDialog("确定要删除吗？","删除【"+row.enodeBID+"】记录",2,"/tdd/plane/deleteByIds",{"ids":row.id},function(){deleteRow(obj);});
+	    	common.getConfirmDelDialog("确定要删除吗？","删除【"+row.enodeBID+"】记录",2,"/tdd/plan/deleteByIds",{"ids":row.id},function(){deleteRow(obj);});
 	    	if(checkArray){
 	   			checkArray.length=0
 	   		}
 	    } else if(obj.event === 'edit'){//编辑
-		    common.openEditDialog(fresh,"编辑","pages/lteTddsf/plan/edit.html?id="+row.id,"1200px","650px",false,"确定","取消","/tdd/plane/edit");
+		    common.openEditDialog(fresh,"编辑","pages/lteTddsf/plan/edit.html?id="+row.id,"1200px","650px",false,"确定","取消","/tdd/plan/edit");
 	    }
 	  });
 	  
 	  /**添加*/
 	  $("#addProjectBtn").click(function(){//添加
-		  common.openEditDialog(fresh,"添加","pages/lteTddsf/plan/add.html","1200px","650px",false,"确定","取消","/tdd/plane/edit");
+		  common.openEditDialog(fresh,"添加","pages/lteTddsf/plan/add.html","1200px","650px",false,"确定","取消","/tdd/plan/edit");
 	  });
 	  
 	  /**搜索*/
@@ -168,7 +168,7 @@
 	  /**多项删除*/
 	  $("#deleteBtnModel").click(function(){
 		  if(checkArray && checkArray.length>0){
-		  	  common.getConfirmDelDialog("确定要删除吗？",'共删除【'+checkArray.length+'】条记录',2,"/tdd/plane/deleteByIds",{"ids":checkArray.join(",")},fresh);
+		  	  common.getConfirmDelDialog("确定要删除吗？",'共删除【'+checkArray.length+'】条记录',2,"/tdd/plan/deleteByIds",{"ids":checkArray.join(",")},fresh);
 		  	if(checkArray){
 	   			checkArray.length=0
 	   		}

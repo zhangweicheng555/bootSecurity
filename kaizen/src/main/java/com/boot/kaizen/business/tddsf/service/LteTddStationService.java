@@ -1,18 +1,15 @@
 package com.boot.kaizen.business.tddsf.service;
-
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
-
+import org.apache.commons.collections4.map.HashedMap;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.stereotype.Service;
-
 import com.boot.kaizen.business.tddsf.dao.LteTddStationMapper;
-import com.boot.kaizen.business.tddsf.model.LteTddParameter;
 import com.boot.kaizen.business.tddsf.model.LteTddStation;
 import com.boot.kaizen.entity.LoginUser;
-import com.boot.kaizen.model.lte.LteConfig;
 import com.boot.kaizen.util.JsonMsgUtil;
 import com.boot.kaizen.util.MyUtil;
 
@@ -93,8 +90,28 @@ public class LteTddStationService implements ILteTddStationService {
 	}
 
 	@Override
-	public void find(Map<String, Object> map) {
-		lteTddStationMapper.find(map);
+	public List<LteTddStation> find(Map<String, Object> map) {
+		return lteTddStationMapper.find(map);
+	}
+
+	@Override
+	public void upSert(LteTddStation lteTddStation) {
+		Map<String, Object> map = new HashedMap<>();
+		map.put("projId", lteTddStation.getProjId());
+		map.put("enodeBID", lteTddStation.getEnodeBID());
+		map.put("beginTime", lteTddStation.getTestDate());
+		map.put("endTime", lteTddStation.getTestDate());
+		List<LteTddStation> lteTddStations = find(map);
+		if (lteTddStations != null && lteTddStations.size() > 0) {
+			LteTddStation model = lteTddStations.get(0);
+			lteTddStation.setId(model.getId());
+			lteTddStation.setUpdateTime(new Date());
+			lteTddStationMapper.updateByPrimaryKeySelective(lteTddStation);
+		} else {// 添加
+			lteTddStation.setId(MyUtil.getUuid());
+			lteTddStation.setCreateTime(new Date());
+			insertSelective(lteTddStation);
+		}
 	}
 
 }

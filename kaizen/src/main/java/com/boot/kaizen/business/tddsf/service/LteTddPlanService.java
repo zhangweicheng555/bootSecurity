@@ -1,5 +1,7 @@
 package com.boot.kaizen.business.tddsf.service;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
@@ -8,8 +10,8 @@ import org.springframework.security.authentication.DisabledException;
 import org.springframework.stereotype.Service;
 import com.boot.kaizen.business.tddsf.dao.LteTddPlanMapper;
 import com.boot.kaizen.business.tddsf.model.LteTddPlan;
+import com.boot.kaizen.controller.lte.model.BaseStationBean;
 import com.boot.kaizen.entity.LoginUser;
-import com.boot.kaizen.model.lteFddModel.LteFddPlan;
 import com.boot.kaizen.util.JsonMsgUtil;
 import com.boot.kaizen.util.MyUtil;
 
@@ -40,7 +42,7 @@ public class LteTddPlanService implements ILteTddPlanService {
 	}
 
 	@Override
-	public List<LteFddPlan> find(Map<String, Object> map) {
+	public List<LteTddPlan> find(Map<String, Object> map) {
 		return lteTddPlanMapper.find(map);
 	}
 
@@ -75,7 +77,6 @@ public class LteTddPlanService implements ILteTddPlanService {
 		LteTddPlan model = selectByPrimaryKey(id);
 		if (model != null) {
 			j = new JsonMsgUtil(true, "操作成功", model);
-			j.setObject(model);
 		} else {
 			j.setMsg("查询的数据不存在");
 		}
@@ -92,6 +93,48 @@ public class LteTddPlanService implements ILteTddPlanService {
 			deleteByPrimaryKey(id);
 		}
 		return new JsonMsgUtil(true, "删除成功:共删除【" + idsArray.length + "】条记录", null);
+	}
+
+	@Override
+	public List<Map<String, Object>> queryPlanList(Long userId, Long projId,String testDate) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("projId", projId);
+		map.put("dealPersonId", userId);
+		map.put("beginTime", testDate);
+		map.put("endTime", testDate);
+		List<LteTddPlan> lteFddPlans = find(map);
+		List<Map<String, Object>> list = new ArrayList<>();
+		if (lteFddPlans != null && lteFddPlans.size() > 0) {
+			for (LteTddPlan lteFddPlan : lteFddPlans) {
+				Map<String, Object> model = new HashMap<>();
+				model.put("planId", lteFddPlan.getId());
+				model.put("testDate", lteFddPlan.getTestDate());
+				list.add(model);
+			}
+		}
+		return list;
+	}
+
+	@Override
+	public List<BaseStationBean> queryBaseStationList(Long userId, Long projId, String testDate) {
+		Map<String, Object> map=new HashMap<>();
+		map.put("projId", projId);
+		map.put("dealPersonId", userId);
+		map.put("testDate", testDate);
+		List<LteTddPlan> lteFddPlans = find(map);
+		List<BaseStationBean> baseStationBeans=new ArrayList<>();
+		for (LteTddPlan lteTddPlan : lteFddPlans) {
+			BaseStationBean baseStationBean=new BaseStationBean();
+			baseStationBean.setmAltitude("");
+			baseStationBean.setmBaseStationName(lteTddPlan.getBaseStationName());
+			baseStationBean.setmBaseStationType(lteTddPlan.getBaseStationType());
+			baseStationBean.setmENodeBID(lteTddPlan.getEnodeBID());
+			baseStationBean.setmLatitude(lteTddPlan.getLatitude());
+			baseStationBean.setmLongitude(lteTddPlan.getLongitude());
+			baseStationBean.setmTac("");
+			baseStationBeans.add(baseStationBean);
+		}
+		return baseStationBeans;
 	}
 
 }

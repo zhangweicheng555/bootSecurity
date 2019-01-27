@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.boot.kaizen.business.tddsf.model.LteTddPlan;
-import com.boot.kaizen.model.lteFddModel.LteFddPlan;
 
 @Mapper
 public interface LteTddPlanMapper {
@@ -19,6 +18,6 @@ public interface LteTddPlanMapper {
 
 	int updateByPrimaryKeySelective(LteTddPlan record);
 
-	List<LteFddPlan> find(@Param("map") Map<String, Object> map);
+	List<LteTddPlan> find(@Param("map") Map<String, Object> map);
 
 }

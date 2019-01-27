@@ -24,4 +24,12 @@ public interface ILteTddParameterService {
 
 	JsonMsgUtil deleteByIds(String ids);
 
+	/**
+	 * 
+	* @Description: app上传小区测试信息
+	* @author weichengz
+	* @date 2019年1月27日 下午10:48:42
+	 */
+	void upsert(LteTddParameter lteFddParameter);
+
 }
