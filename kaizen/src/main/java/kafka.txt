@@ -1,0 +1,110 @@
+kafaka的安装运行：
+1.安装zookeeper,并配置zookeeper的环境变量：
+      ZOOKEEPER_HOME
+      bin目录在path环境变量中也要配置
+ 2.启动windows的ZOOKEEPER
+    zkServer.cmd
+
+3.修改kafka的日志目录
+ D:\kafkaaz\kafka_2.11-0.10.2.0\config\server.properties
+  改为 log.dirs=D:\\kafkaaz\\log
+ 
+4.启动kafaka服务端
+    kafka-server-start.bat  D:\kafkaaz\kafka_2.11-0.10.2.0\config\server.properties
+
+5.创建主题  （先进入kafka的window目录：D:\kafkaaz\kafka_2.11-0.10.2.0\bin\windows）
+  kafka-topics.bat    --create --zookeeper localhost:2181 --replication-factor 1 --partition 1 --topic weicheng
+ 
+ 6.创建生产者/消费者（先进入kafka的window目录：D:\kafkaaz\kafka_2.11-0.10.2.0\bin\windows）
+    生产者启动：  kafka-console-producer.bat  --broker-list localhost:9092  --topic weicheng
+    消费者启动：  kafka-console-consumer.bat  --zookeeper localhost:2181  --topic weicheng
+    
+    
+    
+  kafka的常用命令：（先进入kafka的window目录：D:\kafkaaz\kafka_2.11-0.10.2.0\bin\windows）
+  1.列出所有主题      kafka-topics.bat -list -zookeeper localhost:2181
+  2.描述主题   kafka-topics.bat -describe -zookeeper localhost:2181 -topic  weicheng   这是我的第一个kafka  (这个待定  这个应该是查看topic的详细信息，)
+   3.从头读取消息    kafka-console-consumer.bat  -zookeeper localhost:2181 -topic weicheng  -from-beginning
+   4. 删除主题  (注意使用这个的前提：在server.properties 里面将delete.topic.enable=true，否则删除操作不起作用)
+          kafka-run-class.bat kafka.admin.TopicCommand -delete -topic  test -zookeeper localhost:2181
+    5.查看topic的详细信息 kafka-topics.bat  -zookeeper localhost:2181 -describe -topic  weicheng
+    6.为topic增加partition  kafka-topics.bat  -zookeeper localhost:2181 -alter -partitions 20 -topic  weicheng
+    7.下线broker  
+     kafka-run-class.bat   kafka.admin.ShutdownBroker --zookeeper localhost:2181   broker     [brokerId]    --num.retries 3 --retry.interval.ms 60  shutdown broker
+     
+     
+     
+     8.实现kafka的读入读出：（先进入kafka的window目录：D:\kafkaaz\kafka_2.11-0.10.2.0\bin\windows）
+       connect-standalone.bat  D:\kafkaaz\kafka_2.11-0.10.2.0\config\connect-standalone-1.properties   D:\kafkaaz\kafka_2.11-0.10.2.0\config\connect-file-source-1.properties   D:\kafkaaz\kafka_2.11-0.10.2.0\config\connect-file-sink-1.properties
+       
+       配置好 ： config下面的   connect-file-sink.properties / connect-file-source.properties /  connect-standalone.properties   这三个文件即可
+       
+       
+   9.spring boot 整合kafka  实现队列的功能
+   
+   
+    @Component
+public class QuequProducer {
+
+	@Autowired
+	private KafkaTemplate kafkaTemplate;
+
+	/**
+	 * 发送消息到kafka,主题为test
+	 */
+	public void sendTest() {
+		kafkaTemplate.send("weicheng1","hello,kafka  " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS"))+"张维程");
+	}
+}
+    
+    =============================
+    @Component
+public class QuequConsumer {
+
+	 /**
+     * 监听test主题,有消息就读取
+     * [@param](https://my.oschina.net/u/2303379) message
+     */
+    @KafkaListener(topics = {"weicheng1"})
+    public void consumer(String message){
+        System.out.println(message);
+    }
+}
+ ===================================
+ 
+ 
+ public static void main(String[] args) {
+		SpringApplication.run(KafkaApplication.class, args);
+	}
+
+	@Autowired
+	private QuequProducer quequProducer;
+	
+	 //然后每隔1分钟执行一次
+    @Scheduled(fixedRate = 1000 * 2)
+    public void testKafka() throws Exception {
+    	quequProducer.sendTest();
+    }
+	
+	
+	======================================
+	
+		<dependency>
+			<groupId>org.apache.kafka</groupId>
+			<artifactId>kafka-streams</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.kafka</groupId>
+			<artifactId>spring-kafka</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.kafka</groupId>
+			<artifactId>spring-kafka-test</artifactId>
+			<scope>test</scope>
+		</dependency>
