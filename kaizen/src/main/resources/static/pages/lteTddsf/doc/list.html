@@ -18,7 +18,7 @@
 							<form class="form-inline" onsubmit="return false">
 								<div class="form-group">
 									基站号：
-									<input id="mENodeBID" name="mENodeBID" type="text" class="form-control" placeholder="模糊查询"> 
+									<input id="enodeBID" name="enodeBID" type="text" class="form-control" placeholder="模糊查询"> 
 									
 									测试时间：
 									<input type="text"  id="beginTime" class="form-control" name="beginTime" placeholder="大于等于">
@@ -81,20 +81,20 @@
 	  var tableIns=table.render({
 	    elem: '#infolist'    
 	    ,id:'infolist'
-	    ,url:'/fddhz/plan/query'  
+	    ,url:'/tdd/plan/find'  
 	    ,method:'post' 
 	    ,where:{
-			   "map[mENodeBID]":$("#mENodeBID").val()
+			   "map[enodeBID]":$("#enodeBID").val()
 			   ,"map[beginTime]":$("#beginTime").val()
 			   ,"map[endTime]":$("#endTime").val() 
 			   }
 	    ,cols: [[        
 	      {field:'id', width:'2%', title: 'ID', sort: true,type:'checkbox'}
 	      ,{title: '序号',width:'5%',templet: '#indexTpl',align:'center'}
-	      ,{field:'mENodeBID',   width:'19%', title: '基站号',align:'center'}
-	      ,{field:'mBaseStationName',  width:'19%', title: '基站名称',align:'center'}
+	      ,{field:'enodeBID',   width:'19%', title: '基站号',align:'center'}
+	      ,{field:'baseStationName',  width:'19%', title: '基站名称',align:'center'}
 	      ,{field:'status',   width:'16%', title: '审核状态',align:'center', templet: '#statusTpl'}
-	      ,{field:'testTime', width:'19%', title: '测试时间',align:'center'}
+	      ,{field:'testDate', width:'19%', title: '测试时间',align:'center'}
 	      ,{title:'操作', toolbar: '#editBtnBar', width:'19%',align:'center', fixed: 'right'}
 	    ]]
 	    ,page: true
@@ -136,7 +136,7 @@
 	  table.on('tool(infolist)', function(obj){
 	    var row = obj.data;
 	    if(obj.event === 'check'){//审核
-		    common.openEditDialog(fresh,"审核","pages/lteFddHz/doc/check.html?id="+row.id,"1200px","620px",false,"确定","取消","/fddhz/plan/edit");
+		    common.openEditDialog(fresh,"审核","pages/lteFddHz/doc/check.html?id="+row.id,"1200px","620px",false,"确定","取消","/tdd/plan/edit");
 	    }else if(obj.event === 'export'){
 	    	if(1==row.status){
 	    		 var token = localStorage.getItem("token");
@@ -222,7 +222,7 @@
 	  $("#clearBt").click(function(){
 		  $("#beginTime").val("");
 		  $("#endTime").val("");
-		  $("#mENodeBID").val("");
+		  $("#enodeBID").val("");
 		  fresh();
 	  });
 	  
@@ -230,7 +230,7 @@
 	  function fresh(){
 		  table.reload('infolist'
 				   ,{where:{
-					   "map[mENodeBID]":$("#mENodeBID").val()
+					   "map[enodeBID]":$("#enodeBID").val()
 					   ,"map[beginTime]":$("#beginTime").val()
 					   ,"map[endTime]":$("#endTime").val()
 					   }

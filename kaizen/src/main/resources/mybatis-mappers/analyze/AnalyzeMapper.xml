@@ -9,7 +9,7 @@
 		 	select 
            		 testTime as "name"
 		        ,count(1) as "allNum"
-		        ,sum(if(status !=1,0,1)) as "finishNum"
+		        ,sum(if(status =1,1,0)) as "finishNum"
 		    from  lte_plane 
 		    where 1=1 and testTime is not null and projId=#{projId}
 		    
@@ -32,7 +32,7 @@
 		 	select 
            		 date_format(testTime,'%Y-%m') as "name"
 		        ,count(1) as "allNum"
-		        ,sum(if(status !=1,0,1)) as "finishNum"
+		        ,sum(if(status =1,1,0)) as "finishNum"
 		    from  lte_plane 
 		    where 1=1 and testTime is not null  and projId=#{projId}
            		
@@ -60,7 +60,7 @@
 				   p.dealPersonId
 				   ,case when u.nickname is null then '未知' else u.nickname end as name
 				   ,count(*)  as num 
-				   ,sum(if(p.status !=1,0,1)) as  finish
+				   ,sum(if(p.status =1,1,0)) as  finish
 				from 
 				   lte_plane p left join sys_user u on  p.dealPersonId=u.id
 				where  p.testTime is not null   and projId=#{projId}
@@ -85,7 +85,7 @@
 		 	select 
            		 testTime as "name"
 		        ,count(1) as "allNum"
-		        ,sum(if(status !=1,0,1)) as "finishNum"
+		        ,sum(if(status =1,1,0)) as "finishNum"
 		    from  lte_fdd_plane 
 		    where 1=1 and testTime is not null and projId=#{projId} and jzType=#{jzType}
 		    
@@ -108,7 +108,7 @@
 		 	select 
            		 date_format(testTime,'%Y-%m') as "name"
 		        ,count(1) as "allNum"
-		        ,sum(if(status !=1,0,1)) as "finishNum"
+		        ,sum(if(status =1,1,0)) as "finishNum"
 		    from  lte_fdd_plane 
 		    where 1=1 and testTime is not null and projId=#{projId} and jzType=#{jzType}
            		
@@ -134,7 +134,7 @@
 				   p.dealPersonId
 				   ,case when u.nickname is null then '未知' else u.nickname end as name
 				   ,count(*)  as num 
-				   ,sum(if(p.status !=1,0,1)) as  finish
+				   ,sum(if(p.status =1,1,0)) as  finish
 				from 
 				   lte_fdd_plane p left join sys_user u on  p.dealPersonId=u.id
 				where  p.testTime is not null   and projId=#{projId} and jzType=#{jzType}
@@ -165,7 +165,7 @@
 		 	select 
            		 testDate as "name"
 		        ,count(1) as "allNum"
-		        ,sum(if(status !=1,0,1)) as "finishNum"
+		        ,sum(if(status =1,1,0)) as "finishNum"
 		    from  lte_tdd_plan 
 		    where 1=1 and testDate is not null and projId=#{projId}
 		    
@@ -188,7 +188,7 @@
 		 	select 
            		 date_format(testDate,'%Y-%m') as "name"
 		        ,count(1) as "allNum"
-		        ,sum(if(status !=1,0,1)) as "finishNum"
+		        ,sum(if(status =1,1,0)) as "finishNum"
 		    from  lte_tdd_plan 
 		    where 1=1 and testDate is not null  and projId=#{projId}
            		
@@ -216,7 +216,7 @@
 				   p.dealPersonId
 				   ,case when u.nickname is null then '未知' else u.nickname end as name
 				   ,count(*)  as num 
-				   ,sum(if(p.status !=1,0,1)) as  finish
+				   ,sum(if(p.status =1,1,0)) as  finish
 				from 
 				   lte_tdd_plan p left join sys_user u on  p.dealPersonId=u.id
 				where  p.testDate is not null   and projId=#{projId}

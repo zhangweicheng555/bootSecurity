@@ -18,7 +18,7 @@
 							<form class="form-inline" onsubmit="return false">
 								<div class="form-group">
 									基站号：
-									<input id="enodeBID" name="enodeBID" type="text" class="form-control" placeholder="精确查询"> 
+									<input id="enodeBID" name="enodeBID" type="text" autocomplete="off"  class="form-control" placeholder="精确查询"> 
 									
 									<button id="searchBt" class="layui-btn layui-btn-sm">
 										<i class="layui-icon">&#xe615;</i>搜索
@@ -75,12 +75,12 @@
 	    ,cols: [[        
 	      {field:'id', width:'4%', title: 'ID', sort: true,type:'checkbox'}
 	      ,{title: '序号',width:'5%',templet: '#indexTpl',align:'center'}
-	      ,{field:'enodeBID', width:'13%', title: '站号',align:'center'}
-	      ,{field:'baseStationName', width:'13%', title: '站名',align:'center'}
-	      ,{field:'testDate',   width:'13%', title: '测试时间',align:'center'}
-	      ,{field:'csfbFunctionTestPass',   width:'13%', title: 'CSFB功能测试是否通过',align:'center'}
+	      ,{field:'enodeBID', width:'15%', title: '站号',align:'center'}
+	      ,{field:'baseStationName', width:'15%', title: '站名',align:'center'}
+	      ,{field:'testDate',   width:'15%', title: '测试时间',align:'center'}
+	      ,{field:'csfbFunctionTestPass',   width:'16%', title: 'CSFB功能测试是否通过',align:'center'}
 	      ,{field:'volteFunctionTestPass',   width:'16%', title: 'VoLTE功能测试是否通过',align:'center'}
-	      ,{title:'操作', toolbar: '#editBtnBar', width:'10%',align:'center', fixed: 'right'}
+	      ,{title:'操作', toolbar: '#editBtnBar', width:'15%',align:'center', fixed: 'right'}
 	    ]]
 	    ,page: true
 	    ,limit:10

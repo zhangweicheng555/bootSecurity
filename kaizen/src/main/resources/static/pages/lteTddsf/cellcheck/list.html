@@ -18,7 +18,7 @@
 							<form class="form-inline" onsubmit="return false">
 								<div class="form-group">
 									基站号：
-									<input id="enodeBID" name="enodeBID" type="text" class="form-control" placeholder="模糊查询"> 
+									<input id="enodeBID" name="enodeBID" type="text" class="form-control" autocomplete="off"  placeholder="模糊查询"> 
 									
 									<button id="searchBt" class="layui-btn layui-btn-sm">
 										<i class="layui-icon">&#xe615;</i>搜索
@@ -81,11 +81,11 @@
 			   }
 	    ,cols: [[        
 	      {field:'id', width:'4%', title: 'ID', sort: true,type:'checkbox'}
-	      ,{title: '序号',width:'4%',templet: '#indexTpl',align:'center'}
+	      ,{title: '序号',width:'6%',templet: '#indexTpl',align:'center'}
 	      ,{field:'enodeBID', width:'8.2%', title: '基站号',align:'center'}
 	      ,{field:'baseStationName', width:'11.2%', title: '基站名称',align:'center'}
 	      ,{field:'cellId',  width:'8.2%', title: '小区ID',align:'center'}
-	      ,{field:'cellName',width:'12.2%', title: '小区名字',align:'center'}
+	      ,{field:'cellName',width:'10.2%', title: '小区名字',align:'center'}
 	      ,{field:'pci',   width:'7.2%', title: 'PCI',align:'center'}
 	      ,{field:'eci',   width:'7.2%', title: 'ECI',align:'center'}
 	      ,{field:'tac',   width:'7.2%', title: 'TAC',align:'center'}

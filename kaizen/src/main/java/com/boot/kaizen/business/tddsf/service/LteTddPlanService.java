@@ -1,4 +1,5 @@
 package com.boot.kaizen.business.tddsf.service;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -53,20 +54,47 @@ public class LteTddPlanService implements ILteTddPlanService {
 		}
 		if (StringUtils.isNoneBlank(lteTddPlan.getId())) {// edit
 			lteTddPlan.setUpdateTime(new Date());
-			lteTddPlan.setStatus(0);
 			updateByPrimaryKeySelective(lteTddPlan);
 		} else {// add
 			String id = MyUtil.getUuid();
 			Integer projId = Integer.valueOf(loginUser.getProjId().toString());
-			Date createTime = new Date();
 			Integer createAt = Integer.valueOf(loginUser.getId().toString());
-			lteTddPlan.setId(id);
-			lteTddPlan.setProjId(projId);
-			lteTddPlan.setCreateTime(createTime);
-			lteTddPlan.setCreateAt(createAt);
-			insertSelective(lteTddPlan);
+			if (checkInfo(lteTddPlan,projId)) {
+				lteTddPlan.setId(id);
+				lteTddPlan.setProjId(projId);
+				lteTddPlan.setCreateTime(new Date());
+				lteTddPlan.setCreateAt(createAt);
+				lteTddPlan.setStatus(0);
+				insertSelective(lteTddPlan);
+			}else {
+				throw new IllegalArgumentException("改项目下已经存在此站号信息");
+			}
 		}
 		return new JsonMsgUtil(true, "修改成功", lteTddPlan);
+	}
+
+	/**
+	 * 项目id/测试时间/站号
+	 * @Description: 核对站号是不是存在
+	 * @author weichengz
+	 * @date 2019年2月2日 下午9:02:05
+	 */
+	private boolean checkInfo(LteTddPlan lteTddPlan,Integer projId) {
+		Boolean flag=true;
+		String enodeBID = lteTddPlan.getEnodeBID();
+		String testDate = lteTddPlan.getTestDate();
+		if (StringUtils.isBlank(enodeBID) || StringUtils.isBlank(testDate)) {
+			throw new IllegalArgumentException("【站号，测试时间】不能为空");
+		}
+		Map<String, Object> map=new HashMap<>();
+		map.put("projId", projId);
+		map.put("enodeBID", enodeBID);
+		map.put("testDate", testDate);
+		List<LteTddPlan> lteTddPlans = find(map);
+		if (lteTddPlans != null && lteTddPlans.size()>0) {
+			flag=false;
+		}
+		return flag;
 	}
 
 	@Override
@@ -97,7 +125,7 @@ public class LteTddPlanService implements ILteTddPlanService {
 	}
 
 	@Override
-	public List<Map<String, Object>> queryPlanList(Long userId, Long projId,String testDate) {
+	public List<Map<String, Object>> queryPlanList(Long userId, Long projId, String testDate) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("projId", projId);
 		map.put("dealPersonId", userId);
@@ -118,14 +146,14 @@ public class LteTddPlanService implements ILteTddPlanService {
 
 	@Override
 	public List<BaseStationBean> queryBaseStationList(Long userId, Long projId, String testDate) {
-		Map<String, Object> map=new HashMap<>();
+		Map<String, Object> map = new HashMap<>();
 		map.put("projId", projId);
 		map.put("dealPersonId", userId);
 		map.put("testDate", testDate);
 		List<LteTddPlan> lteFddPlans = find(map);
-		List<BaseStationBean> baseStationBeans=new ArrayList<>();
+		List<BaseStationBean> baseStationBeans = new ArrayList<>();
 		for (LteTddPlan lteTddPlan : lteFddPlans) {
-			BaseStationBean baseStationBean=new BaseStationBean();
+			BaseStationBean baseStationBean = new BaseStationBean();
 			baseStationBean.setmAltitude("");
 			baseStationBean.setmBaseStationName(lteTddPlan.getBaseStationName());
 			baseStationBean.setmBaseStationType(lteTddPlan.getBaseStationType());

@@ -70,6 +70,9 @@
 	<if test="map.jzType != null and map.jzType != '' ">
            and jzType = #{map.jzType} 
        </if>
+	<if test="map.testTime != null and map.testTime != '' ">
+           and testTime = #{map.testTime} 
+       </if>
   </select>
   
   

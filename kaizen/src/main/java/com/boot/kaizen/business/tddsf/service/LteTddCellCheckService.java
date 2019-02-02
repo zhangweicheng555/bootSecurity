@@ -1,6 +1,7 @@
 package com.boot.kaizen.business.tddsf.service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -60,13 +61,37 @@ public class LteTddCellCheckService implements ILteTddCellCheckService {
 			Integer projId = Integer.valueOf(loginUser.getProjId().toString());
 			Date createTime = new Date();
 			Integer createAt = Integer.valueOf(loginUser.getId().toString());
-			lteTddCellCheck.setId(id);
-			lteTddCellCheck.setProjId(projId);
-			lteTddCellCheck.setCreateTime(createTime);
-			lteTddCellCheck.setCreateAt(createAt);
-			insertSelective(lteTddCellCheck);
+			
+			if (checkInfo(projId, lteTddCellCheck)) {
+				lteTddCellCheck.setId(id);
+				lteTddCellCheck.setProjId(projId);
+				lteTddCellCheck.setCreateTime(createTime);
+				lteTddCellCheck.setCreateAt(createAt);
+				insertSelective(lteTddCellCheck);
+			}else {
+				throw new IllegalArgumentException("该站号下已经存在改小区的信息");
+			}
 		}
 		return new JsonMsgUtil(true, "修改成功", lteTddCellCheck);
+	}
+
+	private Boolean checkInfo(Integer projId, LteTddCellCheck lteTddCellCheck) {
+		Boolean flag = true;
+		String enodeBID = lteTddCellCheck.getEnodeBID();
+		String testDate = lteTddCellCheck.getTestDate();
+		String cellId = lteTddCellCheck.getCellId();
+		if (StringUtils.isBlank(enodeBID) || StringUtils.isBlank(testDate) || StringUtils.isBlank(cellId)) {
+			throw new IllegalArgumentException("【项目ID，测试时间，小区ID】不能为空");
+		}
+		Map<String, Object> map = new HashMap<>();
+		map.put("projId", projId);
+		map.put("testDate", testDate);
+		map.put("cellId", cellId);
+		List<LteTddCellCheck> lteTddCellChecks = find(map);
+		if (lteTddCellChecks != null && lteTddCellChecks.size() > 0) {
+			flag=false;
+		}
+		return flag;
 	}
 
 	@Override

@@ -24,12 +24,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.stereotype.Service;
-
-import com.alibaba.fastjson.JSONObject;
 import com.boot.kaizen.controller.lte.model.BaseStationBean;
 import com.boot.kaizen.dao.lteFdd.LteFddPlanMapper;
 import com.boot.kaizen.entity.LoginUser;
-import com.boot.kaizen.model.lte.LtePlan;
 import com.boot.kaizen.model.lteFddModel.LteFddCellCheck;
 import com.boot.kaizen.model.lteFddModel.LteFddParameter;
 import com.boot.kaizen.model.lteFddModel.LteFddPlan;
@@ -84,14 +81,43 @@ public class LteFddPlanServiceImpl implements ILteFddPlanService {
 			Integer createAt = Integer.valueOf(loginUser.getId().toString());
 			Integer status = LteFddPlan.StatueType.NO_CHECK.getCode();
 
-			lteFddPlan.setId(id);
-			lteFddPlan.setProjId(projId);
-			lteFddPlan.setCreateTime(createTime);
-			lteFddPlan.setCreateAt(createAt);
-			lteFddPlan.setStatus(status);
-			insertSelective(lteFddPlan);
+			if (checkinfo(projId, lteFddPlan)) {
+				lteFddPlan.setId(id);
+				lteFddPlan.setProjId(projId);
+				lteFddPlan.setCreateTime(createTime);
+				lteFddPlan.setCreateAt(createAt);
+				lteFddPlan.setStatus(status);
+				insertSelective(lteFddPlan);
+			} else {
+				throw new IllegalArgumentException("改项目下已存在该【站号，测试时间】的信息");
+			}
 		}
 		return new JsonMsgUtil(true, "修改成功", lteFddPlan);
+	}
+
+	/**
+	 * 同项目下不能存在相同的测试时间的站号
+	 * 
+	 * @Description: 校验信息
+	 * @author weichengz
+	 * @date 2019年2月2日 下午9:17:49
+	 */
+	private Boolean checkinfo(Integer projId, LteFddPlan lteFddPlan) {
+		Boolean flag = true;
+		String mENodeBID = lteFddPlan.getmENodeBID();
+		String testTime = lteFddPlan.getTestTime();
+		if (StringUtils.isBlank(mENodeBID) || StringUtils.isBlank(testTime)) {
+			throw new IllegalArgumentException("【站号，测试时时间】不能为空");
+		}
+		Map<String, Object> map = new HashMap<>();
+		map.put("testTime", testTime);
+		map.put("mENodeBID", mENodeBID);
+		map.put("projId", projId);
+		List<LteFddPlan> lteFddPlans = query(map);
+		if (lteFddPlans != null && lteFddPlans.size() > 0) {
+			flag = false;
+		}
+		return flag;
 	}
 
 	@Override
@@ -1474,7 +1500,6 @@ public class LteFddPlanServiceImpl implements ILteFddPlanService {
 				cell = row.getCell(22);
 				cell.setCellValue(map.get("backPersonPhone"));
 
-
 				// 5
 				HSSFSheet sheetFive = workbook.getSheetAt(4);
 				HSSFPatriarch patriarchFive = sheetFive.createDrawingPatriarch();
@@ -1728,7 +1753,6 @@ public class LteFddPlanServiceImpl implements ILteFddPlanService {
 				MyUtil.createExcelPic(workbook, patriarchThree, upRatePic2, (short) 0, 305, (short) 18, 325);
 				MyUtil.createExcelPic(workbook, patriarchThree, rsrpWirePic2, (short) 0, 328, (short) 18, 348);
 
-				
 				// 2
 				HSSFSheet sheetTwo = workbook.getSheetAt(1);
 				HSSFPatriarch patriarchTwo = sheetTwo.createDrawingPatriarch();
@@ -1783,7 +1807,7 @@ public class LteFddPlanServiceImpl implements ILteFddPlanService {
 					cell.setCellValue(map.get("csfbCallSuccfailure" + i));
 					cell = row.getCell(35);
 					cell.setCellValue(map.get("csfbCallSuccpercent" + i));
-					
+
 					row = sheetTwo.getRow(8 + j);
 					cell = row.getCell(15);
 					cell.setCellValue(map.get("volteWirelessAttempt" + i));
@@ -1793,7 +1817,7 @@ public class LteFddPlanServiceImpl implements ILteFddPlanService {
 					cell.setCellValue(map.get("volteWirelessConnFailure" + i));
 					cell = row.getCell(35);
 					cell.setCellValue(map.get("volteWirelessConnpercent" + i));
-					
+
 					row = sheetTwo.getRow(9 + j);
 					cell = row.getCell(15);
 					cell.setCellValue(map.get("csfbPassiveCallSuccAttempt" + i));
@@ -1803,7 +1827,7 @@ public class LteFddPlanServiceImpl implements ILteFddPlanService {
 					cell.setCellValue(map.get("csfbPassiveCallSuccfailure" + i));
 					cell = row.getCell(35);
 					cell.setCellValue(map.get("csfbPassiveCallSuccpercent" + i));
-					
+
 					row = sheetTwo.getRow(10 + j);
 					cell = row.getCell(15);
 					cell.setCellValue(map.get("volteDelay" + i));
@@ -1868,8 +1892,6 @@ public class LteFddPlanServiceImpl implements ILteFddPlanService {
 					cell = row.getCell(35);
 					cell.setCellValue(map.get("ftpUpThroughputRandom" + i));
 
-					
-					
 					row = sheetTwo.getRow(18 + j);
 					cell = row.getCell(15);
 					cell.setCellValue(map.get("systemChangeAttempt" + i));
@@ -1879,7 +1901,7 @@ public class LteFddPlanServiceImpl implements ILteFddPlanService {
 					cell.setCellValue(map.get("systemChangeFailure" + i));
 					cell = row.getCell(35);
 					cell.setCellValue(map.get("systemChangepercent" + i));
-					
+
 					row = sheetTwo.getRow(19 + j);
 					cell = row.getCell(15);
 					cell.setCellValue(map.get("csfbVoiceSuccAttempt" + i));
@@ -1890,8 +1912,6 @@ public class LteFddPlanServiceImpl implements ILteFddPlanService {
 					cell = row.getCell(35);
 					cell.setCellValue(map.get("csfbVoiceSuccpercent" + i));
 
-					
-					
 					j = j + 18;
 				}
 

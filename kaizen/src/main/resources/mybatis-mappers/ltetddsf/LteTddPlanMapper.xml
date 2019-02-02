@@ -153,6 +153,10 @@
 			test="map.endTime != null and map.endTime != '' and map.beginTime != null and map.beginTime != ''">
 			and testDate between #{map.beginTime} and #{map.endTime}
 		</if>
+		<if
+			test="map.testDate != null and map.testDate != '' ">
+			and testDate =#{map.testDate} 
+		</if>
 
 	</select>
 
