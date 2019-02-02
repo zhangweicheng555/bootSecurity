@@ -143,6 +143,9 @@
 		<if test="map.testTime != null and map.testTime != ''">
 			and testTime = #{map.testTime}
 		</if>
+		<if test="map.cellId != null and map.cellId != ''">
+			and cellId = #{map.cellId}
+		</if>
 		<if test="map.jzType != null and map.jzType != ''">
 			and jzType = #{map.jzType}
 		</if>

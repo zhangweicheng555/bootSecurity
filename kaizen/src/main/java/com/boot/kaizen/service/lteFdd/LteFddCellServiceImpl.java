@@ -1,6 +1,7 @@
 package com.boot.kaizen.service.lteFdd;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -51,14 +52,44 @@ public class LteFddCellServiceImpl implements ILteFddCellService {
 			Integer projId = Integer.valueOf(loginUser.getProjId().toString());
 			Date createTime = new Date();
 			Integer createAt = Integer.valueOf(loginUser.getId().toString());
-
-			LteFddCellCheck.setId(id);
-			LteFddCellCheck.setProjId(projId);
-			LteFddCellCheck.setCreateTime(createTime);
-			LteFddCellCheck.setCreateAt(createAt);
-			insertSelective(LteFddCellCheck);
+			if (chechInfo(projId, LteFddCellCheck)) {
+				LteFddCellCheck.setId(id);
+				LteFddCellCheck.setProjId(projId);
+				LteFddCellCheck.setCreateTime(createTime);
+				LteFddCellCheck.setCreateAt(createAt);
+				insertSelective(LteFddCellCheck);
+			}else {
+				throw new IllegalArgumentException("该项目下已经存在该站号的信息");
+			}
 		}
 		return new JsonMsgUtil(true, "修改成功", LteFddCellCheck);
+	}
+
+	/**
+	 * 
+	 * @Description: TODO
+	 * @author weichengz
+	 * @date 2019年2月2日 下午10:56:31
+	 */
+	private Boolean chechInfo(Integer projId, LteFddCellCheck lteFddCellCheck) {
+		Boolean flag=true;
+		String cellId = lteFddCellCheck.getCellId();
+		String mENodeBID = lteFddCellCheck.getmENodeBID();
+		String testTime = lteFddCellCheck.getTestTime();
+		if (projId == null || StringUtils.isBlank(cellId) || StringUtils.isBlank(mENodeBID)
+				|| StringUtils.isBlank(testTime)) {
+			throw new IllegalArgumentException("[项目ID，小区号，基站号，测试时间]不能为空");
+		}
+		Map<String, Object> map = new HashMap<>();
+		map.put("testTime", testTime);
+		map.put("mENodeBID", mENodeBID);
+		map.put("cellId", cellId);
+		map.put("projId", projId);
+		List<LteFddCellCheck> lteFddCellChecks = query(map);
+		if (lteFddCellChecks != null && lteFddCellChecks.size() > 0) {
+			flag=false;
+		}
+		return flag;
 	}
 
 	@Override
