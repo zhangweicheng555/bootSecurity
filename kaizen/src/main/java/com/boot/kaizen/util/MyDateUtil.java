@@ -269,13 +269,17 @@ public class MyDateUtil {
 	 * 根据指定日期获取 前几天 后几天的指定日期 dateStr :传入的指定日期 就是以这个日期为基础 num： 推移的天数 0：代表当天
 	 * 1：代表表当前日期的退后一天 -1：代表当前日期的前一天
 	 */
-	public static String getSomeDateByDay(String dateStr, int num) throws Exception {
+	public static String getSomeDateByDay(String dateStr, int num) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = sdf.parse(dateStr);
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(date);
-		cal.add(Calendar.DAY_OF_MONTH, num);
-		return sdf.format(cal.getTime());
+		try {
+			Date date = sdf.parse(dateStr);
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(date);
+			cal.add(Calendar.DAY_OF_MONTH, num);
+			return sdf.format(cal.getTime());
+		} catch (ParseException e) {
+		}
+		return null;
 	}
 
 	/**
@@ -452,8 +456,7 @@ public class MyDateUtil {
 	}
 
 	/**
-	 * 根据起始 终止时间 分割时间范围
-	 * 注意这个时间的格式是yyyy-MM-dd HH-mm
+	 * 根据起始 终止时间 分割时间范围 注意这个时间的格式是yyyy-MM-dd HH-mm
 	 */
 	public static List<Date> getDateList(String beginDateStr, String endDateStr, int minute) throws ParseException {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
@@ -470,14 +473,13 @@ public class MyDateUtil {
 		}
 		return list;
 	}
-	
-	
+
 	public static List<Date> getDateListN(String beginDateStr, String endDateStr, int minute) throws ParseException {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMddHHmmss");
 		Date beginDate = sdf.parse(beginDateStr);
 		Date endDate = sdf1.parse(endDateStr);
-		
+
 		List<Date> list = new ArrayList<Date>();
 		for (int i = 0; i < 20000; i++) {
 			beginDate = new Date(beginDate.getTime() + 60 * minute * 1000);
@@ -488,15 +490,16 @@ public class MyDateUtil {
 		}
 		return list;
 	}
+
 	/**
-	 * 根据起始 终止时间 分割时间范围
-	 * 注意这个时间的格式是yyyy-MM-dd HH-mm
+	 * 根据起始 终止时间 分割时间范围 注意这个时间的格式是yyyy-MM-dd HH-mm
 	 */
-	public static List<String> getDateListStr(String beginDateStr, String endDateStr, int minute) throws ParseException {
+	public static List<String> getDateListStr(String beginDateStr, String endDateStr, int minute)
+			throws ParseException {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		Date beginDate = sdf.parse(beginDateStr);
 		Date endDate = sdf.parse(endDateStr);
-		
+
 		List<String> list = new ArrayList<String>();
 		for (int i = 0; i < 20000; i++) {
 			beginDate = new Date(beginDate.getTime() + 60 * minute * 1000);
@@ -507,9 +510,10 @@ public class MyDateUtil {
 		}
 		return list;
 	}
-	
+
 	/**
-	 * 传入  yyyy-MM-dd HH:mm:ss
+	 * 传入 yyyy-MM-dd HH:mm:ss
+	 * 
 	 * @param dateStr
 	 * @return
 	 */

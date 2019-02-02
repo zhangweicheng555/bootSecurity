@@ -53,6 +53,7 @@ public class LteTddPlanService implements ILteTddPlanService {
 		}
 		if (StringUtils.isNoneBlank(lteTddPlan.getId())) {// edit
 			lteTddPlan.setUpdateTime(new Date());
+			lteTddPlan.setStatus(0);
 			updateByPrimaryKeySelective(lteTddPlan);
 		} else {// add
 			String id = MyUtil.getUuid();
