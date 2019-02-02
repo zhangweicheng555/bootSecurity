@@ -2,6 +2,7 @@ package com.boot.kaizen.service.lte;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -44,12 +45,33 @@ class LteConfigServiceImpl implements ILteConfigService {
 			lteConfig.setUpdateTime(new Date());
 			configDao.update(lteConfig);
 		} else {// add
-			lteConfig.setProjId(loginUser.getProjId());
-			lteConfig.setCreateAt(loginUser.getId());
-			lteConfig.setCreateTime(new Date());
-			configDao.save(lteConfig);
+			if (checkInfo(loginUser.getProjId())) {
+				lteConfig.setProjId(loginUser.getProjId());
+				lteConfig.setCreateAt(loginUser.getId());
+				lteConfig.setCreateTime(new Date());
+				configDao.save(lteConfig);
+			} else {
+				throw new IllegalArgumentException("该项目下已经存在测试配置项");
+			}
 		}
 		return new JsonMsgUtil(true, "添加成功", lteConfig);
+	}
+
+	/**
+	 * 
+	 * @Description: 核对该项目下只有一个配置项
+	 * @author weichengz
+	 * @date 2019年2月2日 下午10:20:00
+	 */
+	private Boolean checkInfo(Long projId) {
+		Boolean flag = true;
+		Map<String, Object> map = new HashMap<>();
+		map.put("projId", projId);
+		List<LteConfig> lteConfigs = find(map);
+		if (lteConfigs != null && lteConfigs.size() > 0) {
+			flag = false;
+		}
+		return flag;
 	}
 
 	@Override

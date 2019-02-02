@@ -14,7 +14,10 @@
             and lp.projId = #{map.projId}
         </if>
 		 <if test="map.mENodeBID != null and map.mENodeBID != ''">
-            and lp.mENodeBID like '%${map.mENodeBID}%'
+            and lp.mENodeBID = #{map.mENodeBID}
+        </if>
+		 <if test="map.testTime != null and map.testTime != ''">
+            and lp.testTime = #{map.testTime}
         </if>
 		<if test="map.beginTime != null and map.beginTime != '' and (map.endTime == null or map.endTime == '')">
             and lp.testTime &gt;=  #{map.beginTime}

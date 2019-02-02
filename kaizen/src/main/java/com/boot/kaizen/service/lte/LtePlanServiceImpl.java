@@ -66,12 +66,12 @@ class LtePlanServiceImpl implements ILtePlanService {
 	private ILteStationCheckService lteStationCheckService;
 	@Autowired
 	private ILteGcParameterService lteGcParameterService;
-	
+
 	@Autowired
 	private ILteLoadTestService lteLoadTestService;
 	@Autowired
 	private ILteCellCheckService lteCellCheckService;
-	
+
 	@Autowired
 	private UserService userService;
 	@Value("${files.lteImage}")
@@ -94,12 +94,34 @@ class LtePlanServiceImpl implements ILtePlanService {
 			ltePlan.setUpdateTime(new Date());
 			planDao.update(ltePlan);
 		} else {// add
-			ltePlan.setProjId(loginUser.getProjId());
-			ltePlan.setCreateAt(loginUser.getId());
-			ltePlan.setCreateTime(new Date());
-			planDao.save(ltePlan);
+			if (checkInfo(loginUser.getProjId(), ltePlan)) {
+				ltePlan.setProjId(loginUser.getProjId());
+				ltePlan.setCreateAt(loginUser.getId());
+				ltePlan.setCreateTime(new Date());
+				planDao.save(ltePlan);
+			} else {
+				throw new IllegalArgumentException("该项目下已经存在改站号的信息");
+			}
 		}
 		return new JsonMsgUtil(true, "添加成功", ltePlan);
+	}
+
+	private Boolean checkInfo(Long projId, LtePlan ltePlan) {
+		Boolean flag = true;
+		String testTime = ltePlan.getTestTime();
+		String mENodeBID = ltePlan.getmENodeBID();
+		if (projId == null || StringUtils.isBlank(testTime) || StringUtils.isBlank(mENodeBID)) {
+			throw new IllegalArgumentException("[基站号，项目ID，测试时间]不能为空");
+		}
+		Map<String, Object> map = new HashMap<>();
+		map.put("mENodeBID", mENodeBID);
+		map.put("projId", projId);
+		map.put("testTime", testTime);
+		List<LtePlan> ltePlans = find(map);
+		if (ltePlans != null && ltePlans.size() > 0) {
+			flag = false;
+		}
+		return flag;
 	}
 
 	@Override
@@ -148,8 +170,6 @@ class LtePlanServiceImpl implements ILtePlanService {
 		return planDao.queryStationList(userId, projId, testDate);
 	}
 
-	
-
 	@Override
 	public JsonMsgUtil queryLtePlanInfo(Long id, LoginUser user) {
 		JsonMsgUtil j = new JsonMsgUtil(false);
@@ -160,7 +180,7 @@ class LtePlanServiceImpl implements ILtePlanService {
 				throw new IllegalArgumentException("登陆超时");
 			}
 			planInfo.setConfigs(lteConfigService.queryListByProjId(user.getProjId()));
-			
+
 			Map<String, Object> map = new HashMap<>();
 			map.put("mENodeBID", planInfo.getmENodeBID());
 			map.put("eNodeBID", planInfo.getmENodeBID());

@@ -1,8 +1,10 @@
 package com.boot.kaizen.service.lte;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
@@ -42,13 +44,44 @@ class LteGcParameterServiceImpl implements ILteGcParameterService {
 			lteGcParameter.setUpdateTime(new Date());
 			gcParameterDao.update(lteGcParameter);
 		} else {// add
-			lteGcParameter.setProjId(loginUser.getProjId());
-			lteGcParameter.setCreateAt(loginUser.getId());
-			lteGcParameter.setCreateTime(new Date());
-			// 保存数据
-			gcParameterDao.save(lteGcParameter);
+			if (checkInfo(loginUser.getProjId(), lteGcParameter)) {
+				lteGcParameter.setProjId(loginUser.getProjId());
+				lteGcParameter.setCreateAt(loginUser.getId());
+				lteGcParameter.setCreateTime(new Date());
+				// 保存数据
+				gcParameterDao.save(lteGcParameter);
+			} else {
+				throw new IllegalArgumentException("该项目下已经存在该[站号,小区]的信息");
+			}
 		}
 		return new JsonMsgUtil(true, "添加成功", lteGcParameter);
+	}
+
+	/**
+	 * 
+	 * @Description: 核对信息
+	 * @author weichengz
+	 * @date 2019年2月2日 下午10:42:30
+	 */
+	private Boolean checkInfo(Long projId, LteGcParameter lteGcParameter) {
+		Boolean flag = true;
+		String mENodeBID = lteGcParameter.getmENodeBID();
+		String mCellID = lteGcParameter.getmCellID();
+		String testDate = lteGcParameter.getConfigName();
+		if (StringUtils.isBlank(mENodeBID) || StringUtils.isBlank(mCellID) || projId == null
+				|| StringUtils.isBlank(testDate)) {
+			throw new IllegalArgumentException("[站号，小区ID，项目ID，测试时间]不能为空");
+		}
+		Map<String, Object> map = new HashMap<>();
+		map.put("mCellID", mCellID);
+		map.put("mENodeBID", mENodeBID);
+		map.put("projId", projId);
+		map.put("testDate", testDate);
+		List<LteGcParameter> lteGcParameters = find(map);
+		if (lteGcParameters != null && lteGcParameters.size() > 0) {
+			flag = false;
+		}
+		return flag;
 	}
 
 	@Override
@@ -86,10 +119,10 @@ class LteGcParameterServiceImpl implements ILteGcParameterService {
 	}
 
 	@Override
-	public List<LteGcParameter> queryGcParameterList(String mENodeBID,String testDate) {
-		return gcParameterDao.queryGcParameterList(mENodeBID,testDate);
+	public List<LteGcParameter> queryGcParameterList(String mENodeBID, String testDate) {
+		return gcParameterDao.queryGcParameterList(mENodeBID, testDate);
 	}
-	
+
 	@Transactional
 	@Override
 	public JsonMsgUtil upload(MultipartFile file, LoginUser loginUser) {
@@ -137,7 +170,7 @@ class LteGcParameterServiceImpl implements ILteGcParameterService {
 					msg = new JsonMsgUtil(false, "小区号不能为空", null);
 					return msg;
 				}
-				
+
 				String mCellName = cell_string(row.getCell(cell_index++));
 				lteGcParameter.setmCellName(mCellName);
 				String mFrequency = cell_string(row.getCell(cell_index++));
